@@ -233,5 +233,165 @@ body.loading {
   pointer-events: none;
   opacity: 0.8;
 }
+/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
+
+/* Улучшение тач-таргетов (минимум 44x44px по Apple HIG) */
+.option-btn,
+.start-btn,
+.category-btn,
+.exit-btn,
+.next-btn {
+  min-height: 48px !important;
+  min-width: 100px !important;
+  font-size: clamp(10px, 3vw, 14px) !important;
+  padding: 12px 20px !important;
+  touch-action: manipulation; /* Убирает задержку тапа */
+}
+
+/* Игровой экран - лучше используем пространство */
+#game-screen {
+  padding: 10px !important;
+}
+
+#word {
+  font-size: clamp(18px, 5vw, 32px) !important;
+  margin: 20px 0 !important;
+  word-break: break-word; /* Длинные слова переносятся */
+}
+
+/* Сетка опций - одна колонка на узких экранах */
+.options-grid {
+  grid-template-columns: 1fr !important; /* Было 1fr 1fr - теперь по одной */
+  gap: 12px !important;
+  max-width: 100% !important;
+  padding: 0 10px;
+}
+
+/* Категории - адаптивная сетка */
+.category-grid {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 10px !important;
+  padding: 10px !important;
+}
+
+.category-btn {
+  min-height: 80px !important;
+  padding: 12px 8px !important;
+  font-size: 10px !important;
+}
+
+/* Заголовки */
+.game-title {
+  font-size: clamp(20px, 6vw, 48px) !important;
+  margin-bottom: 15px !important;
+}
+
+/* Header игры */
+header {
+  font-size: clamp(8px, 2.5vw, 12px) !important;
+  padding: 10px !important;
+  gap: 8px !important;
+}
+
+/* Модальное окно - на весь экран на мобилке */
+@media (max-width: 768px) {
+  #explanation-modal {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    padding: 15px !important;
+  }
+
+  .review-table {
+    font-size: 10px !important;
+  }
+
+  .review-table td {
+    padding: 8px 4px !important;
+  }
+
+  /* Убираем лишние отступы */
+  .game-container {
+    padding: 10px !important;
+  }
+
+  /* Stats компактнее */
+  #total-stats {
+    font-size: 8px !important;
+  }
+
+  .stat {
+    font-size: 10px !important;
+  }
+}
+
+/* Очень маленькие экраны (iPhone SE и т.д.) */
+@media (max-width: 375px) {
+  .option-btn {
+    font-size: 11px !important;
+    padding: 10px !important;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr !important; /* По одной категории */
+  }
+
+  #word {
+    font-size: 20px !important;
+  }
+}
+
+/* Горизонтальная ориентация на мобилке */
+@media (max-height: 500px) and (orientation: landscape) {
+  .game-title {
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+  }
+
+  #word {
+    font-size: 18px !important;
+    margin: 10px 0 !important;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr 1fr !important; /* 2 колонки в landscape */
+    gap: 8px !important;
+  }
+
+  #explanation-modal {
+    padding: 10px !important;
+  }
+}
+
+/* Убираем эффекты hover на тач-устройствах */
+@media (hover: none) {
+  .option-btn:hover,
+  .category-btn:hover,
+  .start-btn:hover {
+    background: inherit !important;
+    transform: none !important;
+  }
+}
+
+/* Улучшение скроллинга */
+.category-grid,
+#explanation-modal {
+  -webkit-overflow-scrolling: touch; /* Smooth scroll на iOS */
+}
+
+/* Безопасные зоны для notch (iPhone X+) */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
 
 
