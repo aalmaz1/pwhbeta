@@ -307,15 +307,23 @@ function loadQuestion() {
     wordStartTime = Date.now();
 }
 
+
 function checkAnswer(selected, q, btn) {
     const time = (Date.now() - wordStartTime) / 1000;
     const isCorrect = selected === q.correct;
     
-    // Блокируем
-    Array.from(ui.options.children).forEach(b => b.onclick = null);
+    // Блокируем ВСЕ кнопки и затемняем
+    const allBtns = Array.from(ui.options.children);
+    allBtns.forEach(b => {
+        b.onclick = null;
+        b.classList.add('disabled'); // Затемняем все
+    });
 
     if (isCorrect) {
+        // ✅ Убираем затемнение и красим в зеленый
+        btn.classList.remove('disabled');
         btn.classList.add('correct');
+        
         // XP logic
         let gain = 10;
         if (time < 1.5) gain = 25; // Instinct
@@ -328,9 +336,17 @@ function checkAnswer(selected, q, btn) {
         saveWordProgress(q.original, true);
         showFeedback("NICE!", true);
     } else {
+        // ❌ Красим неправильную в красный
+        btn.classList.remove('disabled');
         btn.classList.add('wrong');
-        // Показать правильный
-        Array.from(ui.options.children).find(b => b.textContent === q.correct)?.classList.add('correct');
+        
+        // Показываем правильную (зеленая)
+        const correctBtn = allBtns.find(b => b.textContent === q.correct);
+        if (correctBtn) {
+            correctBtn.classList.remove('disabled');
+            correctBtn.classList.add('correct');
+        }
+        
         saveWordProgress(q.original, false);
         showFeedback("LEARN!", false);
     }
@@ -339,6 +355,9 @@ function checkAnswer(selected, q, btn) {
        showExplanation(q);
     }, 1000);
 }
+
+
+
 
 function saveWordProgress(wordObj, isCorrect) {
     // Обновляем объект
