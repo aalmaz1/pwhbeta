@@ -207,3 +207,30 @@ body {
   cursor: pointer;
   font-family: inherit;
 }
+
+/* Фикс модального окна */
+#explanation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: var(--bg);
+  border: 3px solid var(--yellow);
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
+}
+
+#explanation-modal.hidden {
+  display: none;
+}
+
+body.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+
