@@ -142,23 +142,22 @@ function calculateStats(arr) {
 }
 
 function updateMenuStats() {
-    const s = calculateStats(allWordsFlat);
-    
-    // Обновляем счетчики в главном меню
-    if (ui.masteredCount) ui.masteredCount.textContent = s.ms;
-    if (ui.totalCount) ui.totalCount.textContent = allWordsFlat.length;
+  const totalStats = calculateStats(allWordsFlat || []);
+  
+  if (ui.masteredCount) ui.masteredCount.textContent = totalStats.ms || 0;
+  if (ui.totalCount) ui.totalCount.textContent = allWordsFlat.length || 0;
 
-    // Обновляем цветную полоску (БЕЗ ТАБЛИЦЫ, ЧТОБЫ НЕ КРАШИЛОСЬ)
-    const statsEl = document.getElementById('total-stats');
-    if (statsEl) {
-        statsEl.innerHTML = `
-        <div style="display:flex; justify-content:center; gap:15px; font-size:10px;">
-            <span style="color:#f87171">NS: ${s.ns}</span>
-            <span style="color:#fbbf24">SL: ${s.sl}</span>
-            <span style="color:#4ade80">MS: ${s.ms}</span>
-        </div>`;
-    }
+  const statsElement = document.getElementById('total-stats');
+  if (statsElement) {
+    statsElement.innerHTML = `
+      <div style="display:flex; justify-content:center; gap:15px; font-size:10px;">
+        <span style="color:#f87171">NS: ${totalStats.ns || 0}</span>
+        <span style="color:#fbbf24">SL: ${totalStats.sl || 0}</span>
+        <span style="color:#4ade80">MS: ${totalStats.ms || 0}</span>
+      </div>`;
+  }
 }
+
 
 function updateTotalStatsDisplay() {
     updateMenuStats(); // Используем ту же логику
