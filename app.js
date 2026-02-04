@@ -189,43 +189,56 @@ function updateTotalStatsDisplay() {
     updateMenuStats(); // Используем ту же логику
 }
 
-function renderCategoryMenu() {
-    const container = document.getElementById('category-list') || document.querySelector('.category-grid');
-    if (!container) return;
-    
-    container.innerHTML = ''; // Чистим
-    
-    // Получаем список категорий
-    const cats = Object.keys(window.GAME_DATA || {});
-    
-    // Кнопка ALL WORDS
-    const allBtn = document.createElement('button');
-    allBtn.className = 'category-btn all';
-    allBtn.innerHTML = `🌍<br>ALL WORDS`;
-    allBtn.onclick = () => startGame('All');
-    container.appendChild(allBtn);
 
-    // Кнопки категорий
-    cats.forEach(cat => {
-        if (!Array.isArray(window.GAME_DATA[cat])) return;
-        
-        const catWords = window.GAME_DATA[cat];
-        const s = calculateStats(catWords);
-        
-        const btn = document.createElement('button');
-        btn.className = 'category-btn';
-        btn.innerHTML = `
-            <div class="category-name">${cat.toUpperCase()}</div>
-            <div style="font-size:8px; margin-top:5px">
-                <span style="color:#f87171">${s.ns}</span> |
-                <span style="color:#fbbf24">${s.sl}</span> |
-                <span style="color:#4ade80">${s.ms}</span>
-            </div>
-        `;
-        btn.onclick = () => startGame(cat);
-        container.appendChild(btn);
-    });
+function renderCategoryMenu() {
+  const container = document.getElementById('category-list') || document.querySelector('.category-grid');
+  if (!container) return;
+  
+  container.innerHTML = ''; // Чистим
+  
+  const cats = Object.keys(window.GAME_DATA || {});
+  
+  // 1. Сначала все категории
+  cats.forEach(cat => {
+    if (!Array.isArray(window.GAME_DATA[cat])) return;
+    
+    const catWords = window.GAME_DATA[cat];
+    const s = calculateStats(catWords);
+    
+    const btn = document.createElement('button');
+    btn.className = 'category-btn';
+    btn.innerHTML = `
+      <div class="category-name">${cat.toUpperCase()}</div>
+      <div style="font-size:8px; margin-top:5px; line-height:1.3;">
+        <span style="color:#f87171">${s.ns}</span> | 
+        <span style="color:#fbbf24">${s.sl}</span> | 
+        <span style="color:#4ade80">${s.ms}</span>
+      </div>
+    `;
+    btn.onclick = () => startGame(cat);
+    container.appendChild(btn);
+  });
+
+  // 2. ПОТОМ ALL WORDS (предпоследняя)
+  const allBtn = document.createElement('button');
+  allBtn.className = 'category-btn all';
+  allBtn.innerHTML = `
+    <div class="category-name">🌍<br>ALL WORDS</div>
+  `;
+  allBtn.onclick = () => startGame('All');
+  container.appendChild(allBtn);
+
+  // 3. В КОНЦЕ BACK (последняя, на всю ширину)
+  const backBtn = document.createElement('button');
+  backBtn.className = 'exit-btn';
+  backBtn.innerText = '← BACK';
+  backBtn.onclick = window.backToMenu;
+  container.appendChild(backBtn);
 }
+
+
+
+
 function startGame(cat) {
     selectedCategory = cat;
     ui.categoryScreen.classList.add('hidden');
