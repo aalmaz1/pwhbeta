@@ -567,28 +567,35 @@ header {
     padding: 5px 3px;
   }
 
+  /* Меняем пропорции колонок (но НЕ прячем) */
   .review-table .word-col {
-    width: 30%;
+    width: 25%;
   }
 
   .review-table .def-col {
-    width: 70%;
+    width: 30%;
   }
 
-  /* Прячем колонку EXAMPLE на очень маленьких экранах */
+  .review-table .ex-col {
+    width: 45%;
+    font-size: 8px !important; /* Мелкий шрифт */
+  }
+
+  .ex-rus {
+    font-size: 7px !important;
+    margin-top: 2px;
+  }
+
+  /* УДАЛИ ИЛИ ЗАКОММЕНТИРУЙ ЭТИ СТРОКИ (они прятали колонку): */
+  /*
   .review-table .ex-col {
     display: none;
   }
-
-  /* Показываем пример под переводом */
   .review-table .def-col::after {
     content: attr(data-example);
-    display: block;
-    font-size: 8px;
-    color: #666;
-    margin-top: 4px;
-    font-style: italic;
+    ...
   }
+  */
 }
 
 /* Горизонтальная ориентация */
