@@ -257,9 +257,6 @@ body.loading {
 }
 
 
-
-
-
 /* === 6. ИГРОВОЙ ЭКРАН === */
 #game-screen {
   padding: 10px;
@@ -471,17 +468,22 @@ body.loading {
 
 header {
   width: 100%;
+  max-width: 500px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* СТОЛБИК вместо row */
+  align-items: center;
+  gap: 8px;
   padding: 10px;
-  font-size: clamp(9px, 2.5vw, 12px);
-  margin-bottom: 20px;
+  font-size: clamp(10px, 2.5vw, 13px);
+  margin-bottom: 15px;
+  position: relative;
 }
 
 .stat {
   display: flex;
   align-items: center;
   gap: 5px;
+   font-size: clamp(10px, 2.5vw, 12px);
 }
 
 /* === 9. FEEDBACK === */
@@ -517,6 +519,19 @@ header {
 @media (max-width: 768px) {
   .game-title {
     font-size: clamp(28px, 8vw, 48px);
+  }
+
+    header {
+    gap: 6px;
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  #game-screen .exit-btn {
+    padding: 5px 7px;
+    font-size: 9px;
+    top: 8px;
+    right: 8px;
   }
 
   .category-grid {
@@ -661,3 +676,25 @@ header {
   }
 }
 
+/* EXIT кнопка в углу (маленькая!) */
+#game-screen .exit-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: 1px solid var(--red); /* Тонкий border */
+  color: var(--red);
+  padding: 6px 8px; /* Компактный размер */
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px; /* Маленький шрифт */
+  box-shadow: 2px 2px 0 #000; /* Меньше тень */
+  width: auto;
+  min-width: unset;
+  line-height: 1;
+}
+
+#game-screen .exit-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000;
+}
