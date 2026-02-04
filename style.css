@@ -91,30 +91,28 @@ body {
       4px 4px 0 #000;
   }
 }
+/* ========== КАТЕГОРИИ - ИСПРАВЛЕННЫЙ ДИЗАЙН ========== */
 
-/* СЕТКА КАТЕГОРИЙ (Исправлено) */
+/* Сетка категорий */
 .category-grid {
   width: 100%;
-  max-width: 600px; /* Чтобы на ПК не растягивалось на весь экран */
+  max-width: 600px;
   flex-grow: 1;
   overflow-y: auto;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(140px, 1fr)
-  ); /* Адаптивные колонки */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Адаптивная сетка */
   gap: 15px;
-  align-content: start; /* Чтобы карточки начинались сверху */
+  align-content: start;
 }
 
-/* Скрываем скроллбар, но оставляем скролл */
+/* Прячем scrollbar */
 .category-grid::-webkit-scrollbar {
   display: none;
 }
 
-/* КАРТОЧКА КАТЕГОРИИ (Вот этого класса не хватало!) */
-.category-card {
+/* Кнопки категорий - сохраняем пиксель-арт стиль */
+.category-btn {
   background: rgba(0, 0, 0, 0.4);
   border: 2px solid var(--yellow);
   color: var(--yellow);
@@ -128,27 +126,124 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 80px;
+  font-size: 10px;
+  font-family: inherit;
+  position: relative;
 }
 
-.category-card:active {
+.category-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
 
-.category-card:hover {
+.category-btn:hover {
   background: rgba(251, 191, 36, 0.2);
 }
 
-.cat-title {
+/* Специальная кнопка ALL WORDS */
+.category-btn.all {
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: bold;
+  grid-column: span 2; /* Занимает 2 колонки */
+}
+
+/* Название категории внутри кнопки */
+.category-name {
   font-size: 12px;
   margin-bottom: 5px;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
-.cat-stat {
-  font-size: 10px;
-  color: #888;
+/* Статистика категории */
+.category-stats-grid,
+.category-btn > div[style*="font-size"] {
+  font-size: 8px;
+  margin-top: 5px;
+  line-height: 1.4;
 }
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .category-btn {
+    min-height: 70px;
+    padding: 10px;
+    font-size: 9px;
+  }
+
+  .category-name {
+    font-size: 10px;
+  }
+
+  .category-btn.all {
+    grid-column: span 1; /* На мобилке 1 колонка */
+  }
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr); /* Фиксированно 2 колонки */
+    gap: 8px;
+  }
+
+  .category-btn {
+    min-height: 65px;
+    padding: 8px;
+    font-size: 8px;
+  }
+
+  .category-name {
+    font-size: 9px;
+  }
+}
+
+/* Супер маленькие экраны - одна колонка */
+@media (max-width: 350px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-btn {
+    min-height: 60px;
+  }
+}
+
+/* Кнопка BACK в экране категорий */
+#category-screen .exit-btn,
+#category-screen .back-btn,
+#js-back-btn {
+  position: static;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  background: transparent;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 4px 4px 0 #000;
+  font-size: 12px;
+}
+
+#category-screen .exit-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+
+
+
+
+
+
 
 /* КНОПКИ ГЛАВНОГО МЕНЮ */
 .start-btn {
