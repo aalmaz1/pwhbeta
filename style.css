@@ -394,4 +394,189 @@ header {
   }
 }
 
+/* ========== ФИКС WORD REVIEW КАРТОЧКИ ========== */
+
+#explanation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: var(--bg);
+  border: 3px solid var(--yellow);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
+  
+  /* Адаптивные размеры */
+  width: min(500px, 90vw);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#explanation-modal h2 {
+  font-size: clamp(10px, 3vw, 12px) !important;
+  margin-bottom: 15px !important;
+}
+
+/* Таблица обзора - компактная */
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(9px, 2vw, 11px) !important;
+  table-layout: fixed; /* Фиксированная ширина колонок */
+}
+
+.review-table th,
+.review-table td {
+  padding: 6px 4px !important;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+}
+
+.review-table th {
+  background: rgba(251, 191, 36, 0.15);
+  font-size: clamp(8px, 2vw, 10px) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Колонки: Слово узкая, Значение средняя, Пример широкая */
+.review-table .word-col {
+  width: 20%;
+  font-weight: bold;
+}
+
+.review-table .def-col {
+  width: 25%;
+}
+
+.review-table .ex-col {
+  width: 55%;
+  font-size: clamp(8px, 1.8vw, 10px) !important;
+  font-style: italic;
+  color: #888;
+}
+
+.ex-rus {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(7px, 1.5vw, 9px) !important;
+  color: #666;
+}
+
+/* Кнопка NEXT */
+.next-btn,
+#explanation-modal button {
+  width: 100% !important;
+  margin-top: 15px !important;
+  padding: 12px !important;
+  font-size: clamp(10px, 2.5vw, 12px) !important;
+  background: var(--green) !important;
+  color: #000 !important;
+  border: 2px solid var(--green) !important;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.next-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Мобильная оптимизация */
+@media (max-width: 768px) {
+  #explanation-modal {
+    width: 95vw !important;
+    max-height: 85vh !important;
+    padding: 12px !important;
+  }
+
+  .review-table {
+    font-size: 9px !important;
+    display: block; /* Делаем таблицу блочной */
+    overflow-x: auto; /* Горизонтальный скролл если надо */
+  }
+
+  .review-table thead {
+    display: none; /* Прячем заголовки на мобилке */
+  }
+
+  .review-table tbody {
+    display: block;
+  }
+
+  .review-table tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 2px solid rgba(251, 191, 36, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .review-table td {
+    display: block;
+    border: none !important;
+    padding: 4px 0 !important;
+    width: 100% !important;
+  }
+
+  /* Делаем карточки вместо таблицы */
+  .review-table .word-col::before {
+    content: "📝 ";
+    font-weight: bold;
+  }
+
+  .review-table .def-col::before {
+    content: "💡 ";
+    color: var(--yellow);
+  }
+
+  .review-table .ex-col::before {
+    content: "💬 ";
+    color: var(--green);
+  }
+
+  .review-table .word-col {
+    font-size: 14px !important;
+    margin-bottom: 6px;
+    color: var(--green);
+  }
+
+  .review-table .def-col {
+    font-size: 12px !important;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .review-table .ex-col {
+    font-size: 10px !important;
+    color: #aaa;
+  }
+}
+
+/* Супер маленькие экраны */
+@media (max-width: 375px) {
+  #explanation-modal {
+    width: 98vw !important;
+    padding: 8px !important;
+  }
+
+  .review-table .word-col {
+    font-size: 12px !important;
+  }
+
+  .review-table .def-col {
+    font-size: 11px !important;
+  }
+
+  .review-table .ex-col {
+    font-size: 9px !important;
+  }
+}
 
