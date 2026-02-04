@@ -37,30 +37,14 @@
 
       <div class="edition-badge">TOEIC EDITION</div>
 
-      <div style="margin-bottom: 20px; font-size: 10px; color: #4ade80">
-        MASTERED: <span id="mastered-count">0</span> /
-        <span id="total-count">0</span>
-      </div>
-
-      <p class="blink">PRESS HUNT!</p>
-
-      <button class="start-btn" >▶ HUNT</button>
-
-      <div
-        
-        style="
-          margin-top: 30px;
-          font-size: 8px;
-          color: #6c757d;
-          cursor: pointer;
-          text-decoration: underline;
-        "
-      >
-        RESET SAVE DATA
-      </div>
-
-      <div class="credits">© 2026 ALMAZ CORP</div>
-    </div>
+      <div style="margin-bottom: 20px; font-size: 10px; color: #4ade80;">
+    MASTERED: <span id="mastered-count">0</span> / <span id="total-count">0</span>
+  </div>
+  <p class="blink">PRESS HUNT!</p>
+  <button class="start-btn">HUNT</button>  <!-- Без onclick! -->
+  <div class="reset-link">RESET SAVE DATA</div>  <!-- class вместо onclick -->
+  <!-- ... credits ... -->
+</div>
 
     <div id="category-screen" class="game-container hidden">
       <h2
