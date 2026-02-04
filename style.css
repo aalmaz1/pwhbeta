@@ -230,17 +230,17 @@ body.loading {
   background: rgba(0, 0, 0, 0.4);
   border: 2px solid var(--red);
   color: var(--red);
-  padding: 15px 20px;
-  margin-top: 20px;
+  padding: 12px 20px;
+  margin-top: 20px auto 0;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
   box-shadow: 4px 4px 0 #000;
   transition: all 0.2s;
   width: 100%;
-  max-width: 100%;
+  max-width: 600px;
   text-align: center;
   display: block;
 }
@@ -250,7 +250,7 @@ body.loading {
   background: rgba(248, 113, 113, 0.2);
 }
 
-#category-screen .exit-btn:active,
+#category-screen 
 .exit-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
