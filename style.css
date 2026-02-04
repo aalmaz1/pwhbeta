@@ -104,7 +104,7 @@ body.loading {
 .start-btn,
 .reset-btn {
   width: 100%;
-  max-width: 300px; /* Как BACK */
+  max-width: 300px;
   padding: 0px 40px;
   margin: 8px 0;
   font-family: inherit;
@@ -115,12 +115,13 @@ body.loading {
   border: 2px solid;
   box-shadow: 4px 4px 0 #000;
   transition: transform 0.1s, box-shadow 0.1s;
-  height:54px;
-  display:flex;
-  allign-items:center;
-   justify-content:center;
-   gap:8px;
+  height: 54px;
+  display: flex;
+  align-items: center; /* ИСПРАВЛЕНО: было allign */
+  justify-content: center;
+  gap: 8px;
 }
+
 
 .start-btn {
   background: var(--green);
@@ -205,6 +206,56 @@ body.loading {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
+
+/* ALL WORDS - обычная кнопка */
+.category-btn.all {
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: bold;
+  grid-column: span 1; /* Занимает 1 колонку */
+}
+
+.category-name {
+  font-size: 11px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* Кнопка BACK - пиксель-арт стиль */
+#category-screen .exit-btn,
+#category-screen .back-btn,
+.exit-btn {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 15px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 #000;
+  transition: all 0.2s;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  display: block;
+}
+
+#category-screen .exit-btn:hover,
+.exit-btn:hover {
+  background: rgba(248, 113, 113, 0.2);
+}
+
+#category-screen .exit-btn:active,
+.exit-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
 
 
 
