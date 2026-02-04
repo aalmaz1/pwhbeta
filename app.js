@@ -1,6 +1,32 @@
 /* jshint esversion: 8 */
 console.log("🚀 Pixel Word Hunter v2026 START");
 
+// ГЛОБАЛЬНАЯ ФУНКЦИЯ ВЫХОДА ИЗ ИГРЫ
+window.exitGame = function() {
+  console.log("EXIT clicked");
+  
+  // Скрываем игровой экран
+  const gameScreen = document.getElementById('game-screen');
+  if (gameScreen) gameScreen.classList.add('hidden');
+  
+  // Скрываем модалку если открыта
+  const modal = document.getElementById('explanation-modal');
+  if (modal) modal.classList.add('hidden');
+  
+  // Скрываем фидбек
+  const feedback = document.getElementById('feedback');
+  if (feedback) feedback.classList.remove('show');
+  
+  // Показываем экран категорий
+  const catScreen = document.getElementById('category-screen');
+  if (catScreen) catScreen.classList.remove('hidden');
+  
+  // Обновляем статистику
+  if (typeof updateMenuStats === 'function') updateMenuStats();
+  if (typeof renderCategoryMenu === 'function') renderCategoryMenu();
+};
+
+
 // --- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ---
 let GAME_DATA = window.GAME_DATA || [];
 let allWordsFlat = [];
