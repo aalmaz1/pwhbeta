@@ -629,6 +629,46 @@ header {
   border-radius: 4px;
 }
 
+  /* ========== СТИЛИ ДЛЯ ОТВЕТОВ ========== */
+
+/* Правильный ответ - зеленый */
+.option-btn.correct {
+  background: var(--green) !important;
+  color: #000 !important;
+  border-color: var(--green) !important;
+  animation: correctPulse 0.5s ease-out;
+}
+
+/* Неправильный ответ - красный */
+.option-btn.wrong {
+  background: var(--red) !important;
+  color: #000 !important;
+  border-color: var(--red) !important;
+  animation: wrongShake 0.5s ease-out;
+}
+
+/* Анимация правильного ответа */
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px var(--green); }
+  100% { transform: scale(1); }
+}
+
+/* Анимация неправильного ответа */
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* Заблокированные кнопки (после ответа) */
+.option-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
 #explanation-modal::-webkit-scrollbar-thumb:hover {
   background: var(--green);
 }
