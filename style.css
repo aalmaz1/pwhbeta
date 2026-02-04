@@ -1,0 +1,209 @@
+/* 1. БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ */
+:root {
+  --bg: #0f172a; /* Темно-синий фон */
+  --text: #e2e8f0; /* Светлый текст */
+  --green: #4ade80; /* Неоновый зеленый */
+  --red: #f87171; /* Неоновый красный */
+  --yellow: #fbbf24; /* Неоновый желтый */
+  --cyan: #00ccff; /* Голубой */
+}
+
+/* Шрифты и сброс */
+html,
+body {
+  height: 100dvh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Важно для мобилок */
+  font-family: "Press Start 2P", monospace; /* Твой пиксельный шрифт */
+  background-color: var(--bg);
+  color: var(--text);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Красивый фон с градиентами */
+body {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(0, 204, 255, 0.1), transparent 55%),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(255, 51, 102, 0.08),
+      transparent 60%
+    ),
+    var(--bg);
+}
+
+/* Контейнер для центрирования */
+.game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Эффект старого монитора (CRT) */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Чтобы можно было кликать сквозь него */
+  z-index: 999;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49%,
+      rgba(0, 255, 136, 0.03) 50%,
+      transparent 51%
+    ),
+    linear-gradient(rgba(255, 51, 102, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%);
+  background-size:
+    100% 2px,
+    100% 4px;
+}
+
+/* Заголовок */
+.game-title {
+  font-size: clamp(28px, 6vw, 48px);
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 4px 4px 0px #000;
+  animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from {
+    text-shadow:
+      0 0 5px rgba(0, 255, 136, 0.5),
+      4px 4px 0 #000;
+  }
+  to {
+    text-shadow:
+      0 0 20px rgba(0, 255, 136, 0.8),
+      4px 4px 0 #000;
+  }
+}
+
+/* СЕТКА КАТЕГОРИЙ (Исправлено) */
+.category-grid {
+  width: 100%;
+  max-width: 600px; /* Чтобы на ПК не растягивалось на весь экран */
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(140px, 1fr)
+  ); /* Адаптивные колонки */
+  gap: 15px;
+  align-content: start; /* Чтобы карточки начинались сверху */
+}
+
+/* Скрываем скроллбар, но оставляем скролл */
+.category-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* КАРТОЧКА КАТЕГОРИИ (Вот этого класса не хватало!) */
+.category-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 4px 4px 0 #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+}
+
+.category-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.category-card:hover {
+  background: rgba(251, 191, 36, 0.2);
+}
+
+.cat-title {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.cat-stat {
+  font-size: 10px;
+  color: #888;
+}
+
+/* КНОПКИ ГЛАВНОГО МЕНЮ */
+.start-btn {
+  background: var(--green);
+  color: #000;
+  border: none;
+  padding: 20px 40px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+  margin-top: 20px;
+}
+
+.start-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* ИГРОВОЙ ЭКРАН */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.option-btn {
+  background: rgba(0, 204, 255, 0.1);
+  border: 2px solid var(--cyan);
+  color: var(--text);
+  padding: 15px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+  text-align: center;
+}
+
+.option-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* УТИЛИТЫ */
+.hidden {
+  display: none !important;
+}
+
+.exit-btn {
+  background: transparent;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}

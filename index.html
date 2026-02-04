@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Pixel Word Hunter</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!--- <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("sw.js")
+            .catch((err) => console.log("SW error:", err));
+        });
+      }
+    </script> --->
+  </head>
+  <body>
+    <div class="crt-overlay"></div>
+
+    <div id="menu-screen" class="game-container">
+      <h1 class="game-title">
+        <span style="color: #fff">PIXEL</span><br />
+        <span style="color: #fbbf24">WORD</span><br />
+        <span style="color: #f87171">HUNTER</span>
+      </h1>
+
+      <div class="edition-badge">TOEIC EDITION</div>
+
+      <div style="margin-bottom: 20px; font-size: 10px; color: #4ade80">
+        MASTERED: <span id="mastered-count">0</span> /
+        <span id="total-count">0</span>
+      </div>
+
+      <p class="blink">PRESS HUNT!</p>
+
+      <button class="start-btn" onclick="showCategories()">▶ HUNT</button>
+
+      <div
+        onclick="resetProgress()"
+        style="
+          margin-top: 30px;
+          font-size: 8px;
+          color: #6c757d;
+          cursor: pointer;
+          text-decoration: underline;
+        "
+      >
+        RESET SAVE DATA
+      </div>
+
+      <div class="credits">© 2026 ALMAZ CORP</div>
+    </div>
+
+    <div id="category-screen" class="game-container hidden">
+      <h2
+        style="
+          color: #fbbf24;
+          margin-bottom: 30px;
+          font-size: clamp(16px, 4vw, 20px);
+        "
+      >
+        SELECT CATEGORY
+      </h2>
+
+      <div
+        id="total-stats"
+        style="
+          font-size: 10px;
+          color: #4ade80;
+          margin-bottom: 20px;
+          line-height: 1.5;
+        "
+      ></div>
+
+      <div id="category-list" class="category-grid"></div>
+
+      <button
+        class="exit-btn"
+        onclick="location.reload()"
+        style="position: static; margin-top: 20px"
+      >
+        BACK
+      </button>
+    </div>
+
+    <div id="game-screen" class="game-container hidden">
+      <header>
+        <div class="stat">CAT: <span id="category">ALL</span></div>
+        <div class="stat">XP: <span id="xp">0</span></div>
+        <button class="exit-btn" onclick="exitGame()">✕</button>
+      </header>
+
+      <main id="quiz-box">
+        <div class="progress-bar"><div id="progress"></div></div>
+        <div class="question-card">
+          <h1 id="word">Ready?</h1>
+        </div>
+        <div class="options-grid" id="options"></div>
+      </main>
+
+      <div id="explanation-modal" class="hidden">
+        <h2 style="color: #fbbf24; font-size: 12px; margin-bottom: 10px">
+          WORD REVIEW
+        </h2>
+        <div id="explanation-list"></div>
+        <button class="next-btn" onclick="nextQuestion()">NEXT ▶</button>
+      </div>
+
+      <div id="feedback" class="hidden">NICE!</div>
+    </div>
+
+    <script src="words_optimized.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
