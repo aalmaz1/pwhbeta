@@ -365,20 +365,78 @@ function saveWordProgress(wordObj, isCorrect) {
 }
 
 function showExplanation(q) {
-    ui.explanationModal.classList.remove('hidden');
-    // Тут твоя таблица
-    const w = q.original;
-    const eng = Array.isArray(w) ? w[0] : w.eng;
-    const rus = Array.isArray(w) ? w[1] : w.rus;
-    const ex = Array.isArray(w) ? w[2] : w.ex;
+  ui.explanationModal.classList.remove('hidden');
+  
+  const w = q.original;
+  const eng = Array.isArray(w) ? w[0] : w.eng;
+  const rus = Array.isArray(w) ? w[1] : w.rus;
+  const ex = Array.isArray(w) ? (w[2] || 'No example') : (w.ex || 'No example');
+  const exRus = Array.isArray(w) ? (w[3] || '') : (w.exRus || '');
 
-    ui.explanationList.innerHTML = `
-        <div style="text-align:center; margin-bottom:10px; color:#fbbf24">${eng}</div>
-        <div style="text-align:center; margin-bottom:10px;">${rus}</div>
-        <div style="font-size:10px; color:#888; font-style:italic">"${ex}"</div>
-        <button class="next-btn" onclick="nextQuestion()" style="margin-top:20px; width:100%; padding:10px; background:#4ade80; border:none; cursor:pointer;">NEXT ▶</button>
+  // Генерируем таблицу со ВСЕМИ опциями (как в оригинале твоего кода)
+  let tableHTML = `
+    <table class="review-table">
+      <thead>
+        <tr>
+          <th>WORD</th>
+          <th>MEANING</th>
+          <th>EXAMPLE</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  // Показываем все 4 варианта (optionsList)
+  q.options.forEach(optText => {
+    // Находим полное слово из allWordsFlat по тексту опции
+    const wordData = allWordsFlat.find(word => {
+      const wEng = Array.isArray(word) ? word[0] : word.eng;
+      const wRus = Array.isArray(word) ? word[1] : word.rus;
+      return wEng === optText || wRus === optText;
+    });
+
+    if (!wordData) return; // Пропускаем если не нашли
+
+    const isCorrect = (Array.isArray(wordData) ? wordData[0] : wordData.eng) === eng;
+    const rowStyle = isCorrect ? 'background: rgba(74, 222, 128, 0.25); border-left: 3px solid #4ade80;' : '';
+    const star = isCorrect ? '<span style="color:#fbbf24">★</span>' : '';
+
+    const wEng = Array.isArray(wordData) ? wordData[0] : wordData.eng;
+    const wRus = Array.isArray(wordData) ? wordData[1] : wordData.rus;
+    const wEx = Array.isArray(wordData) ? (wordData[2] || '') : (wordData.ex || '');
+    const wExRus = Array.isArray(wordData) ? (wordData[3] || '') : (wordData.exRus || '');
+
+    tableHTML += `
+      <tr style="${rowStyle}">
+        <td class="word-col">${wEng} ${star}</td>
+        <td class="def-col">${wRus}</td>
+        <td class="ex-col">"${wEx}" <span class="ex-rus">${wExRus}</span></td>
+      </tr>
     `;
+  });
+
+  tableHTML += `
+      </tbody>
+    </table>
+    <button class="next-btn" onclick="window.nextQuestion()">NEXT ▶</button>
+  `;
+
+  ui.explanationList.innerHTML = tableHTML;
 }
+
+// ГЛОБАЛЬНАЯ функция (вне всех блоков)
+window.nextQuestion = function() {
+  const modal = document.getElementById('explanation-modal');
+  if (modal) modal.classList.add('hidden');
+  
+  currentQ++;
+  if (currentQ < currentRound.length) {
+    loadQuestion();
+  } else {
+    finishGame();
+  }
+};
+
 
 window.nextQuestion = function() {
     ui.explanationModal.classList.add('hidden');
