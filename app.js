@@ -227,13 +227,6 @@ function renderCategoryMenu() {
   `;
   allBtn.onclick = () => startGame('All');
   container.appendChild(allBtn);
-
-  // 3. В КОНЦЕ BACK (последняя, на всю ширину)
-  const backBtn = document.createElement('button');
-  backBtn.className = 'exit-btn';
-  backBtn.innerText = '← BACK';
-  backBtn.onclick = window.backToMenu;
-  container.appendChild(backBtn);
 }
 
 
