@@ -25,6 +25,17 @@ currentRound = [];
 currentQ = 0;
 // Твои остальные переменные...
 
+// Глобалки для кнопок
+window.showCategories = () => { ui.menu.classList.add('hidden'); ui.categoryScreen.classList.remove('hidden'); };
+window.resetProgress = () => { if(confirm('Reset?')){ localStorage.clear('pixelWordHunter*'); location.reload(); } };
+
+document.addEventListener('DOMContentLoaded', () => {
+  initApp();  // Твоя initUI + stats + events
+  document.querySelector('.start-btn').addEventListener('click', showCategories);
+});
+
+
+
 console.log("Старт игры. Слов в базе:", allWordsFlat.length);
 
 function loadSavedProgress() {
