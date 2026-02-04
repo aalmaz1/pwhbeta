@@ -390,106 +390,7 @@ header {
 
 /* Модальное окно - на весь экран на мобилке */
 @media (max-width: 768px) {
-  #explanation-modal {
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    padding: 15px !important;
-  }
-
-  .review-table {
-    font-size: 10px !important;
-  }
-
-  .review-table td {
-    padding: 8px 4px !important;
-  }
-
-  /* Убираем лишние отступы */
-  .game-container {
-    padding: 10px !important;
-  }
-
-  /* Stats компактнее */
-  #total-stats {
-    font-size: 8px !important;
-  }
-
-  .stat {
-    font-size: 10px !important;
-  }
-}
-
-/* Очень маленькие экраны (iPhone SE и т.д.) */
-@media (max-width: 375px) {
-  .option-btn {
-    font-size: 11px !important;
-    padding: 10px !important;
-  }
-
-  .category-grid {
-    grid-template-columns: 1fr !important; /* По одной категории */
-  }
-
-  #word {
-    font-size: 20px !important;
-  }
-}
-
-/* Горизонтальная ориентация на мобилке */
-@media (max-height: 500px) and (orientation: landscape) {
-  .game-title {
-    font-size: 18px !important;
-    margin-bottom: 10px !important;
-  }
-
-  #word {
-    font-size: 18px !important;
-    margin: 10px 0 !important;
-  }
-
-  .options-grid {
-    grid-template-columns: 1fr 1fr !important; /* 2 колонки в landscape */
-    gap: 8px !important;
-  }
-
-  #explanation-modal {
-    padding: 10px !important;
-  }
-}
-
-/* Убираем эффекты hover на тач-устройствах */
-@media (hover: none) {
-  .option-btn:hover,
-  .category-btn:hover,
-  .start-btn:hover {
-    background: inherit !important;
-    transform: none !important;
-  }
-}
-
-/* Улучшение скроллинга */
-.category-grid,
-#explanation-modal {
-  -webkit-overflow-scrolling: touch; /* Smooth scroll на iOS */
-}
-
-/* Безопасные зоны для notch (iPhone X+) */
-@supports (padding: env(safe-area-inset-top)) {
-  body {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-}
-
-/* ========== ФИКС WORD REVIEW КАРТОЧКИ ========== */
+  /* ========== АДАПТИВНОЕ ОКНО WORD REVIEW ========== */
 
 #explanation-modal {
   position: fixed;
@@ -497,181 +398,231 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
+  
+  /* Фон и стиль */
   background: var(--bg);
   border: 3px solid var(--yellow);
-  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5), 0 0 100px rgba(0, 0, 0, 0.8);
   
   /* Адаптивные размеры */
-  width: min(500px, 90vw);
-  max-height: 80vh;
+  width: min(450px, 85vw); /* Максимум 450px, но на мобилке 85% ширины */
+  max-height: 70vh; /* Не больше 70% высоты экрана */
+  
+  padding: 20px;
   overflow-y: auto;
+  
+  /* Плавное появление */
+  animation: modalFadeIn 0.3s ease-out;
 }
 
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#explanation-modal.hidden {
+  display: none;
+}
+
+/* Заголовок */
 #explanation-modal h2 {
-  font-size: clamp(10px, 3vw, 12px) !important;
-  margin-bottom: 15px !important;
+  font-size: clamp(10px, 3vw, 12px);
+  color: var(--yellow);
+  text-align: center;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
 }
 
-/* Таблица обзора - компактная */
+/* Таблица - компактная */
 .review-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: clamp(9px, 2vw, 11px) !important;
-  table-layout: fixed; /* Фиксированная ширина колонок */
+  font-size: 11px;
+  table-layout: fixed;
+  margin-bottom: 15px;
 }
 
 .review-table th,
 .review-table td {
-  padding: 6px 4px !important;
+  padding: 8px 6px;
   border: 1px solid rgba(251, 191, 36, 0.2);
   word-wrap: break-word;
-  overflow-wrap: break-word;
   vertical-align: top;
+  text-align: left;
 }
 
 .review-table th {
   background: rgba(251, 191, 36, 0.15);
-  font-size: clamp(8px, 2vw, 10px) !important;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--yellow);
 }
 
-/* Колонки: Слово узкая, Значение средняя, Пример широкая */
+/* Колонки */
 .review-table .word-col {
-  width: 20%;
+  width: 25%;
   font-weight: bold;
+  color: var(--green);
 }
 
 .review-table .def-col {
-  width: 25%;
+  width: 30%;
+  color: var(--text);
 }
 
 .review-table .ex-col {
-  width: 55%;
-  font-size: clamp(8px, 1.8vw, 10px) !important;
+  width: 45%;
+  font-size: 10px;
   font-style: italic;
-  color: #888;
+  color: #aaa;
 }
 
 .ex-rus {
   display: block;
   margin-top: 4px;
-  font-size: clamp(7px, 1.5vw, 9px) !important;
-  color: #666;
+  font-size: 9px;
+  color: #777;
 }
 
 /* Кнопка NEXT */
-.next-btn,
-#explanation-modal button {
-  width: 100% !important;
-  margin-top: 15px !important;
-  padding: 12px !important;
-  font-size: clamp(10px, 2.5vw, 12px) !important;
-  background: var(--green) !important;
-  color: #000 !important;
-  border: 2px solid var(--green) !important;
-  cursor: pointer;
+#explanation-modal button,
+.next-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: var(--green);
+  color: #000;
+  border: 2px solid var(--green);
   font-family: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
   box-shadow: 4px 4px 0 #000;
+  transition: all 0.1s;
+  text-transform: uppercase;
 }
 
-.next-btn:active {
+#explanation-modal button:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
 
-/* Мобильная оптимизация */
+/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
+
 @media (max-width: 768px) {
   #explanation-modal {
-    width: 95vw !important;
-    max-height: 85vh !important;
-    padding: 12px !important;
+    width: 90vw;
+    max-height: 75vh;
+    padding: 15px;
   }
 
   .review-table {
-    font-size: 9px !important;
-    display: block; /* Делаем таблицу блочной */
-    overflow-x: auto; /* Горизонтальный скролл если надо */
+    font-size: 10px;
   }
 
-  .review-table thead {
-    display: none; /* Прячем заголовки на мобилке */
-  }
-
-  .review-table tbody {
-    display: block;
-  }
-
-  .review-table tr {
-    display: block;
-    margin-bottom: 12px;
-    border: 2px solid rgba(251, 191, 36, 0.3);
-    border-radius: 6px;
-    padding: 8px;
-    background: rgba(0, 0, 0, 0.3);
-  }
-
+  .review-table th,
   .review-table td {
-    display: block;
-    border: none !important;
-    padding: 4px 0 !important;
-    width: 100% !important;
-  }
-
-  /* Делаем карточки вместо таблицы */
-  .review-table .word-col::before {
-    content: "📝 ";
-    font-weight: bold;
-  }
-
-  .review-table .def-col::before {
-    content: "💡 ";
-    color: var(--yellow);
-  }
-
-  .review-table .ex-col::before {
-    content: "💬 ";
-    color: var(--green);
-  }
-
-  .review-table .word-col {
-    font-size: 14px !important;
-    margin-bottom: 6px;
-    color: var(--green);
-  }
-
-  .review-table .def-col {
-    font-size: 12px !important;
-    margin-bottom: 6px;
-    color: var(--text);
+    padding: 6px 4px;
   }
 
   .review-table .ex-col {
-    font-size: 10px !important;
-    color: #aaa;
+    font-size: 9px;
+  }
+
+  .ex-rus {
+    font-size: 8px;
   }
 }
 
-/* Супер маленькие экраны */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
   #explanation-modal {
-    width: 98vw !important;
-    padding: 8px !important;
+    width: 95vw;
+    max-height: 80vh;
+    padding: 12px;
+  }
+
+  #explanation-modal h2 {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .review-table {
+    font-size: 9px;
+  }
+
+  .review-table th {
+    font-size: 8px;
+    padding: 4px 2px;
+  }
+
+  .review-table td {
+    padding: 5px 3px;
   }
 
   .review-table .word-col {
-    font-size: 12px !important;
+    width: 30%;
   }
 
   .review-table .def-col {
-    font-size: 11px !important;
+    width: 70%;
   }
 
+  /* Прячем колонку EXAMPLE на очень маленьких экранах */
   .review-table .ex-col {
-    font-size: 9px !important;
+    display: none;
   }
+
+  /* Показываем пример под переводом */
+  .review-table .def-col::after {
+    content: attr(data-example);
+    display: block;
+    font-size: 8px;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+  }
+}
+
+/* Горизонтальная ориентация */
+@media (max-height: 600px) and (orientation: landscape) {
+  #explanation-modal {
+    max-height: 85vh;
+    padding: 10px;
+  }
+
+  .review-table {
+    font-size: 9px;
+  }
+
+  .review-table th,
+  .review-table td {
+    padding: 4px 3px;
+  }
+}
+
+/* Скроллбар для модалки */
+#explanation-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+#explanation-modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#explanation-modal::-webkit-scrollbar-thumb {
+  background: var(--yellow);
+  border-radius: 4px;
+}
+
+#explanation-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--green);
 }
 
