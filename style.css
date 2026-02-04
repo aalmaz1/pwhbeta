@@ -631,45 +631,42 @@ header {
 
   /* ========== СТИЛИ ДЛЯ ОТВЕТОВ ========== */
 
-/* Правильный ответ - зеленый */
+/* ========== ЦВЕТА ОТВЕТОВ (ОБЯЗАТЕЛЬНО!) ========== */
+
 .option-btn.correct {
   background: var(--green) !important;
   color: #000 !important;
   border-color: var(--green) !important;
+  box-shadow: 0 0 20px var(--green), 4px 4px 0 #000 !important;
   animation: correctPulse 0.5s ease-out;
 }
 
-/* Неправильный ответ - красный */
 .option-btn.wrong {
   background: var(--red) !important;
   color: #000 !important;
   border-color: var(--red) !important;
+  box-shadow: 0 0 20px var(--red), 4px 4px 0 #000 !important;
   animation: wrongShake 0.5s ease-out;
 }
 
-/* Анимация правильного ответа */
+/* Анимации */
 @keyframes correctPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); box-shadow: 0 0 20px var(--green); }
-  100% { transform: scale(1); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-/* Анимация неправильного ответа */
 @keyframes wrongShake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
 }
 
-/* Заблокированные кнопки (после ответа) */
+/* Остальные кнопки (не выбранные) - затемнить */
 .option-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  opacity: 0.4 !important;
   pointer-events: none;
 }
 
-
-#explanation-modal::-webkit-scrollbar-thumb:hover {
-  background: var(--green);
-}
 
