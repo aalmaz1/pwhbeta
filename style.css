@@ -469,11 +469,22 @@ header {
   }
 
   .category-grid {
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* ФИКСИРОВАННО 2 колонки */
+    gap: 10px;
+  }
+
+  .category-btn {
+    min-height: 70px;
+    padding: 10px 6px;
+    font-size: 9px;
+  }
+
+  .category-name {
+    font-size: 9px;
   }
 
   .category-btn.all {
-    grid-column: span 1;
+    grid-column: span 1; /* Занимает 1 колонку */
   }
 
   #explanation-modal {
@@ -504,8 +515,18 @@ header {
   }
 
   .category-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Всё равно 2 колонки */
     gap: 8px;
+  }
+
+  .category-btn {
+    min-height: 65px;
+    padding: 8px 4px;
+    font-size: 8px;
+  }
+
+  .category-name {
+    font-size: 8px;
   }
 
   #explanation-modal {
@@ -548,7 +569,18 @@ header {
 
 @media (max-width: 350px) {
   .category-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* ОСТАВЛЯЕМ 2, не 1! */
+    gap: 6px;
+  }
+
+  .category-btn {
+    min-height: 60px;
+    padding: 6px 3px;
+    font-size: 7px;
+  }
+
+  .category-name {
+    font-size: 7px;
   }
 }
 
@@ -572,4 +604,9 @@ header {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr); /* И в landscape тоже 2 */
+  }
 }
+
