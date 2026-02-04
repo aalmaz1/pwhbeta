@@ -1,41 +1,38 @@
-/* 1. БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ */
+/* ========================================
+   PIXEL WORD HUNTER - OPTIMIZED CSS v2026
+   ======================================== */
+
+/* === 1. ПЕРЕМЕННЫЕ === */
 :root {
-  --bg: #0f172a; /* Темно-синий фон */
-  --text: #e2e8f0; /* Светлый текст */
-  --green: #4ade80; /* Неоновый зеленый */
-  --red: #f87171; /* Неоновый красный */
-  --yellow: #fbbf24; /* Неоновый желтый */
-  --cyan: #00ccff; /* Голубой */
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --green: #4ade80;
+  --red: #f87171;
+  --yellow: #fbbf24;
+  --cyan: #00ccff;
 }
 
-/* Шрифты и сброс */
-html,
-body {
+/* === 2. БАЗОВЫЕ СТИЛИ === */
+html, body {
   height: 100dvh;
   width: 100vw;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Важно для мобилок */
-  font-family: "Press Start 2P", monospace; /* Твой пиксельный шрифт */
-  background-color: var(--bg);
+  overflow: hidden;
+  font-family: "Press Start 2P", monospace;
+  background: radial-gradient(circle at 20% 15%, rgba(0, 204, 255, 0.1), transparent 55%),
+              radial-gradient(circle at 80% 85%, rgba(255, 51, 102, 0.08), transparent 60%),
+              var(--bg);
   color: var(--text);
   user-select: none;
   -webkit-user-select: none;
 }
 
-/* Красивый фон с градиентами */
-body {
-  background:
-    radial-gradient(circle at 20% 15%, rgba(0, 204, 255, 0.1), transparent 55%),
-    radial-gradient(
-      circle at 80% 85%,
-      rgba(255, 51, 102, 0.08),
-      transparent 60%
-    ),
-    var(--bg);
+body.loading {
+  pointer-events: none;
+  opacity: 0.8;
 }
 
-/* Контейнер для центрирования */
 .game-container {
   height: 100%;
   width: 100%;
@@ -47,53 +44,110 @@ body {
   box-sizing: border-box;
 }
 
-/* Эффект старого монитора (CRT) */
+.hidden {
+  display: none !important;
+}
+
+/* === 3. CRT ЭФФЕКТ === */
 .crt-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* Чтобы можно было кликать сквозь него */
+  pointer-events: none;
   z-index: 999;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49%,
-      rgba(0, 255, 136, 0.03) 50%,
-      transparent 51%
-    ),
-    linear-gradient(rgba(255, 51, 102, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%);
-  background-size:
-    100% 2px,
-    100% 4px;
-  opacity: 0.4; /* Было 1.0, стало 0.4 — менее заметно */
+  background: linear-gradient(90deg, transparent 49%, rgba(0, 255, 136, 0.03) 50%, transparent 51%),
+              linear-gradient(rgba(255, 51, 102, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%);
+  background-size: 100% 2px, 100% 4px;
+  opacity: 0.4;
 }
 
-/* Заголовок */
+/* === 4. ГЛАВНОЕ МЕНЮ === */
 .game-title {
-  font-size: clamp(28px, 6vw, 48px);
+  font-size: clamp(36px, 9vw, 64px); /* Увеличено */
   text-align: center;
   margin-bottom: 25px;
+  line-height: 1.2;
   text-shadow: 4px 4px 0px #000;
   animation: neonPulse 2s infinite alternate;
 }
 
 @keyframes neonPulse {
-  from {
-    text-shadow:
-      0 0 5px rgba(0, 255, 136, 0.5),
-      4px 4px 0 #000;
-  }
-  to {
-    text-shadow:
-      0 0 20px rgba(0, 255, 136, 0.8),
-      4px 4px 0 #000;
-  }
+  from { text-shadow: 0 0 5px rgba(0, 255, 136, 0.5), 4px 4px 0 #000; }
+  to { text-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 4px 4px 0 #000; }
 }
-/* ========== КАТЕГОРИИ - ИСПРАВЛЕННЫЙ ДИЗАЙН ========== */
 
-/* Сетка категорий */
+.edition-badge {
+  font-size: clamp(8px, 2vw, 10px);
+  color: var(--cyan);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.credits {
+  margin-top: 30px;
+  font-size: 8px;
+  color: #666;
+}
+
+/* КНОПКИ ГЛАВНОГО МЕНЮ (HUNT и RESET) */
+.start-btn,
+.reset-btn {
+  width: 100%;
+  max-width: 300px; /* Как BACK */
+  padding: 18px 40px;
+  margin: 10px 0;
+  font-family: inherit;
+  font-size: clamp(12px, 3vw, 14px);
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.start-btn {
+  background: var(--green);
+  color: #000;
+  border: 2px solid var(--green);
+}
+
+.start-btn:hover {
+  box-shadow: 0 0 20px var(--green), 4px 4px 0 #000;
+}
+
+.start-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.reset-btn {
+  background: var(--red);
+  color: #000;
+  border: 2px solid var(--red);
+}
+
+.reset-btn:hover {
+  box-shadow: 0 0 20px var(--red), 4px 4px 0 #000;
+}
+
+.reset-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* === 5. ЭКРАН КАТЕГОРИЙ === */
 .category-grid {
   width: 100%;
   max-width: 600px;
@@ -101,17 +155,16 @@ body {
   overflow-y: auto;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Адаптивная сетка */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 15px;
   align-content: start;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Прячем scrollbar */
 .category-grid::-webkit-scrollbar {
   display: none;
 }
 
-/* Кнопки категорий - сохраняем пиксель-арт стиль */
 .category-btn {
   background: rgba(0, 0, 0, 0.4);
   border: 2px solid var(--yellow);
@@ -119,7 +172,6 @@ body {
   padding: 15px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
   box-shadow: 4px 4px 0 #000;
   display: flex;
   flex-direction: column;
@@ -128,7 +180,11 @@ body {
   min-height: 80px;
   font-size: 10px;
   font-family: inherit;
-  position: relative;
+  transition: all 0.2s;
+}
+
+.category-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
 }
 
 .category-btn:active {
@@ -136,19 +192,13 @@ body {
   box-shadow: 2px 2px 0 #000;
 }
 
-.category-btn:hover {
-  background: rgba(251, 191, 36, 0.2);
-}
-
-/* Специальная кнопка ALL WORDS */
 .category-btn.all {
   border-color: var(--green);
   color: var(--green);
   font-weight: bold;
-  grid-column: span 2; /* Занимает 2 колонки */
+  grid-column: span 2;
 }
 
-/* Название категории внутри кнопки */
 .category-name {
   font-size: 12px;
   margin-bottom: 5px;
@@ -156,73 +206,8 @@ body {
   font-weight: bold;
 }
 
-/* Статистика категории */
-.category-stats-grid,
-.category-btn > div[style*="font-size"] {
-  font-size: 8px;
-  margin-top: 5px;
-  line-height: 1.4;
-}
-
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-  .category-grid {
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
-    max-width: 100%;
-  }
-
-  .category-btn {
-    min-height: 70px;
-    padding: 10px;
-    font-size: 9px;
-  }
-
-  .category-name {
-    font-size: 10px;
-  }
-
-  .category-btn.all {
-    grid-column: span 1; /* На мобилке 1 колонка */
-  }
-}
-
-@media (max-width: 480px) {
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr); /* Фиксированно 2 колонки */
-    gap: 8px;
-  }
-
-  .category-btn {
-    min-height: 65px;
-    padding: 8px;
-    font-size: 8px;
-  }
-
-  .category-name {
-    font-size: 9px;
-  }
-}
-
-/* Супер маленькие экраны - одна колонка */
-@media (max-width: 350px) {
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .category-btn {
-    min-height: 60px;
-  }
-}
-
-/* Кнопка BACK в экране категорий */
-#category-screen .exit-btn,
-#category-screen .back-btn,
-#js-back-btn {
-  position: static;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 300px;
+.exit-btn,
+.back-btn {
   background: transparent;
   border: 2px solid var(--red);
   color: var(--red);
@@ -231,46 +216,37 @@ body {
   font-family: inherit;
   box-shadow: 4px 4px 0 #000;
   font-size: 12px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
 }
 
-#category-screen .exit-btn:active {
+.exit-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
 
-
-
-
-
-
-
-
-/* КНОПКИ ГЛАВНОГО МЕНЮ */
-.start-btn {
-  background: var(--green);
-  color: #000;
-  border: none;
-  padding: 20px 40px;
-  font-family: inherit;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 4px 4px 0 #000;
-  margin-top: 20px;
+/* === 6. ИГРОВОЙ ЭКРАН === */
+#game-screen {
+  padding: 10px;
 }
 
-.start-btn:active {
-  transform: translate(4px, 4px);
-  box-shadow: none;
+#word {
+  font-size: clamp(20px, 6vw, 36px);
+  margin: 20px 0;
+  word-break: break-word;
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 #000;
 }
 
-/* ИГРОВОЙ ЭКРАН */
 .options-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 15px;
+  gap: 12px;
   width: 100%;
   max-width: 500px;
-  margin-top: 20px;
+  padding: 0 10px;
 }
 
 .option-btn {
@@ -279,10 +255,13 @@ body {
   color: var(--text);
   padding: 15px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: clamp(11px, 3vw, 13px);
   cursor: pointer;
   box-shadow: 4px 4px 0 #000;
   text-align: center;
+  min-height: 48px;
+  touch-action: manipulation;
+  transition: all 0.1s;
 }
 
 .option-btn:active {
@@ -290,148 +269,64 @@ body {
   box-shadow: 2px 2px 0 #000;
 }
 
-/* УТИЛИТЫ */
-.hidden {
-  display: none !important;
+/* Цвета ответов */
+.option-btn.correct {
+  background: var(--green) !important;
+  color: #000 !important;
+  border-color: var(--green) !important;
+  box-shadow: 0 0 20px var(--green), 4px 4px 0 #000 !important;
+  animation: correctPulse 0.5s ease-out;
 }
 
-.exit-btn {
-  background: transparent;
-  border: 2px solid var(--red);
-  color: var(--red);
-  padding: 5px 10px;
-  cursor: pointer;
-  font-family: inherit;
+.option-btn.wrong {
+  background: var(--red) !important;
+  color: #000 !important;
+  border-color: var(--red) !important;
+  box-shadow: 0 0 20px var(--red), 4px 4px 0 #000 !important;
+  animation: wrongShake 0.5s ease-out;
 }
 
-/* Фикс модального окна */
-#explanation-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  background: var(--bg);
-  border: 3px solid var(--yellow);
-  padding: 20px;
-  max-width: 90vw;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
-}
-
-#explanation-modal.hidden {
-  display: none;
-}
-
-body.loading {
+.option-btn.disabled {
+  opacity: 0.4 !important;
   pointer-events: none;
-  opacity: 0.8;
-}
-/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
-
-/* Улучшение тач-таргетов (минимум 44x44px по Apple HIG) */
-.option-btn,
-.start-btn,
-.category-btn,
-.exit-btn,
-.next-btn {
-  min-height: 48px !important;
-  min-width: 100px !important;
-  font-size: clamp(10px, 3vw, 14px) !important;
-  padding: 12px 20px !important;
-  touch-action: manipulation; /* Убирает задержку тапа */
 }
 
-/* Игровой экран - лучше используем пространство */
-#game-screen {
-  padding: 10px !important;
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-#word {
-  font-size: clamp(18px, 5vw, 32px) !important;
-  margin: 20px 0 !important;
-  word-break: break-word; /* Длинные слова переносятся */
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
 }
 
-/* Сетка опций - одна колонка на узких экранах */
-.options-grid {
-  grid-template-columns: 1fr !important; /* Было 1fr 1fr - теперь по одной */
-  gap: 12px !important;
-  max-width: 100% !important;
-  padding: 0 10px;
-}
-
-/* Категории - адаптивная сетка */
-.category-grid {
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-  gap: 10px !important;
-  padding: 10px !important;
-}
-
-.category-btn {
-  min-height: 80px !important;
-  padding: 12px 8px !important;
-  font-size: 10px !important;
-}
-
-/* Заголовки */
-.game-title {
-  font-size: clamp(20px, 6vw, 48px) !important;
-  margin-bottom: 15px !important;
-}
-
-/* Header игры */
-header {
-  font-size: clamp(8px, 2.5vw, 12px) !important;
-  padding: 10px !important;
-  gap: 8px !important;
-}
-
-/* Модальное окно - на весь экран на мобилке */
-@media (max-width: 768px) {
-  /* ========== АДАПТИВНОЕ ОКНО WORD REVIEW ========== */
-
+/* === 7. МОДАЛЬНОЕ ОКНО WORD REVIEW === */
 #explanation-modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  
-  /* Фон и стиль */
   background: var(--bg);
   border: 3px solid var(--yellow);
   border-radius: 8px;
-  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5), 0 0 100px rgba(0, 0, 0, 0.8);
-  
-  /* Адаптивные размеры */
-  width: min(450px, 85vw); /* Максимум 450px, но на мобилке 85% ширины */
-  max-height: 70vh; /* Не больше 70% высоты экрана */
-  
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.5);
+  width: min(450px, 85vw);
+  max-height: 70vh;
   padding: 20px;
   overflow-y: auto;
-  
-  /* Плавное появление */
   animation: modalFadeIn 0.3s ease-out;
 }
 
 @keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+  from { opacity: 0; transform: translate(-50%, -45%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-#explanation-modal.hidden {
-  display: none;
-}
-
-/* Заголовок */
 #explanation-modal h2 {
   font-size: clamp(10px, 3vw, 12px);
   color: var(--yellow);
@@ -440,7 +335,6 @@ header {
   text-transform: uppercase;
 }
 
-/* Таблица - компактная */
 .review-table {
   width: 100%;
   border-collapse: collapse;
@@ -466,7 +360,6 @@ header {
   color: var(--yellow);
 }
 
-/* Колонки */
 .review-table .word-col {
   width: 25%;
   font-weight: bold;
@@ -492,8 +385,6 @@ header {
   color: #777;
 }
 
-/* Кнопка NEXT */
-#explanation-modal button,
 .next-btn {
   width: 100%;
   padding: 12px;
@@ -506,116 +397,15 @@ header {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 4px 4px 0 #000;
-  transition: all 0.1s;
   text-transform: uppercase;
+  transition: all 0.1s;
 }
 
-#explanation-modal button:active {
+.next-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
 
-/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
-
-@media (max-width: 768px) {
-  #explanation-modal {
-    width: 90vw;
-    max-height: 75vh;
-    padding: 15px;
-  }
-
-  .review-table {
-    font-size: 10px;
-  }
-
-  .review-table th,
-  .review-table td {
-    padding: 6px 4px;
-  }
-
-  .review-table .ex-col {
-    font-size: 9px;
-  }
-
-  .ex-rus {
-    font-size: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  #explanation-modal {
-    width: 95vw;
-    max-height: 80vh;
-    padding: 12px;
-  }
-
-  #explanation-modal h2 {
-    font-size: 10px;
-    margin-bottom: 10px;
-  }
-
-  .review-table {
-    font-size: 9px;
-  }
-
-  .review-table th {
-    font-size: 8px;
-    padding: 4px 2px;
-  }
-
-  .review-table td {
-    padding: 5px 3px;
-  }
-
-  /* Меняем пропорции колонок (но НЕ прячем) */
-  .review-table .word-col {
-    width: 25%;
-  }
-
-  .review-table .def-col {
-    width: 30%;
-  }
-
-  .review-table .ex-col {
-    width: 45%;
-    font-size: 8px !important; /* Мелкий шрифт */
-  }
-
-  .ex-rus {
-    font-size: 7px !important;
-    margin-top: 2px;
-  }
-
-  /* УДАЛИ ИЛИ ЗАКОММЕНТИРУЙ ЭТИ СТРОКИ (они прятали колонку): */
-  /*
-  .review-table .ex-col {
-    display: none;
-  }
-  .review-table .def-col::after {
-    content: attr(data-example);
-    ...
-  }
-  */
-}
-
-/* Горизонтальная ориентация */
-@media (max-height: 600px) and (orientation: landscape) {
-  #explanation-modal {
-    max-height: 85vh;
-    padding: 10px;
-  }
-
-  .review-table {
-    font-size: 9px;
-  }
-
-  .review-table th,
-  .review-table td {
-    padding: 4px 3px;
-  }
-}
-
-/* Скроллбар для модалки */
 #explanation-modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -629,44 +419,174 @@ header {
   border-radius: 4px;
 }
 
-  /* ========== СТИЛИ ДЛЯ ОТВЕТОВ ========== */
-
-/* ========== ЦВЕТА ОТВЕТОВ (ОБЯЗАТЕЛЬНО!) ========== */
-
-.option-btn.correct {
-  background: var(--green) !important;
-  color: #000 !important;
-  border-color: var(--green) !important;
-  box-shadow: 0 0 20px var(--green), 4px 4px 0 #000 !important;
-  animation: correctPulse 0.5s ease-out;
+/* === 8. ПРОГРЕСС БАР И HEADER === */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.option-btn.wrong {
-  background: var(--red) !important;
-  color: #000 !important;
-  border-color: var(--red) !important;
-  box-shadow: 0 0 20px var(--red), 4px 4px 0 #000 !important;
-  animation: wrongShake 0.5s ease-out;
+#progress {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.3s ease;
 }
 
-/* Анимации */
-@keyframes correctPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: clamp(9px, 2.5vw, 12px);
+  margin-bottom: 20px;
 }
 
-@keyframes wrongShake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-/* Остальные кнопки (не выбранные) - затемнить */
-.option-btn.disabled {
-  opacity: 0.4 !important;
+/* === 9. FEEDBACK === */
+#feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(24px, 6vw, 48px);
+  font-weight: bold;
+  text-shadow: 4px 4px 0 #000;
+  opacity: 0;
   pointer-events: none;
+  z-index: 10000;
+  transition: opacity 0.3s;
 }
 
+#feedback.show {
+  opacity: 1;
+  animation: feedbackPop 0.8s ease-out;
+}
 
+@keyframes feedbackPop {
+  0% { transform: translate(-50%, -50%) scale(0.5); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ========================================
+   MEDIA QUERIES (МОБИЛЬНАЯ АДАПТАЦИЯ)
+   ======================================== */
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  }
+
+  .category-btn.all {
+    grid-column: span 1;
+  }
+
+  #explanation-modal {
+    width: 90vw;
+    max-height: 75vh;
+    padding: 15px;
+  }
+
+  .review-table {
+    font-size: 10px;
+  }
+
+  .review-table .ex-col {
+    font-size: 9px;
+  }
+
+  .start-btn,
+  .reset-btn {
+    max-width: 90%;
+    padding: 15px 30px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 32px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  #explanation-modal {
+    width: 95vw;
+    max-height: 80vh;
+    padding: 12px;
+  }
+
+  .review-table {
+    font-size: 9px;
+  }
+
+  .review-table th {
+    font-size: 8px;
+  }
+
+  .review-table .word-col {
+    width: 25%;
+  }
+
+  .review-table .def-col {
+    width: 30%;
+  }
+
+  .review-table .ex-col {
+    width: 45%;
+    font-size: 8px;
+  }
+
+  .ex-rus {
+    font-size: 7px;
+  }
+
+  .start-btn,
+  .reset-btn {
+    padding: 14px 25px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 350px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  #explanation-modal {
+    max-height: 85vh;
+    padding: 10px;
+  }
+
+  .game-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  #word {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
