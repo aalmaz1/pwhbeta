@@ -225,14 +225,6 @@ function renderCategoryMenu() {
         btn.onclick = () => startGame(cat);
         container.appendChild(btn);
     });
-
-    // Кнопка BACK
-    const backBtn = document.createElement('button');
-    backBtn.className = 'exit-btn'; // Или back-btn
-    backBtn.style.marginTop = '20px';
-    backBtn.innerText = 'BACK TO MENU';
-    backBtn.onclick = window.backToMenu;
-    container.appendChild(backBtn);
 }
 function startGame(cat) {
     selectedCategory = cat;
