@@ -47,6 +47,33 @@ window.showCategories = function() {
     }
 };
 
+
+// В НАЧАЛЕ app.js (где window.showCategories, window.resetProgress)
+
+window.nextRound = function() {
+  console.log("🔄 Next round:", selectedCategory);
+  
+  // Скрываем окно завершения, показываем игру
+  if (ui.quizBox) ui.quizBox.innerHTML = '';
+  
+  // Сбрасываем счётчик вопросов
+  currentQ = 0;
+  
+  // XP НЕ сбрасываем (накапливается)
+  // xp уже сохранён в localStorage
+  
+  // Обновляем display
+  if (ui.xp) ui.xp.textContent = xp;
+  if (ui.progress) ui.progress.style.width = '0%';
+  
+  // Генерируем новый раунд
+  generateSmartRound(selectedCategory);
+  
+  // Запускаем первый вопрос
+  loadQuestion();
+};
+
+
 window.resetProgress = function() {
     if (confirm('Точно сбросить весь прогресс?')) {
         localStorage.removeItem('pixelWordHunter_save');
