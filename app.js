@@ -490,8 +490,6 @@ window.nextQuestion = function() {
 
 function finishGame() {
   ui.progress.style.width = "100%";
-  
-  // Сохраняем XP
   localStorage.setItem('pixelWordHunter_xp', xp);
   
   ui.quizBox.innerHTML = `
@@ -499,31 +497,19 @@ function finishGame() {
       <h1 style="color:#4ade80; margin-bottom:20px; font-size:clamp(18px, 5vw, 28px);">
         ROUND COMPLETE!
       </h1>
-      <p style="margin-bottom:25px; font-size:clamp(11px, 3vw, 13px); line-height:1.8; color:#e2e8f0;">
+      <p style="margin-bottom:25px; font-size:clamp(11px, 3vw, 13px); line-height:1.8;">
         XP Gained: <span style="color:#fbbf24; font-weight:bold;">${xp}</span><br>
         Progress Saved 💾
       </p>
       
-      <!-- Кнопки в контейнере -->
       <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:300px; margin:0 auto;">
-        <button class="next-round-btn" onclick="nextRound()" 
-                style="background:#4ade80; color:#000; border:2px solid #4ade80; padding:14px; 
-                       font-family:inherit; font-size:12px; font-weight:bold; 
-                       text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000; 
-                       transition:all 0.1s;">
-          🔄 NEXT ROUND
-        </button>
-        
-        <button onclick="location.reload()" 
-                style="background:#eab308; color:#000; border:2px solid #eab308; padding:14px; 
-                       font-family:inherit; font-size:12px; font-weight:bold; 
-                       text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000; 
-                       transition:all 0.1s;">
-          🏠 MAIN MENU
-        </button>
+        <button class="next-round-btn" onclick="nextRound()">🔄 NEXT ROUND</button>
+        <button class="main-menu-btn" onclick="location.reload()">🏠 MAIN MENU</button>
       </div>
     </div>
   `;
+}
+
   
   // Стили для hover/active (добавляются динамически)
   const nextBtn = ui.quizBox.querySelector('.next-round-btn');
