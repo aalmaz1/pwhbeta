@@ -50,38 +50,39 @@ window.showCategories = function() {
 
 // В НАЧАЛЕ app.js (где window.showCategories, window.resetProgress)
 
+
+// ГЛОБАЛЬНАЯ ФУНКЦИЯ - запуск нового раунда
 window.nextRound = function() {
   console.log("🔄 Next round:", selectedCategory);
   
-  // Скрываем окно завершения, показываем игру
-  if (ui.quizBox) ui.quizBox.innerHTML = '';
+  // Очищаем quiz-box (убираем кнопки ROUND COMPLETE)
+  if (ui.quizBox) {
+    ui.quizBox.innerHTML = '';
+  }
   
   // Сбрасываем счётчик вопросов
   currentQ = 0;
+  currentRound = [];
   
-  // XP НЕ сбрасываем (накапливается)
-  // xp уже сохранён в localStorage
-  
-  // Обновляем display
+  // XP продолжает накапливаться (уже сохранён в localStorage)
   if (ui.xp) ui.xp.textContent = xp;
+  
+  // Сброс прогресс-бара
   if (ui.progress) ui.progress.style.width = '0%';
   
-  // Генерируем новый раунд
+  // Генерируем новый набор слов
   generateSmartRound(selectedCategory);
   
-  // Запускаем первый вопрос
-  loadQuestion();
+  // ВАЖНО: проверяем что раунд создан
+  if (currentRound && currentRound.length > 0) {
+    loadQuestion();
+  } else {
+    console.error("❌ Не удалось создать раунд!");
+    alert("Нет доступных слов для этой категории. Возврат в меню.");
+    location.reload();
+  }
 };
 
-
-window.resetProgress = function() {
-    if (confirm('Точно сбросить весь прогресс?')) {
-        localStorage.removeItem('pixelWordHunter_save');
-        localStorage.removeItem('pixelWordHunter_xp');
-        localStorage.removeItem('pixelWordHunter_progress');
-        location.reload();
-    }
-};
 
 window.backToMenu = function() {
     if (ui.categoryScreen && ui.menu) {
@@ -489,26 +490,66 @@ window.nextQuestion = function() {
 };
 
 function finishGame() {
+  // Сохраняем прогресс
   ui.progress.style.width = "100%";
   localStorage.setItem('pixelWordHunter_xp', xp);
   
+  // Показываем результаты
   ui.quizBox.innerHTML = `
     <div class="question-card" style="margin-top:20px; text-align:center;">
       <h1 style="color:#4ade80; margin-bottom:20px; font-size:clamp(18px, 5vw, 28px);">
         ROUND COMPLETE!
       </h1>
-      <p style="margin-bottom:25px; font-size:clamp(11px, 3vw, 13px); line-height:1.8;">
+      <p style="margin-bottom:25px; font-size:clamp(11px, 3vw, 13px); line-height:1.8; color:#e2e8f0;">
         XP Gained: <span style="color:#fbbf24; font-weight:bold;">${xp}</span><br>
         Progress Saved 💾
       </p>
       
       <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:300px; margin:0 auto;">
-        <button class="next-round-btn" onclick="nextRound()">🔄 NEXT ROUND</button>
-        <button class="main-menu-btn" onclick="location.reload()">🏠 MAIN MENU</button>
+        <button class="next-round-btn" style="background:#4ade80; color:#000; border:2px solid #4ade80; padding:14px; font-family:inherit; font-size:12px; font-weight:bold; text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000;">
+          🔄 NEXT ROUND
+        </button>
+        
+        <button class="main-menu-btn" style="background:#eab308; color:#000; border:2px solid #eab308; padding:14px; font-family:inherit; font-size:12px; font-weight:bold; text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000;">
+          🏠 MAIN MENU
+        </button>
       </div>
     </div>
   `;
+  
+  // Вешаем обработчики ПОСЛЕ создания HTML
+  const nextBtn = ui.quizBox.querySelector('.next-round-btn');
+  const menuBtn = ui.quizBox.querySelector('.main-menu-btn');
+  
+  if (nextBtn) {
+    nextBtn.onclick = function() {
+      window.nextRound();
+    };
+    nextBtn.onmousedown = function() {
+      this.style.transform = 'translate(2px, 2px)';
+      this.style.boxShadow = '2px 2px 0 #000';
+    };
+    nextBtn.onmouseup = function() {
+      this.style.transform = '';
+      this.style.boxShadow = '4px 4px 0 #000';
+    };
+  }
+  
+  if (menuBtn) {
+    menuBtn.onclick = function() {
+      location.reload();
+    };
+    menuBtn.onmousedown = function() {
+      this.style.transform = 'translate(2px, 2px)';
+      this.style.boxShadow = '2px 2px 0 #000';
+    };
+    menuBtn.onmouseup = function() {
+      this.style.transform = '';
+      this.style.boxShadow = '4px 4px 0 #000';
+    };
+  }
 }
+
 
   
   // Стили для hover/active (добавляются динамически)
