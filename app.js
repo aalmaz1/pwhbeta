@@ -462,13 +462,74 @@ window.nextQuestion = function() {
 };
 
 function finishGame() {
-    ui.quizBox.innerHTML = `
-        <h2 style="color:#4ade80">ROUND COMPLETE!</h2>
-        <p>XP Gained: ${xp}</p>
-        <button onclick="location.reload()" class="start-btn" style="margin-top:20px">MAIN MENU</button>
-    `;
-    ui.progress.style.width = '100%';
+  ui.progress.style.width = "100%";
+  
+  // Сохраняем XP
+  localStorage.setItem('pixelWordHunter_xp', xp);
+  
+  ui.quizBox.innerHTML = `
+    <div class="question-card" style="margin-top:20px; text-align:center;">
+      <h1 style="color:#4ade80; margin-bottom:20px; font-size:clamp(18px, 5vw, 28px);">
+        ROUND COMPLETE!
+      </h1>
+      <p style="margin-bottom:25px; font-size:clamp(11px, 3vw, 13px); line-height:1.8; color:#e2e8f0;">
+        XP Gained: <span style="color:#fbbf24; font-weight:bold;">${xp}</span><br>
+        Progress Saved 💾
+      </p>
+      
+      <!-- Кнопки в контейнере -->
+      <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:300px; margin:0 auto;">
+        <button class="next-round-btn" onclick="nextRound()" 
+                style="background:#4ade80; color:#000; border:2px solid #4ade80; padding:14px; 
+                       font-family:inherit; font-size:12px; font-weight:bold; 
+                       text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000; 
+                       transition:all 0.1s;">
+          🔄 NEXT ROUND
+        </button>
+        
+        <button onclick="location.reload()" 
+                style="background:#eab308; color:#000; border:2px solid #eab308; padding:14px; 
+                       font-family:inherit; font-size:12px; font-weight:bold; 
+                       text-transform:uppercase; cursor:pointer; box-shadow:4px 4px 0 #000; 
+                       transition:all 0.1s;">
+          🏠 MAIN MENU
+        </button>
+      </div>
+    </div>
+  `;
+  
+  // Стили для hover/active (добавляются динамически)
+  const nextBtn = ui.quizBox.querySelector('.next-round-btn');
+  if (nextBtn) {
+    nextBtn.onmousedown = function() {
+      this.style.transform = 'translate(2px, 2px)';
+      this.style.boxShadow = '2px 2px 0 #000';
+    };
+    nextBtn.onmouseup = function() {
+      this.style.transform = '';
+      this.style.boxShadow = '4px 4px 0 #000';
+    };
+  }
 }
+
+// ГЛОБАЛЬНАЯ ФУНКЦИЯ - запуск нового раунда
+window.nextRound = function() {
+  console.log("🔄 Starting next round for:", selectedCategory);
+  
+  // Сбрасываем состояние
+  currentQ = 0;
+  currentRound = [];
+  
+  // Обновляем XP display (он уже сохранён)
+  if (ui.xp) ui.xp.textContent = xp;
+  
+  // Генерируем новый раунд слов
+  generateSmartRound(selectedCategory);
+  
+  // Запускаем первый вопрос
+  loadQuestion();
+};
+
 
 function showFeedback(msg, success) {
     if(!ui.feedback) return;
