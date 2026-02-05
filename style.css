@@ -698,3 +698,42 @@ header {
   transform: translate(1px, 1px);
   box-shadow: 1px 1px 0 #000;
 }
+
+/* === 10. КНОПКИ ЗАВЕРШЕНИЯ РАУНДА === */
+.next-round-btn,
+.main-menu-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 14px 20px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.next-round-btn {
+  background: var(--green);
+  border-color: var(--green);
+  color: #000;
+}
+
+.next-round-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.main-menu-btn {
+  background: #eab308;
+  border-color: #eab308;
+  color: #000;
+}
+
+.main-menu-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
