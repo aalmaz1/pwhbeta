@@ -563,8 +563,7 @@ function finishGame() {
       this.style.transform = '';
       this.style.boxShadow = '4px 4px 0 #000';
     };
-  }
-}
+  };
 
 // ГЛОБАЛЬНАЯ ФУНКЦИЯ - запуск нового раунда
 window.nextRound = function() {
