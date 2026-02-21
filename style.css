@@ -543,19 +543,130 @@ header {
 ::-webkit-scrollbar-thumb { background: var(--neon-purple); }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
-@media (max-width: 480px) {
-  .game-title { font-size: clamp(16px, 7vw, 24px); }
-  .options-grid { gap: 10px; }
-  .option-btn { padding: 13px 14px; }
-  .category-grid { max-height: 55vh; }
-  .question-card { margin: 60px 0 20px; }
+
+/* Extra Small Devices (phones, 320px and up) */
+@media (max-width: 374px) {
+  .game-title { font-size: clamp(14px, 6vw, 20px); margin-bottom: 14px; }
+  .edition-badge { font-size: 8px; margin-bottom: 20px; }
+  .stats-line { font-size: 8px; margin-bottom: 24px; }
+  .blink { font-size: 9px; margin-bottom: 24px; }
+  .start-btn { padding: 12px 28px; font-size: 12px; min-width: 140px; }
+  .category-btn { padding: 10px 12px; font-size: 8px; min-width: 90px; min-height: 40px; }
+  .option-btn { padding: 12px 12px; font-size: 8px; }
+  .question-card { margin: 55px 0 20px; }
+  .question-card h1 { font-size: clamp(16px, 5.5vw, 24px); }
+  .modal { padding: 16px; }
+  .modal-title { font-size: 10px; margin-bottom: 18px; }
+  #explanation-list { max-height: 45vh; padding: 16px; }
+  .next-btn { padding: 12px 24px; font-size: 10px; }
+  header { padding: 10px 12px; }
+  .stat { font-size: 8px; }
+  .exit-btn { font-size: 10px; padding: 5px 10px; }
+  .category-grid { max-height: 50vh; gap: 8px; padding: 12px; }
 }
 
-@media (min-height: 750px) {
+/* Small Devices (phones, 375px to 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+  .game-title { font-size: clamp(16px, 6.5vw, 24px); }
+  .edition-badge { font-size: 9px; }
+  .stats-line { font-size: 8px; }
+  .blink { font-size: 10px; }
+  .start-btn { padding: 14px 32px; font-size: 13px; }
+  .category-btn { padding: 11px 14px; font-size: 9px; min-width: 100px; min-height: 42px; }
+  .option-btn { padding: 13px 14px; font-size: 9px; }
+  .question-card { margin: 60px 0 22px; }
+  .question-card h1 { font-size: clamp(18px, 5.8vw, 28px); }
+  .modal { padding: 20px; }
+  .modal-title { font-size: 11px; margin-bottom: 20px; }
+  #explanation-list { max-height: 46vh; padding: 18px; }
+  .next-btn { padding: 13px 28px; font-size: 11px; }
+  header { padding: 12px 16px; }
+  .stat { font-size: 8px; }
+  .exit-btn { font-size: 11px; padding: 5px 11px; }
+  .category-grid { max-height: 53vh; gap: 9px; padding: 14px; }
+}
+
+/* Medium Devices (tablets, 481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .game-title { font-size: clamp(22px, 5vw, 32px); }
+  .edition-badge { font-size: 10px; }
+  .stats-line { font-size: 10px; }
+  .blink { font-size: 11px; }
+  .start-btn { padding: 16px 36px; font-size: 14px; }
+  .category-btn { padding: 12px 16px; font-size: 10px; min-width: 110px; min-height: 44px; }
+  .option-btn { padding: 14px 16px; font-size: 10px; }
+  .question-card { margin: 65px 0 24px; }
+  .question-card h1 { font-size: clamp(22px, 6vw, 34px); }
+  .modal { padding: 24px; }
+  .modal-title { font-size: 13px; margin-bottom: 22px; }
+  #explanation-list { max-height: 48vh; padding: 20px; }
+  .next-btn { padding: 14px 32px; font-size: 12px; }
+  .category-grid { max-height: 58vh; gap: 10px; padding: 16px; }
+}
+
+/* Large Devices (desktops, 769px and up) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .category-grid { max-height: 62vh; }
+  #explanation-list { max-height: 50vh; max-width: 500px; }
+  .options-grid { max-width: 480px; }
+}
+
+/* Extra Large Devices (large desktops, 1025px and up) */
+@media (min-width: 1025px) {
   .category-grid { max-height: 65vh; }
+  #explanation-list { max-height: 52vh; max-width: 520px; }
+  .options-grid { max-width: 520px; }
 }
 
-@media (hover: none) {
+/* Portrait orientation (all devices) */
+@media (orientation: portrait) {
+  .category-grid { max-height: 55vh; }
+  #explanation-list { max-height: 45vh; }
+}
+
+/* Landscape orientation (small devices) */
+@media (orientation: landscape) and (max-height: 600px) {
+  .game-title { font-size: clamp(14px, 3.5vw, 20px); margin-bottom: 10px; }
+  .edition-badge { font-size: 8px; margin-bottom: 14px; }
+  .stats-line { font-size: 8px; margin-bottom: 16px; }
+  .blink { font-size: 9px; margin-bottom: 16px; }
+  .start-btn { padding: 10px 24px; font-size: 11px; }
+  .category-grid { max-height: 40vh; padding: 8px; gap: 6px; }
+  .category-btn { padding: 8px 12px; font-size: 8px; min-width: 80px; min-height: 32px; }
+  .question-card { margin: 45px 0 14px; }
+  .question-card h1 { font-size: clamp(16px, 4vw, 24px); }
+  .option-btn { padding: 10px 12px; font-size: 8px; }
+  .options-grid { gap: 8px; }
+  .modal { padding: 12px; }
+  .modal-title { font-size: 10px; margin-bottom: 14px; }
+  #explanation-list { max-height: 35vh; padding: 12px; }
+  .next-btn { padding: 10px 24px; font-size: 10px; }
+  header { padding: 8px 12px; }
+  .stat { font-size: 7px; }
+  .exit-btn { font-size: 10px; padding: 4px 8px; }
+  .credits { display: none; }
+}
+
+/* Extra tall screens (min-height: 900px) */
+@media (min-height: 900px) {
+  .category-grid { max-height: 70vh; }
+  #explanation-list { max-height: 55vh; }
+}
+
+/* Safe area support for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .game-container { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  header { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
+}
+
+/* Touch devices optimization */
+@media (hover: none) and (pointer: coarse) {
+  .option-btn { min-height: 50px; }
+  .category-btn { min-height: 48px; }
+  .start-btn { min-height: 54px; }
+  .next-btn { min-height: 50px; }
+  .exit-btn { min-height: 36px; }
+
   .option-btn:hover {
     background: rgba(10, 0, 20, 0.8);
     border-color: rgba(191, 95, 255, 0.5);
@@ -564,4 +675,25 @@ header {
     padding-left: 16px;
   }
   .option-btn:hover::before { opacity: 0; }
+
+  .category-btn:hover {
+    background: rgba(0,245,255,0.04);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+  }
+
+  .start-btn:hover {
+    background: rgba(255,45,120,0.08);
+    color: var(--neon-pink);
+  }
+
+  .next-btn:hover {
+    background: rgba(0,245,255,0.06);
+    color: var(--neon-cyan);
+  }
+}
+
+/* High DPI displays优化字体渲染 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 }
