@@ -160,12 +160,15 @@ function showExplanation(word) {
   const masteryLevel = getMasteryLevel(word);
   const masteryLabel = getMasteryLabel(masteryLevel);
 
+  const hasValidExample = word.exampleEng && !word.exampleEng.startsWith('Example with');
+  const hasValidRusExample = word.exampleRus && !word.exampleRus.startsWith('Пример с');
+
   list.innerHTML = `
     <div style="font-size: 11px; line-height: 1.8;">
       <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">${word.eng}</p>
       <p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">${word.correct}</p>
-      ${word.exampleEng ? `<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"${word.exampleEng}"</p>` : ''}
-      ${word.exampleRus ? `<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">${word.exampleRus}</p>` : ''}
+      ${hasValidExample ? `<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"${word.exampleEng}"</p>` : ''}
+      ${hasValidRusExample ? `<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">${word.exampleRus}</p>` : ''}
       <p style="color: #ffe600; text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">
         MASTERY: <span style="color: ${getMasteryColor(masteryLevel)}">${masteryLabel}</span>
       </p>
