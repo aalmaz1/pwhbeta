@@ -130,7 +130,9 @@
       "сторона"
     ],
     "correct": "сторона",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The party must sign the contract before the deadline.",
+    "exampleRus": "Сторона должна подписать контракт до истечения срока."
   },
   {
     "category": "Contracts",
@@ -188,7 +190,9 @@
       "управлять"
     ],
     "correct": "пункт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please review the termination clause carefully.",
+    "exampleRus": "Пожалуйста, внимательно изучите пункт о расторжении."
   },
   {
     "category": "Contracts",
@@ -201,7 +205,9 @@
       "розничная торговля"
     ],
     "correct": "нарушение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A breach of contract may result in legal action.",
+    "exampleRus": "Нарушение контракта может повлечь судебное разбирательство."
   },
   {
     "category": "Contracts",
@@ -214,7 +220,9 @@
       "аннулировать"
     ],
     "correct": "аннулировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The court decided to nullify the agreement.",
+    "exampleRus": "Суд решил аннулировать соглашение."
   },
   {
     "category": "Contracts",
@@ -227,7 +235,9 @@
       "утверждать"
     ],
     "correct": "соблюдать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "All vendors must comply with the new regulations.",
+    "exampleRus": "Все поставщики обязаны соблюдать новые правила."
   },
   {
     "category": "Contracts",
@@ -255,7 +265,9 @@
       "сборка"
     ],
     "correct": "условие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The term of the contract is three years.",
+    "exampleRus": "Срок действия контракта составляет три года."
   },
   {
     "category": "Contracts",
@@ -268,7 +280,9 @@
       "обязательный"
     ],
     "correct": "обязательный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "This agreement is legally binding on both parties.",
+    "exampleRus": "Данное соглашение является юридически обязательным для обеих сторон."
   },
   {
     "category": "Contracts",
@@ -281,7 +295,9 @@
       "скидка"
     ],
     "correct": "явный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The contract contains explicit instructions for delivery.",
+    "exampleRus": "Контракт содержит явные инструкции по доставке."
   },
   {
     "category": "Marketing",
@@ -354,7 +370,9 @@
       "аудит"
     ],
     "correct": "убеждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The sales team worked hard to convince the client.",
+    "exampleRus": "Команда по продажам усердно работала, чтобы убедить клиента."
   },
   {
     "category": "Marketing",
@@ -412,7 +430,9 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We need to estimate the cost of the campaign.",
+    "exampleRus": "Нам нужно оценить стоимость кампании."
   },
   {
     "category": "Marketing",
@@ -545,7 +565,9 @@
       "посадочный талон"
     ],
     "correct": "прощение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company sent a solicitation letter to potential donors.",
+    "exampleRus": "Компания отправила письмо-обращение потенциальным донорам."
   },
   {
     "category": "Marketing",
@@ -588,7 +610,9 @@
       "уменьшать"
     ],
     "correct": "гарантия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The warranty covers all manufacturing defects.",
+    "exampleRus": "Гарантия распространяется на все производственные дефекты."
   },
   {
     "category": "Warranties",
@@ -601,7 +625,9 @@
       "бюджет"
     ],
     "correct": "гарантировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We guarantee your satisfaction or your money back.",
+    "exampleRus": "Мы гарантируем ваше удовлетворение или возврат денег."
   },
   {
     "category": "Warranties",
@@ -629,7 +655,9 @@
       "истекать"
     ],
     "correct": "истекать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The warranty will expire in two years.",
+    "exampleRus": "Гарантия истечёт через два года."
   },
   {
     "category": "Warranties",
@@ -642,7 +670,9 @@
       "ремонт"
     ],
     "correct": "действительный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The coupon is valid until the end of the month.",
+    "exampleRus": "Купон действителен до конца месяца."
   },
   {
     "category": "Warranties",
@@ -670,7 +700,9 @@
       "заменять"
     ],
     "correct": "заменять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We will replace the defective product immediately.",
+    "exampleRus": "Мы немедленно заменим дефектный товар."
   },
   {
     "category": "Warranties",
@@ -683,7 +715,9 @@
       "ремонт"
     ],
     "correct": "ремонт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The technician came to repair the broken machine.",
+    "exampleRus": "Техник пришёл починить сломанную машину."
   },
   {
     "category": "Warranties",
@@ -726,7 +760,9 @@
       "багаж"
     ],
     "correct": "продлевать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can extend your warranty for an additional fee.",
+    "exampleRus": "Вы можете продлить гарантию за дополнительную плату."
   },
   {
     "category": "Warranties",
@@ -739,7 +775,9 @@
       "переписка"
     ],
     "correct": "неисправность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Report any malfunction to the service center.",
+    "exampleRus": "Сообщайте о любой неисправности в сервисный центр."
   },
   {
     "category": "Warranties",
@@ -782,7 +820,9 @@
       "нанимать"
     ],
     "correct": "длительность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The duration of the warranty is twelve months.",
+    "exampleRus": "Длительность гарантии составляет двенадцать месяцев."
   },
   {
     "category": "Warranties",
@@ -795,7 +835,9 @@
       "условие"
     ],
     "correct": "условие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The item must be in original condition to qualify for a refund.",
+    "exampleRus": "Товар должен находиться в оригинальном состоянии для возврата."
   },
   {
     "category": "Warranties",
@@ -808,7 +850,9 @@
       "исключать"
     ],
     "correct": "исключать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The warranty does not exclude normal wear and tear.",
+    "exampleRus": "Гарантия не исключает нормальный износ."
   },
   {
     "category": "Warranties",
@@ -821,7 +865,9 @@
       "данные"
     ],
     "correct": "включать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The service package includes free repairs for one year.",
+    "exampleRus": "Пакет обслуживания включает бесплатный ремонт в течение года."
   },
   {
     "category": "Warranties",
@@ -834,7 +880,9 @@
       "спад"
     ],
     "correct": "обновлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You may renew your service contract at any time.",
+    "exampleRus": "Вы можете обновить сервисный контракт в любое время."
   },
   {
     "category": "Warranties",
@@ -847,7 +895,9 @@
       "гражданский"
     ],
     "correct": "автоматический",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The system performs automatic backups every night.",
+    "exampleRus": "Система выполняет автоматическое резервное копирование каждую ночь."
   },
   {
     "category": "Business Planning",
@@ -875,7 +925,9 @@
       "банк"
     ],
     "correct": "альтернатива",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We should consider an alternative approach to cut costs.",
+    "exampleRus": "Нам следует рассмотреть альтернативный подход для снижения затрат."
   },
   {
     "category": "Business Planning",
@@ -903,7 +955,9 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager will brief the team on the new strategy.",
+    "exampleRus": "Менеджер проинструктирует команду о новой стратегии."
   },
   {
     "category": "Business Planning",
@@ -916,7 +970,9 @@
       "уточнять"
     ],
     "correct": "уточнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please clarify the objectives of the project.",
+    "exampleRus": "Пожалуйста, уточните цели проекта."
   },
   {
     "category": "Business Planning",
@@ -929,7 +985,9 @@
       "сотрудничество"
     ],
     "correct": "сотрудничество",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Success depends on close cooperation between departments.",
+    "exampleRus": "Успех зависит от тесного сотрудничества между отделами."
   },
   {
     "category": "Business Planning",
@@ -1032,7 +1090,9 @@
       "делегирование"
     ],
     "correct": "участник",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Each participant received a copy of the agenda.",
+    "exampleRus": "Каждый участник получил копию повестки дня."
   },
   {
     "category": "Business Planning",
@@ -1045,7 +1105,9 @@
       "распродажа"
     ],
     "correct": "приоритет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Customer satisfaction is our top priority.",
+    "exampleRus": "Удовлетворение потребностей клиентов — наш главный приоритет."
   },
   {
     "category": "Business Planning",
@@ -1073,7 +1135,9 @@
       "кампания"
     ],
     "correct": "рекомендация",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The consultant submitted a recommendation report.",
+    "exampleRus": "Консультант представил отчёт с рекомендациями."
   },
   {
     "category": "Business Planning",
@@ -1116,7 +1180,9 @@
       "апеллировать"
     ],
     "correct": "подход",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A flexible approach will help us meet the deadline.",
+    "exampleRus": "Гибкий подход поможет нам уложиться в срок."
   },
   {
     "category": "Business Planning",
@@ -1129,7 +1195,9 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A thorough assessment was conducted before the merger.",
+    "exampleRus": "Перед слиянием было проведено тщательное Assessment."
   },
   {
     "category": "Conferences",
@@ -1172,7 +1240,9 @@
       "посещаемость"
     ],
     "correct": "посещаемость",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Attendance at the annual conference is mandatory.",
+    "exampleRus": "Посещение ежегодной конференции является обязательным."
   },
   {
     "category": "Conferences",
@@ -1185,7 +1255,9 @@
       "шеф-повар"
     ],
     "correct": "награда",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The award was presented to the best presenter.",
+    "exampleRus": "Награда была вручена лучшему докладчику."
   },
   {
     "category": "Conferences",
@@ -1198,7 +1270,9 @@
       "наличные"
     ],
     "correct": "банкет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The conference banquet will be held on Friday evening.",
+    "exampleRus": "Банкет конференции состоится в пятницу вечером."
   },
   {
     "category": "Conferences",
@@ -1211,7 +1285,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please book your hotel room as soon as possible.",
+    "exampleRus": "Пожалуйста, забронируйте номер в отеле как можно скорее."
   },
   {
     "category": "Conferences",
@@ -1224,7 +1300,9 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hall has a capacity of five hundred people.",
+    "exampleRus": "Зал рассчитан на пятьсот человек."
   },
   {
     "category": "Conferences",
@@ -1237,7 +1315,9 @@
       "оптовая торговля"
     ],
     "correct": "заключать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The chairman will conclude the session with a summary.",
+    "exampleRus": "Председатель завершит сессию кратким изложением."
   },
   {
     "category": "Conferences",
@@ -1295,7 +1375,9 @@
       "обсуждение"
     ],
     "correct": "обсуждение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The panel led an open discussion after the presentation.",
+    "exampleRus": "Комиссия провела открытую дискуссию после презентации."
   },
   {
     "category": "Conferences",
@@ -1308,7 +1390,9 @@
       "убеждать"
     ],
     "correct": "дисплей",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company set up a display booth at the trade fair.",
+    "exampleRus": "Компания установила стенд на торговой ярмарке."
   },
   {
     "category": "Conferences",
@@ -1321,7 +1405,9 @@
       "долг"
     ],
     "correct": "распределять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Volunteers will distribute handouts to all attendees.",
+    "exampleRus": "Волонтёры раздадут раздаточные материалы всем участникам."
   },
   {
     "category": "Conferences",
@@ -1334,7 +1420,9 @@
       "записываться"
     ],
     "correct": "записываться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can enroll in the workshop online.",
+    "exampleRus": "Вы можете записаться на мастер-класс онлайн."
   },
   {
     "category": "Conferences",
@@ -1362,7 +1450,9 @@
       "ярмарка"
     ],
     "correct": "ярмарка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The job fair attracted hundreds of applicants.",
+    "exampleRus": "Ярмарка вакансий привлекла сотни соискателей."
   },
   {
     "category": "Conferences",
@@ -1375,7 +1465,9 @@
       "ездить на работу"
     ],
     "correct": "принимать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Our company will host the international summit this year.",
+    "exampleRus": "В этом году наша компания принимает международный саммит."
   },
   {
     "category": "Conferences",
@@ -1388,7 +1480,9 @@
       "нетрудоспособность"
     ],
     "correct": "бейдж",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please wear your name tag throughout the conference.",
+    "exampleRus": "Пожалуйста, носите свой бейдж на протяжении всей конференции."
   },
   {
     "category": "Conferences",
@@ -1401,7 +1495,9 @@
       "делегирование"
     ],
     "correct": "участник",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Every participant received a welcome kit.",
+    "exampleRus": "Каждый участник получил приветственный набор."
   },
   {
     "category": "Computers",
@@ -1444,7 +1540,9 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The server has a storage capacity of ten terabytes.",
+    "exampleRus": "Сервер имеет ёмкость хранилища в десять терабайт."
   },
   {
     "category": "Computers",
@@ -1457,7 +1555,9 @@
       "компонент"
     ],
     "correct": "компонент",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Each component of the system must be tested individually.",
+    "exampleRus": "Каждый компонент системы необходимо протестировать отдельно."
   },
   {
     "category": "Computers",
@@ -1485,7 +1585,9 @@
       "курсор"
     ],
     "correct": "курсор",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Move the cursor to the icon and double-click.",
+    "exampleRus": "Переместите курсор на значок и дважды щёлкните."
   },
   {
     "category": "Computers",
@@ -1528,7 +1630,9 @@
       "удовлетворенность"
     ],
     "correct": "удалять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Be careful not to delete important files.",
+    "exampleRus": "Будьте осторожны и не удаляйте важные файлы."
   },
   {
     "category": "Computers",
@@ -1541,7 +1645,9 @@
       "рабочий стол"
     ],
     "correct": "рабочий стол",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The new desktop computer is faster than the previous model.",
+    "exampleRus": "Новый настольный компьютер работает быстрее предыдущей модели."
   },
   {
     "category": "Computers",
@@ -1599,7 +1705,9 @@
       "папка"
     ],
     "correct": "папка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Save the report in the shared folder on the network.",
+    "exampleRus": "Сохраните отчёт в общей папке в сети."
   },
   {
     "category": "Computers",
@@ -1612,7 +1720,9 @@
       "корпоративный"
     ],
     "correct": "бумажная копия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please provide a hard copy of the contract for signing.",
+    "exampleRus": "Пожалуйста, предоставьте твёрдую копию контракта для подписания."
   },
   {
     "category": "Computers",
@@ -1640,7 +1750,9 @@
       "повышение"
     ],
     "correct": "иконка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Double-click the icon to open the application.",
+    "exampleRus": "Дважды щёлкните значок, чтобы открыть приложение."
   },
   {
     "category": "Computers",
@@ -1668,7 +1780,9 @@
       "клавиатура"
     ],
     "correct": "клавиатура",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The wireless keyboard makes the desk look cleaner.",
+    "exampleRus": "Беспроводная клавиатура делает стол более аккуратным."
   },
   {
     "category": "Computers",
@@ -1681,7 +1795,9 @@
       "плата"
     ],
     "correct": "ноутбук",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She uses a laptop for presentations during client meetings.",
+    "exampleRus": "Она использует ноутбук для презентаций на встречах с клиентами."
   },
   {
     "category": "Office Technology",
@@ -1694,7 +1810,9 @@
       "валюта"
     ],
     "correct": "входить",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Log on to the system with your employee credentials.",
+    "exampleRus": "Войдите в систему, используя учётные данные сотрудника."
   },
   {
     "category": "Office Technology",
@@ -1707,7 +1825,9 @@
       "нарушение"
     ],
     "correct": "память",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Adding more memory will improve the computer's performance.",
+    "exampleRus": "Добавление оперативной памяти повысит производительность компьютера."
   },
   {
     "category": "Office Technology",
@@ -1735,7 +1855,9 @@
       "проход"
     ],
     "correct": "мышка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The wireless mouse is more convenient than a wired one.",
+    "exampleRus": "Беспроводная мышь удобнее проводной."
   },
   {
     "category": "Office Technology",
@@ -1763,7 +1885,9 @@
       "дисплей"
     ],
     "correct": "операционная система",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The operating system was updated to improve security.",
+    "exampleRus": "Операционная система была обновлена для улучшения безопасности."
   },
   {
     "category": "Office Technology",
@@ -1806,7 +1930,9 @@
       "уменьшать"
     ],
     "correct": "принтер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The printer ran out of paper during the meeting.",
+    "exampleRus": "Во время встречи в принтере закончилась бумага."
   },
   {
     "category": "Office Technology",
@@ -1819,7 +1945,9 @@
       "перезагружать"
     ],
     "correct": "перезагружать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Reboot the computer after installing the update.",
+    "exampleRus": "Перезагрузите компьютер после установки обновления."
   },
   {
     "category": "Office Technology",
@@ -1832,7 +1960,9 @@
       "подлежащий"
     ],
     "correct": "экран",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The presentation was shown on a large screen.",
+    "exampleRus": "Презентация была показана на большом экране."
   },
   {
     "category": "Office Technology",
@@ -1845,7 +1975,9 @@
       "дисплей"
     ],
     "correct": "прокручивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Scroll down the page to find the relevant section.",
+    "exampleRus": "Прокрутите страницу вниз, чтобы найти нужный раздел."
   },
   {
     "category": "Office Technology",
@@ -1888,7 +2020,9 @@
       "удерживать"
     ],
     "correct": "спам",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The spam filter blocked most unwanted emails.",
+    "exampleRus": "Спам-фильтр заблокировал большинство нежелательных писем."
   },
   {
     "category": "Office Technology",
@@ -1901,7 +2035,9 @@
       "таблица"
     ],
     "correct": "таблица",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The budget was tracked using a spreadsheet.",
+    "exampleRus": "Бюджет отслеживался с помощью электронной таблицы."
   },
   {
     "category": "Office Technology",
@@ -1989,7 +2125,9 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please arrange the documents in chronological order.",
+    "exampleRus": "Пожалуйста, разложите документы в хронологическом порядке."
   },
   {
     "category": "Office Procedures",
@@ -2002,7 +2140,9 @@
       "папка"
     ],
     "correct": "папка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Keep all project documents in a labeled binder.",
+    "exampleRus": "Храните все документы проекта в подписанной папке-скоросшивателе."
   },
   {
     "category": "Office Procedures",
@@ -2015,7 +2155,9 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager will brief the team on the upcoming changes.",
+    "exampleRus": "Менеджер проинструктирует команду о предстоящих изменениях."
   },
   {
     "category": "Office Procedures",
@@ -2028,7 +2170,9 @@
       "календарь"
     ],
     "correct": "календарь",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Check the office calendar before scheduling the meeting.",
+    "exampleRus": "Перед планированием встречи проверьте рабочий календарь."
   },
   {
     "category": "Office Procedures",
@@ -2056,7 +2200,9 @@
       "диспетчер"
     ],
     "correct": "собирать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please collate the reports before the presentation.",
+    "exampleRus": "Пожалуйста, подборите отчёты перед презентацией."
   },
   {
     "category": "Office Procedures",
@@ -2084,7 +2230,9 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The courier will deliver the package by noon.",
+    "exampleRus": "Курьер доставит посылку до полудня."
   },
   {
     "category": "Office Procedures",
@@ -2097,7 +2245,9 @@
       "бронировать"
     ],
     "correct": "дублировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Make a duplicate copy of all important documents.",
+    "exampleRus": "Сделайте дубликат всех важных документов."
   },
   {
     "category": "Office Procedures",
@@ -2110,7 +2260,9 @@
       "переписка"
     ],
     "correct": "вводить",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Enter the data into the system before end of day.",
+    "exampleRus": "Введите данные в систему до конца рабочего дня."
   },
   {
     "category": "Office Procedures",
@@ -2138,7 +2290,9 @@
       "рекомендация"
     ],
     "correct": "подача",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The filing system was reorganized for better efficiency.",
+    "exampleRus": "Система хранения файлов была реорганизована для большей эффективности."
   },
   {
     "category": "Office Procedures",
@@ -2151,7 +2305,9 @@
       "цифровой"
     ],
     "correct": "пересылать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please forward the email to the relevant department.",
+    "exampleRus": "Пожалуйста, перешлите электронное письмо в соответствующий отдел."
   },
   {
     "category": "Office Procedures",
@@ -2164,7 +2320,9 @@
       "список"
     ],
     "correct": "входящие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Check your inbox for the latest updates from management.",
+    "exampleRus": "Проверьте входящие сообщения на предмет последних обновлений от руководства."
   },
   {
     "category": "Office Procedures",
@@ -2177,7 +2335,9 @@
       "условие"
     ],
     "correct": "ввод",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Input the sales data into the spreadsheet.",
+    "exampleRus": "Введите данные о продажах в электронную таблицу."
   },
   {
     "category": "Office Procedures",
@@ -2205,7 +2365,9 @@
       "список"
     ],
     "correct": "список",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Create a list of all tasks to be completed this week.",
+    "exampleRus": "Составьте список всех задач, которые необходимо выполнить на этой неделе."
   },
   {
     "category": "Office Procedures",
@@ -2233,7 +2395,9 @@
       "оптом"
     ],
     "correct": "меморандум",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A memorandum was sent to all staff regarding the policy change.",
+    "exampleRus": "Всем сотрудникам было направлено служебное письмо об изменении политики."
   },
   {
     "category": "Electronics",
@@ -2246,7 +2410,9 @@
       "гражданский"
     ],
     "correct": "автоматический",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The door uses an automatic sensor to open.",
+    "exampleRus": "Дверь использует автоматический датчик для открывания."
   },
   {
     "category": "Electronics",
@@ -2259,7 +2425,9 @@
       "прибытие"
     ],
     "correct": "батарея",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The battery life of this phone is impressive.",
+    "exampleRus": "Время работы аккумулятора этого телефона впечатляет."
   },
   {
     "category": "Electronics",
@@ -2272,7 +2440,9 @@
       "мотивировать"
     ],
     "correct": "кабель",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Use the correct cable to connect the devices.",
+    "exampleRus": "Используйте правильный кабель для подключения устройств."
   },
   {
     "category": "Electronics",
@@ -2285,7 +2455,9 @@
       "начисляться"
     ],
     "correct": "камера",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The security camera recorded the incident.",
+    "exampleRus": "Камера безопасности зафиксировала инцидент."
   },
   {
     "category": "Electronics",
@@ -2298,7 +2470,9 @@
       "агент"
     ],
     "correct": "чип",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The new chip doubles the processing speed.",
+    "exampleRus": "Новый чип удваивает скорость обработки данных."
   },
   {
     "category": "Electronics",
@@ -2356,7 +2530,9 @@
       "гарантия"
     ],
     "correct": "диск",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Back up your files on an external disk.",
+    "exampleRus": "Создайте резервные копии файлов на внешнем диске."
   },
   {
     "category": "Electronics",
@@ -2369,7 +2545,9 @@
       "убеждать"
     ],
     "correct": "дисплей",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The display resolution is excellent for video editing.",
+    "exampleRus": "Разрешение дисплея отлично подходит для редактирования видео."
   },
   {
     "category": "Electronics",
@@ -2382,7 +2560,9 @@
       "кандидат"
     ],
     "correct": "диск",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hard drive failed and all data was lost.",
+    "exampleRus": "Жёсткий диск вышел из строя и все данные были потеряны."
   },
   {
     "category": "Electronics",
@@ -2395,7 +2575,9 @@
       "электронный"
     ],
     "correct": "электронный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "All electronic devices must be turned off during takeoff.",
+    "exampleRus": "Все электронные устройства должны быть выключены при взлёте."
   },
   {
     "category": "Electronics",
@@ -2423,7 +2605,9 @@
       "условие"
     ],
     "correct": "ввод",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Enter the required data in the input field.",
+    "exampleRus": "Введите необходимые данные в поле ввода."
   },
   {
     "category": "Electronics",
@@ -2436,7 +2620,9 @@
       "доход"
     ],
     "correct": "вставлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Insert the USB drive into the port on the left side.",
+    "exampleRus": "Вставьте USB-накопитель в порт с левой стороны."
   },
   {
     "category": "Electronics",
@@ -2464,7 +2650,9 @@
       "обновлять"
     ],
     "correct": "инструкция",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Follow the instruction manual carefully.",
+    "exampleRus": "Внимательно следуйте руководству по эксплуатации."
   },
   {
     "category": "Electronics",
@@ -2477,7 +2665,9 @@
       "клавиша"
     ],
     "correct": "клавиша",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Press the function key to activate the shortcut.",
+    "exampleRus": "Нажмите функциональную клавишу для активации сочетания клавиш."
   },
   {
     "category": "Electronics",
@@ -2490,7 +2680,9 @@
       "автоматический"
     ],
     "correct": "клавиатура",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Enter your PIN on the keypad to access the system.",
+    "exampleRus": "Введите свой PIN-код на клавиатуре для доступа к системе."
   },
   {
     "category": "Electronics",
@@ -2503,7 +2695,9 @@
       "убеждать"
     ],
     "correct": "линза",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The camera lens was cleaned before the photoshoot.",
+    "exampleRus": "Объектив камеры был очищен перед фотосессией."
   },
   {
     "category": "Hiring",
@@ -2531,7 +2725,9 @@
       "претензия"
     ],
     "correct": "подавать заявку",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Over three hundred people applied for the position.",
+    "exampleRus": "На должность претендовали более трёхсот человек."
   },
   {
     "category": "Hiring",
@@ -2604,7 +2800,9 @@
       "сопроводительное письмо"
     ],
     "correct": "сопроводительное письмо",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A well-written cover letter can set you apart from other applicants.",
+    "exampleRus": "Хорошо написанное сопроводительное письмо может выделить вас среди других соискателей."
   },
   {
     "category": "Hiring",
@@ -2617,7 +2815,9 @@
       "диспетчер"
     ],
     "correct": "работодатель",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The employer offered a competitive benefits package.",
+    "exampleRus": "Работодатель предложил конкурентоспособный социальный пакет."
   },
   {
     "category": "Hiring",
@@ -2675,7 +2875,9 @@
       "рынок"
     ],
     "correct": "работа",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She found a job in the marketing department.",
+    "exampleRus": "Она нашла работу в отделе маркетинга."
   },
   {
     "category": "Hiring",
@@ -2703,7 +2905,9 @@
       "должность"
     ],
     "correct": "должность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company will post the job vacancy on its website.",
+    "exampleRus": "Компания разместит объявление о вакансии на своём сайте."
   },
   {
     "category": "Hiring",
@@ -2746,7 +2950,9 @@
       "рекомендация"
     ],
     "correct": "рекомендация",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please provide two professional references with your application.",
+    "exampleRus": "Пожалуйста, укажите двух профессиональных рекомендателей в заявке."
   },
   {
     "category": "Hiring",
@@ -2759,7 +2965,9 @@
       "кампания"
     ],
     "correct": "отклонять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The committee decided to reject the candidate's application.",
+    "exampleRus": "Комитет решил отклонить заявку кандидата."
   },
   {
     "category": "Hiring",
@@ -2772,7 +2980,9 @@
       "пересылать"
     ],
     "correct": "резюме",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please send your resume to the HR department.",
+    "exampleRus": "Пожалуйста, отправьте своё резюме в отдел кадров."
   },
   {
     "category": "Hiring",
@@ -2815,7 +3025,9 @@
       "комиссия"
     ],
     "correct": "комиссия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The sales representative earns a commission on every deal.",
+    "exampleRus": "Торговый представитель получает комиссию за каждую сделку."
   },
   {
     "category": "Salaries",
@@ -2843,7 +3055,9 @@
       "положение"
     ],
     "correct": "заработок",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Her annual earnings increased after the promotion.",
+    "exampleRus": "После повышения её годовые доходы выросли."
   },
   {
     "category": "Salaries",
@@ -2856,7 +3070,9 @@
       "брутто"
     ],
     "correct": "брутто",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The gross salary before deductions is listed on the payslip.",
+    "exampleRus": "В платёжной ведомости указана зарплата-брутто до вычетов."
   },
   {
     "category": "Salaries",
@@ -2884,7 +3100,9 @@
       "убеждать"
     ],
     "correct": "прирост",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A salary increment is given to employees with good performance.",
+    "exampleRus": "Сотрудники с хорошими показателями получают прибавку к зарплате."
   },
   {
     "category": "Salaries",
@@ -2897,7 +3115,9 @@
       "контейнер"
     ],
     "correct": "нетто",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Her net salary after tax is deposited on the first of the month.",
+    "exampleRus": "Её чистая зарплата после налогов перечисляется первого числа каждого месяца."
   },
   {
     "category": "Salaries",
@@ -2910,7 +3130,9 @@
       "подходящий"
     ],
     "correct": "платить",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company processes pay on the last working day of each month.",
+    "exampleRus": "Компания выплачивает зарплату в последний рабочий день каждого месяца."
   },
   {
     "category": "Salaries",
@@ -2923,7 +3145,9 @@
       "прибывать"
     ],
     "correct": "зарплата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "He received his first paycheck after two weeks of work.",
+    "exampleRus": "Он получил свой первый чек на зарплату после двух недель работы."
   },
   {
     "category": "Salaries",
@@ -2936,7 +3160,9 @@
       "платёжная ведомость"
     ],
     "correct": "платёжная ведомость",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The payroll department handles all salary payments.",
+    "exampleRus": "Отдел расчёта заработной платы занимается всеми выплатами."
   },
   {
     "category": "Salaries",
@@ -2949,7 +3175,9 @@
       "консьерж"
     ],
     "correct": "повышение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She received a pay raise after her annual review.",
+    "exampleRus": "После ежегодной аттестации она получила повышение зарплаты."
   },
   {
     "category": "Salaries",
@@ -2962,7 +3190,9 @@
       "подходящий"
     ],
     "correct": "вознаграждение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The remuneration package includes salary, bonus, and benefits.",
+    "exampleRus": "Пакет вознаграждения включает зарплату, премию и льготы."
   },
   {
     "category": "Salaries",
@@ -3005,7 +3235,9 @@
       "зарплата"
     ],
     "correct": "зарплата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The minimum wage was increased by the government.",
+    "exampleRus": "Правительство повысило минимальную заработную плату."
   },
   {
     "category": "Salaries",
@@ -3018,7 +3250,9 @@
       "удерживать"
     ],
     "correct": "удерживать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Employers are required to withhold income tax from salaries.",
+    "exampleRus": "Работодатели обязаны удерживать подоходный налог с зарплат."
   },
   {
     "category": "Salaries",
@@ -3046,7 +3280,9 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Some workers may be exempt from overtime requirements.",
+    "exampleRus": "Некоторые работники могут быть освобождены от требований о сверхурочной работе."
   },
   {
     "category": "Salaries",
@@ -3059,7 +3295,9 @@
       "в продаже"
     ],
     "correct": "минимальная зарплата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The government raised the minimum wage by five percent.",
+    "exampleRus": "Правительство повысило минимальную заработную плату на пять процентов."
   },
   {
     "category": "Promotions",
@@ -3072,7 +3310,9 @@
       "батарея"
     ],
     "correct": "достижение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Her achievement was recognized with a promotion.",
+    "exampleRus": "Её достижение было отмечено повышением."
   },
   {
     "category": "Promotions",
@@ -3085,7 +3325,9 @@
       "продвижение"
     ],
     "correct": "продвижение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Career advancement requires hard work and dedication.",
+    "exampleRus": "Карьерный рост требует усердного труда и преданности делу."
   },
   {
     "category": "Promotions",
@@ -3098,7 +3340,9 @@
       "назначать"
     ],
     "correct": "назначать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The board decided to appoint a new marketing director.",
+    "exampleRus": "Совет директоров решил назначить нового директора по маркетингу."
   },
   {
     "category": "Promotions",
@@ -3126,7 +3370,9 @@
       "бейдж"
     ],
     "correct": "полномочие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager was given authority to approve small expenses.",
+    "exampleRus": "Менеджеру были предоставлены полномочия для утверждения небольших расходов."
   },
   {
     "category": "Promotions",
@@ -3154,7 +3400,9 @@
       "деликатес"
     ],
     "correct": "понижать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "He was demoted after failing to meet his targets.",
+    "exampleRus": "Его понизили в должности после того, как он не выполнил свои цели."
   },
   {
     "category": "Promotions",
@@ -3167,7 +3415,9 @@
       "явный"
     ],
     "correct": "увольнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The employee was discharged for repeated violations.",
+    "exampleRus": "Сотрудник был уволен за повторные нарушения."
   },
   {
     "category": "Promotions",
@@ -3180,7 +3430,9 @@
       "увольнять"
     ],
     "correct": "увольнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company decided to dismiss the underperforming staff.",
+    "exampleRus": "Компания решила уволить неэффективно работающих сотрудников."
   },
   {
     "category": "Promotions",
@@ -3238,7 +3490,9 @@
       "обновлять"
     ],
     "correct": "увольнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager had to fire the employee for misconduct.",
+    "exampleRus": "Менеджер был вынужден уволить сотрудника за проступок."
   },
   {
     "category": "Promotions",
@@ -3251,7 +3505,9 @@
       "тренер"
     ],
     "correct": "уволнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The factory had to lay off workers due to declining orders.",
+    "exampleRus": "Завод был вынужден уволить рабочих из-за снижения заказов."
   },
   {
     "category": "Promotions",
@@ -3279,7 +3535,9 @@
       "допустимый"
     ],
     "correct": "мотивировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager worked hard to motivate the sales team.",
+    "exampleRus": "Менеджер прилагал все усилия, чтобы мотивировать отдел продаж."
   },
   {
     "category": "Promotions",
@@ -3322,7 +3580,9 @@
       "консьерж"
     ],
     "correct": "повышение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She was given a raise after her excellent performance review.",
+    "exampleRus": "После отличной аттестации ей повысили зарплату."
   },
   {
     "category": "Promotions",
@@ -3365,7 +3625,9 @@
       "просматривать"
     ],
     "correct": "просматривать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Customers can browse the catalog online.",
+    "exampleRus": "Покупатели могут просматривать каталог онлайн."
   },
   {
     "category": "Shopping",
@@ -3378,7 +3640,9 @@
       "усиливать"
     ],
     "correct": "оптом",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "They buy cleaning supplies in bulk to save money.",
+    "exampleRus": "Они покупают чистящие средства оптом, чтобы сэкономить деньги."
   },
   {
     "category": "Shopping",
@@ -3391,7 +3655,9 @@
       "корзина"
     ],
     "correct": "корзина",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She pushed the shopping cart through the store.",
+    "exampleRus": "Она катила тележку для покупок по магазину."
   },
   {
     "category": "Shopping",
@@ -3404,7 +3670,9 @@
       "кассир"
     ],
     "correct": "кассир",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please proceed to the cashier to complete your purchase.",
+    "exampleRus": "Пожалуйста, пройдите к кассиру для завершения покупки."
   },
   {
     "category": "Shopping",
@@ -3432,7 +3700,9 @@
       "вознаграждение"
     ],
     "correct": "распродажа",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The store is having a close out sale on all remaining stock.",
+    "exampleRus": "В магазине проводится распродажа всего оставшегося товара."
   },
   {
     "category": "Shopping",
@@ -3445,7 +3715,9 @@
       "собираться"
     ],
     "correct": "купон",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Present the coupon at the register for a discount.",
+    "exampleRus": "Предъявите купон на кассе для получения скидки."
   },
   {
     "category": "Shopping",
@@ -3488,7 +3760,9 @@
       "пошлина"
     ],
     "correct": "обмен",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can exchange the item within thirty days.",
+    "exampleRus": "Вы можете обменять товар в течение тридцати дней."
   },
   {
     "category": "Shopping",
@@ -3501,7 +3775,9 @@
       "товар"
     ],
     "correct": "товар",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Every item in the sale section is marked down by thirty percent.",
+    "exampleRus": "Каждый товар в разделе распродажи снижен в цене на тридцать процентов."
   },
   {
     "category": "Shopping",
@@ -3529,7 +3805,9 @@
       "причина"
     ],
     "correct": "уценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The store will mark down prices at the end of the season.",
+    "exampleRus": "Магазин снизит цены в конце сезона."
   },
   {
     "category": "Shopping",
@@ -3542,7 +3820,9 @@
       "торговец"
     ],
     "correct": "торговец",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The online merchant offers free shipping on orders over fifty dollars.",
+    "exampleRus": "Интернет-магазин предлагает бесплатную доставку при заказах свыше пятидесяти долларов."
   },
   {
     "category": "Shopping",
@@ -3555,7 +3835,9 @@
       "прирост"
     ],
     "correct": "получать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can obtain a refund by showing the original receipt.",
+    "exampleRus": "Вы можете получить возврат средств, предъявив оригинал чека."
   },
   {
     "category": "Shopping",
@@ -3568,7 +3850,9 @@
       "в продаже"
     ],
     "correct": "в продаже",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The winter coats are on sale this weekend.",
+    "exampleRus": "В эти выходные зимние пальто продаются со скидкой."
   },
   {
     "category": "Shopping",
@@ -3581,7 +3865,9 @@
       "магазин"
     ],
     "correct": "магазин",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She found the dress at a discount outlet.",
+    "exampleRus": "Она нашла платье в дисконт-аутлете."
   },
   {
     "category": "Shopping",
@@ -3609,7 +3895,9 @@
       "количество"
     ],
     "correct": "количество",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Order the quantity you need to avoid excess stock.",
+    "exampleRus": "Заказывайте необходимое количество, чтобы избежать избытка товара."
   },
   {
     "category": "Ordering Supplies",
@@ -3622,7 +3910,9 @@
       "явный"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please acknowledge the order confirmation within 24 hours.",
+    "exampleRus": "Пожалуйста, подтвердите подтверждение заказа в течение 24 часов."
   },
   {
     "category": "Ordering Supplies",
@@ -3635,7 +3925,9 @@
       "бумажная копия"
     ],
     "correct": "адрес",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Verify the delivery address before placing the order.",
+    "exampleRus": "Проверьте адрес доставки перед размещением заказа."
   },
   {
     "category": "Ordering Supplies",
@@ -3663,7 +3955,9 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can cancel the order before it is dispatched.",
+    "exampleRus": "Вы можете отменить заказ до его отправки."
   },
   {
     "category": "Ordering Supplies",
@@ -3691,7 +3985,9 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An additional charge applies for express delivery.",
+    "exampleRus": "За экспресс-доставку взимается дополнительная плата."
   },
   {
     "category": "Ordering Supplies",
@@ -3719,7 +4015,9 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Confirm your order details before finalizing the purchase.",
+    "exampleRus": "Подтвердите детали заказа перед завершением покупки."
   },
   {
     "category": "Ordering Supplies",
@@ -3732,7 +4030,9 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The first consignment of supplies arrived ahead of schedule.",
+    "exampleRus": "Первая партия товаров прибыла раньше графика."
   },
   {
     "category": "Ordering Supplies",
@@ -3775,7 +4075,9 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The amount was debited from the company account.",
+    "exampleRus": "Сумма была списана с корпоративного счёта."
   },
   {
     "category": "Ordering Supplies",
@@ -3788,7 +4090,9 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The supplier agreed to deliver within five business days.",
+    "exampleRus": "Поставщик согласился доставить товар в течение пяти рабочих дней."
   },
   {
     "category": "Ordering Supplies",
@@ -3831,7 +4135,9 @@
       "капитал"
     ],
     "correct": "отправлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The warehouse will dispatch your order tomorrow.",
+    "exampleRus": "Склад отправит ваш заказ завтра."
   },
   {
     "category": "Ordering Supplies",
@@ -3844,7 +4150,9 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Request an estimate from at least three suppliers.",
+    "exampleRus": "Запросите коммерческое предложение не менее чем от трёх поставщиков."
   },
   {
     "category": "Ordering Supplies",
@@ -3857,7 +4165,9 @@
       "строительство"
     ],
     "correct": "ускорять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We need to expedite the delivery of urgent supplies.",
+    "exampleRus": "Нам нужно ускорить доставку срочных расходных материалов."
   },
   {
     "category": "Ordering Supplies",
@@ -3870,7 +4180,9 @@
       "заполнять"
     ],
     "correct": "заполнять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The warehouse will fill the order as soon as stock is available.",
+    "exampleRus": "Склад выполнит заказ, как только товар появится в наличии."
   },
   {
     "category": "Ordering Supplies",
@@ -3898,7 +4210,9 @@
       "бумажная копия"
     ],
     "correct": "адрес",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please double-check the delivery address before shipping.",
+    "exampleRus": "Пожалуйста, проверьте адрес доставки перед отправкой."
   },
   {
     "category": "Shipping",
@@ -3911,7 +4225,9 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The shipment is expected to arrive at the port on Monday.",
+    "exampleRus": "Ожидается, что груз прибудет в порт в понедельник."
   },
   {
     "category": "Shipping",
@@ -3924,7 +4240,9 @@
       "внимание"
     ],
     "correct": "внимание",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Mark the package with 'Attention: Accounts Department'.",
+    "exampleRus": "Пометьте посылку: «Кому: бухгалтерия»."
   },
   {
     "category": "Shipping",
@@ -3937,7 +4255,9 @@
       "скачивать"
     ],
     "correct": "накладная",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The bill of lading must accompany all international shipments.",
+    "exampleRus": "Коносамент должен сопровождать все международные отправления."
   },
   {
     "category": "Shipping",
@@ -3950,7 +4270,9 @@
       "пароль"
     ],
     "correct": "коробка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Pack all fragile items carefully in the box.",
+    "exampleRus": "Тщательно упакуйте все хрупкие предметы в коробку."
   },
   {
     "category": "Shipping",
@@ -3963,7 +4285,9 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Choose a licensed carrier for international freight.",
+    "exampleRus": "Выберите лицензированного перевозчика для международных грузовых перевозок."
   },
   {
     "category": "Shipping",
@@ -3976,7 +4300,9 @@
       "дискреционный"
     ],
     "correct": "коробка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The order was packed in six cartons for shipping.",
+    "exampleRus": "Заказ был упакован в шесть картонных коробок для отправки."
   },
   {
     "category": "Shipping",
@@ -4004,7 +4330,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A certificate of origin is required for customs clearance.",
+    "exampleRus": "Для таможенного оформления требуется сертификат происхождения товара."
   },
   {
     "category": "Shipping",
@@ -4017,7 +4345,9 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Classify the goods correctly to avoid customs delays.",
+    "exampleRus": "Правильно классифицируйте товары, чтобы избежать задержек на таможне."
   },
   {
     "category": "Shipping",
@@ -4030,7 +4360,9 @@
       "надежный"
     ],
     "correct": "грузополучатель",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The consignee must present identification to collect the parcel.",
+    "exampleRus": "Грузополучатель должен предъявить удостоверение личности для получения посылки."
   },
   {
     "category": "Shipping",
@@ -4043,7 +4375,9 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The consignment was insured before it left the warehouse.",
+    "exampleRus": "Партия товаров была застрахована до выхода со склада."
   },
   {
     "category": "Shipping",
@@ -4056,7 +4390,9 @@
       "оценивать"
     ],
     "correct": "контейнер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The goods were loaded into a standard shipping container.",
+    "exampleRus": "Товары были загружены в стандартный морской контейнер."
   },
   {
     "category": "Shipping",
@@ -4069,7 +4405,9 @@
       "местоположение"
     ],
     "correct": "курьер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The documents were sent by courier for same-day delivery.",
+    "exampleRus": "Документы были отправлены курьером для доставки в тот же день."
   },
   {
     "category": "Shipping",
@@ -4082,7 +4420,9 @@
       "действительный"
     ],
     "correct": "ящик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Machinery parts were shipped in a wooden crate.",
+    "exampleRus": "Детали машин были отправлены в деревянном ящике."
   },
   {
     "category": "Shipping",
@@ -4095,7 +4435,9 @@
       "продлевать"
     ],
     "correct": "таможня",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "All goods must be declared at customs.",
+    "exampleRus": "Все товары должны быть задекларированы на таможне."
   },
   {
     "category": "Shipping",
@@ -4108,7 +4450,9 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We guarantee to deliver the order within three business days.",
+    "exampleRus": "Мы гарантируем доставку заказа в течение трёх рабочих дней."
   },
   {
     "category": "Shipping",
@@ -4121,7 +4465,9 @@
       "развлечение"
     ],
     "correct": "диспетчер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The dispatcher coordinated all outgoing deliveries for the day.",
+    "exampleRus": "Диспетчер координировал все исходящие доставки на день."
   },
   {
     "category": "Shipping",
@@ -4164,7 +4510,9 @@
       "явный"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please acknowledge receipt of this invoice by email.",
+    "exampleRus": "Пожалуйста, подтвердите получение этого счёта по электронной почте."
   },
   {
     "category": "Invoices",
@@ -4177,7 +4525,9 @@
       "просматривать"
     ],
     "correct": "точный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "All figures on the invoice must be accurate.",
+    "exampleRus": "Все цифры в счёте должны быть точными."
   },
   {
     "category": "Invoices",
@@ -4190,7 +4540,9 @@
       "задолженность"
     ],
     "correct": "задолженность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The account is two months in arrear.",
+    "exampleRus": "На счету имеется двухмесячная задолженность."
   },
   {
     "category": "Invoices",
@@ -4248,7 +4600,9 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An extra charge was applied for expedited delivery.",
+    "exampleRus": "За ускоренную доставку была начислена дополнительная плата."
   },
   {
     "category": "Invoices",
@@ -4276,7 +4630,9 @@
       "собирать"
     ],
     "correct": "собирать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The agency was hired to collect the outstanding payment.",
+    "exampleRus": "Агентство было нанято для взыскания задолженности по платежу."
   },
   {
     "category": "Invoices",
@@ -4289,7 +4645,9 @@
       "подключать"
     ],
     "correct": "консолидировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We will consolidate all invoices into one monthly statement.",
+    "exampleRus": "Мы объединим все счета в одну ежемесячную выписку."
   },
   {
     "category": "Invoices",
@@ -4317,7 +4675,9 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The amount was recorded as a debit on the invoice.",
+    "exampleRus": "Сумма была зафиксирована в счёте как дебет."
   },
   {
     "category": "Invoices",
@@ -4330,7 +4690,9 @@
       "аварийный комиссар"
     ],
     "correct": "деталь",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Each line item includes a detail of the services provided.",
+    "exampleRus": "Каждая позиция включает описание оказанных услуг."
   },
   {
     "category": "Invoices",
@@ -4358,7 +4720,9 @@
       "дефект"
     ],
     "correct": "подлежащий",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Payment is due on the fifteenth of each month.",
+    "exampleRus": "Платёж должен быть произведён пятнадцатого числа каждого месяца."
   },
   {
     "category": "Invoices",
@@ -4371,7 +4735,9 @@
       "пошлина"
     ],
     "correct": "пошлина",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Import duty is included in the total amount on the invoice.",
+    "exampleRus": "Импортная пошлина включена в общую сумму счёта."
   },
   {
     "category": "Invoices",
@@ -4384,7 +4750,9 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The contractor sent an estimate before starting the work.",
+    "exampleRus": "Подрядчик отправил смету перед началом работ."
   },
   {
     "category": "Invoices",
@@ -4397,7 +4765,9 @@
       "пароль"
     ],
     "correct": "плата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A late payment fee will be charged after the due date.",
+    "exampleRus": "После истечения срока оплаты будет начислена комиссия за просрочку."
   },
   {
     "category": "Invoices",
@@ -4410,7 +4780,9 @@
       "цифра"
     ],
     "correct": "цифра",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Double-check every figure before submitting the invoice.",
+    "exampleRus": "Дважды проверьте каждую цифру перед отправкой счёта."
   },
   {
     "category": "Invoices",
@@ -4423,7 +4795,9 @@
       "банк"
     ],
     "correct": "финансы",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The finance department processes all invoices.",
+    "exampleRus": "Отдел финансов обрабатывает все счета."
   },
   {
     "category": "Inventory",
@@ -4436,7 +4810,9 @@
       "просматривать"
     ],
     "correct": "точный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Accurate record-keeping prevents inventory errors.",
+    "exampleRus": "Точное ведение учёта предотвращает ошибки в инвентаризации."
   },
   {
     "category": "Inventory",
@@ -4449,7 +4825,9 @@
       "достаточный"
     ],
     "correct": "достаточный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Ensure adequate stock levels before the busy season.",
+    "exampleRus": "Обеспечьте достаточный уровень запасов до начала сезона пика."
   },
   {
     "category": "Inventory",
@@ -4462,7 +4840,9 @@
       "корректировка"
     ],
     "correct": "корректировка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An inventory adjustment was made after the physical count.",
+    "exampleRus": "После физического подсчёта была произведена корректировка инвентаря."
   },
   {
     "category": "Inventory",
@@ -4490,7 +4870,9 @@
       "рекламировать"
     ],
     "correct": "задел",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The backlog of unfilled orders grew during the shortage.",
+    "exampleRus": "Остаток невыполненных заказов вырос во время дефицита."
   },
   {
     "category": "Inventory",
@@ -4503,7 +4885,9 @@
       "усиливать"
     ],
     "correct": "оптом",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Buying in bulk reduces the cost per unit.",
+    "exampleRus": "Покупка оптом снижает стоимость единицы товара."
   },
   {
     "category": "Inventory",
@@ -4516,7 +4900,9 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The carrier delivered the inventory to the warehouse on time.",
+    "exampleRus": "Перевозчик доставил инвентарь на склад вовремя."
   },
   {
     "category": "Inventory",
@@ -4544,7 +4930,9 @@
       "подлежащий"
     ],
     "correct": "завершать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Complete a thorough check before closing the warehouse.",
+    "exampleRus": "Выполните тщательную проверку перед закрытием склада."
   },
   {
     "category": "Inventory",
@@ -4557,7 +4945,9 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The consignment of goods arrived without any damage.",
+    "exampleRus": "Партия товаров прибыла без каких-либо повреждений."
   },
   {
     "category": "Inventory",
@@ -4570,7 +4960,9 @@
       "строительство"
     ],
     "correct": "считать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The team will count all items during the physical inventory.",
+    "exampleRus": "Команда пересчитает все товары в ходе инвентаризации."
   },
   {
     "category": "Inventory",
@@ -4583,7 +4975,9 @@
       "записываться"
     ],
     "correct": "уменьшать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Sales will decrease if stock levels are not maintained.",
+    "exampleRus": "Продажи снизятся, если не поддерживать уровень запасов."
   },
   {
     "category": "Inventory",
@@ -4596,7 +4990,9 @@
       "дефектный"
     ],
     "correct": "дефектный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Defective items were returned to the supplier for replacement.",
+    "exampleRus": "Дефектные товары были возвращены поставщику для замены."
   },
   {
     "category": "Inventory",
@@ -4624,7 +5020,9 @@
       "спрос"
     ],
     "correct": "спрос",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Demand for the product increased during the holiday season.",
+    "exampleRus": "Спрос на продукт вырос в праздничный сезон."
   },
   {
     "category": "Inventory",
@@ -4637,7 +5035,9 @@
       "уменьшать"
     ],
     "correct": "уменьшать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Reserves diminish quickly when orders are high.",
+    "exampleRus": "Запасы быстро убывают при высоком спросе."
   },
   {
     "category": "Inventory",
@@ -4650,7 +5050,9 @@
       "капитал"
     ],
     "correct": "отправлять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The manager will dispatch the order from the warehouse.",
+    "exampleRus": "Менеджер отправит заказ со склада."
   },
   {
     "category": "Inventory",
@@ -4663,7 +5065,9 @@
       "долг"
     ],
     "correct": "распределять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Products are distributed to regional warehouses weekly.",
+    "exampleRus": "Продукция еженедельно распределяется по региональным складам."
   },
   {
     "category": "Inventory",
@@ -4691,7 +5095,9 @@
       "излишек"
     ],
     "correct": "излишек",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Excess stock was sold at a discounted price.",
+    "exampleRus": "Излишек товаров был продан по сниженной цене."
   },
   {
     "category": "Banking",
@@ -4749,7 +5155,9 @@
       "опыт"
     ],
     "correct": "банк",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She opened a new account at the local bank.",
+    "exampleRus": "Она открыла новый счёт в местном банке."
   },
   {
     "category": "Banking",
@@ -4762,7 +5170,9 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The bank refused the loan due to the applicant's bankruptcy history.",
+    "exampleRus": "Банк отказал в кредите из-за истории банкротства заявителя."
   },
   {
     "category": "Banking",
@@ -4880,7 +5290,9 @@
       "залог"
     ],
     "correct": "залог",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The borrower provided property as collateral for the loan.",
+    "exampleRus": "Заёмщик предоставил недвижимость в качестве залога по кредиту."
   },
   {
     "category": "Banking",
@@ -4893,7 +5305,9 @@
       "обязываться"
     ],
     "correct": "обязываться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Both parties agree to commit to the terms of the loan.",
+    "exampleRus": "Обе стороны соглашаются соблюдать условия кредита."
   },
   {
     "category": "Banking",
@@ -4906,7 +5320,9 @@
       "компенсировать"
     ],
     "correct": "компенсировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The bank will compensate clients for the service outage.",
+    "exampleRus": "Банк компенсирует клиентам перебои в обслуживании."
   },
   {
     "category": "Banking",
@@ -4949,7 +5365,9 @@
       "валюта"
     ],
     "correct": "валюта",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The exchange rate for foreign currency changes daily.",
+    "exampleRus": "Обменный курс иностранной валюты меняется ежедневно."
   },
   {
     "category": "Banking",
@@ -4962,7 +5380,9 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The payment was deducted as a debit from the account.",
+    "exampleRus": "Платёж был списан с счёта в виде дебета."
   },
   {
     "category": "Banking",
@@ -4975,7 +5395,9 @@
       "долг"
     ],
     "correct": "долг",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "He managed to pay off his debt within two years.",
+    "exampleRus": "Ему удалось погасить долг в течение двух лет."
   },
   {
     "category": "Accounting",
@@ -5003,7 +5425,9 @@
       "классифицировать"
     ],
     "correct": "начисляться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Interest will accrue daily on the outstanding balance.",
+    "exampleRus": "Проценты будут начисляться ежедневно на непогашенный остаток."
   },
   {
     "category": "Accounting",
@@ -5016,7 +5440,9 @@
       "накапливать"
     ],
     "correct": "накапливать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company began to accumulate reserves over several years.",
+    "exampleRus": "Компания начала накапливать резервы на протяжении нескольких лет."
   },
   {
     "category": "Accounting",
@@ -5044,7 +5470,9 @@
       "вычет"
     ],
     "correct": "распределение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The allocation of funds was approved by the board.",
+    "exampleRus": "Распределение средств было одобрено советом директоров."
   },
   {
     "category": "Accounting",
@@ -5057,7 +5485,9 @@
       "празднование"
     ],
     "correct": "пособие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A travel allowance is provided for business trips.",
+    "exampleRus": "Командировочное пособие предоставляется для деловых поездок."
   },
   {
     "category": "Accounting",
@@ -5070,7 +5500,9 @@
       "переписка"
     ],
     "correct": "амортизировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The loan will be amortized over five years.",
+    "exampleRus": "Кредит будет амортизирован в течение пяти лет."
   },
   {
     "category": "Accounting",
@@ -5098,7 +5530,9 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The tax assessment was completed by the end of the year.",
+    "exampleRus": "Налоговая оценка была завершена к концу года."
   },
   {
     "category": "Accounting",
@@ -5141,7 +5575,9 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The firm filed for bankruptcy after years of losses.",
+    "exampleRus": "Фирма объявила о банкротстве после многолетних убытков."
   },
   {
     "category": "Accounting",
@@ -5199,7 +5635,9 @@
       "стратегия"
     ],
     "correct": "денежный поток",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Positive cash flow is critical for daily operations.",
+    "exampleRus": "Положительный денежный поток необходим для ежедневной работы."
   },
   {
     "category": "Accounting",
@@ -5212,7 +5650,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The accountant holds a certificate in financial management.",
+    "exampleRus": "Бухгалтер имеет сертификат в области финансового менеджмента."
   },
   {
     "category": "Accounting",
@@ -5225,7 +5665,9 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Expenses must be classified correctly for tax purposes.",
+    "exampleRus": "Расходы должны быть правильно классифицированы в целях налогообложения."
   },
   {
     "category": "Accounting",
@@ -5253,7 +5695,9 @@
       "цель"
     ],
     "correct": "сложный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Compound interest grows faster than simple interest.",
+    "exampleRus": "Сложные проценты растут быстрее, чем простые."
   },
   {
     "category": "Investments",
@@ -5281,7 +5725,9 @@
       "оценивать"
     ],
     "correct": "оценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Real estate tends to appreciate in value over time.",
+    "exampleRus": "Недвижимость, как правило, растёт в цене со временем."
   },
   {
     "category": "Investments",
@@ -5324,7 +5770,9 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The broker advised her to diversify her portfolio.",
+    "exampleRus": "Брокер посоветовал ей диверсифицировать свой портфель."
   },
   {
     "category": "Investments",
@@ -5352,7 +5800,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She received a certificate of deposit from the bank.",
+    "exampleRus": "Она получила депозитный сертификат от банка."
   },
   {
     "category": "Investments",
@@ -5365,7 +5815,9 @@
       "комиссия"
     ],
     "correct": "комиссия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The broker charged a commission on each transaction.",
+    "exampleRus": "Брокер взимал комиссию за каждую сделку."
   },
   {
     "category": "Investments",
@@ -5378,7 +5830,9 @@
       "цель"
     ],
     "correct": "сложный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Compound interest accelerates the growth of savings.",
+    "exampleRus": "Сложные проценты ускоряют рост сбережений."
   },
   {
     "category": "Investments",
@@ -5391,7 +5845,9 @@
       "кабель"
     ],
     "correct": "конвертируемый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The firm issued convertible bonds to attract investors.",
+    "exampleRus": "Фирма выпустила конвертируемые облигации для привлечения инвесторов."
   },
   {
     "category": "Investments",
@@ -5404,7 +5860,9 @@
       "брокер"
     ],
     "correct": "снижаться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Stock prices began to decline after the announcement.",
+    "exampleRus": "Цены на акции начали снижаться после объявления."
   },
   {
     "category": "Investments",
@@ -5417,7 +5875,9 @@
       "внедрять"
     ],
     "correct": "отложенный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Deferred tax liabilities arise from timing differences.",
+    "exampleRus": "Отложенные налоговые обязательства возникают из-за временных разниц."
   },
   {
     "category": "Investments",
@@ -5445,7 +5905,9 @@
       "обесцениваться"
     ],
     "correct": "обесцениваться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The currency began to depreciate against the dollar.",
+    "exampleRus": "Валюта начала обесцениваться по отношению к доллару."
   },
   {
     "category": "Investments",
@@ -5458,7 +5920,9 @@
       "налогоплательщик"
     ],
     "correct": "диверсифицировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Investors should diversify their portfolio to reduce risk.",
+    "exampleRus": "Инвесторам следует диверсифицировать портфель для снижения риска."
   },
   {
     "category": "Investments",
@@ -5486,7 +5950,9 @@
       "вводить"
     ],
     "correct": "доллар",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The fund gained two million dollars in the last quarter.",
+    "exampleRus": "Фонд получил два миллиона долларов в последнем квартале."
   },
   {
     "category": "Investments",
@@ -5499,7 +5965,9 @@
       "спад"
     ],
     "correct": "спад",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The economic downturn affected investment returns.",
+    "exampleRus": "Экономический спад повлиял на инвестиционную доходность."
   },
   {
     "category": "Investments",
@@ -5527,7 +5995,9 @@
       "приоритет"
     ],
     "correct": "колебаться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Currency exchange rates fluctuate throughout the trading day.",
+    "exampleRus": "Обменные курсы валют колеблются в течение торгового дня."
   },
   {
     "category": "Financial Statements",
@@ -5555,7 +6025,9 @@
       "классифицировать"
     ],
     "correct": "начисляться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Expenses accrue over time and are recorded at period end.",
+    "exampleRus": "Расходы накапливаются со временем и записываются в конце периода."
   },
   {
     "category": "Financial Statements",
@@ -5568,7 +6040,9 @@
       "накапливать"
     ],
     "correct": "накапливать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Retained earnings accumulate when profits are not distributed.",
+    "exampleRus": "Нераспределённая прибыль накапливается, когда прибыль не распределяется."
   },
   {
     "category": "Financial Statements",
@@ -5581,7 +6055,9 @@
       "корректировка"
     ],
     "correct": "корректировка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An adjustment was made to correct the accounting error.",
+    "exampleRus": "Была произведена корректировка для исправления бухгалтерской ошибки."
   },
   {
     "category": "Financial Statements",
@@ -5594,7 +6070,9 @@
       "переписка"
     ],
     "correct": "амортизировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company will amortize the loan over ten years.",
+    "exampleRus": "Компания будет амортизировать кредит в течение десяти лет."
   },
   {
     "category": "Financial Statements",
@@ -5622,7 +6100,9 @@
       "годовой"
     ],
     "correct": "годовой",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The annual report summarizes the company's performance.",
+    "exampleRus": "Годовой отчёт подводит итоги деятельности компании."
   },
   {
     "category": "Financial Statements",
@@ -5635,7 +6115,9 @@
       "оценивать"
     ],
     "correct": "оценивать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Investors hope the stock will appreciate in value.",
+    "exampleRus": "Инвесторы надеются, что акции вырастут в цене."
   },
   {
     "category": "Financial Statements",
@@ -5693,7 +6175,9 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The bankruptcy filing was reflected in the financial statements.",
+    "exampleRus": "Подача заявления о банкротстве была отражена в финансовой отчётности."
   },
   {
     "category": "Financial Statements",
@@ -5751,7 +6235,9 @@
       "стратегия"
     ],
     "correct": "денежный поток",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Positive cash flow is essential for business survival.",
+    "exampleRus": "Положительный денежный поток необходим для выживания бизнеса."
   },
   {
     "category": "Financial Statements",
@@ -5764,7 +6250,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The auditor issued a certificate of compliance.",
+    "exampleRus": "Аудитор выдал сертификат соответствия."
   },
   {
     "category": "Financial Statements",
@@ -5777,7 +6265,9 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Assets are classified as current or non-current on the balance sheet.",
+    "exampleRus": "Активы классифицируются как оборотные или внеоборотные в балансе."
   },
   {
     "category": "Financial Statements",
@@ -5790,7 +6280,9 @@
       "подключать"
     ],
     "correct": "консолидировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The parent company will consolidate all subsidiary accounts.",
+    "exampleRus": "Материнская компания консолидирует все счета дочерних компаний."
   },
   {
     "category": "Financial Statements",
@@ -5833,7 +6325,9 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The tax assessment was higher than the company expected.",
+    "exampleRus": "Налоговая оценка оказалась выше, чем ожидала компания."
   },
   {
     "category": "Taxes",
@@ -5876,7 +6370,9 @@
       "файл"
     ],
     "correct": "скобка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She moved into a higher tax bracket after her promotion.",
+    "exampleRus": "После повышения она перешла в более высокую налоговую категорию."
   },
   {
     "category": "Taxes",
@@ -5949,7 +6445,9 @@
       "назначать"
     ],
     "correct": "зависеть",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The amount of tax you pay depends on your income level.",
+    "exampleRus": "Сумма уплачиваемого налога зависит от уровня дохода."
   },
   {
     "category": "Taxes",
@@ -5962,7 +6460,9 @@
       "обесцениваться"
     ],
     "correct": "обесцениваться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Companies can depreciate assets to reduce taxable income.",
+    "exampleRus": "Компании могут амортизировать активы для уменьшения налогооблагаемого дохода."
   },
   {
     "category": "Taxes",
@@ -5975,7 +6475,9 @@
       "развлечение"
     ],
     "correct": "дискреционный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Discretionary spending was cut to meet the budget.",
+    "exampleRus": "Дискреционные расходы были сокращены для выполнения бюджета."
   },
   {
     "category": "Taxes",
@@ -6003,7 +6505,9 @@
       "мышка"
     ],
     "correct": "электронная сдача",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can e-file your tax return directly on the government website.",
+    "exampleRus": "Вы можете подать налоговую декларацию в электронном виде на сайте правительства."
   },
   {
     "category": "Taxes",
@@ -6016,7 +6520,9 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Charitable organizations are exempt from income tax.",
+    "exampleRus": "Благотворительные организации освобождены от подоходного налога."
   },
   {
     "category": "Taxes",
@@ -6029,7 +6535,9 @@
       "комфорт"
     ],
     "correct": "освобождение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A personal exemption reduces your taxable income.",
+    "exampleRus": "Личное освобождение уменьшает ваш налогооблагаемый доход."
   },
   {
     "category": "Taxes",
@@ -6057,7 +6565,9 @@
       "начало"
     ],
     "correct": "налогоплательщик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A joint filer can claim more deductions than a single filer.",
+    "exampleRus": "Совместный налогоплательщик может претендовать на большие вычеты, чем единственный."
   },
   {
     "category": "Taxes",
@@ -6070,7 +6580,9 @@
       "рекомендация"
     ],
     "correct": "подача",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The filing deadline for individual tax returns is April 30.",
+    "exampleRus": "Крайний срок подачи индивидуальной налоговой декларации — 30 апреля."
   },
   {
     "category": "Taxes",
@@ -6083,7 +6595,9 @@
       "стратегия"
     ],
     "correct": "правительство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The government increased corporate tax rates this year.",
+    "exampleRus": "В этом году правительство повысило ставки корпоративного налога."
   },
   {
     "category": "Property & Real Estate",
@@ -6126,7 +6640,9 @@
       "продлевать"
     ],
     "correct": "смежный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company purchased the adjacent building for expansion.",
+    "exampleRus": "Компания приобрела соседнее здание для расширения."
   },
   {
     "category": "Property & Real Estate",
@@ -6139,7 +6655,9 @@
       "удобство"
     ],
     "correct": "удобство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The apartment complex includes amenities such as a pool and gym.",
+    "exampleRus": "Жилой комплекс включает такие удобства, как бассейн и тренажёрный зал."
   },
   {
     "category": "Property & Real Estate",
@@ -6152,7 +6670,9 @@
       "оценка"
     ],
     "correct": "оценка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A professional appraisal determined the property's market value.",
+    "exampleRus": "Профессиональная оценка определила рыночную стоимость недвижимости."
   },
   {
     "category": "Property & Real Estate",
@@ -6165,7 +6685,9 @@
       "доллар"
     ],
     "correct": "подходящий",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The location is appropriate for a retail business.",
+    "exampleRus": "Место расположения подходит для розничного бизнеса."
   },
   {
     "category": "Property & Real Estate",
@@ -6193,7 +6715,9 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The real estate broker arranged a viewing for the property.",
+    "exampleRus": "Риелтор организовал осмотр объекта недвижимости."
   },
   {
     "category": "Property & Real Estate",
@@ -6221,7 +6745,9 @@
       "условие"
     ],
     "correct": "условие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The property was sold in excellent condition.",
+    "exampleRus": "Имущество было продано в отличном состоянии."
   },
   {
     "category": "Property & Real Estate",
@@ -6234,7 +6760,9 @@
       "кредит"
     ],
     "correct": "строительство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The construction of the new office building is underway.",
+    "exampleRus": "Строительство нового офисного здания ведётся полным ходом."
   },
   {
     "category": "Property & Real Estate",
@@ -6247,7 +6775,9 @@
       "смежный"
     ],
     "correct": "подрядчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The contractor submitted a bid for the renovation project.",
+    "exampleRus": "Подрядчик подал заявку на участие в проекте реновации."
   },
   {
     "category": "Property & Real Estate",
@@ -6260,7 +6790,9 @@
       "авиакомпания"
     ],
     "correct": "документ",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The deed of the property was transferred to the new owner.",
+    "exampleRus": "Право собственности на имущество было передано новому владельцу."
   },
   {
     "category": "Property & Real Estate",
@@ -6288,7 +6820,9 @@
       "бронировать"
     ],
     "correct": "жилище",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The zoning law permits a single-family dwelling in this area.",
+    "exampleRus": "Закон о зонировании разрешает индивидуальное жилище в этом районе."
   },
   {
     "category": "Property & Real Estate",
@@ -6301,7 +6835,9 @@
       "адвокат"
     ],
     "correct": "имущество",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The estate was divided among the heirs after the owner's death.",
+    "exampleRus": "Имущество было разделено между наследниками после смерти владельца."
   },
   {
     "category": "Property & Real Estate",
@@ -6314,7 +6850,9 @@
       "сертифицировать"
     ],
     "correct": "выселение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The landlord issued an eviction notice to the non-paying tenant.",
+    "exampleRus": "Арендодатель направил уведомление о выселении неплательщику."
   },
   {
     "category": "Property & Real Estate",
@@ -6342,7 +6880,9 @@
       "банк"
     ],
     "correct": "финансы",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "They secured finance to purchase the commercial property.",
+    "exampleRus": "Они получили финансирование для покупки коммерческой недвижимости."
   },
   {
     "category": "Property & Real Estate",
@@ -6355,7 +6895,9 @@
       "меблировать"
     ],
     "correct": "меблировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The landlord agreed to furnish the apartment before the tenant moves in.",
+    "exampleRus": "Арендодатель согласился меблировать квартиру до въезда арендатора."
   },
   {
     "category": "Insurance",
@@ -6368,7 +6910,9 @@
       "актуарий"
     ],
     "correct": "актуарий",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The actuary calculated the risk associated with the policy.",
+    "exampleRus": "Актуарий рассчитал риск, связанный со страховым полисом."
   },
   {
     "category": "Insurance",
@@ -6381,7 +6925,9 @@
       "аварийный комиссар"
     ],
     "correct": "аварийный комиссар",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The claims adjuster inspected the damaged property.",
+    "exampleRus": "Аварийный комиссар осмотрел повреждённое имущество."
   },
   {
     "category": "Insurance",
@@ -6394,7 +6940,9 @@
       "делегирование"
     ],
     "correct": "неблагоприятный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Adverse weather conditions led to many insurance claims.",
+    "exampleRus": "Неблагоприятные погодные условия привели к многочисленным страховым претензиям."
   },
   {
     "category": "Insurance",
@@ -6422,7 +6970,9 @@
       "оценка"
     ],
     "correct": "оценка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An appraisal was conducted to estimate the damage.",
+    "exampleRus": "Для оценки ущерба было проведено экспертное заключение."
   },
   {
     "category": "Insurance",
@@ -6480,7 +7030,9 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The insurance broker found the best policy for the client.",
+    "exampleRus": "Страховой брокер нашёл лучший полис для клиента."
   },
   {
     "category": "Insurance",
@@ -6493,7 +7045,9 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The policy can be cancelled with thirty days' notice.",
+    "exampleRus": "Полис может быть отменён с уведомлением за тридцать дней."
   },
   {
     "category": "Insurance",
@@ -6506,7 +7060,9 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The insurance carrier approved the claim within a week.",
+    "exampleRus": "Страховщик одобрил претензию в течение недели."
   },
   {
     "category": "Insurance",
@@ -6564,7 +7120,9 @@
       "ущерб"
     ],
     "correct": "ущерб",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The storm caused significant damage to the insured property.",
+    "exampleRus": "Шторм причинил значительный ущерб застрахованному имуществу."
   },
   {
     "category": "Insurance",
@@ -6592,7 +7150,9 @@
       "ущерб"
     ],
     "correct": "ущерб",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The accident was a detriment to the company's finances.",
+    "exampleRus": "Авария нанесла ущерб финансам компании."
   },
   {
     "category": "Insurance",
@@ -6605,7 +7165,9 @@
       "интервью"
     ],
     "correct": "нетрудоспособность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Disability insurance provides income if you cannot work.",
+    "exampleRus": "Страхование нетрудоспособности обеспечивает доход, если вы не можете работать."
   },
   {
     "category": "Insurance",
@@ -6618,7 +7180,9 @@
       "ENDORSE"
     ],
     "correct": "ENDORSE",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The agent will endorse the policy after payment.",
+    "exampleRus": "Агент подпишет полис после оплаты."
   },
   {
     "category": "Insurance",
@@ -6631,7 +7195,9 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Non-profit organizations may be exempt from certain taxes.",
+    "exampleRus": "Некоммерческие организации могут быть освобождены от определённых налогов."
   },
   {
     "category": "Legal",
@@ -6659,7 +7225,9 @@
       "скидка"
     ],
     "correct": "обвинять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The prosecutor will accuse the defendant at the trial.",
+    "exampleRus": "Прокурор обвинит ответчика на судебном процессе."
   },
   {
     "category": "Legal",
@@ -6672,7 +7240,9 @@
       "зал"
     ],
     "correct": "судить",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The board will adjudicate the dispute between the parties.",
+    "exampleRus": "Правление разрешит спор между сторонами."
   },
   {
     "category": "Legal",
@@ -6685,7 +7255,9 @@
       "допустимый"
     ],
     "correct": "допустимый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Only admissible evidence can be presented in court.",
+    "exampleRus": "В суде может быть представлены только допустимые доказательства."
   },
   {
     "category": "Legal",
@@ -6698,7 +7270,9 @@
       "бронировать"
     ],
     "correct": "аффидевит",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The witness signed an affidavit confirming the facts.",
+    "exampleRus": "Свидетель подписал аффидевит, подтверждающий факты."
   },
   {
     "category": "Legal",
@@ -6711,7 +7285,9 @@
       "задел"
     ],
     "correct": "утверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The plaintiff alleges that the company violated the contract.",
+    "exampleRus": "Истец утверждает, что компания нарушила контракт."
   },
   {
     "category": "Legal",
@@ -6739,7 +7315,9 @@
       "финансы"
     ],
     "correct": "аннулировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The court agreed to annul the marriage.",
+    "exampleRus": "Суд согласился аннулировать брак."
   },
   {
     "category": "Legal",
@@ -6752,7 +7330,9 @@
       "кабель"
     ],
     "correct": "апеллировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The defendant decided to appeal the court decision.",
+    "exampleRus": "Ответчик решил обжаловать решение суда."
   },
   {
     "category": "Legal",
@@ -6765,7 +7345,9 @@
       "деталь"
     ],
     "correct": "применимый",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "These regulations are applicable to all employees.",
+    "exampleRus": "Данные правила применимы ко всем сотрудникам."
   },
   {
     "category": "Legal",
@@ -6808,7 +7390,9 @@
       "обязательный"
     ],
     "correct": "обязательный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The signed contract is legally binding.",
+    "exampleRus": "Подписанный договор является юридически обязательным."
   },
   {
     "category": "Legal",
@@ -6821,7 +7405,9 @@
       "розничная торговля"
     ],
     "correct": "нарушение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company was found guilty of a breach of contract.",
+    "exampleRus": "Компания была признана виновной в нарушении контракта."
   },
   {
     "category": "Legal",
@@ -6834,7 +7420,9 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The attorney prepared a brief for the court.",
+    "exampleRus": "Адвокат подготовил краткое изложение для суда."
   },
   {
     "category": "Legal",
@@ -6847,7 +7435,9 @@
       "уценивать"
     ],
     "correct": "дело",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The lawyer reviewed the case files carefully.",
+    "exampleRus": "Адвокат тщательно изучил материалы дела."
   },
   {
     "category": "Legal",
@@ -6860,7 +7450,9 @@
       "прирост"
     ],
     "correct": "причина",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The investigation determined the cause of the accident.",
+    "exampleRus": "Расследование установило причину аварии."
   },
   {
     "category": "Legal",
@@ -6873,7 +7465,9 @@
       "закрывать"
     ],
     "correct": "сертифицировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "An accountant must certify the financial statements.",
+    "exampleRus": "Бухгалтер должен сертифицировать финансовые отчёты."
   },
   {
     "category": "Legal",
@@ -6886,7 +7480,9 @@
       "отклонять"
     ],
     "correct": "гражданский",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Civil law governs disputes between private parties.",
+    "exampleRus": "Гражданское право регулирует споры между частными лицами."
   },
   {
     "category": "Legal",
@@ -6899,7 +7495,9 @@
       "управлять"
     ],
     "correct": "пункт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The exclusion clause limits the company's liability.",
+    "exampleRus": "Исключительный пункт ограничивает ответственность компании."
   },
   {
     "category": "Travel",
@@ -6942,7 +7540,9 @@
       "стоимость авиабилета"
     ],
     "correct": "стоимость авиабилета",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The airfare to Tokyo was more expensive than expected.",
+    "exampleRus": "Стоимость авиабилета до Токио оказалась выше ожидаемой."
   },
   {
     "category": "Travel",
@@ -6955,7 +7555,9 @@
       "выезд"
     ],
     "correct": "аллергия",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please inform the airline of any food allergy.",
+    "exampleRus": "Пожалуйста, сообщите авиакомпании о любой пищевой аллергии."
   },
   {
     "category": "Travel",
@@ -6968,7 +7570,9 @@
       "соглашение"
     ],
     "correct": "высота",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "At high altitude, breathing can become difficult.",
+    "exampleRus": "На большой высоте дыхание может стать затруднённым."
   },
   {
     "category": "Travel",
@@ -6981,7 +7585,9 @@
       "подходящий"
     ],
     "correct": "район",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hotel is located in a quiet residential area.",
+    "exampleRus": "Отель расположен в тихом жилом районе."
   },
   {
     "category": "Travel",
@@ -6994,7 +7600,9 @@
       "цифра"
     ],
     "correct": "прибытие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Your arrival time has been updated to 3 PM.",
+    "exampleRus": "Время вашего прибытия обновлено до 15:00."
   },
   {
     "category": "Travel",
@@ -7007,7 +7615,9 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We expect to arrive at the destination by noon.",
+    "exampleRus": "Мы рассчитываем прибыть к месту назначения к полудню."
   },
   {
     "category": "Travel",
@@ -7020,7 +7630,9 @@
       "кандидат"
     ],
     "correct": "багаж",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Excess baggage fees apply for overweight luggage.",
+    "exampleRus": "За перевес багажа взимается дополнительная плата."
   },
   {
     "category": "Travel",
@@ -7033,7 +7645,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "It is wise to book flights well in advance.",
+    "exampleRus": "Разумно бронировать авиабилеты заблаговременно."
   },
   {
     "category": "Travel",
@@ -7046,7 +7660,9 @@
       "посадка"
     ],
     "correct": "граница",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Travelers must show their passport at the border.",
+    "exampleRus": "Путешественники должны предъявить паспорт на границе."
   },
   {
     "category": "Travel",
@@ -7059,7 +7675,9 @@
       "посадочный талон"
     ],
     "correct": "посадочный талон",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can download your boarding pass to your phone.",
+    "exampleRus": "Вы можете загрузить посадочный талон на свой телефон."
   },
   {
     "category": "Travel",
@@ -7072,7 +7690,9 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The carrier offers direct flights to over fifty destinations.",
+    "exampleRus": "Перевозчик предлагает прямые рейсы более чем в пятьдесят направлений."
   },
   {
     "category": "Travel",
@@ -7085,7 +7705,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A health certificate may be required for certain destinations.",
+    "exampleRus": "Для некоторых направлений может потребоваться медицинский сертификат."
   },
   {
     "category": "Travel",
@@ -7143,7 +7765,9 @@
       "отменять"
     ],
     "correct": "комфорт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Business class provides greater comfort on long flights.",
+    "exampleRus": "Бизнес-класс обеспечивает больший комфорт на дальних рейсах."
   },
   {
     "category": "Travel",
@@ -7156,7 +7780,9 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please confirm your travel arrangements at least a week before.",
+    "exampleRus": "Пожалуйста, подтвердите свои дорожные договорённости не менее чем за неделю."
   },
   {
     "category": "Travel",
@@ -7169,7 +7795,9 @@
       "подтверждение"
     ],
     "correct": "подтверждение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You will receive a booking confirmation by email.",
+    "exampleRus": "Вы получите подтверждение бронирования по электронной почте."
   },
   {
     "category": "Hotels",
@@ -7197,7 +7825,9 @@
       "удобство"
     ],
     "correct": "удобство",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hotel offers many amenities, including a gym and pool.",
+    "exampleRus": "Отель предлагает множество удобств, включая тренажёрный зал и бассейн."
   },
   {
     "category": "Hotels",
@@ -7210,7 +7840,9 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The concierge can arrange transportation to the airport.",
+    "exampleRus": "Консьерж может организовать транспорт до аэропорта."
   },
   {
     "category": "Hotels",
@@ -7223,7 +7855,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "I would like to book a double room for two nights.",
+    "exampleRus": "Я хотел бы забронировать двухместный номер на две ночи."
   },
   {
     "category": "Hotels",
@@ -7236,7 +7870,9 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You may cancel your reservation up to 24 hours in advance.",
+    "exampleRus": "Вы можете отменить бронирование за 24 часа до заезда."
   },
   {
     "category": "Hotels",
@@ -7294,7 +7930,9 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hotel will confirm your booking by email.",
+    "exampleRus": "Отель подтвердит вашу бронь по электронной почте."
   },
   {
     "category": "Hotels",
@@ -7307,7 +7945,9 @@
       "запускать"
     ],
     "correct": "детская кроватка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Guests with babies can request a cot at no extra charge.",
+    "exampleRus": "Гости с младенцами могут бесплатно запросить детскую кроватку."
   },
   {
     "category": "Hotels",
@@ -7320,7 +7960,9 @@
       "любезность"
     ],
     "correct": "любезность",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The staff showed great courtesy to every guest.",
+    "exampleRus": "Персонал проявил большую любезность к каждому гостю."
   },
   {
     "category": "Hotels",
@@ -7378,7 +8020,9 @@
       "стойка регистрации"
     ],
     "correct": "стойка регистрации",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please collect your key from the front desk.",
+    "exampleRus": "Пожалуйста, получите ключ на стойке регистрации."
   },
   {
     "category": "Hotels",
@@ -7421,7 +8065,9 @@
       "ездить на работу"
     ],
     "correct": "принимать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The hotel will host a gala dinner on Saturday.",
+    "exampleRus": "Отель проведёт торжественный ужин в субботу."
   },
   {
     "category": "Hotels",
@@ -7434,7 +8080,9 @@
       "явный"
     ],
     "correct": "хостел",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Budget travelers often prefer to stay at a hostel.",
+    "exampleRus": "Путешественники с ограниченным бюджетом часто предпочитают останавливаться в хостеле."
   },
   {
     "category": "Hotels",
@@ -7447,7 +8095,9 @@
       "циркулировать"
     ],
     "correct": "гостиница",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The cozy inn by the lake offers a peaceful retreat.",
+    "exampleRus": "Уютная гостиница у озера предлагает спокойный отдых."
   },
   {
     "category": "Transportation",
@@ -7475,7 +8125,9 @@
       "прибывать"
     ],
     "correct": "проход",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The flight attendant walked down the aisle with drinks.",
+    "exampleRus": "Бортпроводник прошёл по проходу с напитками."
   },
   {
     "category": "Transportation",
@@ -7503,7 +8155,9 @@
       "цифра"
     ],
     "correct": "прибытие",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The arrival of the train was delayed by fifteen minutes.",
+    "exampleRus": "Прибытие поезда задержалось на пятнадцать минут."
   },
   {
     "category": "Transportation",
@@ -7516,7 +8170,9 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The bus is scheduled to arrive at 9 AM.",
+    "exampleRus": "Автобус должен прибыть в 9 утра."
   },
   {
     "category": "Transportation",
@@ -7529,7 +8185,9 @@
       "собирать"
     ],
     "correct": "собирать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Passengers should assemble at the gate thirty minutes early.",
+    "exampleRus": "Пассажиры должны собраться у выхода за тридцать минут."
   },
   {
     "category": "Transportation",
@@ -7542,7 +8200,9 @@
       "достижение"
     ],
     "correct": "сборка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The assembly of passengers at the terminal was orderly.",
+    "exampleRus": "Сборка пассажиров в терминале прошла организованно."
   },
   {
     "category": "Transportation",
@@ -7555,7 +8215,9 @@
       "кандидат"
     ],
     "correct": "багаж",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please label all your baggage before check-in.",
+    "exampleRus": "Пожалуйста, пометьте весь свой багаж перед регистрацией."
   },
   {
     "category": "Transportation",
@@ -7568,7 +8230,9 @@
       "сажаться"
     ],
     "correct": "сажаться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Passengers in business class are first to board the plane.",
+    "exampleRus": "Пассажиры бизнес-класса первыми садятся в самолёт."
   },
   {
     "category": "Transportation",
@@ -7581,7 +8245,9 @@
       "посадка"
     ],
     "correct": "посадка",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Boarding will begin thirty minutes before departure.",
+    "exampleRus": "Посадка начнётся за тридцать минут до отправления."
   },
   {
     "category": "Transportation",
@@ -7594,7 +8260,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "You can book train tickets on the official website.",
+    "exampleRus": "Вы можете забронировать билеты на поезд на официальном сайте."
   },
   {
     "category": "Transportation",
@@ -7607,7 +8275,9 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The flight was cancelled due to bad weather.",
+    "exampleRus": "Рейс был отменён из-за плохой погоды."
   },
   {
     "category": "Transportation",
@@ -7620,7 +8290,9 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Choose a reliable carrier for your international shipment.",
+    "exampleRus": "Выбирайте надёжного перевозчика для международных грузоперевозок."
   },
   {
     "category": "Transportation",
@@ -7633,7 +8305,9 @@
       "переносить"
     ],
     "correct": "переносить",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Each passenger is allowed to carry one piece of hand luggage.",
+    "exampleRus": "Каждому пассажиру разрешено провозить один предмет ручной клади."
   },
   {
     "category": "Transportation",
@@ -7646,7 +8320,9 @@
       "прокручивать"
     ],
     "correct": "циркулировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Information about delays was circulated to all passengers.",
+    "exampleRus": "Информация о задержках была распространена среди всех пассажиров."
   },
   {
     "category": "Transportation",
@@ -7659,7 +8335,9 @@
       "инструктировать"
     ],
     "correct": "ездить на работу",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She commutes to work by train every day.",
+    "exampleRus": "Каждый день она ездит на работу на поезде."
   },
   {
     "category": "Transportation",
@@ -7672,7 +8350,9 @@
       "правительство"
     ],
     "correct": "пассажир",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The commuter train runs every fifteen minutes.",
+    "exampleRus": "Пригородный поезд ходит каждые пятнадцать минут."
   },
   {
     "category": "Transportation",
@@ -7685,7 +8365,9 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please confirm your seat reservation before boarding.",
+    "exampleRus": "Пожалуйста, подтвердите бронирование места перед посадкой."
   },
   {
     "category": "Transportation",
@@ -7698,7 +8380,9 @@
       "вычет"
     ],
     "correct": "затор",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Traffic congestion caused a long delay on the highway.",
+    "exampleRus": "Дорожный затор вызвал длительную задержку на шоссе."
   },
   {
     "category": "Transportation",
@@ -7726,7 +8410,9 @@
       "применимый"
     ],
     "correct": "авиакомпания",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The airline meal included a salad, main course, and dessert.",
+    "exampleRus": "Питание авиакомпании включало салат, основное блюдо и десерт."
   },
   {
     "category": "Restaurants",
@@ -7739,7 +8425,9 @@
       "аппетитный"
     ],
     "correct": "аппетитный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The display of fresh pastries looked very appetizing.",
+    "exampleRus": "Витрина со свежей выпечкой выглядела очень аппетитно."
   },
   {
     "category": "Restaurants",
@@ -7752,7 +8440,9 @@
       "арома"
     ],
     "correct": "арома",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The aroma of fresh bread filled the restaurant.",
+    "exampleRus": "Аромат свежего хлеба наполнил ресторан."
   },
   {
     "category": "Restaurants",
@@ -7765,7 +8455,9 @@
       "напиток"
     ],
     "correct": "напиток",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "A complimentary beverage is included with the meal.",
+    "exampleRus": "К блюду прилагается бесплатный напиток."
   },
   {
     "category": "Restaurants",
@@ -7793,7 +8485,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "I would like to book a table for four at seven o'clock.",
+    "exampleRus": "Я хотел бы забронировать столик на четверых на семь часов."
   },
   {
     "category": "Restaurants",
@@ -7806,7 +8500,9 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The restaurant has a seating capacity of eighty people.",
+    "exampleRus": "Ресторан вмещает восемьдесят человек."
   },
   {
     "category": "Restaurants",
@@ -7819,7 +8515,9 @@
       "ярмарка"
     ],
     "correct": "на вынос",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We offer carryout service for all menu items.",
+    "exampleRus": "Мы предлагаем услугу «на вынос» для всех позиций меню."
   },
   {
     "category": "Restaurants",
@@ -7832,7 +8530,9 @@
       "кассир"
     ],
     "correct": "кассир",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Please pay at the cashier before leaving.",
+    "exampleRus": "Пожалуйста, оплатите у кассира перед уходом."
   },
   {
     "category": "Restaurants",
@@ -7845,7 +8545,9 @@
       "обеспечивать питанием"
     ],
     "correct": "обеспечивать питанием",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The company agreed to cater the corporate lunch.",
+    "exampleRus": "Компания согласилась обеспечить питание на корпоративном обеде."
   },
   {
     "category": "Restaurants",
@@ -7858,7 +8560,9 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The restaurant received a certificate of excellence.",
+    "exampleRus": "Ресторан получил сертификат отличия."
   },
   {
     "category": "Restaurants",
@@ -7871,7 +8575,9 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "There is an additional charge for delivery.",
+    "exampleRus": "За доставку взимается дополнительная плата."
   },
   {
     "category": "Restaurants",
@@ -7884,7 +8590,9 @@
       "работодатель"
     ],
     "correct": "шеф-повар",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The head chef prepared a special menu for the event.",
+    "exampleRus": "Шеф-повар приготовил специальное меню для мероприятия."
   },
   {
     "category": "Restaurants",
@@ -7897,7 +8605,9 @@
       "закрывать"
     ],
     "correct": "закрывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The restaurant will close at eleven o'clock tonight.",
+    "exampleRus": "Ресторан сегодня закроется в одиннадцать часов."
   },
   {
     "category": "Restaurants",
@@ -7910,7 +8620,9 @@
       "кухня"
     ],
     "correct": "кухня",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The restaurant specializes in traditional Italian cuisine.",
+    "exampleRus": "Ресторан специализируется на традиционной итальянской кухне."
   },
   {
     "category": "Restaurants",
@@ -7938,7 +8650,9 @@
       "входить"
     ],
     "correct": "деликатес",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Sea urchin is considered a local delicacy.",
+    "exampleRus": "Морской ёж считается местным деликатесом."
   },
   {
     "category": "Restaurants",
@@ -7951,7 +8665,9 @@
       "вкусный"
     ],
     "correct": "вкусный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The guests found the dessert absolutely delicious.",
+    "exampleRus": "Гости нашли десерт абсолютно вкусным."
   },
   {
     "category": "Restaurants",
@@ -7964,7 +8680,9 @@
       "пункт"
     ],
     "correct": "десерт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Would you like to order dessert after the main course?",
+    "exampleRus": "Не хотите ли заказать десерт после основного блюда?"
   },
   {
     "category": "Restaurants",
@@ -7977,7 +8695,9 @@
       "адвокат"
     ],
     "correct": "обедать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We decided to dine at the rooftop restaurant.",
+    "exampleRus": "Мы решили пообедать в ресторане на крыше."
   },
   {
     "category": "Events & Entertainment",
@@ -7990,7 +8710,9 @@
       "высота"
     ],
     "correct": "развлечение",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The amusement park was crowded during the holidays.",
+    "exampleRus": "В праздничные дни парк развлечений был переполнен."
   },
   {
     "category": "Events & Entertainment",
@@ -8003,7 +8725,9 @@
       "ведущий"
     ],
     "correct": "ведущий",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The announcer introduced each speaker at the ceremony.",
+    "exampleRus": "Ведущий представил каждого докладчика на церемонии."
   },
   {
     "category": "Events & Entertainment",
@@ -8016,7 +8740,9 @@
       "соглашение"
     ],
     "correct": "закуска",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The appetizer was served before the main course.",
+    "exampleRus": "Закуска была подана до основного блюда."
   },
   {
     "category": "Events & Entertainment",
@@ -8029,7 +8755,9 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We need to arrange seating for three hundred guests.",
+    "exampleRus": "Нам нужно организовать рассадку для трёхсот гостей."
   },
   {
     "category": "Events & Entertainment",
@@ -8042,7 +8770,9 @@
       "излишек"
     ],
     "correct": "зал",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The auditorium was filled with enthusiastic listeners.",
+    "exampleRus": "Зал был заполнен энтузиастами-слушателями."
   },
   {
     "category": "Events & Entertainment",
@@ -8055,7 +8785,9 @@
       "наличные"
     ],
     "correct": "банкет",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The award banquet will be held at the Grand Hotel.",
+    "exampleRus": "Банкет по случаю вручения наград пройдёт в Grand Hotel."
   },
   {
     "category": "Events & Entertainment",
@@ -8068,7 +8800,9 @@
       "полезный"
     ],
     "correct": "полезный",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Networking events are beneficial for career growth.",
+    "exampleRus": "Нетворкинг-мероприятия полезны для карьерного роста."
   },
   {
     "category": "Events & Entertainment",
@@ -8081,7 +8815,9 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "We need to book the venue six months in advance.",
+    "exampleRus": "Нам нужно забронировать зал за шесть месяцев вперёд."
   },
   {
     "category": "Events & Entertainment",
@@ -8094,7 +8830,9 @@
       "календарь"
     ],
     "correct": "календарь",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Add the event to your calendar to avoid conflicts.",
+    "exampleRus": "Добавьте мероприятие в свой календарь, чтобы избежать конфликтов."
   },
   {
     "category": "Events & Entertainment",
@@ -8107,7 +8845,9 @@
       "технический"
     ],
     "correct": "празднование",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The celebration of the company anniversary was spectacular.",
+    "exampleRus": "Празднование годовщины компании было впечатляющим."
   },
   {
     "category": "Events & Entertainment",
@@ -8120,7 +8860,9 @@
       "внедрять"
     ],
     "correct": "церемония",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The closing ceremony will begin at seven o'clock.",
+    "exampleRus": "Церемония закрытия начнётся в семь часов."
   },
   {
     "category": "Events & Entertainment",
@@ -8133,7 +8875,9 @@
       "применимый"
     ],
     "correct": "хореограф",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "She was hired to choreograph the opening performance.",
+    "exampleRus": "Её наняли для постановки хореографии вступительного выступления."
   },
   {
     "category": "Events & Entertainment",
@@ -8146,7 +8890,9 @@
       "хореограф"
     ],
     "correct": "хореограф",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The choreographer rehearsed with the dancers every day.",
+    "exampleRus": "Хореограф ежедневно репетировал с танцорами."
   },
   {
     "category": "Events & Entertainment",
@@ -8159,7 +8905,9 @@
       "сотрудничать"
     ],
     "correct": "сотрудничать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Artists and musicians collaborate to create the show.",
+    "exampleRus": "Художники и музыканты сотрудничают для создания шоу."
   },
   {
     "category": "Events & Entertainment",
@@ -8172,7 +8920,9 @@
       "отмечать"
     ],
     "correct": "отмечать",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The event was held to commemorate the founding of the city.",
+    "exampleRus": "Мероприятие было проведено, чтобы отметить основание города."
   },
   {
     "category": "Events & Entertainment",
@@ -8185,7 +8935,9 @@
       "заменять"
     ],
     "correct": "начало",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The commencement ceremony marks the end of studies.",
+    "exampleRus": "Церемония начала отмечает окончание учёбы."
   },
   {
     "category": "Events & Entertainment",
@@ -8198,7 +8950,9 @@
       "арбитраж"
     ],
     "correct": "ведущий",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The compere kept the audience engaged throughout the show.",
+    "exampleRus": "Ведущий поддерживал интерес аудитории на протяжении всего шоу."
   },
   {
     "category": "Events & Entertainment",
@@ -8211,7 +8965,9 @@
       "уволнять"
     ],
     "correct": "концерт",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The outdoor concert attracted thousands of fans.",
+    "exampleRus": "Концерт под открытым небом привлёк тысячи фанатов."
   },
   {
     "category": "Events & Entertainment",
@@ -8224,7 +8980,9 @@
       "совещаться"
     ],
     "correct": "совещаться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "The organizers need to confer before making a decision.",
+    "exampleRus": "Организаторам нужно посовещаться перед принятием решения."
   },
   {
     "category": "Events & Entertainment",
@@ -8237,6 +8995,8 @@
       "полезный"
     ],
     "correct": "собираться",
-    "mastery": 0
+    "mastery": 0,
+    "exampleEng": "Fans congregate outside the venue before the show.",
+    "exampleRus": "Фанаты собираются у входа в зал перед шоу."
   }
 ]
