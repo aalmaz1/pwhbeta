@@ -157,11 +157,11 @@ function showExplanation(word) {
   if (!modal || !list) return;
 
   list.innerHTML = `
-    <div style="color: #fff; font-size: 12px; line-height: 1.6;">
-      <p style="color: #fbbf24; margin-bottom: 10px;">${word.eng}</p>
-      <p style="color: #4ade80; margin-bottom: 10px;">${word.correct}</p>
-      ${word.exampleEng ? `<p style="color: #aaa; font-style: italic;">"${word.exampleEng}"</p>` : ''}
-      ${word.exampleRus ? `<p style="color: #aaa; font-style: italic;">${word.exampleRus}</p>` : ''}
+    <div style="font-size: 11px; line-height: 1.8;">
+      <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">${word.eng}</p>
+      <p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">${word.correct}</p>
+      ${word.exampleEng ? `<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"${word.exampleEng}"</p>` : ''}
+      ${word.exampleRus ? `<p style="color: #8877aa; font-style: italic;">${word.exampleRus}</p>` : ''}
     </div>
   `;
   modal.classList.remove('hidden');
@@ -170,7 +170,10 @@ function showExplanation(word) {
 function showFeedback(message, isCorrect) {
   const feedback = document.getElementById('feedback');
   feedback.textContent = message;
-  feedback.style.color = isCorrect ? '#4ade80' : '#ef4444';
+  feedback.style.color = isCorrect ? '#39ff14' : '#ff2d78';
+  feedback.style.textShadow = isCorrect
+    ? '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)'
+    : '0 0 10px #ff2d78, 0 0 25px rgba(255,45,120,0.7)';
   feedback.classList.remove('hidden');
   setTimeout(() => feedback.classList.add('hidden'), 1500);
 }
