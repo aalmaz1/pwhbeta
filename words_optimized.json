@@ -130,9 +130,7 @@
       "сторона"
     ],
     "correct": "сторона",
-    "mastery": 0,
-    "exampleEng": "Example with party.",
-    "exampleRus": "Пример с party."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -190,9 +188,7 @@
       "управлять"
     ],
     "correct": "пункт",
-    "mastery": 0,
-    "exampleEng": "Example with clause.",
-    "exampleRus": "Пример с clause."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -205,9 +201,7 @@
       "розничная торговля"
     ],
     "correct": "нарушение",
-    "mastery": 0,
-    "exampleEng": "Example with breach.",
-    "exampleRus": "Пример с breach."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -220,9 +214,7 @@
       "аннулировать"
     ],
     "correct": "аннулировать",
-    "mastery": 0,
-    "exampleEng": "Example with nullify.",
-    "exampleRus": "Пример с nullify."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -235,9 +227,7 @@
       "утверждать"
     ],
     "correct": "соблюдать",
-    "mastery": 0,
-    "exampleEng": "Example with comply.",
-    "exampleRus": "Пример с comply."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -265,9 +255,7 @@
       "сборка"
     ],
     "correct": "условие",
-    "mastery": 0,
-    "exampleEng": "Example with term.",
-    "exampleRus": "Пример с term."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -280,9 +268,7 @@
       "обязательный"
     ],
     "correct": "обязательный",
-    "mastery": 0,
-    "exampleEng": "Example with binding.",
-    "exampleRus": "Пример с binding."
+    "mastery": 0
   },
   {
     "category": "Contracts",
@@ -295,9 +281,7 @@
       "скидка"
     ],
     "correct": "явный",
-    "mastery": 0,
-    "exampleEng": "Example with explicit.",
-    "exampleRus": "Пример с explicit."
+    "mastery": 0
   },
   {
     "category": "Marketing",
@@ -370,9 +354,7 @@
       "аудит"
     ],
     "correct": "убеждать",
-    "mastery": 0,
-    "exampleEng": "Example with convince.",
-    "exampleRus": "Пример с convince."
+    "mastery": 0
   },
   {
     "category": "Marketing",
@@ -430,9 +412,7 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0,
-    "exampleEng": "Example with estimate.",
-    "exampleRus": "Пример с estimate."
+    "mastery": 0
   },
   {
     "category": "Marketing",
@@ -565,9 +545,7 @@
       "посадочный талон"
     ],
     "correct": "прощение",
-    "mastery": 0,
-    "exampleEng": "Example with solicitation.",
-    "exampleRus": "Пример с solicitation."
+    "mastery": 0
   },
   {
     "category": "Marketing",
@@ -610,9 +588,7 @@
       "уменьшать"
     ],
     "correct": "гарантия",
-    "mastery": 0,
-    "exampleEng": "Example with warranty.",
-    "exampleRus": "Пример с warranty."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -625,9 +601,7 @@
       "бюджет"
     ],
     "correct": "гарантировать",
-    "mastery": 0,
-    "exampleEng": "Example with guarantee.",
-    "exampleRus": "Пример с guarantee."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -655,9 +629,7 @@
       "истекать"
     ],
     "correct": "истекать",
-    "mastery": 0,
-    "exampleEng": "Example with expire.",
-    "exampleRus": "Пример с expire."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -670,9 +642,7 @@
       "ремонт"
     ],
     "correct": "действительный",
-    "mastery": 0,
-    "exampleEng": "Example with valid.",
-    "exampleRus": "Пример с valid."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -700,9 +670,7 @@
       "заменять"
     ],
     "correct": "заменять",
-    "mastery": 0,
-    "exampleEng": "Example with replace.",
-    "exampleRus": "Пример с replace."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -715,9 +683,7 @@
       "ремонт"
     ],
     "correct": "ремонт",
-    "mastery": 0,
-    "exampleEng": "Example with repair.",
-    "exampleRus": "Пример с repair."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -760,9 +726,7 @@
       "багаж"
     ],
     "correct": "продлевать",
-    "mastery": 0,
-    "exampleEng": "Example with extend.",
-    "exampleRus": "Пример с extend."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -775,9 +739,7 @@
       "переписка"
     ],
     "correct": "неисправность",
-    "mastery": 0,
-    "exampleEng": "Example with malfunction.",
-    "exampleRus": "Пример с malfunction."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -820,9 +782,7 @@
       "нанимать"
     ],
     "correct": "длительность",
-    "mastery": 0,
-    "exampleEng": "Example with duration.",
-    "exampleRus": "Пример с duration."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -835,9 +795,7 @@
       "условие"
     ],
     "correct": "условие",
-    "mastery": 0,
-    "exampleEng": "Example with condition.",
-    "exampleRus": "Пример с condition."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -850,9 +808,7 @@
       "исключать"
     ],
     "correct": "исключать",
-    "mastery": 0,
-    "exampleEng": "Example with exclude.",
-    "exampleRus": "Пример с exclude."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -865,9 +821,7 @@
       "данные"
     ],
     "correct": "включать",
-    "mastery": 0,
-    "exampleEng": "Example with include.",
-    "exampleRus": "Пример с include."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -880,9 +834,7 @@
       "спад"
     ],
     "correct": "обновлять",
-    "mastery": 0,
-    "exampleEng": "Example with renew.",
-    "exampleRus": "Пример с renew."
+    "mastery": 0
   },
   {
     "category": "Warranties",
@@ -895,9 +847,7 @@
       "гражданский"
     ],
     "correct": "автоматический",
-    "mastery": 0,
-    "exampleEng": "Example with automatic.",
-    "exampleRus": "Пример с automatic."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -925,9 +875,7 @@
       "банк"
     ],
     "correct": "альтернатива",
-    "mastery": 0,
-    "exampleEng": "Example with alternative.",
-    "exampleRus": "Пример с alternative."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -955,9 +903,7 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0,
-    "exampleEng": "Example with brief.",
-    "exampleRus": "Пример с brief."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -970,9 +916,7 @@
       "уточнять"
     ],
     "correct": "уточнять",
-    "mastery": 0,
-    "exampleEng": "Example with clarify.",
-    "exampleRus": "Пример с clarify."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -985,9 +929,7 @@
       "сотрудничество"
     ],
     "correct": "сотрудничество",
-    "mastery": 0,
-    "exampleEng": "Example with cooperation.",
-    "exampleRus": "Пример с cooperation."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -1090,9 +1032,7 @@
       "делегирование"
     ],
     "correct": "участник",
-    "mastery": 0,
-    "exampleEng": "Example with participant.",
-    "exampleRus": "Пример с participant."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -1105,9 +1045,7 @@
       "распродажа"
     ],
     "correct": "приоритет",
-    "mastery": 0,
-    "exampleEng": "Example with priority.",
-    "exampleRus": "Пример с priority."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -1135,9 +1073,7 @@
       "кампания"
     ],
     "correct": "рекомендация",
-    "mastery": 0,
-    "exampleEng": "Example with recommendation.",
-    "exampleRus": "Пример с recommendation."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -1180,9 +1116,7 @@
       "апеллировать"
     ],
     "correct": "подход",
-    "mastery": 0,
-    "exampleEng": "Example with approach.",
-    "exampleRus": "Пример с approach."
+    "mastery": 0
   },
   {
     "category": "Business Planning",
@@ -1195,9 +1129,7 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0,
-    "exampleEng": "Example with assessment.",
-    "exampleRus": "Пример с assessment."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1240,9 +1172,7 @@
       "посещаемость"
     ],
     "correct": "посещаемость",
-    "mastery": 0,
-    "exampleEng": "Example with attendance.",
-    "exampleRus": "Пример с attendance."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1255,9 +1185,7 @@
       "шеф-повар"
     ],
     "correct": "награда",
-    "mastery": 0,
-    "exampleEng": "Example with award.",
-    "exampleRus": "Пример с award."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1270,9 +1198,7 @@
       "наличные"
     ],
     "correct": "банкет",
-    "mastery": 0,
-    "exampleEng": "Example with banquet.",
-    "exampleRus": "Пример с banquet."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1285,9 +1211,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1300,9 +1224,7 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0,
-    "exampleEng": "Example with capacity.",
-    "exampleRus": "Пример с capacity."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1315,9 +1237,7 @@
       "оптовая торговля"
     ],
     "correct": "заключать",
-    "mastery": 0,
-    "exampleEng": "Example with conclude.",
-    "exampleRus": "Пример с conclude."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1375,9 +1295,7 @@
       "обсуждение"
     ],
     "correct": "обсуждение",
-    "mastery": 0,
-    "exampleEng": "Example with discussion.",
-    "exampleRus": "Пример с discussion."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1390,9 +1308,7 @@
       "убеждать"
     ],
     "correct": "дисплей",
-    "mastery": 0,
-    "exampleEng": "Example with display.",
-    "exampleRus": "Пример с display."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1405,9 +1321,7 @@
       "долг"
     ],
     "correct": "распределять",
-    "mastery": 0,
-    "exampleEng": "Example with distribute.",
-    "exampleRus": "Пример с distribute."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1420,9 +1334,7 @@
       "записываться"
     ],
     "correct": "записываться",
-    "mastery": 0,
-    "exampleEng": "Example with enroll.",
-    "exampleRus": "Пример с enroll."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1450,9 +1362,7 @@
       "ярмарка"
     ],
     "correct": "ярмарка",
-    "mastery": 0,
-    "exampleEng": "Example with fair.",
-    "exampleRus": "Пример с fair."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1465,9 +1375,7 @@
       "ездить на работу"
     ],
     "correct": "принимать",
-    "mastery": 0,
-    "exampleEng": "Example with host.",
-    "exampleRus": "Пример с host."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1480,9 +1388,7 @@
       "нетрудоспособность"
     ],
     "correct": "бейдж",
-    "mastery": 0,
-    "exampleEng": "Example with name tag.",
-    "exampleRus": "Пример с name tag."
+    "mastery": 0
   },
   {
     "category": "Conferences",
@@ -1495,9 +1401,7 @@
       "делегирование"
     ],
     "correct": "участник",
-    "mastery": 0,
-    "exampleEng": "Example with participant.",
-    "exampleRus": "Пример с participant."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1540,9 +1444,7 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0,
-    "exampleEng": "Example with capacity.",
-    "exampleRus": "Пример с capacity."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1555,9 +1457,7 @@
       "компонент"
     ],
     "correct": "компонент",
-    "mastery": 0,
-    "exampleEng": "Example with component.",
-    "exampleRus": "Пример с component."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1585,9 +1485,7 @@
       "курсор"
     ],
     "correct": "курсор",
-    "mastery": 0,
-    "exampleEng": "Example with cursor.",
-    "exampleRus": "Пример с cursor."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1630,9 +1528,7 @@
       "удовлетворенность"
     ],
     "correct": "удалять",
-    "mastery": 0,
-    "exampleEng": "Example with delete.",
-    "exampleRus": "Пример с delete."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1645,9 +1541,7 @@
       "рабочий стол"
     ],
     "correct": "рабочий стол",
-    "mastery": 0,
-    "exampleEng": "Example with desktop.",
-    "exampleRus": "Пример с desktop."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1705,9 +1599,7 @@
       "папка"
     ],
     "correct": "папка",
-    "mastery": 0,
-    "exampleEng": "Example with folder.",
-    "exampleRus": "Пример с folder."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1720,9 +1612,7 @@
       "корпоративный"
     ],
     "correct": "бумажная копия",
-    "mastery": 0,
-    "exampleEng": "Example with hard copy.",
-    "exampleRus": "Пример с hard copy."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1750,9 +1640,7 @@
       "повышение"
     ],
     "correct": "иконка",
-    "mastery": 0,
-    "exampleEng": "Example with icon.",
-    "exampleRus": "Пример с icon."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1780,9 +1668,7 @@
       "клавиатура"
     ],
     "correct": "клавиатура",
-    "mastery": 0,
-    "exampleEng": "Example with keyboard.",
-    "exampleRus": "Пример с keyboard."
+    "mastery": 0
   },
   {
     "category": "Computers",
@@ -1795,9 +1681,7 @@
       "плата"
     ],
     "correct": "ноутбук",
-    "mastery": 0,
-    "exampleEng": "Example with laptop.",
-    "exampleRus": "Пример с laptop."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1810,9 +1694,7 @@
       "валюта"
     ],
     "correct": "входить",
-    "mastery": 0,
-    "exampleEng": "Example with log on.",
-    "exampleRus": "Пример с log on."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1825,9 +1707,7 @@
       "нарушение"
     ],
     "correct": "память",
-    "mastery": 0,
-    "exampleEng": "Example with memory.",
-    "exampleRus": "Пример с memory."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1855,9 +1735,7 @@
       "проход"
     ],
     "correct": "мышка",
-    "mastery": 0,
-    "exampleEng": "Example with mouse.",
-    "exampleRus": "Пример с mouse."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1885,9 +1763,7 @@
       "дисплей"
     ],
     "correct": "операционная система",
-    "mastery": 0,
-    "exampleEng": "Example with operating system.",
-    "exampleRus": "Пример с operating system."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1930,9 +1806,7 @@
       "уменьшать"
     ],
     "correct": "принтер",
-    "mastery": 0,
-    "exampleEng": "Example with printer.",
-    "exampleRus": "Пример с printer."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1945,9 +1819,7 @@
       "перезагружать"
     ],
     "correct": "перезагружать",
-    "mastery": 0,
-    "exampleEng": "Example with reboot.",
-    "exampleRus": "Пример с reboot."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1960,9 +1832,7 @@
       "подлежащий"
     ],
     "correct": "экран",
-    "mastery": 0,
-    "exampleEng": "Example with screen.",
-    "exampleRus": "Пример с screen."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -1975,9 +1845,7 @@
       "дисплей"
     ],
     "correct": "прокручивать",
-    "mastery": 0,
-    "exampleEng": "Example with scroll.",
-    "exampleRus": "Пример с scroll."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -2020,9 +1888,7 @@
       "удерживать"
     ],
     "correct": "спам",
-    "mastery": 0,
-    "exampleEng": "Example with spam.",
-    "exampleRus": "Пример с spam."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -2035,9 +1901,7 @@
       "таблица"
     ],
     "correct": "таблица",
-    "mastery": 0,
-    "exampleEng": "Example with spreadsheet.",
-    "exampleRus": "Пример с spreadsheet."
+    "mastery": 0
   },
   {
     "category": "Office Technology",
@@ -2125,9 +1989,7 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrange.",
-    "exampleRus": "Пример с arrange."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2140,9 +2002,7 @@
       "папка"
     ],
     "correct": "папка",
-    "mastery": 0,
-    "exampleEng": "Example with binder.",
-    "exampleRus": "Пример с binder."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2155,9 +2015,7 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0,
-    "exampleEng": "Example with brief.",
-    "exampleRus": "Пример с brief."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2170,9 +2028,7 @@
       "календарь"
     ],
     "correct": "календарь",
-    "mastery": 0,
-    "exampleEng": "Example with calendar.",
-    "exampleRus": "Пример с calendar."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2200,9 +2056,7 @@
       "диспетчер"
     ],
     "correct": "собирать",
-    "mastery": 0,
-    "exampleEng": "Example with collate.",
-    "exampleRus": "Пример с collate."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2230,9 +2084,7 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0,
-    "exampleEng": "Example with deliver.",
-    "exampleRus": "Пример с deliver."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2245,9 +2097,7 @@
       "бронировать"
     ],
     "correct": "дублировать",
-    "mastery": 0,
-    "exampleEng": "Example with duplicate.",
-    "exampleRus": "Пример с duplicate."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2260,9 +2110,7 @@
       "переписка"
     ],
     "correct": "вводить",
-    "mastery": 0,
-    "exampleEng": "Example with enter.",
-    "exampleRus": "Пример с enter."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2290,9 +2138,7 @@
       "рекомендация"
     ],
     "correct": "подача",
-    "mastery": 0,
-    "exampleEng": "Example with filing.",
-    "exampleRus": "Пример с filing."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2305,9 +2151,7 @@
       "цифровой"
     ],
     "correct": "пересылать",
-    "mastery": 0,
-    "exampleEng": "Example with forward.",
-    "exampleRus": "Пример с forward."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2320,9 +2164,7 @@
       "список"
     ],
     "correct": "входящие",
-    "mastery": 0,
-    "exampleEng": "Example with inbox.",
-    "exampleRus": "Пример с inbox."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2335,9 +2177,7 @@
       "условие"
     ],
     "correct": "ввод",
-    "mastery": 0,
-    "exampleEng": "Example with input.",
-    "exampleRus": "Пример с input."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2365,9 +2205,7 @@
       "список"
     ],
     "correct": "список",
-    "mastery": 0,
-    "exampleEng": "Example with list.",
-    "exampleRus": "Пример с list."
+    "mastery": 0
   },
   {
     "category": "Office Procedures",
@@ -2395,9 +2233,7 @@
       "оптом"
     ],
     "correct": "меморандум",
-    "mastery": 0,
-    "exampleEng": "Example with memorandum.",
-    "exampleRus": "Пример с memorandum."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2410,9 +2246,7 @@
       "гражданский"
     ],
     "correct": "автоматический",
-    "mastery": 0,
-    "exampleEng": "Example with automatic.",
-    "exampleRus": "Пример с automatic."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2425,9 +2259,7 @@
       "прибытие"
     ],
     "correct": "батарея",
-    "mastery": 0,
-    "exampleEng": "Example with battery.",
-    "exampleRus": "Пример с battery."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2440,9 +2272,7 @@
       "мотивировать"
     ],
     "correct": "кабель",
-    "mastery": 0,
-    "exampleEng": "Example with cable.",
-    "exampleRus": "Пример с cable."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2455,9 +2285,7 @@
       "начисляться"
     ],
     "correct": "камера",
-    "mastery": 0,
-    "exampleEng": "Example with camera.",
-    "exampleRus": "Пример с camera."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2470,9 +2298,7 @@
       "агент"
     ],
     "correct": "чип",
-    "mastery": 0,
-    "exampleEng": "Example with chip.",
-    "exampleRus": "Пример с chip."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2530,9 +2356,7 @@
       "гарантия"
     ],
     "correct": "диск",
-    "mastery": 0,
-    "exampleEng": "Example with disk.",
-    "exampleRus": "Пример с disk."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2545,9 +2369,7 @@
       "убеждать"
     ],
     "correct": "дисплей",
-    "mastery": 0,
-    "exampleEng": "Example with display.",
-    "exampleRus": "Пример с display."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2560,9 +2382,7 @@
       "кандидат"
     ],
     "correct": "диск",
-    "mastery": 0,
-    "exampleEng": "Example with drive.",
-    "exampleRus": "Пример с drive."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2575,9 +2395,7 @@
       "электронный"
     ],
     "correct": "электронный",
-    "mastery": 0,
-    "exampleEng": "Example with electronic.",
-    "exampleRus": "Пример с electronic."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2605,9 +2423,7 @@
       "условие"
     ],
     "correct": "ввод",
-    "mastery": 0,
-    "exampleEng": "Example with input.",
-    "exampleRus": "Пример с input."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2620,9 +2436,7 @@
       "доход"
     ],
     "correct": "вставлять",
-    "mastery": 0,
-    "exampleEng": "Example with insert.",
-    "exampleRus": "Пример с insert."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2650,9 +2464,7 @@
       "обновлять"
     ],
     "correct": "инструкция",
-    "mastery": 0,
-    "exampleEng": "Example with instruction.",
-    "exampleRus": "Пример с instruction."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2665,9 +2477,7 @@
       "клавиша"
     ],
     "correct": "клавиша",
-    "mastery": 0,
-    "exampleEng": "Example with key.",
-    "exampleRus": "Пример с key."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2680,9 +2490,7 @@
       "автоматический"
     ],
     "correct": "клавиатура",
-    "mastery": 0,
-    "exampleEng": "Example with keypad.",
-    "exampleRus": "Пример с keypad."
+    "mastery": 0
   },
   {
     "category": "Electronics",
@@ -2695,9 +2503,7 @@
       "убеждать"
     ],
     "correct": "линза",
-    "mastery": 0,
-    "exampleEng": "Example with lens.",
-    "exampleRus": "Пример с lens."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2725,9 +2531,7 @@
       "претензия"
     ],
     "correct": "подавать заявку",
-    "mastery": 0,
-    "exampleEng": "Example with apply.",
-    "exampleRus": "Пример с apply."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2800,9 +2604,7 @@
       "сопроводительное письмо"
     ],
     "correct": "сопроводительное письмо",
-    "mastery": 0,
-    "exampleEng": "Example with cover letter.",
-    "exampleRus": "Пример с cover letter."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2815,9 +2617,7 @@
       "диспетчер"
     ],
     "correct": "работодатель",
-    "mastery": 0,
-    "exampleEng": "Example with employer.",
-    "exampleRus": "Пример с employer."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2875,9 +2675,7 @@
       "рынок"
     ],
     "correct": "работа",
-    "mastery": 0,
-    "exampleEng": "Example with job.",
-    "exampleRus": "Пример с job."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2905,9 +2703,7 @@
       "должность"
     ],
     "correct": "должность",
-    "mastery": 0,
-    "exampleEng": "Example with post.",
-    "exampleRus": "Пример с post."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2950,9 +2746,7 @@
       "рекомендация"
     ],
     "correct": "рекомендация",
-    "mastery": 0,
-    "exampleEng": "Example with reference.",
-    "exampleRus": "Пример с reference."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2965,9 +2759,7 @@
       "кампания"
     ],
     "correct": "отклонять",
-    "mastery": 0,
-    "exampleEng": "Example with reject.",
-    "exampleRus": "Пример с reject."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -2980,9 +2772,7 @@
       "пересылать"
     ],
     "correct": "резюме",
-    "mastery": 0,
-    "exampleEng": "Example with resume.",
-    "exampleRus": "Пример с resume."
+    "mastery": 0
   },
   {
     "category": "Hiring",
@@ -3025,9 +2815,7 @@
       "комиссия"
     ],
     "correct": "комиссия",
-    "mastery": 0,
-    "exampleEng": "Example with commission.",
-    "exampleRus": "Пример с commission."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3055,9 +2843,7 @@
       "положение"
     ],
     "correct": "заработок",
-    "mastery": 0,
-    "exampleEng": "Example with earnings.",
-    "exampleRus": "Пример с earnings."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3070,9 +2856,7 @@
       "брутто"
     ],
     "correct": "брутто",
-    "mastery": 0,
-    "exampleEng": "Example with gross.",
-    "exampleRus": "Пример с gross."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3100,9 +2884,7 @@
       "убеждать"
     ],
     "correct": "прирост",
-    "mastery": 0,
-    "exampleEng": "Example with increment.",
-    "exampleRus": "Пример с increment."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3115,9 +2897,7 @@
       "контейнер"
     ],
     "correct": "нетто",
-    "mastery": 0,
-    "exampleEng": "Example with net.",
-    "exampleRus": "Пример с net."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3130,9 +2910,7 @@
       "подходящий"
     ],
     "correct": "платить",
-    "mastery": 0,
-    "exampleEng": "Example with pay.",
-    "exampleRus": "Пример с pay."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3145,9 +2923,7 @@
       "прибывать"
     ],
     "correct": "зарплата",
-    "mastery": 0,
-    "exampleEng": "Example with paycheck.",
-    "exampleRus": "Пример с paycheck."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3160,9 +2936,7 @@
       "платёжная ведомость"
     ],
     "correct": "платёжная ведомость",
-    "mastery": 0,
-    "exampleEng": "Example with payroll.",
-    "exampleRus": "Пример с payroll."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3175,9 +2949,7 @@
       "консьерж"
     ],
     "correct": "повышение",
-    "mastery": 0,
-    "exampleEng": "Example with raise.",
-    "exampleRus": "Пример с raise."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3190,9 +2962,7 @@
       "подходящий"
     ],
     "correct": "вознаграждение",
-    "mastery": 0,
-    "exampleEng": "Example with remuneration.",
-    "exampleRus": "Пример с remuneration."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3235,9 +3005,7 @@
       "зарплата"
     ],
     "correct": "зарплата",
-    "mastery": 0,
-    "exampleEng": "Example with wage.",
-    "exampleRus": "Пример с wage."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3250,9 +3018,7 @@
       "удерживать"
     ],
     "correct": "удерживать",
-    "mastery": 0,
-    "exampleEng": "Example with withhold.",
-    "exampleRus": "Пример с withhold."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3280,9 +3046,7 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0,
-    "exampleEng": "Example with exempt.",
-    "exampleRus": "Пример с exempt."
+    "mastery": 0
   },
   {
     "category": "Salaries",
@@ -3295,9 +3059,7 @@
       "в продаже"
     ],
     "correct": "минимальная зарплата",
-    "mastery": 0,
-    "exampleEng": "Example with minimum wage.",
-    "exampleRus": "Пример с minimum wage."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3310,9 +3072,7 @@
       "батарея"
     ],
     "correct": "достижение",
-    "mastery": 0,
-    "exampleEng": "Example with achievement.",
-    "exampleRus": "Пример с achievement."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3325,9 +3085,7 @@
       "продвижение"
     ],
     "correct": "продвижение",
-    "mastery": 0,
-    "exampleEng": "Example with advancement.",
-    "exampleRus": "Пример с advancement."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3340,9 +3098,7 @@
       "назначать"
     ],
     "correct": "назначать",
-    "mastery": 0,
-    "exampleEng": "Example with appoint.",
-    "exampleRus": "Пример с appoint."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3370,9 +3126,7 @@
       "бейдж"
     ],
     "correct": "полномочие",
-    "mastery": 0,
-    "exampleEng": "Example with authority.",
-    "exampleRus": "Пример с authority."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3400,9 +3154,7 @@
       "деликатес"
     ],
     "correct": "понижать",
-    "mastery": 0,
-    "exampleEng": "Example with demote.",
-    "exampleRus": "Пример с demote."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3415,9 +3167,7 @@
       "явный"
     ],
     "correct": "увольнять",
-    "mastery": 0,
-    "exampleEng": "Example with discharge.",
-    "exampleRus": "Пример с discharge."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3430,9 +3180,7 @@
       "увольнять"
     ],
     "correct": "увольнять",
-    "mastery": 0,
-    "exampleEng": "Example with dismiss.",
-    "exampleRus": "Пример с dismiss."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3490,9 +3238,7 @@
       "обновлять"
     ],
     "correct": "увольнять",
-    "mastery": 0,
-    "exampleEng": "Example with fire.",
-    "exampleRus": "Пример с fire."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3505,9 +3251,7 @@
       "тренер"
     ],
     "correct": "уволнять",
-    "mastery": 0,
-    "exampleEng": "Example with lay off.",
-    "exampleRus": "Пример с lay off."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3535,9 +3279,7 @@
       "допустимый"
     ],
     "correct": "мотивировать",
-    "mastery": 0,
-    "exampleEng": "Example with motivate.",
-    "exampleRus": "Пример с motivate."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3580,9 +3322,7 @@
       "консьерж"
     ],
     "correct": "повышение",
-    "mastery": 0,
-    "exampleEng": "Example with raise.",
-    "exampleRus": "Пример с raise."
+    "mastery": 0
   },
   {
     "category": "Promotions",
@@ -3625,9 +3365,7 @@
       "просматривать"
     ],
     "correct": "просматривать",
-    "mastery": 0,
-    "exampleEng": "Example with browse.",
-    "exampleRus": "Пример с browse."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3640,9 +3378,7 @@
       "усиливать"
     ],
     "correct": "оптом",
-    "mastery": 0,
-    "exampleEng": "Example with bulk.",
-    "exampleRus": "Пример с bulk."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3655,9 +3391,7 @@
       "корзина"
     ],
     "correct": "корзина",
-    "mastery": 0,
-    "exampleEng": "Example with cart.",
-    "exampleRus": "Пример с cart."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3670,9 +3404,7 @@
       "кассир"
     ],
     "correct": "кассир",
-    "mastery": 0,
-    "exampleEng": "Example with cashier.",
-    "exampleRus": "Пример с cashier."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3700,9 +3432,7 @@
       "вознаграждение"
     ],
     "correct": "распродажа",
-    "mastery": 0,
-    "exampleEng": "Example with close out.",
-    "exampleRus": "Пример с close out."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3715,9 +3445,7 @@
       "собираться"
     ],
     "correct": "купон",
-    "mastery": 0,
-    "exampleEng": "Example with coupon.",
-    "exampleRus": "Пример с coupon."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3760,9 +3488,7 @@
       "пошлина"
     ],
     "correct": "обмен",
-    "mastery": 0,
-    "exampleEng": "Example with exchange.",
-    "exampleRus": "Пример с exchange."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3775,9 +3501,7 @@
       "товар"
     ],
     "correct": "товар",
-    "mastery": 0,
-    "exampleEng": "Example with item.",
-    "exampleRus": "Пример с item."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3805,9 +3529,7 @@
       "причина"
     ],
     "correct": "уценивать",
-    "mastery": 0,
-    "exampleEng": "Example with mark down.",
-    "exampleRus": "Пример с mark down."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3820,9 +3542,7 @@
       "торговец"
     ],
     "correct": "торговец",
-    "mastery": 0,
-    "exampleEng": "Example with merchant.",
-    "exampleRus": "Пример с merchant."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3835,9 +3555,7 @@
       "прирост"
     ],
     "correct": "получать",
-    "mastery": 0,
-    "exampleEng": "Example with obtain.",
-    "exampleRus": "Пример с obtain."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3850,9 +3568,7 @@
       "в продаже"
     ],
     "correct": "в продаже",
-    "mastery": 0,
-    "exampleEng": "Example with on sale.",
-    "exampleRus": "Пример с on sale."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3865,9 +3581,7 @@
       "магазин"
     ],
     "correct": "магазин",
-    "mastery": 0,
-    "exampleEng": "Example with outlet.",
-    "exampleRus": "Пример с outlet."
+    "mastery": 0
   },
   {
     "category": "Shopping",
@@ -3895,9 +3609,7 @@
       "количество"
     ],
     "correct": "количество",
-    "mastery": 0,
-    "exampleEng": "Example with quantity.",
-    "exampleRus": "Пример с quantity."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -3910,9 +3622,7 @@
       "явный"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with acknowledge.",
-    "exampleRus": "Пример с acknowledge."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -3925,9 +3635,7 @@
       "бумажная копия"
     ],
     "correct": "адрес",
-    "mastery": 0,
-    "exampleEng": "Example with address.",
-    "exampleRus": "Пример с address."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -3955,9 +3663,7 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0,
-    "exampleEng": "Example with cancel.",
-    "exampleRus": "Пример с cancel."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -3985,9 +3691,7 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0,
-    "exampleEng": "Example with charge.",
-    "exampleRus": "Пример с charge."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4015,9 +3719,7 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with confirm.",
-    "exampleRus": "Пример с confirm."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4030,9 +3732,7 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0,
-    "exampleEng": "Example with consignment.",
-    "exampleRus": "Пример с consignment."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4075,9 +3775,7 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0,
-    "exampleEng": "Example with debit.",
-    "exampleRus": "Пример с debit."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4090,9 +3788,7 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0,
-    "exampleEng": "Example with deliver.",
-    "exampleRus": "Пример с deliver."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4135,9 +3831,7 @@
       "капитал"
     ],
     "correct": "отправлять",
-    "mastery": 0,
-    "exampleEng": "Example with dispatch.",
-    "exampleRus": "Пример с dispatch."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4150,9 +3844,7 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0,
-    "exampleEng": "Example with estimate.",
-    "exampleRus": "Пример с estimate."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4165,9 +3857,7 @@
       "строительство"
     ],
     "correct": "ускорять",
-    "mastery": 0,
-    "exampleEng": "Example with expedite.",
-    "exampleRus": "Пример с expedite."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4180,9 +3870,7 @@
       "заполнять"
     ],
     "correct": "заполнять",
-    "mastery": 0,
-    "exampleEng": "Example with fill.",
-    "exampleRus": "Пример с fill."
+    "mastery": 0
   },
   {
     "category": "Ordering Supplies",
@@ -4210,9 +3898,7 @@
       "бумажная копия"
     ],
     "correct": "адрес",
-    "mastery": 0,
-    "exampleEng": "Example with address.",
-    "exampleRus": "Пример с address."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4225,9 +3911,7 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrive.",
-    "exampleRus": "Пример с arrive."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4240,9 +3924,7 @@
       "внимание"
     ],
     "correct": "внимание",
-    "mastery": 0,
-    "exampleEng": "Example with attention.",
-    "exampleRus": "Пример с attention."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4255,9 +3937,7 @@
       "скачивать"
     ],
     "correct": "накладная",
-    "mastery": 0,
-    "exampleEng": "Example with bill of lading.",
-    "exampleRus": "Пример с bill of lading."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4270,9 +3950,7 @@
       "пароль"
     ],
     "correct": "коробка",
-    "mastery": 0,
-    "exampleEng": "Example with box.",
-    "exampleRus": "Пример с box."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4285,9 +3963,7 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0,
-    "exampleEng": "Example with carrier.",
-    "exampleRus": "Пример с carrier."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4300,9 +3976,7 @@
       "дискреционный"
     ],
     "correct": "коробка",
-    "mastery": 0,
-    "exampleEng": "Example with carton.",
-    "exampleRus": "Пример с carton."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4330,9 +4004,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4345,9 +4017,7 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0,
-    "exampleEng": "Example with classify.",
-    "exampleRus": "Пример с classify."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4360,9 +4030,7 @@
       "надежный"
     ],
     "correct": "грузополучатель",
-    "mastery": 0,
-    "exampleEng": "Example with consignee.",
-    "exampleRus": "Пример с consignee."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4375,9 +4043,7 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0,
-    "exampleEng": "Example with consignment.",
-    "exampleRus": "Пример с consignment."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4390,9 +4056,7 @@
       "оценивать"
     ],
     "correct": "контейнер",
-    "mastery": 0,
-    "exampleEng": "Example with container.",
-    "exampleRus": "Пример с container."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4405,9 +4069,7 @@
       "местоположение"
     ],
     "correct": "курьер",
-    "mastery": 0,
-    "exampleEng": "Example with courier.",
-    "exampleRus": "Пример с courier."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4420,9 +4082,7 @@
       "действительный"
     ],
     "correct": "ящик",
-    "mastery": 0,
-    "exampleEng": "Example with crate.",
-    "exampleRus": "Пример с crate."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4435,9 +4095,7 @@
       "продлевать"
     ],
     "correct": "таможня",
-    "mastery": 0,
-    "exampleEng": "Example with customs.",
-    "exampleRus": "Пример с customs."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4450,9 +4108,7 @@
       "доставлять"
     ],
     "correct": "доставлять",
-    "mastery": 0,
-    "exampleEng": "Example with deliver.",
-    "exampleRus": "Пример с deliver."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4465,9 +4121,7 @@
       "развлечение"
     ],
     "correct": "диспетчер",
-    "mastery": 0,
-    "exampleEng": "Example with dispatcher.",
-    "exampleRus": "Пример с dispatcher."
+    "mastery": 0
   },
   {
     "category": "Shipping",
@@ -4510,9 +4164,7 @@
       "явный"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with acknowledge.",
-    "exampleRus": "Пример с acknowledge."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4525,9 +4177,7 @@
       "просматривать"
     ],
     "correct": "точный",
-    "mastery": 0,
-    "exampleEng": "Example with accurate.",
-    "exampleRus": "Пример с accurate."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4540,9 +4190,7 @@
       "задолженность"
     ],
     "correct": "задолженность",
-    "mastery": 0,
-    "exampleEng": "Example with arrear.",
-    "exampleRus": "Пример с arrear."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4600,9 +4248,7 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0,
-    "exampleEng": "Example with charge.",
-    "exampleRus": "Пример с charge."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4630,9 +4276,7 @@
       "собирать"
     ],
     "correct": "собирать",
-    "mastery": 0,
-    "exampleEng": "Example with collect.",
-    "exampleRus": "Пример с collect."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4645,9 +4289,7 @@
       "подключать"
     ],
     "correct": "консолидировать",
-    "mastery": 0,
-    "exampleEng": "Example with consolidate.",
-    "exampleRus": "Пример с consolidate."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4675,9 +4317,7 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0,
-    "exampleEng": "Example with debit.",
-    "exampleRus": "Пример с debit."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4690,9 +4330,7 @@
       "аварийный комиссар"
     ],
     "correct": "деталь",
-    "mastery": 0,
-    "exampleEng": "Example with detail.",
-    "exampleRus": "Пример с detail."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4720,9 +4358,7 @@
       "дефект"
     ],
     "correct": "подлежащий",
-    "mastery": 0,
-    "exampleEng": "Example with due.",
-    "exampleRus": "Пример с due."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4735,9 +4371,7 @@
       "пошлина"
     ],
     "correct": "пошлина",
-    "mastery": 0,
-    "exampleEng": "Example with duty.",
-    "exampleRus": "Пример с duty."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4750,9 +4384,7 @@
       "оптом"
     ],
     "correct": "оценивать",
-    "mastery": 0,
-    "exampleEng": "Example with estimate.",
-    "exampleRus": "Пример с estimate."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4765,9 +4397,7 @@
       "пароль"
     ],
     "correct": "плата",
-    "mastery": 0,
-    "exampleEng": "Example with fee.",
-    "exampleRus": "Пример с fee."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4780,9 +4410,7 @@
       "цифра"
     ],
     "correct": "цифра",
-    "mastery": 0,
-    "exampleEng": "Example with figure.",
-    "exampleRus": "Пример с figure."
+    "mastery": 0
   },
   {
     "category": "Invoices",
@@ -4795,9 +4423,7 @@
       "банк"
     ],
     "correct": "финансы",
-    "mastery": 0,
-    "exampleEng": "Example with finance.",
-    "exampleRus": "Пример с finance."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4810,9 +4436,7 @@
       "просматривать"
     ],
     "correct": "точный",
-    "mastery": 0,
-    "exampleEng": "Example with accurate.",
-    "exampleRus": "Пример с accurate."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4825,9 +4449,7 @@
       "достаточный"
     ],
     "correct": "достаточный",
-    "mastery": 0,
-    "exampleEng": "Example with adequate.",
-    "exampleRus": "Пример с adequate."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4840,9 +4462,7 @@
       "корректировка"
     ],
     "correct": "корректировка",
-    "mastery": 0,
-    "exampleEng": "Example with adjustment.",
-    "exampleRus": "Пример с adjustment."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4870,9 +4490,7 @@
       "рекламировать"
     ],
     "correct": "задел",
-    "mastery": 0,
-    "exampleEng": "Example with backlog.",
-    "exampleRus": "Пример с backlog."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4885,9 +4503,7 @@
       "усиливать"
     ],
     "correct": "оптом",
-    "mastery": 0,
-    "exampleEng": "Example with bulk.",
-    "exampleRus": "Пример с bulk."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4900,9 +4516,7 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0,
-    "exampleEng": "Example with carrier.",
-    "exampleRus": "Пример с carrier."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4930,9 +4544,7 @@
       "подлежащий"
     ],
     "correct": "завершать",
-    "mastery": 0,
-    "exampleEng": "Example with complete.",
-    "exampleRus": "Пример с complete."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4945,9 +4557,7 @@
       "концерт"
     ],
     "correct": "партия",
-    "mastery": 0,
-    "exampleEng": "Example with consignment.",
-    "exampleRus": "Пример с consignment."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4960,9 +4570,7 @@
       "строительство"
     ],
     "correct": "считать",
-    "mastery": 0,
-    "exampleEng": "Example with count.",
-    "exampleRus": "Пример с count."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4975,9 +4583,7 @@
       "записываться"
     ],
     "correct": "уменьшать",
-    "mastery": 0,
-    "exampleEng": "Example with decrease.",
-    "exampleRus": "Пример с decrease."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -4990,9 +4596,7 @@
       "дефектный"
     ],
     "correct": "дефектный",
-    "mastery": 0,
-    "exampleEng": "Example with defective.",
-    "exampleRus": "Пример с defective."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -5020,9 +4624,7 @@
       "спрос"
     ],
     "correct": "спрос",
-    "mastery": 0,
-    "exampleEng": "Example with demand.",
-    "exampleRus": "Пример с demand."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -5035,9 +4637,7 @@
       "уменьшать"
     ],
     "correct": "уменьшать",
-    "mastery": 0,
-    "exampleEng": "Example with diminish.",
-    "exampleRus": "Пример с diminish."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -5050,9 +4650,7 @@
       "капитал"
     ],
     "correct": "отправлять",
-    "mastery": 0,
-    "exampleEng": "Example with dispatch.",
-    "exampleRus": "Пример с dispatch."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -5065,9 +4663,7 @@
       "долг"
     ],
     "correct": "распределять",
-    "mastery": 0,
-    "exampleEng": "Example with distribute.",
-    "exampleRus": "Пример с distribute."
+    "mastery": 0
   },
   {
     "category": "Inventory",
@@ -5095,9 +4691,7 @@
       "излишек"
     ],
     "correct": "излишек",
-    "mastery": 0,
-    "exampleEng": "Example with excess.",
-    "exampleRus": "Пример с excess."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5155,9 +4749,7 @@
       "опыт"
     ],
     "correct": "банк",
-    "mastery": 0,
-    "exampleEng": "Example with bank.",
-    "exampleRus": "Пример с bank."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5170,9 +4762,7 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0,
-    "exampleEng": "Example with bankruptcy.",
-    "exampleRus": "Пример с bankruptcy."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5290,9 +4880,7 @@
       "залог"
     ],
     "correct": "залог",
-    "mastery": 0,
-    "exampleEng": "Example with collateral.",
-    "exampleRus": "Пример с collateral."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5305,9 +4893,7 @@
       "обязываться"
     ],
     "correct": "обязываться",
-    "mastery": 0,
-    "exampleEng": "Example with commit.",
-    "exampleRus": "Пример с commit."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5320,9 +4906,7 @@
       "компенсировать"
     ],
     "correct": "компенсировать",
-    "mastery": 0,
-    "exampleEng": "Example with compensate.",
-    "exampleRus": "Пример с compensate."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5365,9 +4949,7 @@
       "валюта"
     ],
     "correct": "валюта",
-    "mastery": 0,
-    "exampleEng": "Example with currency.",
-    "exampleRus": "Пример с currency."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5380,9 +4962,7 @@
       "подход"
     ],
     "correct": "дебет",
-    "mastery": 0,
-    "exampleEng": "Example with debit.",
-    "exampleRus": "Пример с debit."
+    "mastery": 0
   },
   {
     "category": "Banking",
@@ -5395,9 +4975,7 @@
       "долг"
     ],
     "correct": "долг",
-    "mastery": 0,
-    "exampleEng": "Example with debt.",
-    "exampleRus": "Пример с debt."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5425,9 +5003,7 @@
       "классифицировать"
     ],
     "correct": "начисляться",
-    "mastery": 0,
-    "exampleEng": "Example with accrue.",
-    "exampleRus": "Пример с accrue."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5440,9 +5016,7 @@
       "накапливать"
     ],
     "correct": "накапливать",
-    "mastery": 0,
-    "exampleEng": "Example with accumulate.",
-    "exampleRus": "Пример с accumulate."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5470,9 +5044,7 @@
       "вычет"
     ],
     "correct": "распределение",
-    "mastery": 0,
-    "exampleEng": "Example with allocation.",
-    "exampleRus": "Пример с allocation."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5485,9 +5057,7 @@
       "празднование"
     ],
     "correct": "пособие",
-    "mastery": 0,
-    "exampleEng": "Example with allowance.",
-    "exampleRus": "Пример с allowance."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5500,9 +5070,7 @@
       "переписка"
     ],
     "correct": "амортизировать",
-    "mastery": 0,
-    "exampleEng": "Example with amortize.",
-    "exampleRus": "Пример с amortize."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5530,9 +5098,7 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0,
-    "exampleEng": "Example with assessment.",
-    "exampleRus": "Пример с assessment."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5575,9 +5141,7 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0,
-    "exampleEng": "Example with bankruptcy.",
-    "exampleRus": "Пример с bankruptcy."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5635,9 +5199,7 @@
       "стратегия"
     ],
     "correct": "денежный поток",
-    "mastery": 0,
-    "exampleEng": "Example with cash flow.",
-    "exampleRus": "Пример с cash flow."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5650,9 +5212,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5665,9 +5225,7 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0,
-    "exampleEng": "Example with classify.",
-    "exampleRus": "Пример с classify."
+    "mastery": 0
   },
   {
     "category": "Accounting",
@@ -5695,9 +5253,7 @@
       "цель"
     ],
     "correct": "сложный",
-    "mastery": 0,
-    "exampleEng": "Example with compound.",
-    "exampleRus": "Пример с compound."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5725,9 +5281,7 @@
       "оценивать"
     ],
     "correct": "оценивать",
-    "mastery": 0,
-    "exampleEng": "Example with appreciate.",
-    "exampleRus": "Пример с appreciate."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5770,9 +5324,7 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0,
-    "exampleEng": "Example with broker.",
-    "exampleRus": "Пример с broker."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5800,9 +5352,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5815,9 +5365,7 @@
       "комиссия"
     ],
     "correct": "комиссия",
-    "mastery": 0,
-    "exampleEng": "Example with commission.",
-    "exampleRus": "Пример с commission."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5830,9 +5378,7 @@
       "цель"
     ],
     "correct": "сложный",
-    "mastery": 0,
-    "exampleEng": "Example with compound.",
-    "exampleRus": "Пример с compound."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5845,9 +5391,7 @@
       "кабель"
     ],
     "correct": "конвертируемый",
-    "mastery": 0,
-    "exampleEng": "Example with convertible.",
-    "exampleRus": "Пример с convertible."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5860,9 +5404,7 @@
       "брокер"
     ],
     "correct": "снижаться",
-    "mastery": 0,
-    "exampleEng": "Example with decline.",
-    "exampleRus": "Пример с decline."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5875,9 +5417,7 @@
       "внедрять"
     ],
     "correct": "отложенный",
-    "mastery": 0,
-    "exampleEng": "Example with deferred.",
-    "exampleRus": "Пример с deferred."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5905,9 +5445,7 @@
       "обесцениваться"
     ],
     "correct": "обесцениваться",
-    "mastery": 0,
-    "exampleEng": "Example with depreciate.",
-    "exampleRus": "Пример с depreciate."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5920,9 +5458,7 @@
       "налогоплательщик"
     ],
     "correct": "диверсифицировать",
-    "mastery": 0,
-    "exampleEng": "Example with diversify.",
-    "exampleRus": "Пример с diversify."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5950,9 +5486,7 @@
       "вводить"
     ],
     "correct": "доллар",
-    "mastery": 0,
-    "exampleEng": "Example with dollar.",
-    "exampleRus": "Пример с dollar."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5965,9 +5499,7 @@
       "спад"
     ],
     "correct": "спад",
-    "mastery": 0,
-    "exampleEng": "Example with downturn.",
-    "exampleRus": "Пример с downturn."
+    "mastery": 0
   },
   {
     "category": "Investments",
@@ -5995,9 +5527,7 @@
       "приоритет"
     ],
     "correct": "колебаться",
-    "mastery": 0,
-    "exampleEng": "Example with fluctuate.",
-    "exampleRus": "Пример с fluctuate."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6025,9 +5555,7 @@
       "классифицировать"
     ],
     "correct": "начисляться",
-    "mastery": 0,
-    "exampleEng": "Example with accrue.",
-    "exampleRus": "Пример с accrue."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6040,9 +5568,7 @@
       "накапливать"
     ],
     "correct": "накапливать",
-    "mastery": 0,
-    "exampleEng": "Example with accumulate.",
-    "exampleRus": "Пример с accumulate."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6055,9 +5581,7 @@
       "корректировка"
     ],
     "correct": "корректировка",
-    "mastery": 0,
-    "exampleEng": "Example with adjustment.",
-    "exampleRus": "Пример с adjustment."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6070,9 +5594,7 @@
       "переписка"
     ],
     "correct": "амортизировать",
-    "mastery": 0,
-    "exampleEng": "Example with amortize.",
-    "exampleRus": "Пример с amortize."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6100,9 +5622,7 @@
       "годовой"
     ],
     "correct": "годовой",
-    "mastery": 0,
-    "exampleEng": "Example with annual.",
-    "exampleRus": "Пример с annual."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6115,9 +5635,7 @@
       "оценивать"
     ],
     "correct": "оценивать",
-    "mastery": 0,
-    "exampleEng": "Example with appreciate.",
-    "exampleRus": "Пример с appreciate."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6175,9 +5693,7 @@
       "банкротство"
     ],
     "correct": "банкротство",
-    "mastery": 0,
-    "exampleEng": "Example with bankruptcy.",
-    "exampleRus": "Пример с bankruptcy."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6235,9 +5751,7 @@
       "стратегия"
     ],
     "correct": "денежный поток",
-    "mastery": 0,
-    "exampleEng": "Example with cash flow.",
-    "exampleRus": "Пример с cash flow."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6250,9 +5764,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6265,9 +5777,7 @@
       "заполнять"
     ],
     "correct": "классифицировать",
-    "mastery": 0,
-    "exampleEng": "Example with classify.",
-    "exampleRus": "Пример с classify."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6280,9 +5790,7 @@
       "подключать"
     ],
     "correct": "консолидировать",
-    "mastery": 0,
-    "exampleEng": "Example with consolidate.",
-    "exampleRus": "Пример с consolidate."
+    "mastery": 0
   },
   {
     "category": "Financial Statements",
@@ -6325,9 +5833,7 @@
       "вставлять"
     ],
     "correct": "оценка",
-    "mastery": 0,
-    "exampleEng": "Example with assessment.",
-    "exampleRus": "Пример с assessment."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6370,9 +5876,7 @@
       "файл"
     ],
     "correct": "скобка",
-    "mastery": 0,
-    "exampleEng": "Example with bracket.",
-    "exampleRus": "Пример с bracket."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6445,9 +5949,7 @@
       "назначать"
     ],
     "correct": "зависеть",
-    "mastery": 0,
-    "exampleEng": "Example with depend.",
-    "exampleRus": "Пример с depend."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6460,9 +5962,7 @@
       "обесцениваться"
     ],
     "correct": "обесцениваться",
-    "mastery": 0,
-    "exampleEng": "Example with depreciate.",
-    "exampleRus": "Пример с depreciate."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6475,9 +5975,7 @@
       "развлечение"
     ],
     "correct": "дискреционный",
-    "mastery": 0,
-    "exampleEng": "Example with discretionary.",
-    "exampleRus": "Пример с discretionary."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6505,9 +6003,7 @@
       "мышка"
     ],
     "correct": "электронная сдача",
-    "mastery": 0,
-    "exampleEng": "Example with e-file.",
-    "exampleRus": "Пример с e-file."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6520,9 +6016,7 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0,
-    "exampleEng": "Example with exempt.",
-    "exampleRus": "Пример с exempt."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6535,9 +6029,7 @@
       "комфорт"
     ],
     "correct": "освобождение",
-    "mastery": 0,
-    "exampleEng": "Example with exemption.",
-    "exampleRus": "Пример с exemption."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6565,9 +6057,7 @@
       "начало"
     ],
     "correct": "налогоплательщик",
-    "mastery": 0,
-    "exampleEng": "Example with filer.",
-    "exampleRus": "Пример с filer."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6580,9 +6070,7 @@
       "рекомендация"
     ],
     "correct": "подача",
-    "mastery": 0,
-    "exampleEng": "Example with filing.",
-    "exampleRus": "Пример с filing."
+    "mastery": 0
   },
   {
     "category": "Taxes",
@@ -6595,9 +6083,7 @@
       "стратегия"
     ],
     "correct": "правительство",
-    "mastery": 0,
-    "exampleEng": "Example with government.",
-    "exampleRus": "Пример с government."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6640,9 +6126,7 @@
       "продлевать"
     ],
     "correct": "смежный",
-    "mastery": 0,
-    "exampleEng": "Example with adjacent.",
-    "exampleRus": "Пример с adjacent."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6655,9 +6139,7 @@
       "удобство"
     ],
     "correct": "удобство",
-    "mastery": 0,
-    "exampleEng": "Example with amenity.",
-    "exampleRus": "Пример с amenity."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6670,9 +6152,7 @@
       "оценка"
     ],
     "correct": "оценка",
-    "mastery": 0,
-    "exampleEng": "Example with appraisal.",
-    "exampleRus": "Пример с appraisal."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6685,9 +6165,7 @@
       "доллар"
     ],
     "correct": "подходящий",
-    "mastery": 0,
-    "exampleEng": "Example with appropriate.",
-    "exampleRus": "Пример с appropriate."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6715,9 +6193,7 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0,
-    "exampleEng": "Example with broker.",
-    "exampleRus": "Пример с broker."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6745,9 +6221,7 @@
       "условие"
     ],
     "correct": "условие",
-    "mastery": 0,
-    "exampleEng": "Example with condition.",
-    "exampleRus": "Пример с condition."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6760,9 +6234,7 @@
       "кредит"
     ],
     "correct": "строительство",
-    "mastery": 0,
-    "exampleEng": "Example with construction.",
-    "exampleRus": "Пример с construction."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6775,9 +6247,7 @@
       "смежный"
     ],
     "correct": "подрядчик",
-    "mastery": 0,
-    "exampleEng": "Example with contractor.",
-    "exampleRus": "Пример с contractor."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6790,9 +6260,7 @@
       "авиакомпания"
     ],
     "correct": "документ",
-    "mastery": 0,
-    "exampleEng": "Example with deed.",
-    "exampleRus": "Пример с deed."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6820,9 +6288,7 @@
       "бронировать"
     ],
     "correct": "жилище",
-    "mastery": 0,
-    "exampleEng": "Example with dwelling.",
-    "exampleRus": "Пример с dwelling."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6835,9 +6301,7 @@
       "адвокат"
     ],
     "correct": "имущество",
-    "mastery": 0,
-    "exampleEng": "Example with estate.",
-    "exampleRus": "Пример с estate."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6850,9 +6314,7 @@
       "сертифицировать"
     ],
     "correct": "выселение",
-    "mastery": 0,
-    "exampleEng": "Example with eviction.",
-    "exampleRus": "Пример с eviction."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6880,9 +6342,7 @@
       "банк"
     ],
     "correct": "финансы",
-    "mastery": 0,
-    "exampleEng": "Example with finance.",
-    "exampleRus": "Пример с finance."
+    "mastery": 0
   },
   {
     "category": "Property & Real Estate",
@@ -6895,9 +6355,7 @@
       "меблировать"
     ],
     "correct": "меблировать",
-    "mastery": 0,
-    "exampleEng": "Example with furnish.",
-    "exampleRus": "Пример с furnish."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -6910,9 +6368,7 @@
       "актуарий"
     ],
     "correct": "актуарий",
-    "mastery": 0,
-    "exampleEng": "Example with actuary.",
-    "exampleRus": "Пример с actuary."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -6925,9 +6381,7 @@
       "аварийный комиссар"
     ],
     "correct": "аварийный комиссар",
-    "mastery": 0,
-    "exampleEng": "Example with adjuster.",
-    "exampleRus": "Пример с adjuster."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -6940,9 +6394,7 @@
       "делегирование"
     ],
     "correct": "неблагоприятный",
-    "mastery": 0,
-    "exampleEng": "Example with adverse.",
-    "exampleRus": "Пример с adverse."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -6970,9 +6422,7 @@
       "оценка"
     ],
     "correct": "оценка",
-    "mastery": 0,
-    "exampleEng": "Example with appraisal.",
-    "exampleRus": "Пример с appraisal."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7030,9 +6480,7 @@
       "оценивать"
     ],
     "correct": "брокер",
-    "mastery": 0,
-    "exampleEng": "Example with broker.",
-    "exampleRus": "Пример с broker."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7045,9 +6493,7 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0,
-    "exampleEng": "Example with cancel.",
-    "exampleRus": "Пример с cancel."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7060,9 +6506,7 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0,
-    "exampleEng": "Example with carrier.",
-    "exampleRus": "Пример с carrier."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7120,9 +6564,7 @@
       "ущерб"
     ],
     "correct": "ущерб",
-    "mastery": 0,
-    "exampleEng": "Example with damage.",
-    "exampleRus": "Пример с damage."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7150,9 +6592,7 @@
       "ущерб"
     ],
     "correct": "ущерб",
-    "mastery": 0,
-    "exampleEng": "Example with detriment.",
-    "exampleRus": "Пример с detriment."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7165,9 +6605,7 @@
       "интервью"
     ],
     "correct": "нетрудоспособность",
-    "mastery": 0,
-    "exampleEng": "Example with disability.",
-    "exampleRus": "Пример с disability."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7180,9 +6618,7 @@
       "ENDORSE"
     ],
     "correct": "ENDORSE",
-    "mastery": 0,
-    "exampleEng": "Example with endorse.",
-    "exampleRus": "Пример с endorse."
+    "mastery": 0
   },
   {
     "category": "Insurance",
@@ -7195,9 +6631,7 @@
       "арома"
     ],
     "correct": "освобождённый",
-    "mastery": 0,
-    "exampleEng": "Example with exempt.",
-    "exampleRus": "Пример с exempt."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7225,9 +6659,7 @@
       "скидка"
     ],
     "correct": "обвинять",
-    "mastery": 0,
-    "exampleEng": "Example with accuse.",
-    "exampleRus": "Пример с accuse."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7240,9 +6672,7 @@
       "зал"
     ],
     "correct": "судить",
-    "mastery": 0,
-    "exampleEng": "Example with adjudicate.",
-    "exampleRus": "Пример с adjudicate."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7255,9 +6685,7 @@
       "допустимый"
     ],
     "correct": "допустимый",
-    "mastery": 0,
-    "exampleEng": "Example with admissible.",
-    "exampleRus": "Пример с admissible."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7270,9 +6698,7 @@
       "бронировать"
     ],
     "correct": "аффидевит",
-    "mastery": 0,
-    "exampleEng": "Example with affidavit.",
-    "exampleRus": "Пример с affidavit."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7285,9 +6711,7 @@
       "задел"
     ],
     "correct": "утверждать",
-    "mastery": 0,
-    "exampleEng": "Example with allege.",
-    "exampleRus": "Пример с allege."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7315,9 +6739,7 @@
       "финансы"
     ],
     "correct": "аннулировать",
-    "mastery": 0,
-    "exampleEng": "Example with annul.",
-    "exampleRus": "Пример с annul."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7330,9 +6752,7 @@
       "кабель"
     ],
     "correct": "апеллировать",
-    "mastery": 0,
-    "exampleEng": "Example with appeal.",
-    "exampleRus": "Пример с appeal."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7345,9 +6765,7 @@
       "деталь"
     ],
     "correct": "применимый",
-    "mastery": 0,
-    "exampleEng": "Example with applicable.",
-    "exampleRus": "Пример с applicable."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7390,9 +6808,7 @@
       "обязательный"
     ],
     "correct": "обязательный",
-    "mastery": 0,
-    "exampleEng": "Example with binding.",
-    "exampleRus": "Пример с binding."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7405,9 +6821,7 @@
       "розничная торговля"
     ],
     "correct": "нарушение",
-    "mastery": 0,
-    "exampleEng": "Example with breach.",
-    "exampleRus": "Пример с breach."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7420,9 +6834,7 @@
       "каталог"
     ],
     "correct": "инструктировать",
-    "mastery": 0,
-    "exampleEng": "Example with brief.",
-    "exampleRus": "Пример с brief."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7435,9 +6847,7 @@
       "уценивать"
     ],
     "correct": "дело",
-    "mastery": 0,
-    "exampleEng": "Example with case.",
-    "exampleRus": "Пример с case."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7450,9 +6860,7 @@
       "прирост"
     ],
     "correct": "причина",
-    "mastery": 0,
-    "exampleEng": "Example with cause.",
-    "exampleRus": "Пример с cause."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7465,9 +6873,7 @@
       "закрывать"
     ],
     "correct": "сертифицировать",
-    "mastery": 0,
-    "exampleEng": "Example with certify.",
-    "exampleRus": "Пример с certify."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7480,9 +6886,7 @@
       "отклонять"
     ],
     "correct": "гражданский",
-    "mastery": 0,
-    "exampleEng": "Example with civil.",
-    "exampleRus": "Пример с civil."
+    "mastery": 0
   },
   {
     "category": "Legal",
@@ -7495,9 +6899,7 @@
       "управлять"
     ],
     "correct": "пункт",
-    "mastery": 0,
-    "exampleEng": "Example with clause.",
-    "exampleRus": "Пример с clause."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7540,9 +6942,7 @@
       "стоимость авиабилета"
     ],
     "correct": "стоимость авиабилета",
-    "mastery": 0,
-    "exampleEng": "Example with airfare.",
-    "exampleRus": "Пример с airfare."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7555,9 +6955,7 @@
       "выезд"
     ],
     "correct": "аллергия",
-    "mastery": 0,
-    "exampleEng": "Example with allergy.",
-    "exampleRus": "Пример с allergy."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7570,9 +6968,7 @@
       "соглашение"
     ],
     "correct": "высота",
-    "mastery": 0,
-    "exampleEng": "Example with altitude.",
-    "exampleRus": "Пример с altitude."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7585,9 +6981,7 @@
       "подходящий"
     ],
     "correct": "район",
-    "mastery": 0,
-    "exampleEng": "Example with area.",
-    "exampleRus": "Пример с area."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7600,9 +6994,7 @@
       "цифра"
     ],
     "correct": "прибытие",
-    "mastery": 0,
-    "exampleEng": "Example with arrival.",
-    "exampleRus": "Пример с arrival."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7615,9 +7007,7 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrive.",
-    "exampleRus": "Пример с arrive."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7630,9 +7020,7 @@
       "кандидат"
     ],
     "correct": "багаж",
-    "mastery": 0,
-    "exampleEng": "Example with baggage.",
-    "exampleRus": "Пример с baggage."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7645,9 +7033,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7660,9 +7046,7 @@
       "посадка"
     ],
     "correct": "граница",
-    "mastery": 0,
-    "exampleEng": "Example with border.",
-    "exampleRus": "Пример с border."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7675,9 +7059,7 @@
       "посадочный талон"
     ],
     "correct": "посадочный талон",
-    "mastery": 0,
-    "exampleEng": "Example with boarding pass.",
-    "exampleRus": "Пример с boarding pass."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7690,9 +7072,7 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0,
-    "exampleEng": "Example with carrier.",
-    "exampleRus": "Пример с carrier."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7705,9 +7085,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7765,9 +7143,7 @@
       "отменять"
     ],
     "correct": "комфорт",
-    "mastery": 0,
-    "exampleEng": "Example with comfort.",
-    "exampleRus": "Пример с comfort."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7780,9 +7156,7 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with confirm.",
-    "exampleRus": "Пример с confirm."
+    "mastery": 0
   },
   {
     "category": "Travel",
@@ -7795,9 +7169,7 @@
       "подтверждение"
     ],
     "correct": "подтверждение",
-    "mastery": 0,
-    "exampleEng": "Example with confirmation.",
-    "exampleRus": "Пример с confirmation."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7825,9 +7197,7 @@
       "удобство"
     ],
     "correct": "удобство",
-    "mastery": 0,
-    "exampleEng": "Example with amenity.",
-    "exampleRus": "Пример с amenity."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7840,9 +7210,7 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrange.",
-    "exampleRus": "Пример с arrange."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7855,9 +7223,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7870,9 +7236,7 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0,
-    "exampleEng": "Example with cancel.",
-    "exampleRus": "Пример с cancel."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7930,9 +7294,7 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with confirm.",
-    "exampleRus": "Пример с confirm."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7945,9 +7307,7 @@
       "запускать"
     ],
     "correct": "детская кроватка",
-    "mastery": 0,
-    "exampleEng": "Example with cot.",
-    "exampleRus": "Пример с cot."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -7960,9 +7320,7 @@
       "любезность"
     ],
     "correct": "любезность",
-    "mastery": 0,
-    "exampleEng": "Example with courtesy.",
-    "exampleRus": "Пример с courtesy."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -8020,9 +7378,7 @@
       "стойка регистрации"
     ],
     "correct": "стойка регистрации",
-    "mastery": 0,
-    "exampleEng": "Example with front desk.",
-    "exampleRus": "Пример с front desk."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -8065,9 +7421,7 @@
       "ездить на работу"
     ],
     "correct": "принимать",
-    "mastery": 0,
-    "exampleEng": "Example with host.",
-    "exampleRus": "Пример с host."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -8080,9 +7434,7 @@
       "явный"
     ],
     "correct": "хостел",
-    "mastery": 0,
-    "exampleEng": "Example with hostel.",
-    "exampleRus": "Пример с hostel."
+    "mastery": 0
   },
   {
     "category": "Hotels",
@@ -8095,9 +7447,7 @@
       "циркулировать"
     ],
     "correct": "гостиница",
-    "mastery": 0,
-    "exampleEng": "Example with inn.",
-    "exampleRus": "Пример с inn."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8125,9 +7475,7 @@
       "прибывать"
     ],
     "correct": "проход",
-    "mastery": 0,
-    "exampleEng": "Example with aisle.",
-    "exampleRus": "Пример с aisle."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8155,9 +7503,7 @@
       "цифра"
     ],
     "correct": "прибытие",
-    "mastery": 0,
-    "exampleEng": "Example with arrival.",
-    "exampleRus": "Пример с arrival."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8170,9 +7516,7 @@
       "прибывать"
     ],
     "correct": "прибывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrive.",
-    "exampleRus": "Пример с arrive."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8185,9 +7529,7 @@
       "собирать"
     ],
     "correct": "собирать",
-    "mastery": 0,
-    "exampleEng": "Example with assemble.",
-    "exampleRus": "Пример с assemble."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8200,9 +7542,7 @@
       "достижение"
     ],
     "correct": "сборка",
-    "mastery": 0,
-    "exampleEng": "Example with assembly.",
-    "exampleRus": "Пример с assembly."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8215,9 +7555,7 @@
       "кандидат"
     ],
     "correct": "багаж",
-    "mastery": 0,
-    "exampleEng": "Example with baggage.",
-    "exampleRus": "Пример с baggage."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8230,9 +7568,7 @@
       "сажаться"
     ],
     "correct": "сажаться",
-    "mastery": 0,
-    "exampleEng": "Example with board.",
-    "exampleRus": "Пример с board."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8245,9 +7581,7 @@
       "посадка"
     ],
     "correct": "посадка",
-    "mastery": 0,
-    "exampleEng": "Example with boarding.",
-    "exampleRus": "Пример с boarding."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8260,9 +7594,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8275,9 +7607,7 @@
       "квалификация"
     ],
     "correct": "отменять",
-    "mastery": 0,
-    "exampleEng": "Example with cancel.",
-    "exampleRus": "Пример с cancel."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8290,9 +7620,7 @@
       "перевозчик"
     ],
     "correct": "перевозчик",
-    "mastery": 0,
-    "exampleEng": "Example with carrier.",
-    "exampleRus": "Пример с carrier."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8305,9 +7633,7 @@
       "переносить"
     ],
     "correct": "переносить",
-    "mastery": 0,
-    "exampleEng": "Example with carry.",
-    "exampleRus": "Пример с carry."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8320,9 +7646,7 @@
       "прокручивать"
     ],
     "correct": "циркулировать",
-    "mastery": 0,
-    "exampleEng": "Example with circulate.",
-    "exampleRus": "Пример с circulate."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8335,9 +7659,7 @@
       "инструктировать"
     ],
     "correct": "ездить на работу",
-    "mastery": 0,
-    "exampleEng": "Example with commute.",
-    "exampleRus": "Пример с commute."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8350,9 +7672,7 @@
       "правительство"
     ],
     "correct": "пассажир",
-    "mastery": 0,
-    "exampleEng": "Example with commuter.",
-    "exampleRus": "Пример с commuter."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8365,9 +7685,7 @@
       "участник"
     ],
     "correct": "подтверждать",
-    "mastery": 0,
-    "exampleEng": "Example with confirm.",
-    "exampleRus": "Пример с confirm."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8380,9 +7698,7 @@
       "вычет"
     ],
     "correct": "затор",
-    "mastery": 0,
-    "exampleEng": "Example with congestion.",
-    "exampleRus": "Пример с congestion."
+    "mastery": 0
   },
   {
     "category": "Transportation",
@@ -8410,9 +7726,7 @@
       "применимый"
     ],
     "correct": "авиакомпания",
-    "mastery": 0,
-    "exampleEng": "Example with airline.",
-    "exampleRus": "Пример с airline."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8425,9 +7739,7 @@
       "аппетитный"
     ],
     "correct": "аппетитный",
-    "mastery": 0,
-    "exampleEng": "Example with appetizing.",
-    "exampleRus": "Пример с appetizing."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8440,9 +7752,7 @@
       "арома"
     ],
     "correct": "арома",
-    "mastery": 0,
-    "exampleEng": "Example with aroma.",
-    "exampleRus": "Пример с aroma."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8455,9 +7765,7 @@
       "напиток"
     ],
     "correct": "напиток",
-    "mastery": 0,
-    "exampleEng": "Example with beverage.",
-    "exampleRus": "Пример с beverage."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8485,9 +7793,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8500,9 +7806,7 @@
       "доставка"
     ],
     "correct": "вместимость",
-    "mastery": 0,
-    "exampleEng": "Example with capacity.",
-    "exampleRus": "Пример с capacity."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8515,9 +7819,7 @@
       "ярмарка"
     ],
     "correct": "на вынос",
-    "mastery": 0,
-    "exampleEng": "Example with carryout.",
-    "exampleRus": "Пример с carryout."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8530,9 +7832,7 @@
       "кассир"
     ],
     "correct": "кассир",
-    "mastery": 0,
-    "exampleEng": "Example with cashier.",
-    "exampleRus": "Пример с cashier."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8545,9 +7845,7 @@
       "обеспечивать питанием"
     ],
     "correct": "обеспечивать питанием",
-    "mastery": 0,
-    "exampleEng": "Example with cater.",
-    "exampleRus": "Пример с cater."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8560,9 +7858,7 @@
       "кандидат"
     ],
     "correct": "сертификат",
-    "mastery": 0,
-    "exampleEng": "Example with certificate.",
-    "exampleRus": "Пример с certificate."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8575,9 +7871,7 @@
       "плата"
     ],
     "correct": "плата",
-    "mastery": 0,
-    "exampleEng": "Example with charge.",
-    "exampleRus": "Пример с charge."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8590,9 +7884,7 @@
       "работодатель"
     ],
     "correct": "шеф-повар",
-    "mastery": 0,
-    "exampleEng": "Example with chef.",
-    "exampleRus": "Пример с chef."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8605,9 +7897,7 @@
       "закрывать"
     ],
     "correct": "закрывать",
-    "mastery": 0,
-    "exampleEng": "Example with close.",
-    "exampleRus": "Пример с close."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8620,9 +7910,7 @@
       "кухня"
     ],
     "correct": "кухня",
-    "mastery": 0,
-    "exampleEng": "Example with cuisine.",
-    "exampleRus": "Пример с cuisine."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8650,9 +7938,7 @@
       "входить"
     ],
     "correct": "деликатес",
-    "mastery": 0,
-    "exampleEng": "Example with delicacy.",
-    "exampleRus": "Пример с delicacy."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8665,9 +7951,7 @@
       "вкусный"
     ],
     "correct": "вкусный",
-    "mastery": 0,
-    "exampleEng": "Example with delicious.",
-    "exampleRus": "Пример с delicious."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8680,9 +7964,7 @@
       "пункт"
     ],
     "correct": "десерт",
-    "mastery": 0,
-    "exampleEng": "Example with dessert.",
-    "exampleRus": "Пример с dessert."
+    "mastery": 0
   },
   {
     "category": "Restaurants",
@@ -8695,9 +7977,7 @@
       "адвокат"
     ],
     "correct": "обедать",
-    "mastery": 0,
-    "exampleEng": "Example with dine.",
-    "exampleRus": "Пример с dine."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8710,9 +7990,7 @@
       "высота"
     ],
     "correct": "развлечение",
-    "mastery": 0,
-    "exampleEng": "Example with amusement.",
-    "exampleRus": "Пример с amusement."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8725,9 +8003,7 @@
       "ведущий"
     ],
     "correct": "ведущий",
-    "mastery": 0,
-    "exampleEng": "Example with announcer.",
-    "exampleRus": "Пример с announcer."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8740,9 +8016,7 @@
       "соглашение"
     ],
     "correct": "закуска",
-    "mastery": 0,
-    "exampleEng": "Example with appetizer.",
-    "exampleRus": "Пример с appetizer."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8755,9 +8029,7 @@
       "удерживать"
     ],
     "correct": "организовывать",
-    "mastery": 0,
-    "exampleEng": "Example with arrange.",
-    "exampleRus": "Пример с arrange."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8770,9 +8042,7 @@
       "излишек"
     ],
     "correct": "зал",
-    "mastery": 0,
-    "exampleEng": "Example with auditorium.",
-    "exampleRus": "Пример с auditorium."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8785,9 +8055,7 @@
       "наличные"
     ],
     "correct": "банкет",
-    "mastery": 0,
-    "exampleEng": "Example with banquet.",
-    "exampleRus": "Пример с banquet."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8800,9 +8068,7 @@
       "полезный"
     ],
     "correct": "полезный",
-    "mastery": 0,
-    "exampleEng": "Example with beneficial.",
-    "exampleRus": "Пример с beneficial."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8815,9 +8081,7 @@
       "бронировать"
     ],
     "correct": "бронировать",
-    "mastery": 0,
-    "exampleEng": "Example with book.",
-    "exampleRus": "Пример с book."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8830,9 +8094,7 @@
       "календарь"
     ],
     "correct": "календарь",
-    "mastery": 0,
-    "exampleEng": "Example with calendar.",
-    "exampleRus": "Пример с calendar."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8845,9 +8107,7 @@
       "технический"
     ],
     "correct": "празднование",
-    "mastery": 0,
-    "exampleEng": "Example with celebration.",
-    "exampleRus": "Пример с celebration."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8860,9 +8120,7 @@
       "внедрять"
     ],
     "correct": "церемония",
-    "mastery": 0,
-    "exampleEng": "Example with ceremony.",
-    "exampleRus": "Пример с ceremony."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8875,9 +8133,7 @@
       "применимый"
     ],
     "correct": "хореограф",
-    "mastery": 0,
-    "exampleEng": "Example with choreograph.",
-    "exampleRus": "Пример с choreograph."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8890,9 +8146,7 @@
       "хореограф"
     ],
     "correct": "хореограф",
-    "mastery": 0,
-    "exampleEng": "Example with choreographer.",
-    "exampleRus": "Пример с choreographer."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8905,9 +8159,7 @@
       "сотрудничать"
     ],
     "correct": "сотрудничать",
-    "mastery": 0,
-    "exampleEng": "Example with collaborate.",
-    "exampleRus": "Пример с collaborate."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8920,9 +8172,7 @@
       "отмечать"
     ],
     "correct": "отмечать",
-    "mastery": 0,
-    "exampleEng": "Example with commemorate.",
-    "exampleRus": "Пример с commemorate."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8935,9 +8185,7 @@
       "заменять"
     ],
     "correct": "начало",
-    "mastery": 0,
-    "exampleEng": "Example with commencement.",
-    "exampleRus": "Пример с commencement."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8950,9 +8198,7 @@
       "арбитраж"
     ],
     "correct": "ведущий",
-    "mastery": 0,
-    "exampleEng": "Example with compere.",
-    "exampleRus": "Пример с compere."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8965,9 +8211,7 @@
       "уволнять"
     ],
     "correct": "концерт",
-    "mastery": 0,
-    "exampleEng": "Example with concert.",
-    "exampleRus": "Пример с concert."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8980,9 +8224,7 @@
       "совещаться"
     ],
     "correct": "совещаться",
-    "mastery": 0,
-    "exampleEng": "Example with confer.",
-    "exampleRus": "Пример с confer."
+    "mastery": 0
   },
   {
     "category": "Events & Entertainment",
@@ -8995,8 +8237,6 @@
       "полезный"
     ],
     "correct": "собираться",
-    "mastery": 0,
-    "exampleEng": "Example with congregate.",
-    "exampleRus": "Пример с congregate."
+    "mastery": 0
   }
 ]
