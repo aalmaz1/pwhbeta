@@ -29,6 +29,13 @@
   padding: 0;
 }
 
+/* ─── BROWSER COMPATIBILITY ─────────────────────────────────────── */
+:root {
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon-purple) var(--bg-mid);
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -177,6 +184,7 @@ body::after {
   box-shadow: 0 0 12px rgba(255,45,120,0.5), inset 0 0 12px rgba(255,45,120,0.08);
   letter-spacing: 3px;
   transition: all 0.2s;
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   position: relative;
   overflow: hidden;
@@ -277,6 +285,7 @@ body::after {
   box-shadow: 0 0 8px rgba(0,245,255,0.2), inset 0 0 6px rgba(0,245,255,0.04);
   transition: all 0.18s;
   white-space: nowrap;
+  -webkit-clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
 }
 
@@ -378,6 +387,7 @@ header {
   transition: all 0.15s;
   position: relative;
   overflow: hidden;
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
@@ -449,6 +459,7 @@ header {
   justify-content: center;
   padding: 24px;
   z-index: 100;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -494,6 +505,7 @@ header {
   letter-spacing: 3px;
   text-shadow: var(--shadow-cyan);
   box-shadow: 0 0 12px rgba(0,245,255,0.4), inset 0 0 10px rgba(0,245,255,0.05);
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: all 0.2s;
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pixel-word-v3';
+const CACHE_NAME = 'pixel-word-v4';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -14,22 +14,26 @@ const ASSETS_TO_CACHE = [
   './assets/logo.png'
 ];
 
+// Install event - cache assets
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
-  e.skipWaiting();
+  // Activate immediately
+  e.waitUntil(self.skipWaiting());
 });
 
+// Activate event - clean old caches
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
     )
   );
-  self.clients.claim();
+  // Take control immediately
+  e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (e) => {
