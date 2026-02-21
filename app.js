@@ -1,267 +1,183 @@
-// app.js
-import { GAME_DATA, getWordWeight } from "./data.js";
-import { saveProgress } from "./storage.js";
-import { initUI, renderCategoryButtons } from "./ui.js";
+import { loadGameData, getGameData, getWordWeight } from './data.js';
+import { saveProgress, loadProgress, resetProgress } from './storage.js';
+import { initUI, renderCategoryButtons } from './ui.js';
 
-let ui; // Объект с элементами UI
-let currentRound = [];
-let currentQ = 0;
-let xp = parseInt(localStorage.getItem("pixelWordHunter_xp")) || 0;
-let selectedCategory = "All";
-let wordStartTime = 0;
+const state = {
+  ui: null,
+  currentRound: [],
+  currentQ: 0,
+  xp: 0,
+  selectedCategory: 'All',
+  wordStartTime: 0,
+};
 
-/**
- * Инициализирует приложение
- */
-export function initApp() {
-  ui = initUI();
+export async function initApp() {
+  await loadGameData();
 
-  // Проверка, что элементы существуют
-  if (!ui.menuScreenElement || !ui.gameScreenElement) {
-    console.error("Не все UI элементы найдены");
-    return;
-  }
+  state.ui = initUI();
+  state.xp = parseInt(localStorage.getItem('pixelWordHunter_xp')) || 0;
 
-  // Объявляем список категорий
-  const categories = [...new Set(GAME_DATA.map((w) => w.category))];
-  categories.unshift("All"); // добавляем "All" в список
-
-  // Отрисовываем кнопки категорий
+  const categories = ['All', ...new Set(getGameData().map((w) => w.category))];
   renderCategoryButtons(categories, startGame);
 
   loadSavedProgress();
-  initProgress();
   updateMenuStats();
+  document.getElementById('xp').textContent = state.xp;
 
-  // Обработчик кнопки "HUNT" на главном экране
-  document.querySelector(".start-btn").addEventListener("click", () => {
-    showCategories(); // Показать выбор категорий
-  });
+  document.querySelector('.start-btn').addEventListener('click', showCategories);
 
-  // Обработчик выхода из игры
-  window.exitGame = () => {
-    ui.menuScreenElement.classList.remove("hidden");
-    ui.categoryScreenElement.classList.add("hidden");
-    ui.gameScreenElement.classList.add("hidden");
+  window.exitGame = () => toggleScreen('menu');
+  window.nextQuestion = () => {
+    state.currentQ++;
+    loadQuestion();
+  };
+  window.resetProgress = () => {
+    if (confirm('Reset all progress?')) {
+      resetProgress();
+      localStorage.removeItem('pixelWordHunter_xp');
+      state.xp = 0;
+      location.reload();
+    }
   };
 
-  console.log("✅ Все системы в норме. UI готов.");
+  console.log('✅ App initialized');
 }
 
-/**
- * Показывает экран выбора категорий
- */
 function showCategories() {
-  ui.menuScreenElement.classList.add("hidden");
-  ui.categoryScreenElement.classList.remove("hidden");
+  toggleScreen('category');
 }
 
-/**
- * Загружает сохранённый прогресс
- */
+function toggleScreen(screen) {
+  state.ui.menuScreenElement.classList.toggle('hidden', screen !== 'menu');
+  state.ui.categoryScreenElement.classList.toggle('hidden', screen !== 'category');
+  state.ui.gameScreenElement.classList.toggle('hidden', screen !== 'game');
+}
+
 function loadSavedProgress() {
-  const rawData = localStorage.getItem("pixelWordHunter_save");
-  if (!rawData) {
-    console.log(" nack: Сохранений пока нет.");
-    return;
-  }
-  const savedStats = JSON.parse(rawData);
+  const savedStats = loadProgress();
   let restoredCount = 0;
 
-  GAME_DATA.forEach((word) => {
-    const key = word.eng.trim();
-    if (savedStats[key]) {
-      word.mastery = savedStats[key];
+  getGameData().forEach((word) => {
+    const mastery = savedStats[word.eng.trim()];
+    if (mastery !== undefined) {
+      word.mastery = mastery;
       restoredCount++;
     } else {
       word.mastery = 0;
     }
   });
 
-  console.log(`♻️ Восстановлен прогресс для ${restoredCount} слов.`);
-  updateMenuStats();
+  console.log(`♻️ Restored progress for ${restoredCount} words`);
 }
 
-/**
- * Инициализация прогресса
- */
-function initProgress() {
-  let savedData = {};
-  try {
-    const raw = localStorage.getItem("pixelWordHunter_save");
-    if (raw) savedData = JSON.parse(raw);
-  } catch (e) {
-    console.warn("⚠️ LocalStorage заблокирован.");
-  }
-
-  GAME_DATA.forEach((word) => {
-    const key = word.eng.trim();
-    word.mastery = savedData[key] || 0;
-  });
-
-  updateMenuStats();
-  console.log("📊 Статистика инициализирована");
-}
-
-/**
- * Запускает игру с выбранной категорией
- * @param {string} category - Категория слов
- */
 function startGame(category) {
-  selectedCategory = category;
+  state.selectedCategory = category;
+  toggleScreen('game');
+  document.getElementById('category').textContent = category;
 
-  // Переключаем экраны
-  ui.menuScreenElement.classList.add("hidden");
-  ui.categoryScreenElement.classList.add("hidden");
-  ui.gameScreenElement.classList.remove("hidden");
-
-  // Обновляем название категории
-  document.getElementById("category").textContent = category;
-
-  // Генерируем раунд
-  currentRound = generateSmartRound(category);
-  currentQ = 0;
+  state.currentRound = generateRound(category);
+  state.currentQ = 0;
   loadQuestion();
 }
 
-/**
- * Генерирует раунд с учетом веса слов
- */
-function generateSmartRound(category) {
-  const pool =
-    category === "All"
-      ? GAME_DATA
-      : GAME_DATA.filter((w) => w.category === category);
+function generateRound(category) {
+  const pool = category === 'All'
+    ? getGameData()
+    : getGameData().filter((w) => w.category === category);
 
-  const weightedWords = pool.map((w) => ({
-    word: w,
-    weight: getWordWeight(w.eng),
-  }));
-  weightedWords.sort((a, b) => b.weight - a.weight);
-  return weightedWords.map((w) => w.word);
+  return pool
+    .map((w) => ({ word: w, weight: getWordWeight(w.eng) }))
+    .sort((a, b) => b.weight - a.weight)
+    .map((w) => w.word);
 }
 
-/**
- * Загружает текущий вопрос
- */
 function loadQuestion() {
-  if (currentQ >= currentRound.length) {
-    endGame();
+  if (state.currentQ >= state.currentRound.length) {
+    toggleScreen('menu');
     return;
   }
 
-  const word = currentRound[currentQ];
-  const options = shuffleArray([...word.options, word.translation]);
-  const question = word.eng;
-  const correct = word.translation;
+  const word = state.currentRound[state.currentQ];
+  const options = shuffle([...word.options, word.translation]);
 
-  ui.wordElement.textContent = question;
-  ui.optionsElement.innerHTML = "";
+  state.ui.wordElement.textContent = word.eng;
+  state.ui.optionsElement.innerHTML = '';
+  state.ui.explanationModal?.classList.add('hidden');
 
   options.forEach((option) => {
-    const btn = document.createElement("button");
-    btn.className = "option-btn";
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
     btn.textContent = option;
-    btn.onclick = () => checkAnswer(option, { question, correct });
-    ui.optionsElement.appendChild(btn);
+    btn.onclick = () => checkAnswer(option, word, btn);
+    state.ui.optionsElement.appendChild(btn);
   });
 
-  wordStartTime = Date.now();
+  state.wordStartTime = Date.now();
 }
 
-/**
- * Проверяет ответ
- */
-function checkAnswer(selectedText, qObj) {
-  const reactionTime = (Date.now() - wordStartTime) / 1000;
-  let status = "";
-  let bonusXP = 0;
-  let multiplier = 1;
+function checkAnswer(selected, word, btn) {
+  const time = (Date.now() - state.wordStartTime) / 1000;
+  const isCorrect = selected === word.translation;
 
-  Array.from(ui.optionsElement.children).forEach((b) => (b.onclick = null));
-
-  const isCorrect = selectedText === qObj.correct;
+  state.ui.optionsElement.querySelectorAll('button').forEach((b) => (b.onclick = null));
 
   if (isCorrect) {
-    if (reactionTime < 1.2) {
-      status = "INSTINCT KILL";
-      bonusXP = 25;
-      multiplier = 4;
-    } else if (reactionTime <= 3.5) {
-      status = "TACTICAL HIT";
-      bonusXP = 15;
-      multiplier = 2;
-    } else {
-      status = "FADING ECHO";
-      bonusXP = 5;
-      multiplier = 0.5;
-    }
-    // подсветка правильного ответа
-    Array.from(ui.optionsElement.children)
-      .find((b) => b.textContent === selectedText)
-      .classList.add("correct");
-    xp += bonusXP;
-    localStorage.setItem("pixelWordHunter_xp", xp);
-    document.getElementById("xp").textContent = xp;
+    const { status, xp: bonus, multiplier } = getScoring(time);
+    btn.classList.add('correct');
+    state.xp += bonus;
+    localStorage.setItem('pixelWordHunter_xp', state.xp);
+    document.getElementById('xp').textContent = state.xp;
     showFeedback(status, true);
+    saveProgress(word.eng, true, multiplier);
   } else {
-    status = "MISFIRE...";
-    Array.from(ui.optionsElement.children)
-      .find((b) => b.textContent === selectedText)
-      .classList.add("wrong");
-    Array.from(ui.optionsElement.children)
-      .find((b) => b.textContent === qObj.correct)
-      .classList.add("correct");
-    showFeedback("LEARN!", false);
-    multiplier = 0;
+    btn.classList.add('wrong');
+    const correctBtn = Array.from(state.ui.optionsElement.children).find(
+      (b) => b.textContent === word.translation
+    );
+    correctBtn?.classList.add('correct');
+    showFeedback('LEARN!', false);
+    saveProgress(word.eng, false, 0);
   }
 
-  // сохранение прогресса
-  saveProgress(qObj.question, isCorrect, multiplier);
-
-  // обновление статистики
   updateMenuStats();
-
-  // показываем объяснение
-  setTimeout(() => {
-    showExplanation(qObj);
-  }, 1000);
-
-  currentQ++;
-  setTimeout(loadQuestion, 1500);
+  setTimeout(() => showExplanation(word), 1000);
 }
 
-/**
- * Завершение игры
- */
-function endGame() {
-  ui.gameScreenElement.classList.add("hidden");
-  ui.menuScreenElement.classList.remove("hidden");
-  console.log("🎉 Игра завершена");
+function getScoring(time) {
+  if (time < 1.2) return { status: 'INSTINCT KILL', xp: 25, multiplier: 4 };
+  if (time <= 3.5) return { status: 'TACTICAL HIT', xp: 15, multiplier: 2 };
+  return { status: 'FADING ECHO', xp: 5, multiplier: 0.5 };
 }
 
-// Вспомогательные функции
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+function showExplanation(word) {
+  const modal = document.getElementById('explanation-modal');
+  const list = document.getElementById('explanation-list');
+  if (!modal || !list) return;
+
+  list.innerHTML = `
+    <div style="color: #fff; font-size: 12px; line-height: 1.6;">
+      <p style="color: #fbbf24; margin-bottom: 10px;">${word.eng}</p>
+      <p style="color: #4ade80; margin-bottom: 10px;">${word.translation}</p>
+      ${word.example ? `<p style="color: #aaa; font-style: italic;">"${word.example}"</p>` : ''}
+    </div>
+  `;
+  modal.classList.remove('hidden');
 }
 
 function showFeedback(message, isCorrect) {
-  const feedback = document.getElementById("feedback");
+  const feedback = document.getElementById('feedback');
   feedback.textContent = message;
-  feedback.style.color = isCorrect ? "green" : "red";
-  feedback.classList.remove("hidden");
-  setTimeout(() => feedback.classList.add("hidden"), 1500);
+  feedback.style.color = isCorrect ? '#4ade80' : '#ef4444';
+  feedback.classList.remove('hidden');
+  setTimeout(() => feedback.classList.add('hidden'), 1500);
 }
 
 function updateMenuStats() {
-  const masteredCount = GAME_DATA.filter((w) => w.mastery > 0).length;
-  const totalCount = GAME_DATA.length;
-  document.getElementById("mastered-count").textContent = masteredCount;
-  document.getElementById("total-count").textContent = totalCount;
+  const mastered = getGameData().filter((w) => w.mastery > 0).length;
+  document.getElementById('mastered-count').textContent = mastered;
+  document.getElementById('total-count').textContent = getGameData().length;
 }
 
-// Для вызова из HTML или других скриптов
-window.nextQuestion = () => {
-  currentQ++;
-  loadQuestion();
-};
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}

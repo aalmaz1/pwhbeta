@@ -1,116 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <title>Pixel Word Hunter</title>
-    <link rel="manifest" href="/manifest.json" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* Минимальные стили для скрытия элементов */
-      .hidden {
-        display: none;
-      }
-      /* Можно добавить дополнительные стили по необходимости */
-      .category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 10px;
-      }
-      .category-btn {
-        padding: 8px 12px;
-        font-family: "Press Start 2P", cursive;
-        font-size: 10px;
-        cursor: pointer;
-        background-color: #222;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-      }
-      .category-btn:hover {
-        background-color: #444;
-      }
-    </style>
-    <script type="module">
-      import { initApp } from "./app.js";
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Pixel Word Hunter</title>
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { initApp } from './app.js';
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</head>
+<body>
+  <div class="crt-overlay"></div>
 
-      // Инициализация приложения
-      document.addEventListener("DOMContentLoaded", () => {
-        initApp();
-      });
-    </script>
-  </head>
-  <body>
-    <div class="crt-overlay"></div>
-    <!-- MENU -->
-    <div id="menu-screen" class="game-container">
-      <h1 class="game-title">
-        <span>PIXEL</span><br />
-        <span>WORD</span><br />
-        <span>HUNTER</span>
-      </h1>
-      <div class="edition-badge">TOEIC EDITION</div>
-      <div style="margin-bottom: 20px; font-size: 10px; color: #4ade80">
-        MASTERED: <span id="mastered-count">0</span> /
-        <span id="total-count">0</span>
+  <div id="menu-screen" class="game-container">
+    <h1 class="game-title">
+      <span>PIXEL</span><br>
+      <span>WORD</span><br>
+      <span>HUNTER</span>
+    </h1>
+    <div class="edition-badge">TOEIC EDITION</div>
+    <div class="stats-line">
+      MASTERED: <span id="mastered-count">0</span> / <span id="total-count">0</span>
+    </div>
+    <p class="blink">PRESS HUNT!</p>
+    <button class="start-btn">▶ HUNT</button>
+    <div class="reset-button" onclick="resetProgress()">RESET SAVE DATA</div>
+    <div class="credits">© 2026 ALMAZ CORP</div>
+  </div>
+
+  <div id="category-screen" class="game-container hidden">
+    <h2 class="screen-title">SELECT CATEGORY</h2>
+    <div id="category-list" class="category-grid"></div>
+  </div>
+
+  <div id="game-screen" class="game-container hidden">
+    <header>
+      <div class="stat">CAT: <span id="category">ALL</span></div>
+      <div class="stat">XP: <span id="xp">0</span></div>
+      <button class="exit-btn" onclick="exitGame()">✕</button>
+    </header>
+    <main id="quiz-box">
+      <div class="question-card">
+        <h1 id="word">Ready?</h1>
       </div>
-      <p class="blink">PRESS HUNT!</p>
-      <button class="start-btn">▶ HUNT</button>
-      <div class="reset-button" onclick="resetProgress()">RESET SAVE DATA</div>
-      <div class="credits">© 2026 ALMAZ CORP</div>
+      <div class="options-grid" id="options"></div>
+    </main>
+    <div id="explanation-modal" class="modal hidden">
+      <h2 class="modal-title">WORD REVIEW</h2>
+      <div id="explanation-list"></div>
+      <button class="next-btn" onclick="nextQuestion()">NEXT ▶</button>
     </div>
-    <!-- CATEGORIES -->
-    <div id="category-screen" class="game-container hidden">
-      <h2
-        style="
-          color: #fbbf24;
-          margin-bottom: 30px;
-          font-size: clamp(16px, 4vw, 20px);
-        "
-      >
-        SELECT CATEGORY
-      </h2>
-      <div
-        id="total-stats"
-        class="stat"
-        style="
-          font-size: 10px;
-          color: #4ade80;
-          margin-bottom: 20px;
-          line-height: 1.5;
-        "
-      ></div>
-      <div id="category-list" class="category-grid"></div>
-    </div>
-    <!-- GAME -->
-    <div id="game-screen" class="game-container hidden">
-      <header>
-        <div class="stat">CAT: <span id="category">ALL</span></div>
-        <div class="stat">XP: <span id="xp">0</span></div>
-        <button class="exit-btn" onclick="exitGame()">✕</button>
-      </header>
-      <main id="quiz-box">
-        <div class="progress-bar"><div id="progress"></div></div>
-        <div class="question-card">
-          <h1 id="word">Ready?</h1>
-        </div>
-        <div class="options-grid" id="options"></div>
-      </main>
-      <div id="explanation-modal" class="modal hidden">
-        <h2 style="color: #fbbf24; font-size: 12px; margin-bottom: 10px">
-          WORD REVIEW
-        </h2>
-        <div id="explanation-list"></div>
-        <button class="next-btn" onclick="nextQuestion()">NEXT ▶</button>
-      </div>
-      <div id="feedback" class="hidden">NICE!</div>
-    </div>
-  </body>
+    <div id="feedback" class="hidden">NICE!</div>
+  </div>
+</body>
 </html>
