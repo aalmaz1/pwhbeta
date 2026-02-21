@@ -1,4 +1,4 @@
-import { loadGameData, getGameData, getWordWeight } from './data.js';
+import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
 import { saveProgress, loadProgress, resetProgress } from './storage.js';
 import { initUI, renderCategoryButtons } from './ui.js';
 
@@ -9,6 +9,8 @@ const state = {
   xp: 0,
   selectedCategory: 'All',
   wordStartTime: 0,
+  totalAnswered: 0,
+  correctInRow: 0,
 };
 
 export async function initApp() {
@@ -17,7 +19,7 @@ export async function initApp() {
   state.ui = initUI();
   state.xp = parseInt(localStorage.getItem('pixelWordHunter_xp')) || 0;
 
-  const categories = ['All', ...new Set(getGameData().map((w) => w.category))];
+  const categories = ['All', ...getCategories()];
   renderCategoryButtons(categories, startGame);
 
   loadSavedProgress();
@@ -40,7 +42,7 @@ export async function initApp() {
     }
   };
 
-  console.log('✅ App initialized');
+  console.log('✅ App initialized with adaptive learning algorithm');
 }
 
 function showCategories() {
@@ -58,12 +60,18 @@ function loadSavedProgress() {
   let restoredCount = 0;
 
   getGameData().forEach((word) => {
-    const mastery = savedStats[word.eng.trim()];
-    if (mastery !== undefined) {
-      word.mastery = mastery;
+    const saved = savedStats[word.eng.trim()];
+    if (saved) {
+      word.mastery = saved.mastery || 0;
+      word.lastSeen = saved.lastSeen || 0;
+      word.correctCount = saved.correctCount || 0;
+      word.incorrectCount = saved.incorrectCount || 0;
       restoredCount++;
     } else {
       word.mastery = 0;
+      word.lastSeen = 0;
+      word.correctCount = 0;
+      word.incorrectCount = 0;
     }
   });
 
@@ -72,35 +80,23 @@ function loadSavedProgress() {
 
 function startGame(category) {
   state.selectedCategory = category;
+  state.correctInRow = 0;
   toggleScreen('game');
   document.getElementById('category').textContent = category;
 
-  state.currentRound = generateRound(category);
+  state.currentRound = selectWordsForRound(category, 10);
   state.currentQ = 0;
   loadQuestion();
 }
 
-function generateRound(category) {
-  const pool = category === 'All'
-    ? getGameData()
-    : getGameData().filter((w) => w.category === category);
-
-  return pool
-    .map((w) => ({ word: w, weight: getWordWeight(w.eng) }))
-    .sort((a, b) => b.weight - a.weight)
-    .map((w) => w.word);
-}
-
 function loadQuestion() {
   if (state.currentQ >= state.currentRound.length) {
-    toggleScreen('menu');
+    showRoundSummary();
     return;
   }
 
   const word = state.currentRound[state.currentQ];
-  const allOptions = [...word.optionsList, word.correct];
-  const uniqueOptions = [...new Set(allOptions)];
-  const options = shuffle(uniqueOptions);
+  const options = generateOptionsForWord(word);
 
   state.ui.wordElement.textContent = word.eng;
   state.ui.optionsElement.innerHTML = '';
@@ -115,6 +111,7 @@ function loadQuestion() {
   });
 
   state.wordStartTime = Date.now();
+  state.totalAnswered++;
 }
 
 function checkAnswer(selected, word, btn) {
@@ -126,29 +123,33 @@ function checkAnswer(selected, word, btn) {
   if (isCorrect) {
     const { status, xp: bonus, multiplier } = getScoring(time);
     btn.classList.add('correct');
+    state.correctInRow++;
     state.xp += bonus;
     localStorage.setItem('pixelWordHunter_xp', state.xp);
     document.getElementById('xp').textContent = state.xp;
-    showFeedback(status, true);
-    saveProgress(word.eng, true, multiplier);
+    showFeedback(status, true, state.correctInRow);
+    updateWordProgress(word.eng, true);
   } else {
     btn.classList.add('wrong');
     const correctBtn = Array.from(state.ui.optionsElement.children).find(
       (b) => b.textContent === word.correct
     );
     correctBtn?.classList.add('correct');
-    showFeedback('LEARN!', false);
-    saveProgress(word.eng, false, 0);
+    state.correctInRow = 0;
+    showFeedback('LEARN!', false, 0);
+    updateWordProgress(word.eng, false);
   }
 
+  saveProgress();
   updateMenuStats();
   setTimeout(() => showExplanation(word), 1000);
 }
 
 function getScoring(time) {
-  if (time < 1.2) return { status: 'INSTINCT KILL', xp: 25, multiplier: 4 };
-  if (time <= 3.5) return { status: 'TACTICAL HIT', xp: 15, multiplier: 2 };
-  return { status: 'FADING ECHO', xp: 5, multiplier: 0.5 };
+  if (time < 1.2) return { status: '⚡ INSTINCT', xp: 25, multiplier: 4 };
+  if (time <= 3.5) return { status: '🎯 TACTICAL', xp: 15, multiplier: 2 };
+  if (time <= 6) return { status: '✅ GOOD', xp: 10, multiplier: 1 };
+  return { status: '⏰ SLOW', xp: 5, multiplier: 0.5 };
 }
 
 function showExplanation(word) {
@@ -156,20 +157,74 @@ function showExplanation(word) {
   const list = document.getElementById('explanation-list');
   if (!modal || !list) return;
 
+  const masteryLevel = getMasteryLevel(word);
+  const masteryLabel = getMasteryLabel(masteryLevel);
+
   list.innerHTML = `
     <div style="font-size: 11px; line-height: 1.8;">
       <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">${word.eng}</p>
       <p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">${word.correct}</p>
       ${word.exampleEng ? `<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"${word.exampleEng}"</p>` : ''}
-      ${word.exampleRus ? `<p style="color: #8877aa; font-style: italic;">${word.exampleRus}</p>` : ''}
+      ${word.exampleRus ? `<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">${word.exampleRus}</p>` : ''}
+      <p style="color: #ffe600; text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">
+        MASTERY: <span style="color: ${getMasteryColor(masteryLevel)}">${masteryLabel}</span>
+      </p>
     </div>
   `;
   modal.classList.remove('hidden');
 }
 
-function showFeedback(message, isCorrect) {
+function getMasteryColor(level) {
+  const colors = ['#ff2d78', '#ff8800', '#ffe600', '#39ff14', '#00f5ff', '#bf5fff'];
+  return colors[level] || colors[0];
+}
+
+function showRoundSummary() {
+  const modal = document.getElementById('explanation-modal');
+  const list = document.getElementById('explanation-list');
+  if (!modal || !list) return;
+
+  const total = state.currentRound.length;
+  const mastered = getGameData().filter(w => w.mastery >= 4).length;
+  const learning = getGameData().filter(w => w.mastery > 0 && w.mastery < 4).length;
+  const newWords = getGameData().filter(w => w.mastery === 0).length;
+
+  list.innerHTML = `
+    <div style="font-size: 11px; line-height: 2; text-align: center;">
+      <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 24px; letter-spacing: 3px;">
+        // ROUND COMPLETE //
+      </p>
+      <p style="color: #ffe600; margin-bottom: 20px;">XP: <span style="color: #39ff14;">${state.xp}</span></p>
+      <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+        <span style="color: #bf5fff;">🟣 ${mastered}</span>
+        <span style="color: #ff8800;">🟠 ${learning}</span>
+        <span style="color: #ff2d78;">🔴 ${newWords}</span>
+      </div>
+      <p style="color: #8877aa; font-size: 9px; margin-top: 24px;">
+        Keep practicing to master all words!
+      </p>
+    </div>
+  `;
+  
+  const nextBtn = modal.querySelector('.next-btn');
+  if (nextBtn) {
+    nextBtn.textContent = 'MENU ↺';
+    nextBtn.onclick = () => {
+      nextBtn.textContent = 'NEXT ▶';
+      nextBtn.onclick = () => {
+        state.currentQ++;
+        loadQuestion();
+      };
+      toggleScreen('menu');
+    };
+  }
+  
+  modal.classList.remove('hidden');
+}
+
+function showFeedback(message, isCorrect, streak = 0) {
   const feedback = document.getElementById('feedback');
-  feedback.textContent = message;
+  feedback.textContent = message + (streak > 1 ? ` x${streak}` : '');
   feedback.style.color = isCorrect ? '#39ff14' : '#ff2d78';
   feedback.style.textShadow = isCorrect
     ? '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)'
@@ -179,11 +234,8 @@ function showFeedback(message, isCorrect) {
 }
 
 function updateMenuStats() {
-  const mastered = getGameData().filter((w) => w.mastery > 0).length;
+  const mastered = getGameData().filter((w) => w.mastery >= 4).length;
+  const learning = getGameData().filter((w) => w.mastery > 0 && w.mastery < 4).length;
   document.getElementById('mastered-count').textContent = mastered;
   document.getElementById('total-count').textContent = getGameData().length;
-}
-
-function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
 }
