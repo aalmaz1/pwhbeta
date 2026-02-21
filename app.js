@@ -98,7 +98,9 @@ function loadQuestion() {
   }
 
   const word = state.currentRound[state.currentQ];
-  const options = shuffle([...word.options, word.translation]);
+  const allOptions = [...word.optionsList, word.correct];
+  const uniqueOptions = [...new Set(allOptions)];
+  const options = shuffle(uniqueOptions);
 
   state.ui.wordElement.textContent = word.eng;
   state.ui.optionsElement.innerHTML = '';
@@ -117,7 +119,7 @@ function loadQuestion() {
 
 function checkAnswer(selected, word, btn) {
   const time = (Date.now() - state.wordStartTime) / 1000;
-  const isCorrect = selected === word.translation;
+  const isCorrect = selected === word.correct;
 
   state.ui.optionsElement.querySelectorAll('button').forEach((b) => (b.onclick = null));
 
@@ -132,7 +134,7 @@ function checkAnswer(selected, word, btn) {
   } else {
     btn.classList.add('wrong');
     const correctBtn = Array.from(state.ui.optionsElement.children).find(
-      (b) => b.textContent === word.translation
+      (b) => b.textContent === word.correct
     );
     correctBtn?.classList.add('correct');
     showFeedback('LEARN!', false);
@@ -157,8 +159,9 @@ function showExplanation(word) {
   list.innerHTML = `
     <div style="color: #fff; font-size: 12px; line-height: 1.6;">
       <p style="color: #fbbf24; margin-bottom: 10px;">${word.eng}</p>
-      <p style="color: #4ade80; margin-bottom: 10px;">${word.translation}</p>
-      ${word.example ? `<p style="color: #aaa; font-style: italic;">"${word.example}"</p>` : ''}
+      <p style="color: #4ade80; margin-bottom: 10px;">${word.correct}</p>
+      ${word.exampleEng ? `<p style="color: #aaa; font-style: italic;">"${word.exampleEng}"</p>` : ''}
+      ${word.exampleRus ? `<p style="color: #aaa; font-style: italic;">${word.exampleRus}</p>` : ''}
     </div>
   `;
   modal.classList.remove('hidden');
