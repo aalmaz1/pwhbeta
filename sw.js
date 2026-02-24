@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pixel-word-v5';
+const CACHE_NAME = 'pixel-word-v6';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -15,7 +15,7 @@ const ASSETS_TO_CACHE = [
   './assets/logo.png'
 ];
 
-// Cache-first strategy for static assets
+// Static assets that never change (cache-first forever)
 const STATIC_ASSETS = [
   './style.css',
   './bundle.js',
@@ -24,12 +24,7 @@ const STATIC_ASSETS = [
   './assets/logo.png'
 ];
 
-// Network-first strategy for dynamic content
-const DYNAMIC_CONTENT = [
-  './words_optimized.json'
-];
-
-// Install event - cache all assets
+// Install event - cache all assets immediately
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -60,56 +55,58 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Fetch event - different strategies for different resources
+// Fetch event - optimized caching strategies
 self.addEventListener('fetch', (e) => {
   // Only handle GET requests
   if (e.request.method !== 'GET') return;
 
   const url = new URL(e.request.url);
 
-  // Skip cross-origin requests (e.g., Google Fonts)
-  if (url.origin !== location.origin) {
-    // Handle Google Fonts specially
-    if (url.hostname.includes('fonts.googleapis.com') || 
-        url.hostname.includes('fonts.gstatic.com')) {
-      e.respondWith(
-        caches.match(e.request).then((response) => {
-          if (response) return response;
-          
-          return fetch(e.request).then((fetchResponse) => {
-            // Cache font files
-            if (fetchResponse.ok && (
-              url.pathname.endsWith('.woff2') ||
-              url.pathname.endsWith('.woff') ||
-              url.pathname.endsWith('.ttf')
-            )) {
-              const responseClone = fetchResponse.clone();
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(e.request, responseClone);
-              });
-            }
-            return fetchResponse;
-          }).catch(() => {
-            // Return empty response for fonts if offline
-            return new Response('', { status: 200 });
-          });
-        })
-      );
-      return;
-    }
-    return;
-  }
-
-  // Cache-first for static assets
-  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', '')))) {
+  // Handle Google Fonts - cache-first with long expiry
+  if (url.hostname.includes('fonts.googleapis.com') || 
+      url.hostname.includes('fonts.gstatic.com')) {
     e.respondWith(
       caches.match(e.request).then((response) => {
         if (response) {
-          console.log('[SW] Cache hit:', url.pathname);
+          console.log('[SW] Font cache hit:', url.pathname);
           return response;
         }
         
-        console.log('[SW] Cache miss:', url.pathname);
+        return fetch(e.request).then((fetchResponse) => {
+          // Cache font files for offline use
+          if (fetchResponse.ok) {
+            const responseClone = fetchResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(e.request, responseClone);
+            });
+          }
+          return fetchResponse;
+        }).catch(() => {
+          // Return empty response for fonts if offline
+          return new Response('', { status: 200 });
+        });
+      })
+    );
+    return;
+  }
+
+  // Skip non-origin requests
+  if (url.origin !== location.origin) {
+    return;
+  }
+
+  // Cache-first for static assets (JS, CSS, images)
+  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', ''))) ||
+      url.pathname.endsWith('.js') || url.pathname.endsWith('.css') ||
+      url.pathname.endsWith('.png') || url.pathname.endsWith('.ico')) {
+    e.respondWith(
+      caches.match(e.request).then((response) => {
+        if (response) {
+          console.log('[SW] Static cache hit:', url.pathname);
+          return response;
+        }
+        
+        console.log('[SW] Static cache miss:', url.pathname);
         return fetch(e.request).then((fetchResponse) => {
           if (fetchResponse.ok) {
             const responseClone = fetchResponse.clone();
@@ -124,8 +121,39 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Network-first with cache fallback for JSON data
+  // Stale-while-revalidate for JSON data (fast response + background update)
   if (url.pathname.includes('words_optimized.json')) {
+    e.respondWith(
+      caches.match(e.request).then((cachedResponse) => {
+        // Start fetch in background
+        const fetchPromise = fetch(e.request).then((networkResponse) => {
+          if (networkResponse.ok) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(e.request, responseClone);
+              console.log('[SW] JSON data updated in cache');
+            });
+          }
+          return networkResponse;
+        }).catch(() => {
+          console.log('[SW] Network failed for JSON');
+        });
+
+        // Return cached version immediately, or wait for network
+        if (cachedResponse) {
+          console.log('[SW] JSON cache hit, serving stale data');
+          return cachedResponse;
+        }
+        
+        console.log('[SW] JSON cache miss, waiting for network');
+        return fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // Network-first for HTML (to get fresh content), fallback to cache
+  if (url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname === '') {
     e.respondWith(
       fetch(e.request)
         .then((response) => {
@@ -138,18 +166,9 @@ self.addEventListener('fetch', (e) => {
           return response;
         })
         .catch(() => {
-          console.log('[SW] Network failed, serving from cache:', url.pathname);
-          return caches.match(e.request);
+          console.log('[SW] Network failed, serving cached HTML');
+          return caches.match('./index.html');
         })
-    );
-    return;
-  }
-
-  // Network-first for HTML document (to get fresh content)
-  if (url.pathname.endsWith('.html') || url.pathname === '/') {
-    e.respondWith(
-      fetch(e.request)
-        .catch(() => caches.match('./index.html'))
     );
     return;
   }
@@ -157,7 +176,10 @@ self.addEventListener('fetch', (e) => {
   // Default: cache-first strategy
   e.respondWith(
     caches.match(e.request).then((response) => {
-      if (response) return response;
+      if (response) {
+        console.log('[SW] Default cache hit:', url.pathname);
+        return response;
+      }
       
       return fetch(e.request).then((fetchResponse) => {
         if (fetchResponse.ok) {
