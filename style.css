@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* Fonts are loaded via <link> in HTML for better performance */
 
 :root {
   --bg-deep:       #0a0010;
