@@ -19,13 +19,60 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0010">
   
-  <!-- Fonts -->
+  <!-- Preconnect and Preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="words_optimized.json" as="fetch" crossorigin>
+  
+  <!-- Critical CSS - Inlined for fast first paint -->
+  <style>
+    :root {
+      --bg-deep:       #0a0010;
+      --bg-mid:        #100020;
+      --neon-pink:     #ff2d78;
+      --neon-cyan:     #00f5ff;
+      --neon-purple:   #bf5fff;
+      --neon-yellow:   #ffe600;
+      --neon-green:    #39ff14;
+      --grid-color:    rgba(191, 95, 255, 0.15);
+      --text-main:     #f0e6ff;
+      --text-dim:      #8877aa;
+      --shadow-pink:   0 0 8px #ff2d78, 0 0 20px rgba(255,45,120,0.5);
+      --shadow-cyan:   0 0 8px #00f5ff, 0 0 20px rgba(0,245,255,0.5);
+      --shadow-purple: 0 0 8px #bf5fff, 0 0 20px rgba(191,95,255,0.5);
+      --crt-lines:     repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; width: 100%; overflow: hidden; overscroll-behavior: none; user-select: none; -webkit-user-select: none; font-family: 'Press Start 2P', cursive; background: var(--bg-deep); color: var(--text-main); }
+    .game-container { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; }
+    .game-container::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(191,95,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(191,95,255,0.07) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(400px) rotateX(45deg) scaleX(1.5); transform-origin: bottom center; z-index: -1; }
+    .game-container::after { content: ''; position: absolute; bottom: 0; left: -20%; right: -20%; height: 50%; background: linear-gradient(to top, rgba(255,45,120,0.08) 0%, transparent 100%); z-index: -1; }
+    .hidden { display: none !important; }
+    .game-title { font-size: clamp(18px, 5vw, 36px); line-height: 1.5; text-align: center; margin-bottom: 18px; letter-spacing: 4px; color: var(--neon-cyan); text-shadow: var(--shadow-cyan); }
+    .edition-badge { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); letter-spacing: 6px; margin-bottom: 28px; }
+    .stats-line { font-size: 9px; color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green); margin-bottom: 30px; letter-spacing: 2px; }
+    .blink { font-size: 10px; color: var(--neon-pink); text-shadow: var(--shadow-pink); margin-bottom: 28px; }
+    .start-btn { padding: 16px 36px; font-family: inherit; font-size: 14px; background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); border-radius: 0; cursor: pointer; text-shadow: var(--shadow-pink); box-shadow: 0 0 12px rgba(255,45,120,0.5), inset 0 0 12px rgba(255,45,120,0.08); letter-spacing: 3px; transition: all 0.2s; -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); position: relative; overflow: hidden; }
+    .reset-button { margin-top: 32px; font-size: 7px; color: var(--text-dim); cursor: pointer; letter-spacing: 2px; transition: color 0.2s; }
+    .credits { position: absolute; bottom: 18px; font-size: 7px; color: var(--text-dim); letter-spacing: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.12s infinite; }
+    body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%); pointer-events: none; z-index: 9001; }
+    @keyframes crtFlicker { 0% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: 0.96; } 94% { opacity: 1; } 98% { opacity: 1; } 99% { opacity: 0.94; } 100% { opacity: 1; } }
+    @keyframes titlePulse { 0%, 100% { text-shadow: var(--shadow-cyan); color: var(--neon-cyan); } 50% { text-shadow: 0 0 16px #00f5ff, 0 0 40px rgba(0,245,255,0.9), 0 0 60px rgba(0,245,255,0.4); color: #aaffff; } }
+    @keyframes blink { 50% { opacity: 0; } }
+    .game-title { animation: titlePulse 3s ease-in-out infinite; }
+    .edition-badge, .blink { animation: blink 2.5s step-end infinite; }
+    .blink { animation: blink 1s step-end infinite; }
+  </style>
+  
+  <!-- Non-critical CSS loaded asynchronously -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script type="module">
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
+  
+  <!-- Deferred JS module -->
+  <script type="module" defer>
     import { initApp } from './app.js';
     document.addEventListener('DOMContentLoaded', initApp);
   </script>
