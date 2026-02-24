@@ -12,7 +12,7 @@ const INTERVALS = {
 
 export async function loadGameData() {
   if (!gameData) {
-    const response = await fetch(`./words_optimized.json?v=${Date.now()}`);
+    const response = await fetch('./words_optimized.json');
     gameData = await response.json();
     
     gameData.forEach(word => {
