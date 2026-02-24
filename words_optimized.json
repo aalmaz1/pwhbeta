@@ -7172,17 +7172,17 @@
   {
     "category": "Insurance",
     "eng": "endorse",
-    "rus": "ENDORSE",
+    "rus": "одобрять",
     "question": "endorse",
     "optionsList": [
       "удовлетворенность",
       "клавиатура",
-      "ENDORSE"
+      "одобрять"
     ],
-    "correct": "ENDORSE",
+    "correct": "одобрять",
     "mastery": 0,
     "exampleEng": "The broker endorsed the policy change.",
-    "exampleRus": "Брокер подтвердил изменение полиса."
+    "exampleRus": "Брокер одобрил изменение полиса."
   },
   {
     "category": "Insurance",
