@@ -208,20 +208,60 @@ function showRoundSummary() {
       </p>
     </div>
   `;
-  
+
+  // Hide the default next-btn and create custom buttons
   const nextBtn = modal.querySelector('.next-btn');
   if (nextBtn) {
-    nextBtn.textContent = 'MENU ↺';
-    nextBtn.onclick = () => {
-      nextBtn.textContent = 'NEXT ▶';
-      nextBtn.onclick = () => {
-        state.currentQ++;
-        loadQuestion();
-      };
-      toggleScreen('menu');
-    };
+    nextBtn.classList.add('hidden');
   }
-  
+
+  // Remove any existing button container from previous round
+  const existingContainer = modal.querySelector('.round-buttons');
+  if (existingContainer) {
+    existingContainer.remove();
+  }
+
+  // Create container for round summary buttons
+  const btnContainer = document.createElement('div');
+  btnContainer.className = 'round-buttons';
+  btnContainer.style.cssText = 'display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;';
+
+  // CONTINUE button - starts new round with same category
+  const continueBtn = document.createElement('button');
+  continueBtn.className = 'next-btn continue-btn';
+  continueBtn.textContent = 'CONTINUE ▶';
+  continueBtn.onclick = () => {
+    modal.classList.add('hidden');
+    nextBtn.classList.remove('hidden');
+    nextBtn.textContent = 'NEXT ▶';
+    nextBtn.onclick = () => {
+      state.currentQ++;
+      loadQuestion();
+    };
+    btnContainer.remove();
+    startGame(state.selectedCategory);
+  };
+
+  // MENU button - returns to main menu
+  const menuBtn = document.createElement('button');
+  menuBtn.className = 'next-btn menu-btn';
+  menuBtn.textContent = 'MENU ↺';
+  menuBtn.onclick = () => {
+    modal.classList.add('hidden');
+    nextBtn.classList.remove('hidden');
+    nextBtn.textContent = 'NEXT ▶';
+    nextBtn.onclick = () => {
+      state.currentQ++;
+      loadQuestion();
+    };
+    btnContainer.remove();
+    toggleScreen('menu');
+  };
+
+  btnContainer.appendChild(continueBtn);
+  btnContainer.appendChild(menuBtn);
+  modal.appendChild(btnContainer);
+
   modal.classList.remove('hidden');
 }
 
