@@ -587,10 +587,13 @@
     document.getElementById('total-count').textContent = getGameData().length;
   }
 
-  // Export init function
+  // Export init function for external use
   window.initApp = initApp;
   
-  // Register service worker
+  // Auto-initialize immediately since bundle.js is deferred (DOM is ready)
+  initApp();
+  
+  // Register service worker after page load (non-blocking)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('./sw.js')

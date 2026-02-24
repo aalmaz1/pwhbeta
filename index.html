@@ -19,14 +19,26 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0010">
   
-  <!-- Preload critical resources -->
+  <!-- Preconnect to critical origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical JS bundle -->
   <link rel="preload" href="bundle.js" as="script">
+  
+  <!-- Preload JSON data -->
   <link rel="preload" href="words_optimized.json" as="fetch" crossorigin>
   
   <!-- Critical CSS - Inlined for fast first paint -->
   <style>
+    /* Font face with swap for instant text rendering */
+    @font-face {
+      font-family: 'Press Start 2P';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url('https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf') format('truetype');
+    }
     :root {
       --bg-deep:       #0a0010;
       --bg-mid:        #100020;
@@ -44,7 +56,7 @@
       --crt-lines:     repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; width: 100%; overflow: hidden; overscroll-behavior: none; user-select: none; -webkit-user-select: none; font-family: 'Press Start 2P', cursive; background: var(--bg-deep); color: var(--text-main); }
+    html, body { height: 100%; width: 100%; overflow: hidden; overscroll-behavior: none; user-select: none; -webkit-user-select: none; font-family: 'Press Start 2P', monospace; background: var(--bg-deep); color: var(--text-main); }
     .game-container { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; }
     .game-container::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(191,95,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(191,95,255,0.07) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(400px) rotateX(45deg) scaleX(1.5); transform-origin: bottom center; z-index: -1; }
     .game-container::after { content: ''; position: absolute; bottom: 0; left: -20%; right: -20%; height: 50%; background: linear-gradient(to top, rgba(255,45,120,0.08) 0%, transparent 100%); z-index: -1; }
@@ -73,18 +85,8 @@
   <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="style.css"></noscript>
   
-  <!-- Deferred JS bundle for optimal FCP -->
+  <!-- Deferred JS bundle - auto-initializes when loaded -->
   <script src="bundle.js" defer></script>
-  
-  <!-- Fallback for no-JS - start app immediately when module loads -->
-  <script>
-    // Initialize app as soon as possible
-    window.addEventListener('DOMContentLoaded', function() {
-      if (window.initApp) {
-        window.initApp();
-      }
-    });
-  </script>
 </head>
 <body>
   <div class="crt-overlay"></div>
