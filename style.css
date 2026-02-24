@@ -516,6 +516,19 @@ header {
   color: #fff;
 }
 
+.continue-btn {
+  color: var(--neon-green);
+  border-color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green), 0 0 20px rgba(57,255,20,0.5);
+  box-shadow: 0 0 12px rgba(57,255,20,0.4), inset 0 0 10px rgba(57,255,20,0.05);
+}
+
+.continue-btn:hover {
+  background: rgba(57,255,20,0.12);
+  box-shadow: 0 0 24px rgba(57,255,20,0.7), inset 0 0 16px rgba(57,255,20,0.1);
+  color: #fff;
+}
+
 /* ─── FEEDBACK OVERLAY ───────────────────────────────────────── */
 #feedback {
   position: fixed;
