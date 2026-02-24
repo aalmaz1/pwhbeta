@@ -24,7 +24,9 @@ export async function initApp() {
 
   loadSavedProgress();
   updateMenuStats();
-  document.getElementById('xp').textContent = state.xp;
+  if (state.ui.xpElement) {
+    state.ui.xpElement.textContent = state.xp;
+  }
 
   document.querySelector('.start-btn').addEventListener('click', showCategories);
 
@@ -125,31 +127,58 @@ function checkAnswer(selected, word, btn) {
   // Cache DOM reads BEFORE any writes to avoid forced reflow
   const buttons = state.ui.optionsElement.querySelectorAll('button');
   const children = Array.from(state.ui.optionsElement.children);
+  const xpElement = state.ui.xpElement;
+  const feedbackElement = state.ui.feedbackElement;
 
-  // Disable all buttons
+  // Disable all buttons immediately
   buttons.forEach((b) => (b.onclick = null));
 
+  // Calculate all state changes first
+  let status = '';
+  let bonus = 0;
+  let streak = 0;
+
   if (isCorrect) {
-    const { status, xp: bonus } = getScoring(time);
+    const scoring = getScoring(time);
+    status = scoring.status;
+    bonus = scoring.xp;
     state.correctInRow++;
+    streak = state.correctInRow;
     state.xp += bonus;
     localStorage.setItem('pixelWordHunter_xp', state.xp);
-    document.getElementById('xp').textContent = state.xp;
-    showFeedback(status, true, state.correctInRow);
     updateWordProgress(word.eng, true);
-    // Apply visual feedback after state updates
-    requestAnimationFrame(() => btn.classList.add('correct'));
   } else {
     state.correctInRow = 0;
-    showFeedback('LEARN!', false, 0);
     updateWordProgress(word.eng, false);
-    // Apply visual feedback after state updates
-    const correctBtn = children.find((b) => b.textContent === word.correct);
-    requestAnimationFrame(() => {
-      btn.classList.add('wrong');
-      correctBtn?.classList.add('correct');
-    });
   }
+
+  // Batch ALL visual updates in a single animation frame
+  requestAnimationFrame(() => {
+    if (isCorrect) {
+      btn.classList.add('correct');
+      if (xpElement) xpElement.textContent = state.xp;
+      // Show feedback
+      if (feedbackElement) {
+        feedbackElement.textContent = status + (streak > 1 ? ` x${streak}` : '');
+        feedbackElement.style.color = '#39ff14';
+        feedbackElement.style.textShadow = '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)';
+      }
+    } else {
+      btn.classList.add('wrong');
+      const correctBtn = children.find((b) => b.textContent === word.correct);
+      correctBtn?.classList.add('correct');
+      // Show feedback
+      if (feedbackElement) {
+        feedbackElement.textContent = 'LEARN!';
+        feedbackElement.style.color = '#ff2d78';
+        feedbackElement.style.textShadow = '0 0 10px #ff2d78, 0 0 25px rgba(255,45,120,0.7)';
+      }
+    }
+    if (feedbackElement) {
+      feedbackElement.classList.remove('hidden');
+      setTimeout(() => feedbackElement.classList.add('hidden'), 1500);
+    }
+  });
 
   saveProgress();
   updateMenuStats();
@@ -290,6 +319,10 @@ function showFeedback(message, isCorrect, streak = 0) {
 function updateMenuStats() {
   const mastered = getGameData().filter((w) => w.mastery >= 4).length;
   const learning = getGameData().filter((w) => w.mastery > 0 && w.mastery < 4).length;
-  document.getElementById('mastered-count').textContent = mastered;
-  document.getElementById('total-count').textContent = getGameData().length;
+  if (state.ui.masteredCountElement) {
+    state.ui.masteredCountElement.textContent = mastered;
+  }
+  if (state.ui.totalCountElement) {
+    state.ui.totalCountElement.textContent = getGameData().length;
+  }
 }

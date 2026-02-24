@@ -1,12 +1,12 @@
-const CACHE_VERSION = 'v8';
+const CACHE_VERSION = 'v9';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Assets with version query params for cache busting
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './style.css?v=8',
-  './bundle.js?v=8',
+  './style.css?v=9',
+  './bundle.js?v=9',
   './app.js',
   './data.js',
   './ui.js',
@@ -20,9 +20,9 @@ const ASSETS_TO_CACHE = [
 // Static assets that never change (cache-first forever)
 const STATIC_ASSETS = [
   './style.css',
-  './style.css?v=8',
+  './style.css?v=9',
   './bundle.js',
-  './bundle.js?v=8',
+  './bundle.js?v=9',
   './manifest.json',
   './assets/favicon.ico',
   './assets/logo.png'
@@ -107,9 +107,11 @@ self.addEventListener('fetch', (e) => {
   };
 
   // Cache-first for static assets (JS, CSS, images)
-  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', '').replace('?v=7', ''))) ||
-      url.pathname.endsWith('.js') || url.pathname.endsWith('.css') ||
-      url.pathname.endsWith('.png') || url.pathname.endsWith('.ico')) {
+  // Use normalized path (without query params) for matching
+  const basePath = url.pathname.split('?')[0];
+  if (STATIC_ASSETS.some(asset => basePath.endsWith(asset.replace('./', '').split('?')[0])) ||
+      basePath.endsWith('.js') || basePath.endsWith('.css') ||
+      basePath.endsWith('.png') || basePath.endsWith('.ico')) {
     e.respondWith(
       caches.match(e.request).then((response) => {
         if (response) {
