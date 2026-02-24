@@ -56,7 +56,8 @@ body::before {
   background: var(--crt-lines);
   pointer-events: none;
   z-index: 9000;
-  animation: crtFlicker 0.15s infinite;
+  /* Optimized: reduced animation frequency from 0.15s to 0.5s to reduce repaints */
+  animation: crtFlicker 0.5s infinite;
   contain: strict;
   will-change: opacity;
 }
@@ -296,7 +297,10 @@ body::after {
   white-space: nowrap;
   -webkit-clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  /* Performance: contain layout/style to prevent layout thrashing */
   contain: layout style;
+  /* Hint browser to optimize for hover state changes */
+  will-change: background, box-shadow, color;
 }
 
 .category-btn:hover {
@@ -402,7 +406,10 @@ header {
   overflow: hidden;
   -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  contain: layout style;
+  /* Performance: contain layout/style/paint to prevent layout thrashing */
+  contain: layout style paint;
+  /* Hint browser to optimize for hover state changes */
+  will-change: background, border-color, color, box-shadow, padding-left;
 }
 
 .option-btn::before {
