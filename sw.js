@@ -1,10 +1,12 @@
-const CACHE_NAME = 'pixel-word-v6';
+const CACHE_VERSION = 'v7';
+const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
+// Assets with version query params for cache busting
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './style.css',
-  './bundle.js',
+  './style.css?v=7',
+  './bundle.js?v=7',
   './app.js',
   './data.js',
   './ui.js',
@@ -18,7 +20,9 @@ const ASSETS_TO_CACHE = [
 // Static assets that never change (cache-first forever)
 const STATIC_ASSETS = [
   './style.css',
+  './style.css?v=7',
   './bundle.js',
+  './bundle.js?v=7',
   './manifest.json',
   './assets/favicon.ico',
   './assets/logo.png'
@@ -95,8 +99,15 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
+  // Helper to normalize URLs (strip query params for cache matching)
+  const normalizeUrl = (requestUrl) => {
+    const u = new URL(requestUrl);
+    u.search = '';
+    return u.toString();
+  };
+
   // Cache-first for static assets (JS, CSS, images)
-  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', ''))) ||
+  if (STATIC_ASSETS.some(asset => url.pathname.endsWith(asset.replace('./', '').replace('?v=7', ''))) ||
       url.pathname.endsWith('.js') || url.pathname.endsWith('.css') ||
       url.pathname.endsWith('.png') || url.pathname.endsWith('.ico')) {
     e.respondWith(
@@ -105,16 +116,25 @@ self.addEventListener('fetch', (e) => {
           console.log('[SW] Static cache hit:', url.pathname);
           return response;
         }
-        
-        console.log('[SW] Static cache miss:', url.pathname);
-        return fetch(e.request).then((fetchResponse) => {
-          if (fetchResponse.ok) {
-            const responseClone = fetchResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(e.request, responseClone);
-            });
+
+        // Try matching without query params for versioned URLs
+        const normalizedUrl = normalizeUrl(e.request.url);
+        return caches.match(normalizedUrl).then((cachedResponse) => {
+          if (cachedResponse) {
+            console.log('[SW] Static cache hit (normalized):', url.pathname);
+            return cachedResponse;
           }
-          return fetchResponse;
+
+          console.log('[SW] Static cache miss:', url.pathname);
+          return fetch(e.request).then((fetchResponse) => {
+            if (fetchResponse.ok) {
+              const responseClone = fetchResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(e.request, responseClone);
+              });
+            }
+            return fetchResponse;
+          });
         });
       })
     );

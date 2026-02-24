@@ -299,15 +299,20 @@
     const container = document.getElementById('category-list');
     if (!container) return;
 
-    container.innerHTML = '';
+    // Use DocumentFragment to batch DOM insertions
+    const fragment = document.createDocumentFragment();
 
     categories.forEach((category) => {
       const btn = document.createElement('button');
       btn.textContent = category;
       btn.className = 'category-btn';
       btn.onclick = () => onSelect(category);
-      container.appendChild(btn);
+      fragment.appendChild(btn);
     });
+
+    // Single DOM write operation
+    container.innerHTML = '';
+    container.appendChild(fragment);
   }
 
   // ==================== APP MODULE ====================
@@ -407,17 +412,21 @@
     const word = state.currentRound[state.currentQ];
     const options = generateOptionsForWord(word);
 
-    state.ui.wordElement.textContent = word.eng;
-    state.ui.optionsElement.innerHTML = '';
-    state.ui.explanationModal?.classList.add('hidden');
-
+    // Batch DOM operations: prepare content first
+    const fragment = document.createDocumentFragment();
     options.forEach((option) => {
       const btn = document.createElement('button');
       btn.className = 'option-btn';
       btn.textContent = option;
       btn.onclick = () => checkAnswer(option, word, btn);
-      state.ui.optionsElement.appendChild(btn);
+      fragment.appendChild(btn);
     });
+
+    // Apply all DOM changes in a single batch
+    state.ui.wordElement.textContent = word.eng;
+    state.ui.optionsElement.innerHTML = '';
+    state.ui.optionsElement.appendChild(fragment);
+    state.ui.explanationModal?.classList.add('hidden');
 
     state.wordStartTime = Date.now();
     state.totalAnswered++;
@@ -427,26 +436,33 @@
     const time = (Date.now() - state.wordStartTime) / 1000;
     const isCorrect = selected === word.correct;
 
-    state.ui.optionsElement.querySelectorAll('button').forEach((b) => (b.onclick = null));
+    // Cache DOM reads BEFORE any writes to avoid forced reflow
+    const buttons = state.ui.optionsElement.querySelectorAll('button');
+    const children = Array.from(state.ui.optionsElement.children);
+
+    // Disable all buttons
+    buttons.forEach((b) => (b.onclick = null));
 
     if (isCorrect) {
       const { status, xp: bonus } = getScoring(time);
-      btn.classList.add('correct');
       state.correctInRow++;
       state.xp += bonus;
       localStorage.setItem('pixelWordHunter_xp', state.xp);
       document.getElementById('xp').textContent = state.xp;
       showFeedback(status, true, state.correctInRow);
       updateWordProgress(word.eng, true);
+      // Apply visual feedback after state updates
+      requestAnimationFrame(() => btn.classList.add('correct'));
     } else {
-      btn.classList.add('wrong');
-      const correctBtn = Array.from(state.ui.optionsElement.children).find(
-        (b) => b.textContent === word.correct
-      );
-      correctBtn?.classList.add('correct');
       state.correctInRow = 0;
       showFeedback('LEARN!', false, 0);
       updateWordProgress(word.eng, false);
+      // Apply visual feedback after state updates
+      const correctBtn = children.find((b) => b.textContent === word.correct);
+      requestAnimationFrame(() => {
+        btn.classList.add('wrong');
+        correctBtn?.classList.add('correct');
+      });
     }
 
     saveProgress();

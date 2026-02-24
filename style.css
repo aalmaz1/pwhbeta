@@ -56,7 +56,9 @@ body::before {
   background: var(--crt-lines);
   pointer-events: none;
   z-index: 9000;
-  animation: crtFlicker 0.12s infinite;
+  animation: crtFlicker 0.15s infinite;
+  contain: strict;
+  will-change: opacity;
 }
 
 body::after {
@@ -66,15 +68,16 @@ body::after {
   background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%);
   pointer-events: none;
   z-index: 9001;
+  contain: strict;
 }
 
 @keyframes crtFlicker {
   0%   { opacity: 1; }
   92%  { opacity: 1; }
-  93%  { opacity: 0.96; }
+  93%  { opacity: 0.97; }
   94%  { opacity: 1; }
   98%  { opacity: 1; }
-  99%  { opacity: 0.94; }
+  99%  { opacity: 0.96; }
   100% { opacity: 1; }
 }
 
@@ -89,6 +92,7 @@ body::after {
   padding: 20px;
   position: relative;
   overflow: hidden;
+  contain: layout style;
 }
 
 .game-container::before {
@@ -102,6 +106,7 @@ body::after {
   transform: perspective(400px) rotateX(45deg) scaleX(1.5);
   transform-origin: bottom center;
   z-index: -1;
+  contain: strict;
 }
 
 .game-container::after {
@@ -113,6 +118,7 @@ body::after {
   height: 50%;
   background: linear-gradient(to top, rgba(255,45,120,0.08) 0%, transparent 100%);
   z-index: -1;
+  contain: strict;
 }
 
 .hidden {
@@ -129,6 +135,8 @@ body::after {
   color: var(--neon-cyan);
   text-shadow: var(--shadow-cyan);
   animation: titlePulse 3s ease-in-out infinite;
+  contain: layout style paint;
+  will-change: text-shadow, color;
 }
 
 @keyframes titlePulse {
@@ -255,6 +263,7 @@ body::after {
   padding: 16px;
   scrollbar-width: thin;
   scrollbar-color: var(--neon-purple) var(--bg-mid);
+  contain: layout style;
 }
 
 .category-grid::-webkit-scrollbar {
@@ -287,6 +296,7 @@ body::after {
   white-space: nowrap;
   -webkit-clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  contain: layout style;
 }
 
 .category-btn:hover {
@@ -349,6 +359,7 @@ header {
   margin: 70px 0 28px;
   text-align: center;
   padding: 0 16px;
+  contain: layout style;
 }
 
 .question-card h1 {
@@ -357,6 +368,8 @@ header {
   text-shadow: var(--shadow-cyan);
   letter-spacing: 4px;
   animation: wordGlow 2s ease-in-out infinite;
+  contain: layout style paint;
+  will-change: text-shadow;
 }
 
 @keyframes wordGlow {
@@ -389,6 +402,7 @@ header {
   overflow: hidden;
   -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  contain: layout style;
 }
 
 .option-btn::before {
@@ -424,6 +438,8 @@ header {
   text-shadow: 0 0 8px var(--neon-green);
   box-shadow: 0 0 16px rgba(57,255,20,0.5), inset 0 0 10px rgba(57,255,20,0.1);
   animation: correctFlash 0.4s ease;
+  contain: layout style paint;
+  will-change: box-shadow;
 }
 
 .option-btn.wrong {
@@ -433,6 +449,8 @@ header {
   text-shadow: var(--shadow-pink);
   box-shadow: 0 0 16px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
   animation: wrongShake 0.35s ease;
+  contain: layout style paint;
+  will-change: transform;
 }
 
 @keyframes correctFlash {
@@ -540,6 +558,8 @@ header {
   z-index: 200;
   pointer-events: none;
   animation: feedbackPop 0.3s ease;
+  contain: layout style paint;
+  will-change: transform, opacity;
 }
 
 @keyframes feedbackPop {
@@ -560,6 +580,7 @@ header {
     transparent 50%
   );
   background-size: 100% 4px;
+  contain: strict;
 }
 
 /* ─── SCROLLBAR GLOBAL ───────────────────────────────────────── */
