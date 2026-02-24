@@ -13,13 +13,18 @@ export function renderCategoryButtons(categories, onSelect) {
   const container = document.getElementById('category-list');
   if (!container) return;
 
-  container.innerHTML = '';
+  // Use DocumentFragment to batch DOM insertions
+  const fragment = document.createDocumentFragment();
 
   categories.forEach((category) => {
     const btn = document.createElement('button');
     btn.textContent = category;
     btn.className = 'category-btn';
     btn.onclick = () => onSelect(category);
-    container.appendChild(btn);
+    fragment.appendChild(btn);
   });
+
+  // Single DOM write operation
+  container.innerHTML = '';
+  container.appendChild(fragment);
 }
