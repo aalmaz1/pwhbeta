@@ -949,19 +949,23 @@ header {
   padding: 0 8px;
 }
 
+/* Base option button styles */
 .option-btn {
   padding: 15px 16px;
   font-family: inherit;
   font-size: clamp(9px, 2.5vw, 12px);
-  background: rgba(10, 0, 20, 0.8);
-  border: 1px solid rgba(191, 95, 255, 0.5);
-  color: var(--text-main);
+  min-height: 44px;
   cursor: pointer;
   letter-spacing: 1px;
   text-align: left;
   transition: all 0.15s;
   position: relative;
   overflow: hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  line-height: 1.6;
   -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   /* Performance: contain layout/style/paint to prevent layout thrashing */
@@ -997,23 +1001,198 @@ header {
   text-shadow: var(--shadow-purple);
 }
 
+.option-btn:active {
+  transform: scale(0.98);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC OPTION BUTTON STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── CYBERPUNK THEME ─────────────────────────────────────────── */
+.option-btn {
+  background: rgba(10, 0, 20, 0.8);
+  border: 1px solid #ff2d78;
+  color: #00f5ff;
+  text-shadow: 0 0 6px #00f5ff;
+}
+
 .option-btn:hover {
-  background: rgba(191, 95, 255, 0.15);
-  border-color: var(--neon-purple);
+  background: rgba(255, 45, 120, 0.2);
+  border-color: #ff2d78;
   color: #fff;
-  box-shadow: 0 0 14px rgba(191,95,255,0.4), inset 0 0 10px rgba(191,95,255,0.08);
+  box-shadow: 0 0 14px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
   padding-left: 28px;
+  text-shadow: 0 0 8px #00f5ff, 0 0 16px rgba(0,245,255,0.5);
 }
 
 .option-btn:hover::before {
   opacity: 1;
 }
 
-.option-btn:active {
-  transform: scale(0.98);
+/* ─── MIDNIGHT THEME ──────────────────────────────────────────── */
+[data-theme="midnight"] .option-btn {
+  background: rgba(10, 10, 18, 0.8);
+  border: 1px solid #4fc3f7;
+  color: #e3f2fd;
+  text-shadow: 0 0 4px rgba(79, 195, 247, 0.4);
 }
 
-/* Correct answer animation */
+[data-theme="midnight"] .option-btn:hover {
+  background: rgba(79, 195, 247, 0.15);
+  border-color: #4fc3f7;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(79,195,247,0.4), inset 0 0 8px rgba(79,195,247,0.1);
+  padding-left: 28px;
+  text-shadow: 0 0 6px #4fc3f7, 0 0 12px rgba(79,195,247,0.4);
+}
+
+[data-theme="midnight"] .option-btn:hover::before {
+  opacity: 1;
+  color: #4fc3f7;
+  text-shadow: 0 0 4px #4fc3f7;
+}
+
+/* ─── MATRIX THEME ───────────────────────────────────────────── */
+[data-theme="matrix"] .option-btn {
+  background: rgba(0, 8, 0, 0.8);
+  border: 1px solid #00ff41;
+  color: #00ff41;
+  text-shadow: 0 0 8px #00ff41;
+}
+
+[data-theme="matrix"] .option-btn:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
+  color: #fff;
+  box-shadow: 0 0 16px rgba(0,255,65,0.6), inset 0 0 12px rgba(0,255,65,0.15);
+  padding-left: 28px;
+  text-shadow: 0 0 10px #00ff41, 0 0 20px rgba(0,255,65,0.6);
+}
+
+[data-theme="matrix"] .option-btn:hover::before {
+  opacity: 1;
+  color: #00ff41;
+  text-shadow: 0 0 8px #00ff41;
+}
+
+/* ─── PAPER THEME (Light) ─────────────────────────────────────── */
+[data-theme="paper"] .option-btn {
+  background: #faf8f2;
+  border: 2px solid #d4634e;
+  color: #2b2b2b;
+  font-weight: bold;
+  text-shadow: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  -webkit-clip-path: none;
+  clip-path: none;
+}
+
+[data-theme="paper"] .option-btn:hover {
+  background: #d4634e;
+  border-color: #d4634e;
+  color: #faf8f2;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+  padding-left: 16px;
+  text-shadow: none;
+}
+
+[data-theme="paper"] .option-btn::before {
+  content: none;
+}
+
+/* ─── 3310 THEME (Nokia LCD) ──────────────────────────────────── */
+[data-theme="3310"] .option-btn {
+  background: #d4dcc6;
+  border: 2px solid #212121;
+  color: #212121;
+  font-weight: bold;
+  text-shadow: none;
+  box-shadow: 2px 2px 0 #212121;
+  -webkit-clip-path: none;
+  clip-path: none;
+}
+
+[data-theme="3310"] .option-btn:hover {
+  background: #212121;
+  border-color: #212121;
+  color: #c7cfb9;
+  box-shadow: 3px 3px 0 #212121;
+  padding-left: 16px;
+  text-shadow: none;
+  /* Ghosting effect */
+  position: relative;
+}
+
+[data-theme="3310"] .option-btn:hover::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: rgba(199, 207, 185, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="3310"] .option-btn::before {
+  content: none;
+}
+
+/* ─── SUNSET THEME ───────────────────────────────────────────── */
+[data-theme="sunset"] .option-btn {
+  background: rgba(26, 10, 46, 0.8);
+  border: 1px solid #ff6b9d;
+  color: #ffeaa7;
+  text-shadow: 0 0 6px rgba(255, 234, 167, 0.5);
+}
+
+[data-theme="sunset"] .option-btn:hover {
+  background: rgba(255, 107, 157, 0.2);
+  border-color: #ff6b9d;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255,107,157,0.5), inset 0 0 10px rgba(255,107,157,0.1);
+  padding-left: 28px;
+  text-shadow: 0 0 8px #ffeaa7, 0 0 16px rgba(255,234,167,0.5);
+}
+
+[data-theme="sunset"] .option-btn:hover::before {
+  opacity: 1;
+  color: #ff6b9d;
+  text-shadow: 0 0 4px #ff6b9d;
+}
+
+/* ─── MONO THEME (OLED) ───────────────────────────────────────── */
+[data-theme="mono"] .option-btn {
+  background: #1a1a1a;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  -webkit-clip-path: none;
+  clip-path: none;
+}
+
+[data-theme="mono"] .option-btn:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  padding-left: 16px;
+  text-shadow: none;
+}
+
+[data-theme="mono"] .option-btn::before {
+  content: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME-SPECIFIC CORRECT/WRONG STATES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cyberpunk correct/wrong */
 .option-btn.correct {
   background: rgba(57, 255, 20, 0.18);
   border-color: var(--neon-green);
@@ -1025,6 +1204,134 @@ header {
   will-change: box-shadow, transform;
 }
 
+.option-btn.wrong {
+  background: rgba(255, 45, 120, 0.18);
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  text-shadow: var(--shadow-pink);
+  box-shadow: 0 0 16px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
+  animation: wrongShake 0.5s ease;
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Midnight correct/wrong */
+[data-theme="midnight"] .option-btn.correct {
+  background: rgba(100, 255, 218, 0.18);
+  border-color: #64ffda;
+  color: #64ffda;
+  text-shadow: 0 0 8px #64ffda;
+  box-shadow: 0 0 16px rgba(100,255,218,0.5), inset 0 0 10px rgba(100,255,218,0.1);
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="midnight"] .option-btn.wrong {
+  background: rgba(79, 195, 247, 0.18);
+  border-color: #4fc3f7;
+  color: #4fc3f7;
+  text-shadow: 0 0 8px #4fc3f7;
+  box-shadow: 0 0 16px rgba(79,195,247,0.5), inset 0 0 10px rgba(79,195,247,0.1);
+  animation: wrongShake 0.5s ease;
+}
+
+/* Matrix correct/wrong */
+[data-theme="matrix"] .option-btn.correct {
+  background: rgba(0, 255, 65, 0.18);
+  border-color: #00ff41;
+  color: #00ff41;
+  text-shadow: 0 0 8px #00ff41;
+  box-shadow: 0 0 16px rgba(0,255,65,0.5), inset 0 0 10px rgba(0,255,65,0.1);
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="matrix"] .option-btn.wrong {
+  background: rgba(200, 50, 50, 0.18);
+  border-color: #c83232;
+  color: #c83232;
+  text-shadow: 0 0 8px #c83232;
+  box-shadow: 0 0 16px rgba(200,50,50,0.5), inset 0 0 10px rgba(200,50,50,0.1);
+  animation: wrongShake 0.5s ease;
+}
+
+/* Paper correct/wrong (light theme - no glow) */
+[data-theme="paper"] .option-btn.correct {
+  background: #2c5f2d;
+  border-color: #2c5f2d;
+  color: #faf8f2;
+  text-shadow: none;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="paper"] .option-btn.wrong {
+  background: #d4634e;
+  border-color: #d4634e;
+  color: #faf8f2;
+  text-shadow: none;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+  animation: wrongShake 0.5s ease;
+}
+
+/* 3310 correct/wrong (no glow) */
+[data-theme="3310"] .option-btn.correct {
+  background: #212121;
+  border-color: #212121;
+  color: #c7cfb9;
+  text-shadow: none;
+  box-shadow: 3px 3px 0 #212121;
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="3310"] .option-btn.wrong {
+  background: #4a4a4a;
+  border-color: #4a4a4a;
+  color: #c7cfb9;
+  text-shadow: none;
+  box-shadow: 3px 3px 0 #4a4a4a;
+  animation: wrongShake 0.5s ease;
+}
+
+/* Sunset correct/wrong */
+[data-theme="sunset"] .option-btn.correct {
+  background: rgba(255, 217, 61, 0.18);
+  border-color: #ffd93d;
+  color: #ffd93d;
+  text-shadow: 0 0 8px #ffd93d;
+  box-shadow: 0 0 16px rgba(255,217,61,0.5), inset 0 0 10px rgba(255,217,61,0.1);
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="sunset"] .option-btn.wrong {
+  background: rgba(255, 107, 157, 0.18);
+  border-color: #ff6b9d;
+  color: #ff6b9d;
+  text-shadow: 0 0 8px #ff6b9d;
+  box-shadow: 0 0 16px rgba(255,107,157,0.5), inset 0 0 10px rgba(255,107,157,0.1);
+  animation: wrongShake 0.5s ease;
+}
+
+/* Mono correct/wrong (maximum contrast, no glow) */
+[data-theme="mono"] .option-btn.correct {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+  text-shadow: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+}
+
+[data-theme="mono"] .option-btn.wrong {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+  text-shadow: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  animation: wrongShake 0.5s ease;
+}
+
+/* ─── ANIMATIONS ───────────────────────────────────────────────── */
 @keyframes correctFlash {
   0% { box-shadow: 0 0 30px rgba(57,255,20,0.9); }
   100% { box-shadow: 0 0 16px rgba(57,255,20,0.5); }
@@ -1036,18 +1343,6 @@ header {
   50% { transform: scale(1.02) translateY(-1px); }
   70% { transform: scale(1.04) translateY(-2px); }
   100% { transform: scale(1) translateY(0); }
-}
-
-/* Wrong answer animation */
-.option-btn.wrong {
-  background: rgba(255, 45, 120, 0.18);
-  border-color: var(--neon-pink);
-  color: var(--neon-pink);
-  text-shadow: var(--shadow-pink);
-  box-shadow: 0 0 16px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
-  animation: wrongShake 0.5s ease;
-  contain: layout style paint;
-  will-change: transform;
 }
 
 @keyframes wrongShake {
