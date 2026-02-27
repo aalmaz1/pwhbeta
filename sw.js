@@ -1,12 +1,12 @@
-const CACHE_VERSION = 'v9';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Assets with version query params for cache busting
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './style.css?v=9',
-  './bundle.js?v=9',
+  './style.css?v=7',
+  './bundle.js?v=7',
   './app.js',
   './data.js',
   './ui.js',
@@ -20,9 +20,9 @@ const ASSETS_TO_CACHE = [
 // Static assets that never change (cache-first forever)
 const STATIC_ASSETS = [
   './style.css',
-  './style.css?v=9',
+  './style.css?v=7',
   './bundle.js',
-  './bundle.js?v=9',
+  './bundle.js?v=7',
   './manifest.json',
   './assets/favicon.ico',
   './assets/logo.png'
@@ -131,8 +131,12 @@ self.addEventListener('fetch', (e) => {
           return fetch(e.request).then((fetchResponse) => {
             if (fetchResponse.ok) {
               const responseClone = fetchResponse.clone();
+              const normalizedUrl = normalizeUrl(e.request.url);
               caches.open(CACHE_NAME).then((cache) => {
                 cache.put(e.request, responseClone);
+                if (url.search) {
+                  cache.put(normalizedUrl, fetchResponse.clone());
+                }
               });
             }
             return fetchResponse;

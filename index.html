@@ -25,7 +25,7 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <!-- Preload critical JS bundle -->
-  <link rel="preload" href="bundle.js?v=9" as="script" fetchpriority="high">
+  <link rel="preload" href="bundle.js?v=7" as="script" fetchpriority="high">
 
   <!-- Preload font file for instant text rendering -->
   <link rel="preload" href="https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf" as="font" type="font/ttf" crossorigin fetchpriority="high">
@@ -69,16 +69,16 @@
     .edition-badge { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); letter-spacing: 6px; margin-bottom: 28px; }
     .stats-line { font-size: 9px; color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green); margin-bottom: 30px; letter-spacing: 2px; }
     .blink { font-size: 10px; color: var(--neon-pink); text-shadow: var(--shadow-pink); margin-bottom: 28px; }
-    .start-btn { padding: 16px 36px; font-family: inherit; font-size: 14px; background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); border-radius: 0; cursor: pointer; text-shadow: var(--shadow-pink); box-shadow: 0 0 12px rgba(255,45,120,0.5), inset 0 0 12px rgba(255,45,120,0.08); letter-spacing: 3px; transition: all 0.2s; -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); position: relative; overflow: hidden; }
+    .start-btn { padding: 16px 36px; font-family: inherit; font-size: 14px; background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); border-radius: 0; cursor: pointer; text-shadow: var(--shadow-pink); box-shadow: 0 0 12px rgba(255,45,120,0.5), inset 0 0 12px rgba(255,45,120,0.08); letter-spacing: 3px; transition: all 0.2s; -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); position: relative; overflow: hidden; contain: layout style paint; will-change: transform; }
     .reset-button { margin-top: 32px; font-size: 7px; color: var(--text-dim); cursor: pointer; letter-spacing: 2px; transition: color 0.2s; }
     .credits { position: absolute; bottom: 18px; font-size: 7px; color: var(--text-dim); letter-spacing: 2px; }
-    body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.15s infinite; contain: strict; will-change: opacity; }
+    body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.6s infinite; contain: strict; will-change: opacity; }
     body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%); pointer-events: none; z-index: 9001; contain: strict; }
-    @keyframes crtFlicker { 0% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: 0.97; } 94% { opacity: 1; } 98% { opacity: 1; } 99% { opacity: 0.96; } 100% { opacity: 1; } }
+    @keyframes crtFlicker { 0%, 96% { opacity: 1; } 97% { opacity: 0.98; } 98% { opacity: 1; } 99% { opacity: 0.96; } 100% { opacity: 1; } }
     @keyframes titlePulse { 0%, 100% { text-shadow: var(--shadow-cyan); color: var(--neon-cyan); } 50% { text-shadow: 0 0 16px #00f5ff, 0 0 40px rgba(0,245,255,0.9), 0 0 60px rgba(0,245,255,0.4); color: #aaffff; } }
     @keyframes blink { 50% { opacity: 0; } }
     .game-title { animation: titlePulse 3s ease-in-out infinite; contain: layout style paint; will-change: text-shadow, color; }
-    .edition-badge, .blink { animation: blink 2.5s step-end infinite; }
+    .edition-badge, .blink { animation: blink 2.5s step-end infinite; contain: layout style paint; will-change: opacity; }
     .blink { animation: blink 1s step-end infinite; }
   </style>
   
@@ -86,11 +86,11 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
-  <link rel="stylesheet" href="style.css?v=9" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="style.css?v=9"></noscript>
+  <link rel="stylesheet" href="style.css?v=7" media="print" onload="this.media='all'" fetchpriority="high">
+  <noscript><link rel="stylesheet" href="style.css?v=7"></noscript>
 
   <!-- Deferred JS bundle - auto-initializes when loaded -->
-  <script src="bundle.js?v=9" defer></script>
+  <script src="bundle.js?v=7" defer fetchpriority="high"></script>
 </head>
 <body>
   <div class="crt-overlay"></div>

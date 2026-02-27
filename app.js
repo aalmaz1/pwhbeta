@@ -110,13 +110,15 @@ function loadQuestion() {
     fragment.appendChild(btn);
   });
 
-  // Apply all DOM changes in a single batch
-  state.ui.wordElement.textContent = word.eng;
-  state.ui.optionsElement.innerHTML = '';
-  state.ui.optionsElement.appendChild(fragment);
-  state.ui.explanationModal?.classList.add('hidden');
+  // Apply all DOM changes in a single batch on the next frame
+  requestAnimationFrame(() => {
+    state.ui.wordElement.textContent = word.eng;
+    state.ui.optionsElement.innerHTML = '';
+    state.ui.optionsElement.appendChild(fragment);
+    state.ui.explanationModal?.classList.add('hidden');
+    state.wordStartTime = Date.now();
+  });
 
-  state.wordStartTime = Date.now();
   state.totalAnswered++;
 }
 
