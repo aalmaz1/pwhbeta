@@ -6,6 +6,254 @@
 (function() {
   'use strict';
 
+  // ==================== AUDIO MODULE ====================
+  const AudioEngine = {
+    ctx: null,
+    masterGain: null,
+    isMuted: false,
+    volume: 0.7,
+    bgmOscillator: null,
+    bgmGain: null,
+    isPlayingBGM: false,
+
+    // Initialize Web Audio API
+    init() {
+      try {
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        this.masterGain = this.ctx.createGain();
+        this.masterGain.gain.value = this.volume;
+        this.masterGain.connect(this.ctx.destination);
+        
+        // Load saved preferences
+        const savedMute = localStorage.getItem('pixelWordHunter_muted');
+        const savedVolume = localStorage.getItem('pixelWordHunter_volume');
+        
+        if (savedMute !== null) {
+          this.isMuted = savedMute === 'true';
+        }
+        if (savedVolume !== null) {
+          this.volume = parseFloat(savedVolume);
+          if (this.masterGain) {
+            this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
+          }
+        }
+        
+        console.log('[Audio] Engine initialized');
+        return true;
+      } catch (e) {
+        console.log('[Audio] Web Audio API not supported');
+        return false;
+      }
+    },
+
+    // Ensure audio context is running (required after user interaction)
+    ensureContext() {
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
+    },
+
+    // Create 8-bit style beep sound
+    playCorrectSound() {
+      if (!this.ctx || this.isMuted) return;
+      this.ensureContext();
+
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(880, this.ctx.currentTime); // A5
+      osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05); // A6
+
+      gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(this.ctx.currentTime);
+      osc.stop(this.ctx.currentTime + 0.1);
+    },
+
+    // Create 8-bit style error/boom sound
+    playWrongSound() {
+      if (!this.ctx || this.isMuted) return;
+      this.ensureContext();
+
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(300, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
+
+      gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(this.ctx.currentTime);
+      osc.stop(this.ctx.currentTime + 0.2);
+    },
+
+    // Create whoosh/transition sound
+    playTransitionSound() {
+      if (!this.ctx || this.isMuted) return;
+      this.ensureContext();
+
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.15);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(400, this.ctx.currentTime);
+      filter.frequency.linearRampToValueAtTime(3000, this.ctx.currentTime + 0.15);
+
+      gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(this.ctx.currentTime);
+      osc.stop(this.ctx.currentTime + 0.15);
+    },
+
+    // Toggle mute state
+    toggleMute() {
+      this.isMuted = !this.isMuted;
+      if (this.masterGain) {
+        this.masterGain.gain.setValueAtTime(
+          this.isMuted ? 0 : this.volume,
+          this.ctx.currentTime
+        );
+      }
+      localStorage.setItem('pixelWordHunter_muted', this.isMuted);
+      return this.isMuted;
+    },
+
+    // Set volume (0-1)
+    setVolume(value) {
+      this.volume = Math.max(0, Math.min(1, value));
+      if (this.masterGain && !this.isMuted) {
+        this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+      }
+      localStorage.setItem('pixelWordHunter_volume', this.volume);
+      return this.volume;
+    },
+
+    // Get current mute state
+    getMuteIcon() {
+      return this.isMuted ? '🔇' : '🔊';
+    }
+  };
+
+  // ==================== THEME MODULE ====================
+  const ThemeManager = {
+    currentTheme: 'cyberpunk',
+
+    init() {
+      const savedTheme = localStorage.getItem('pixelWordHunter_theme');
+      if (savedTheme) {
+        this.currentTheme = savedTheme;
+      }
+      this.applyTheme(this.currentTheme);
+      console.log('[Theme] Initialized:', this.currentTheme);
+    },
+
+    setTheme(theme) {
+      if (theme === this.currentTheme) return;
+      this.currentTheme = theme;
+      this.applyTheme(theme);
+      localStorage.setItem('pixelWordHunter_theme', theme);
+      console.log('[Theme] Changed to:', theme);
+    },
+
+    applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // Update active state in UI
+      document.querySelectorAll('.theme-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.theme === theme);
+      });
+    },
+
+    getCurrentTheme() {
+      return this.currentTheme;
+    }
+  };
+
+  // ==================== SETTINGS UI MODULE ====================
+  const SettingsUI = {
+    panel: null,
+    overlay: null,
+    isOpen: false,
+
+    init() {
+      this.panel = document.getElementById('settings-panel');
+      this.overlay = document.getElementById('settings-overlay');
+      
+      if (this.overlay) {
+        this.overlay.addEventListener('click', () => this.close());
+      }
+
+      // Update UI to match current settings
+      this.updateUI();
+    },
+
+    toggle() {
+      if (this.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
+
+    open() {
+      if (!this.panel) return;
+      this.isOpen = true;
+      this.panel.classList.add('open');
+      if (this.overlay) this.overlay.classList.add('open');
+      AudioEngine.playTransitionSound();
+    },
+
+    close() {
+      if (!this.panel) return;
+      this.isOpen = false;
+      this.panel.classList.remove('open');
+      if (this.overlay) this.overlay.classList.remove('open');
+    },
+
+    updateUI() {
+      // Update mute icon
+      const muteIcon = document.getElementById('mute-icon');
+      if (muteIcon) {
+        muteIcon.textContent = AudioEngine.getMuteIcon();
+      }
+
+      // Update volume slider
+      const volumeSlider = document.getElementById('volume-slider');
+      const volumeValue = document.getElementById('volume-value');
+      if (volumeSlider) {
+        volumeSlider.value = Math.round(AudioEngine.volume * 100);
+      }
+      if (volumeValue) {
+        volumeValue.textContent = Math.round(AudioEngine.volume * 100) + '%';
+      }
+
+      // Update theme selector
+      document.querySelectorAll('.theme-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.theme === ThemeManager.currentTheme);
+      });
+    }
+  };
+
   // ==================== DATA MODULE ====================
   let gameData = null;
   let categoriesCache = null;
@@ -332,6 +580,15 @@
   };
 
   async function initApp() {
+    // Initialize audio engine
+    AudioEngine.init();
+    
+    // Initialize theme
+    ThemeManager.init();
+    
+    // Initialize settings UI
+    SettingsUI.init();
+
     await loadGameData();
 
     state.ui = initUI();
@@ -361,18 +618,53 @@
         location.reload();
       }
     };
+    
+    // Expose settings functions globally
+    window.toggleSettings = () => SettingsUI.toggle();
+    window.setTheme = (theme) => {
+      ThemeManager.setTheme(theme);
+      SettingsUI.updateUI();
+    };
+    window.toggleMute = () => {
+      AudioEngine.toggleMute();
+      SettingsUI.updateUI();
+    };
+    window.setVolume = (value) => {
+      AudioEngine.setVolume(value / 100);
+      SettingsUI.updateUI();
+    };
 
-    console.log('✅ App initialized with adaptive learning algorithm');
+    console.log('✅ App initialized with audio, themes, and adaptive learning');
   }
 
   function showCategories() {
+    AudioEngine.playTransitionSound();
     toggleScreen('category');
   }
 
   function toggleScreen(screen) {
-    state.ui.menuScreenElement.classList.toggle('hidden', screen !== 'menu');
-    state.ui.categoryScreenElement.classList.toggle('hidden', screen !== 'category');
-    state.ui.gameScreenElement.classList.toggle('hidden', screen !== 'game');
+    // Add exit animation to current visible screen
+    const screens = ['menu', 'category', 'game'];
+    screens.forEach(s => {
+      const el = state.ui[`${s}ScreenElement`];
+      if (el && !el.classList.contains('hidden') && s !== screen) {
+        el.classList.add('screen-exit');
+        setTimeout(() => {
+          el.classList.add('hidden');
+          el.classList.remove('screen-exit');
+        }, 300);
+      }
+    });
+
+    // Show new screen with enter animation
+    const targetEl = state.ui[`${screen}ScreenElement`];
+    if (targetEl) {
+      targetEl.classList.remove('hidden');
+      targetEl.classList.add('screen-enter');
+      requestAnimationFrame(() => {
+        targetEl.classList.remove('screen-enter');
+      });
+    }
   }
 
   function loadSavedProgress() {
@@ -401,6 +693,7 @@
   function startGame(category) {
     state.selectedCategory = category;
     state.correctInRow = 0;
+    AudioEngine.playTransitionSound();
     toggleScreen('game');
     document.getElementById('category').textContent = category;
 
@@ -431,6 +724,11 @@
     // Apply all DOM changes in a single batch on the next frame
     requestAnimationFrame(() => {
       state.ui.wordElement.textContent = word.eng;
+      // Add typewriter effect class
+      state.ui.wordElement.classList.remove('typewriter', 'glitch');
+      void state.ui.wordElement.offsetWidth; // Trigger reflow
+      state.ui.wordElement.classList.add('typewriter');
+      
       state.ui.optionsElement.innerHTML = '';
       state.ui.optionsElement.appendChild(fragment);
       state.ui.explanationModal?.classList.add('hidden');
@@ -467,9 +765,13 @@
       state.xp += bonus;
       localStorage.setItem('pixelWordHunter_xp', state.xp);
       updateWordProgress(word.eng, true);
+      // Play correct sound
+      AudioEngine.playCorrectSound();
     } else {
       state.correctInRow = 0;
       updateWordProgress(word.eng, false);
+      // Play wrong sound
+      AudioEngine.playWrongSound();
     }
 
     // Batch ALL visual updates in a single animation frame
