@@ -76,6 +76,150 @@
   );
 }
 
+/* Midnight Theme - for night hunters */
+[data-theme="midnight"] {
+  --bg-deep:       #0a0a12;
+  --bg-mid:        #12121f;
+  --neon-pink:     #4fc3f7;
+  --neon-cyan:     #7c4dff;
+  --neon-purple:   #536dfe;
+  --neon-yellow:   #81d4fa;
+  --neon-green:    #64ffda;
+  --grid-color:    rgba(79, 195, 247, 0.15);
+  --text-main:     #e3f2fd;
+  --text-dim:      #90caf9;
+  --shadow-pink:   0 0 8px #4fc3f7, 0 0 20px rgba(79,195,247,0.5);
+  --shadow-cyan:   0 0 8px #7c4dff, 0 0 20px rgba(124,77,255,0.5);
+  --shadow-purple: 0 0 8px #536dfe, 0 0 20px rgba(83,109,254,0.5);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(79,195,247,0.05) 2px,
+    rgba(79,195,247,0.05) 4px
+  );
+}
+
+/* Phosphor Green Theme - old IBM monitor */
+[data-theme="phosphor"] {
+  --bg-deep:       #001100;
+  --bg-mid:        #002200;
+  --neon-pink:     #33ff00;
+  --neon-cyan:     #22cc00;
+  --neon-purple:   #11aa00;
+  --neon-yellow:   #33ff00;
+  --neon-green:    #33ff00;
+  --grid-color:    rgba(51, 255, 0, 0.15);
+  --text-main:     #ccffcc;
+  --text-dim:      #66aa66;
+  --shadow-pink:   0 0 8px #33ff00, 0 0 20px rgba(51,255,0,0.5);
+  --shadow-cyan:   0 0 8px #22cc00, 0 0 20px rgba(34,204,0,0.5);
+  --shadow-purple: 0 0 8px #11aa00, 0 0 20px rgba(17,170,0,0.5);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(51,255,0,0.08) 2px,
+    rgba(51,255,0,0.08) 4px
+  );
+}
+
+/* Paper Theme - for daylight */
+[data-theme="paper"] {
+  --bg-deep:       #f5f2e8;
+  --bg-mid:        #ebe6dc;
+  --neon-pink:     #d4634e;
+  --neon-cyan:     #2c5f2d;
+  --neon-purple:   #8b4513;
+  --neon-yellow:   #daa520;
+  --neon-green:    #3d5a3d;
+  --grid-color:    rgba(212, 99, 78, 0.1);
+  --text-main:     #2b2b2b;
+  --text-dim:      #5a5a5a;
+  --shadow-pink:   0 0 4px #d4634e, 0 0 10px rgba(212,99,78,0.3);
+  --shadow-cyan:   0 0 4px #2c5f2d, 0 0 10px rgba(44,95,45,0.3);
+  --shadow-purple: 0 0 4px #8b4513, 0 0 10px rgba(139,69,19,0.3);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(212,99,78,0.02) 2px,
+    rgba(212,99,78,0.02) 4px
+  );
+}
+
+/* GameBoy Theme - retro handheld */
+[data-theme="gameboy"] {
+  --bg-deep:       #8bac0f;
+  --bg-mid:        #9bbc0f;
+  --neon-pink:     #0f380f;
+  --neon-cyan:     #306230;
+  --neon-purple:   #0f380f;
+  --neon-yellow:   #306230;
+  --neon-green:    #8bac0f;
+  --grid-color:    rgba(15, 56, 15, 0.2);
+  --text-main:     #0f380f;
+  --text-dim:      #306230;
+  --shadow-pink:   0 0 4px #0f380f, 0 0 8px rgba(15,56,15,0.4);
+  --shadow-cyan:   0 0 4px #306230, 0 0 8px rgba(48,98,48,0.4);
+  --shadow-purple: 0 0 4px #0f380f, 0 0 8px rgba(15,56,15,0.4);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(15,56,15,0.05) 2px,
+    rgba(15,56,15,0.05) 4px
+  );
+}
+
+/* Sunset Theme - vaporwave aesthetic */
+[data-theme="sunset"] {
+  --bg-deep:       #1a0a2e;
+  --bg-mid:        #2d1b4e;
+  --neon-pink:     #ff6b9d;
+  --neon-cyan:     #c44569;
+  --neon-purple:   #f8b500;
+  --neon-yellow:   #ff8fab;
+  --neon-green:    #ffd93d;
+  --grid-color:    rgba(255, 107, 157, 0.15);
+  --text-main:     #ffeaa7;
+  --text-dim:      #dda0dd;
+  --shadow-pink:   0 0 8px #ff6b9d, 0 0 20px rgba(255,107,157,0.5);
+  --shadow-cyan:   0 0 8px #c44569, 0 0 20px rgba(196,69,105,0.5);
+  --shadow-purple: 0 0 8px #f8b500, 0 0 20px rgba(248,181,0,0.5);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,107,157,0.05) 2px,
+    rgba(255,107,157,0.05) 4px
+  );
+}
+
+/* Mono Theme - maximum contrast OLED */
+[data-theme="mono"] {
+  --bg-deep:       #000000;
+  --bg-mid:        #111111;
+  --neon-pink:     #ffffff;
+  --neon-cyan:     #cccccc;
+  --neon-purple:   #888888;
+  --neon-yellow:   #ffffff;
+  --neon-green:    #ffffff;
+  --grid-color:    rgba(255, 255, 255, 0.1);
+  --text-main:     #ffffff;
+  --text-dim:      #888888;
+  --shadow-pink:   0 0 8px #ffffff, 0 0 20px rgba(255,255,255,0.4);
+  --shadow-cyan:   0 0 8px #cccccc, 0 0 20px rgba(204,204,204,0.4);
+  --shadow-purple: 0 0 8px #888888, 0 0 20px rgba(136,136,136,0.4);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.03) 2px,
+    rgba(255,255,255,0.03) 4px
+  );
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -192,6 +336,42 @@ body::after {
     linear-gradient(90deg, rgba(255,176,0,0.06) 1px, transparent 1px);
 }
 
+[data-theme="midnight"] .game-container::before {
+  background:
+    linear-gradient(rgba(79,195,247,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,195,247,0.07) 1px, transparent 1px);
+}
+
+[data-theme="phosphor"] .game-container::before {
+  background:
+    linear-gradient(rgba(51,255,0,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(51,255,0,0.07) 1px, transparent 1px);
+}
+
+[data-theme="paper"] .game-container::before {
+  background:
+    linear-gradient(rgba(212,99,78,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,99,78,0.04) 1px, transparent 1px);
+}
+
+[data-theme="gameboy"] .game-container::before {
+  background:
+    linear-gradient(rgba(15,56,15,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,56,15,0.08) 1px, transparent 1px);
+}
+
+[data-theme="sunset"] .game-container::before {
+  background:
+    linear-gradient(rgba(255,107,157,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,157,0.07) 1px, transparent 1px);
+}
+
+[data-theme="mono"] .game-container::before {
+  background:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}
+
 .game-container::after {
   content: '';
   position: absolute;
@@ -210,6 +390,30 @@ body::after {
 
 [data-theme="amber"] .game-container::after {
   background: linear-gradient(to top, rgba(255,176,0,0.08) 0%, transparent 100%);
+}
+
+[data-theme="midnight"] .game-container::after {
+  background: linear-gradient(to top, rgba(79,195,247,0.08) 0%, transparent 100%);
+}
+
+[data-theme="phosphor"] .game-container::after {
+  background: linear-gradient(to top, rgba(51,255,0,0.08) 0%, transparent 100%);
+}
+
+[data-theme="paper"] .game-container::after {
+  background: linear-gradient(to top, rgba(212,99,78,0.04) 0%, transparent 100%);
+}
+
+[data-theme="gameboy"] .game-container::after {
+  background: linear-gradient(to top, rgba(15,56,15,0.08) 0%, transparent 100%);
+}
+
+[data-theme="sunset"] .game-container::after {
+  background: linear-gradient(to top, rgba(255,107,157,0.08) 0%, transparent 100%);
+}
+
+[data-theme="mono"] .game-container::after {
+  background: linear-gradient(to top, rgba(255,255,255,0.04) 0%, transparent 100%);
 }
 
 .hidden {
@@ -396,6 +600,7 @@ body::after {
 .theme-btns {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .theme-btn {
@@ -449,6 +654,36 @@ body::after {
 .theme-dot.amber {
   background: #ffb000;
   box-shadow: 0 0 4px #ffb000;
+}
+
+.theme-dot.midnight {
+  background: linear-gradient(135deg, #4fc3f7 0%, #7c4dff 100%);
+  box-shadow: 0 0 4px #7c4dff;
+}
+
+.theme-dot.phosphor {
+  background: #33ff00;
+  box-shadow: 0 0 4px #33ff00;
+}
+
+.theme-dot.paper {
+  background: linear-gradient(135deg, #d4634e 0%, #2c5f2d 100%);
+  box-shadow: 0 0 3px #d4634e;
+}
+
+.theme-dot.gameboy {
+  background: linear-gradient(135deg, #8bac0f 0%, #0f380f 100%);
+  box-shadow: 0 0 3px #0f380f;
+}
+
+.theme-dot.sunset {
+  background: linear-gradient(135deg, #ff6b9d 0%, #f8b500 100%);
+  box-shadow: 0 0 4px #ff6b9d;
+}
+
+.theme-dot.mono {
+  background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+  box-shadow: 0 0 4px #ffffff;
 }
 
 /* Sound toggle in settings */
