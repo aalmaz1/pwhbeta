@@ -177,9 +177,7 @@
 
     applyTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
-      
-      // Update active state in UI
-      document.querySelectorAll('.theme-option').forEach(el => {
+      document.querySelectorAll('.theme-btn').forEach(el => {
         el.classList.toggle('active', el.dataset.theme === theme);
       });
     },
@@ -189,70 +187,23 @@
     }
   };
 
-  // ==================== SETTINGS UI MODULE ====================
-  const SettingsUI = {
-    panel: null,
-    overlay: null,
-    isOpen: false,
+  // ==================== SOUND UI SYNC ====================
+  function updateSoundUI() {
+    const isMuted = AudioEngine.isMuted;
+    const icon = AudioEngine.getMuteIcon();
 
-    init() {
-      this.panel = document.getElementById('settings-panel');
-      this.overlay = document.getElementById('settings-overlay');
-      
-      if (this.overlay) {
-        this.overlay.addEventListener('click', () => this.close());
-      }
+    const menuIcon = document.getElementById('menu-sound-icon');
+    const menuLabel = document.getElementById('menu-sound-label');
+    const menuBtn = document.getElementById('menu-sound-btn');
+    if (menuIcon) menuIcon.textContent = icon;
+    if (menuLabel) menuLabel.textContent = isMuted ? 'OFF' : 'ON';
+    if (menuBtn) menuBtn.classList.toggle('muted', isMuted);
 
-      // Update UI to match current settings
-      this.updateUI();
-    },
-
-    toggle() {
-      if (this.isOpen) {
-        this.close();
-      } else {
-        this.open();
-      }
-    },
-
-    open() {
-      if (!this.panel) return;
-      this.isOpen = true;
-      this.panel.classList.add('open');
-      if (this.overlay) this.overlay.classList.add('open');
-      AudioEngine.playTransitionSound();
-    },
-
-    close() {
-      if (!this.panel) return;
-      this.isOpen = false;
-      this.panel.classList.remove('open');
-      if (this.overlay) this.overlay.classList.remove('open');
-    },
-
-    updateUI() {
-      // Update mute icon
-      const muteIcon = document.getElementById('mute-icon');
-      if (muteIcon) {
-        muteIcon.textContent = AudioEngine.getMuteIcon();
-      }
-
-      // Update volume slider
-      const volumeSlider = document.getElementById('volume-slider');
-      const volumeValue = document.getElementById('volume-value');
-      if (volumeSlider) {
-        volumeSlider.value = Math.round(AudioEngine.volume * 100);
-      }
-      if (volumeValue) {
-        volumeValue.textContent = Math.round(AudioEngine.volume * 100) + '%';
-      }
-
-      // Update theme selector
-      document.querySelectorAll('.theme-option').forEach(el => {
-        el.classList.toggle('active', el.dataset.theme === ThemeManager.currentTheme);
-      });
-    }
-  };
+    const gameIcon = document.getElementById('game-sound-icon');
+    const gameBtn = document.getElementById('game-sound-btn');
+    if (gameIcon) gameIcon.textContent = icon;
+    if (gameBtn) gameBtn.classList.toggle('muted', isMuted);
+  }
 
   // ==================== DATA MODULE ====================
   let gameData = null;
@@ -580,14 +531,8 @@
   };
 
   async function initApp() {
-    // Initialize audio engine
     AudioEngine.init();
-    
-    // Initialize theme
     ThemeManager.init();
-    
-    // Initialize settings UI
-    SettingsUI.init();
 
     await loadGameData();
 
@@ -603,9 +548,15 @@
       state.ui.xpElement.textContent = state.xp;
     }
 
+    updateSoundUI();
+
     document.querySelector('.start-btn').addEventListener('click', showCategories);
 
     window.exitGame = () => toggleScreen('menu');
+    window.goBack = () => {
+      AudioEngine.playTransitionSound();
+      toggleScreen('menu');
+    };
     window.nextQuestion = () => {
       state.currentQ++;
       loadQuestion();
@@ -618,20 +569,13 @@
         location.reload();
       }
     };
-    
-    // Expose settings functions globally
-    window.toggleSettings = () => SettingsUI.toggle();
+
     window.setTheme = (theme) => {
       ThemeManager.setTheme(theme);
-      SettingsUI.updateUI();
     };
     window.toggleMute = () => {
       AudioEngine.toggleMute();
-      SettingsUI.updateUI();
-    };
-    window.setVolume = (value) => {
-      AudioEngine.setVolume(value / 100);
-      SettingsUI.updateUI();
+      updateSoundUI();
     };
 
     console.log('✅ App initialized with audio, themes, and adaptive learning');

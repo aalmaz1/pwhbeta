@@ -25,7 +25,7 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <!-- Preload critical JS bundle -->
-  <link rel="preload" href="bundle.js?v=8" as="script" fetchpriority="high">
+  <link rel="preload" href="bundle.js?v=9" as="script" fetchpriority="high">
 
   <!-- Preload font file for instant text rendering -->
   <link rel="preload" href="https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf" as="font" type="font/ttf" crossorigin fetchpriority="high">
@@ -35,7 +35,6 @@
   
   <!-- Critical CSS - Inlined for fast first paint -->
   <style>
-    /* Font face with swap for instant text rendering */
     @font-face {
       font-family: 'Press Start 2P';
       font-style: normal;
@@ -80,102 +79,24 @@
     .game-title { animation: titlePulse 3s ease-in-out infinite; contain: layout style paint; will-change: text-shadow, color; }
     .edition-badge, .blink { animation: blink 2.5s step-end infinite; contain: layout style paint; will-change: opacity; }
     .blink { animation: blink 1s step-end infinite; }
-    /* Settings button */
-    .settings-btn { position: absolute; top: 14px; right: 14px; background: transparent; border: 1px solid var(--neon-cyan); color: var(--neon-cyan); font-family: inherit; font-size: 12px; padding: 8px 12px; cursor: pointer; text-shadow: var(--shadow-cyan); box-shadow: 0 0 8px rgba(0,245,255,0.3); transition: all 0.18s; z-index: 100; }
-    .settings-btn:hover { background: rgba(0,245,255,0.15); box-shadow: 0 0 16px rgba(0,245,255,0.6); }
-    .settings-panel { position: fixed; top: 0; right: -320px; width: 320px; height: 100vh; background: rgba(10, 0, 16, 0.98); border-left: 2px solid var(--neon-cyan); z-index: 1000; padding: 60px 24px 24px; transition: right 0.3s ease; overflow-y: auto; }
-    .settings-panel.open { right: 0; }
-    .settings-panel-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-    .settings-panel-overlay.open { opacity: 1; visibility: visible; }
-    .settings-title { font-size: 12px; color: var(--neon-cyan); text-shadow: var(--shadow-cyan); margin-bottom: 24px; letter-spacing: 3px; text-align: center; }
-    .settings-section { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(191,95,255,0.3); }
-    .settings-section:last-child { border-bottom: none; }
-    .settings-label { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); margin-bottom: 12px; display: block; letter-spacing: 2px; }
-    .theme-selector { display: flex; flex-direction: column; gap: 10px; }
-    .theme-option { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--text-dim); cursor: pointer; transition: all 0.2s; }
-    .theme-option:hover { border-color: var(--neon-cyan); background: rgba(0,245,255,0.1); }
-    .theme-option.active { border-color: var(--neon-green); background: rgba(57,255,20,0.1); }
-    .theme-preview { width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--text-dim); }
-    .theme-preview.cyberpunk { background: linear-gradient(135deg, #0a0010 0%, #ff2d78 50%, #00f5ff 100%); }
-    .theme-preview.matrix { background: linear-gradient(135deg, #000a00 0%, #00ff41 100%); }
-    .theme-preview.amber { background: linear-gradient(135deg, #1a0f00 0%, #ffb000 100%); }
-    .theme-name { font-size: 10px; color: var(--text-main); }
-    .audio-controls { display: flex; flex-direction: column; gap: 16px; }
-    .mute-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--text-dim); cursor: pointer; transition: all 0.2s; }
-    .mute-toggle:hover { border-color: var(--neon-cyan); }
-    .mute-toggle-label { font-size: 10px; color: var(--text-main); }
-    .mute-toggle-icon { font-size: 14px; }
-    .volume-slider-container { display: flex; flex-direction: column; gap: 8px; }
-    .volume-label { font-size: 9px; color: var(--text-dim); display: flex; justify-content: space-between; }
-    .volume-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: var(--bg-mid); border: 1px solid var(--neon-purple); outline: none; cursor: pointer; }
-    .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: var(--neon-cyan); border: none; cursor: pointer; box-shadow: var(--shadow-cyan); }
-    .close-settings { position: absolute; top: 14px; right: 14px; background: transparent; border: 1px solid var(--neon-pink); color: var(--neon-pink); font-family: inherit; font-size: 10px; padding: 6px 10px; cursor: pointer; transition: all 0.18s; }
-    .close-settings:hover { background: rgba(255,45,120,0.2); box-shadow: 0 0 12px rgba(255,45,120,0.5); }
   </style>
   
   <!-- Non-critical CSS loaded asynchronously -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
-  <link rel="stylesheet" href="style.css?v=8" media="print" onload="this.media='all'" fetchpriority="high">
-  <noscript><link rel="stylesheet" href="style.css?v=8"></noscript>
+  <link rel="stylesheet" href="style.css?v=9" media="print" onload="this.media='all'" fetchpriority="high">
+  <noscript><link rel="stylesheet" href="style.css?v=9"></noscript>
 
   <!-- Deferred JS bundle - auto-initializes when loaded -->
-  <script src="bundle.js?v=8" defer fetchpriority="high"></script>
+  <script src="bundle.js?v=9" defer fetchpriority="high"></script>
 </head>
 <body>
   <div class="crt-overlay"></div>
 
-  <!-- Settings Panel Overlay -->
-  <div id="settings-overlay" class="settings-panel-overlay"></div>
-  
-  <!-- Settings Panel -->
-  <aside id="settings-panel" class="settings-panel">
-    <button class="close-settings" onclick="toggleSettings()">✕</button>
-    <h2 class="settings-title">// SETTINGS //</h2>
-    
-    <!-- Theme Section -->
-    <div class="settings-section">
-      <label class="settings-label">COLOR THEME</label>
-      <div class="theme-selector">
-        <div class="theme-option active" data-theme="cyberpunk" onclick="setTheme('cyberpunk')">
-          <div class="theme-preview cyberpunk"></div>
-          <span class="theme-name">CYBERPUNK</span>
-        </div>
-        <div class="theme-option" data-theme="matrix" onclick="setTheme('matrix')">
-          <div class="theme-preview matrix"></div>
-          <span class="theme-name">MATRIX</span>
-        </div>
-        <div class="theme-option" data-theme="amber" onclick="setTheme('amber')">
-          <div class="theme-preview amber"></div>
-          <span class="theme-name">AMBER TERM</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Audio Section -->
-    <div class="settings-section">
-      <label class="settings-label">AUDIO</label>
-      <div class="audio-controls">
-        <div class="mute-toggle" onclick="toggleMute()">
-          <span class="mute-toggle-label">SOUND EFFECTS</span>
-          <span id="mute-icon" class="mute-toggle-icon">🔊</span>
-        </div>
-        <div class="volume-slider-container">
-          <div class="volume-label">
-            <span>VOLUME</span>
-            <span id="volume-value">70%</span>
-          </div>
-          <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="70" oninput="setVolume(this.value)">
-        </div>
-      </div>
-    </div>
-  </aside>
-
   <main role="main">
   <!-- ── MENU SCREEN ────────────────────────── -->
   <div id="menu-screen" class="game-container">
-    <button class="settings-btn" onclick="toggleSettings()">⚙ SETTINGS</button>
     <h1 class="game-title">
       PIXEL<br>WORD<br>HUNTER
     </h1>
@@ -185,24 +106,54 @@
     </div>
     <p class="blink">▸ PRESS HUNT ◂</p>
     <button class="start-btn">▶&nbsp;HUNT</button>
+
+    <!-- Menu controls: theme + sound -->
+    <div class="menu-controls">
+      <div class="menu-controls-row">
+        <span class="menu-controls-label">THEME</span>
+        <div class="theme-btns">
+          <button class="theme-btn active" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk">
+            <span class="theme-dot cyberpunk"></span>CYB
+          </button>
+          <button class="theme-btn" data-theme="matrix" onclick="setTheme('matrix')" title="Matrix">
+            <span class="theme-dot matrix"></span>MTX
+          </button>
+          <button class="theme-btn" data-theme="amber" onclick="setTheme('amber')" title="Amber">
+            <span class="theme-dot amber"></span>AMB
+          </button>
+        </div>
+      </div>
+      <div class="menu-controls-row">
+        <span class="menu-controls-label">SOUND</span>
+        <button id="menu-sound-btn" class="sound-toggle-btn" onclick="toggleMute()">
+          <span id="menu-sound-icon">🔊</span>
+          <span id="menu-sound-label">ON</span>
+        </button>
+      </div>
+    </div>
+
     <div class="reset-button" onclick="resetProgress()">[ RESET SAVE DATA ]</div>
     <div class="credits">© 2026 ALMAZ CORP</div>
   </div>
 
   <!-- ── CATEGORY SCREEN ────────────────────── -->
   <div id="category-screen" class="game-container hidden">
-    <button class="settings-btn" onclick="toggleSettings()">⚙ SETTINGS</button>
+    <button class="back-btn" onclick="goBack()">◀ BACK</button>
     <h2 class="screen-title">// SELECT CATEGORY //</h2>
     <div id="category-list" class="category-grid"></div>
   </div>
 
   <!-- ── GAME SCREEN ────────────────────────── -->
   <div id="game-screen" class="game-container hidden">
-    <button class="settings-btn" onclick="toggleSettings()">⚙ SETTINGS</button>
     <header>
       <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
-      <div class="stat">XP:&nbsp;<span id="xp">0</span></div>
-      <button class="exit-btn" onclick="exitGame()">✕ EXIT</button>
+      <div class="header-actions">
+        <div class="stat header-xp">XP:&nbsp;<span id="xp">0</span></div>
+        <button id="game-sound-btn" class="icon-btn sound-icon-btn" onclick="toggleMute()" title="Toggle sound">
+          <span id="game-sound-icon">🔊</span>
+        </button>
+        <button class="icon-btn exit-icon-btn" onclick="exitGame()" title="Exit to menu">✕</button>
+      </div>
     </header>
 
     <div id="quiz-box">
