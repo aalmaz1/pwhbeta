@@ -1,7 +1,7 @@
 /* Fonts are loaded via <link> in HTML for better performance */
 
 /* ═══════════════════════════════════════════════════════════════
-   THEME VARIABLES - Seven color schemes
+   THEME VARIABLES - Six color schemes
    ═══════════════════════════════════════════════════════════════ */
 
 /* Cyberpunk Theme (default) */
@@ -76,22 +76,28 @@
   );
 }
 
-/* Paper Theme - for daylight */
-[data-theme="paper"] {
-  --bg-deep:       #f5f2e8;
-  --bg-mid:        #ebe6dc;
-  --neon-pink:     #d4634e;
-  --neon-cyan:     #2c5f2d;
-  --neon-purple:   #8b4513;
-  --neon-yellow:   #daa520;
-  --neon-green:    #3d5a3d;
-  --grid-color:    rgba(212, 99, 78, 0.1);
-  --text-main:     #2b2b2b;
-  --text-dim:      #5a5a5a;
-  --shadow-pink:   0 0 4px #d4634e, 0 0 10px rgba(212,99,78,0.3);
-  --shadow-cyan:   0 0 4px #2c5f2d, 0 0 10px rgba(44,95,45,0.3);
-  --shadow-purple: 0 0 4px #8b4513, 0 0 10px rgba(139,69,19,0.3);
-  --crt-lines:     none;
+/* Matrix Theme */
+[data-theme="matrix"] {
+  --bg-deep:       #000800;
+  --bg-mid:        #001100;
+  --neon-pink:     #00ff41;
+  --neon-cyan:     #00ff41;
+  --neon-purple:   #00cc33;
+  --neon-yellow:   #00ff41;
+  --neon-green:    #00ff41;
+  --grid-color:    rgba(0, 255, 65, 0.15);
+  --text-main:     #ccffcc;
+  --text-dim:      #66aa66;
+  --shadow-pink:   0 0 8px #00ff41, 0 0 20px rgba(0,255,65,0.5);
+  --shadow-cyan:   0 0 8px #00ff41, 0 0 20px rgba(0,255,65,0.5);
+  --shadow-purple: 0 0 8px #00cc33, 0 0 20px rgba(0,204,51,0.5);
+  --crt-lines:     repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,65,0.05) 2px,
+    rgba(0,255,65,0.05) 4px
+  );
 }
 
 /* 3310 Theme - Nokia LCD */
@@ -217,12 +223,6 @@ body::after {
   100% { opacity: 1; }
 }
 
-body[data-theme="paper"]::before,
-body[data-theme="paper"]::after {
-  background: none;
-  animation: none;
-}
-
 body[data-theme="3310"]::before,
 body[data-theme="3310"]::after {
   background: none;
@@ -296,12 +296,6 @@ body[data-theme="3310"] .game-container {
     linear-gradient(90deg, rgba(79,195,247,0.07) 1px, transparent 1px);
 }
 
-[data-theme="paper"] .game-container::before {
-  background:
-    linear-gradient(rgba(212,99,78,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212,99,78,0.03) 1px, transparent 1px);
-}
-
 [data-theme="3310"] .game-container::before {
   background: none;
 }
@@ -336,10 +330,6 @@ body[data-theme="3310"] .game-container {
 
 [data-theme="midnight"] .game-container::after {
   background: linear-gradient(to top, rgba(79,195,247,0.08) 0%, transparent 100%);
-}
-
-[data-theme="paper"] .game-container::after {
-  background: linear-gradient(to top, rgba(212,99,78,0.03) 0%, transparent 100%);
 }
 
 [data-theme="3310"] .game-container::after {
@@ -592,11 +582,6 @@ body[data-theme="3310"] .game-container {
 .theme-dot.midnight {
   background: linear-gradient(135deg, #4fc3f7 0%, #7c4dff 100%);
   box-shadow: 0 0 4px #7c4dff;
-}
-
-.theme-dot.paper {
-  background: linear-gradient(135deg, #d4634e 0%, #2c5f2d 100%);
-  box-shadow: 0 0 3px #d4634e;
 }
 
 .theme-dot.t3310 {
@@ -1076,31 +1061,6 @@ header {
   text-shadow: 0 0 8px #00ff41;
 }
 
-/* ─── PAPER THEME (Light) ─────────────────────────────────────── */
-[data-theme="paper"] .option-btn {
-  background: #faf8f2;
-  border: 2px solid #d4634e;
-  color: #2b2b2b;
-  font-weight: bold;
-  text-shadow: none;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-  -webkit-clip-path: none;
-  clip-path: none;
-}
-
-[data-theme="paper"] .option-btn:hover {
-  background: #d4634e;
-  border-color: #d4634e;
-  color: #faf8f2;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.15);
-  padding-left: 16px;
-  text-shadow: none;
-}
-
-[data-theme="paper"] .option-btn::before {
-  content: none;
-}
-
 /* ─── 3310 THEME (Nokia LCD) ──────────────────────────────────── */
 [data-theme="3310"] .option-btn {
   background: #d4dcc6;
@@ -1250,25 +1210,6 @@ header {
   color: #c83232;
   text-shadow: 0 0 8px #c83232;
   box-shadow: 0 0 16px rgba(200,50,50,0.5), inset 0 0 10px rgba(200,50,50,0.1);
-  animation: wrongShake 0.5s ease;
-}
-
-/* Paper correct/wrong (light theme - no glow) */
-[data-theme="paper"] .option-btn.correct {
-  background: #2c5f2d;
-  border-color: #2c5f2d;
-  color: #faf8f2;
-  text-shadow: none;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
-}
-
-[data-theme="paper"] .option-btn.wrong {
-  background: #d4634e;
-  border-color: #d4634e;
-  color: #faf8f2;
-  text-shadow: none;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
   animation: wrongShake 0.5s ease;
 }
 
