@@ -107,10 +107,20 @@
     <p class="blink">▸ PRESS HUNT ◂</p>
     <button class="start-btn">▶&nbsp;HUNT</button>
 
-    <!-- Menu controls: theme + sound -->
-    <div class="menu-controls">
-      <div class="menu-controls-row">
-        <span class="menu-controls-label">THEME</span>
+    <button class="settings-btn" onclick="showSettings()">SETTINGS</button>
+
+    <div class="credits">© 2026 ALMAZ CORP</div>
+  </div>
+
+  <!-- ── SETTINGS SCREEN ─────────────────────── -->
+  <div id="settings-screen" class="game-container hidden">
+    <button class="back-btn" onclick="goBackFromSettings()">◀ BACK</button>
+    <h2 class="screen-title">// SETTINGS //</h2>
+    
+    <div class="settings-content">
+      <!-- Theme selector -->
+      <div class="settings-row">
+        <span class="settings-label">THEME</span>
         <div class="theme-btns">
           <button class="theme-btn active" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk">
             <span class="theme-dot cyberpunk"></span>CYB
@@ -123,17 +133,21 @@
           </button>
         </div>
       </div>
-      <div class="menu-controls-row">
-        <span class="menu-controls-label">SOUND</span>
-        <button id="menu-sound-btn" class="sound-toggle-btn" onclick="toggleMute()">
-          <span id="menu-sound-icon">🔊</span>
-          <span id="menu-sound-label">ON</span>
+      
+      <!-- Sound toggle -->
+      <div class="settings-row">
+        <span class="settings-label">SOUND</span>
+        <button id="settings-sound-btn" class="sound-toggle-btn" onclick="toggleMute()">
+          <span id="settings-sound-icon">🔊</span>
+          <span id="settings-sound-label">ON</span>
         </button>
       </div>
+      
+      <!-- Reset progress -->
+      <div class="settings-reset">
+        <button class="reset-btn" onclick="resetProgress()">RESET PROGRESS</button>
+      </div>
     </div>
-
-    <div class="reset-button" onclick="resetProgress()">[ RESET SAVE DATA ]</div>
-    <div class="credits">© 2026 ALMAZ CORP</div>
   </div>
 
   <!-- ── CATEGORY SCREEN ────────────────────── -->
@@ -149,9 +163,6 @@
       <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
       <div class="header-actions">
         <div class="stat header-xp">XP:&nbsp;<span id="xp">0</span></div>
-        <button id="game-sound-btn" class="icon-btn sound-icon-btn" onclick="toggleMute()" title="Toggle sound">
-          <span id="game-sound-icon">🔊</span>
-        </button>
         <button class="icon-btn exit-icon-btn" onclick="exitGame()" title="Exit to menu">✕</button>
       </div>
     </header>

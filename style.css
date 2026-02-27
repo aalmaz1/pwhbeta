@@ -333,6 +333,28 @@ body::after {
   text-shadow: var(--shadow-pink);
 }
 
+/* Settings button in main menu */
+.settings-btn {
+  margin-top: 20px;
+  padding: 10px 24px;
+  font-family: inherit;
+  font-size: 10px;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--text-dim);
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.settings-btn:hover {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  text-shadow: var(--shadow-cyan);
+  box-shadow: 0 0 8px rgba(0,245,255,0.3);
+}
+
 .credits {
   position: absolute;
   bottom: 18px;
@@ -342,33 +364,32 @@ body::after {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MENU CONTROLS (theme + sound inline in menu)
+   SETTINGS SCREEN
    ═══════════════════════════════════════════════════════════════ */
 
-.menu-controls {
-  margin-top: 24px;
+.settings-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
   max-width: 320px;
-  padding: 16px;
+  padding: 20px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(191,95,255,0.25);
 }
 
-.menu-controls-row {
+.settings-row {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.menu-controls-label {
-  font-size: 8px;
+.settings-label {
+  font-size: 10px;
   color: var(--neon-purple);
   text-shadow: var(--shadow-purple);
   letter-spacing: 2px;
-  min-width: 46px;
+  min-width: 60px;
 }
 
 /* Theme buttons row */
@@ -430,7 +451,7 @@ body::after {
   box-shadow: 0 0 4px #ffb000;
 }
 
-/* Sound toggle in menu */
+/* Sound toggle in settings */
 .sound-toggle-btn {
   display: flex;
   align-items: center;
@@ -456,6 +477,33 @@ body::after {
 .sound-toggle-btn.muted {
   border-color: var(--text-dim);
   color: var(--text-dim);
+}
+
+/* Reset button in settings */
+.settings-reset {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(191,95,255,0.2);
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 10px;
+  background: transparent;
+  color: var(--neon-pink);
+  border: 1px solid var(--neon-pink);
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.reset-btn:hover {
+  background: rgba(255,45,120,0.15);
+  box-shadow: 0 0 12px rgba(255,45,120,0.5);
+  text-shadow: var(--shadow-pink);
 }
 
 /* ─── BACK BUTTON (category screen) ─────────────────────────── */
@@ -655,21 +703,6 @@ header {
   cursor: pointer;
   transition: all 0.18s;
   flex-shrink: 0;
-}
-
-.sound-icon-btn {
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
-}
-
-.sound-icon-btn:hover {
-  background: rgba(0,245,255,0.12);
-  box-shadow: 0 0 12px rgba(0,245,255,0.5);
-}
-
-.sound-icon-btn.muted {
-  border-color: var(--text-dim);
-  color: var(--text-dim);
 }
 
 .exit-icon-btn {
@@ -1021,9 +1054,10 @@ header {
   .stat { font-size: 7px; }
   .icon-btn { width: 36px; height: 36px; font-size: 13px; }
   .category-grid { max-height: 50vh; gap: 8px; padding: 12px; }
-  .menu-controls { max-width: 100%; padding: 12px; gap: 10px; }
+  .settings-content { max-width: 100%; padding: 12px; gap: 12px; }
   .theme-btn { padding: 6px 7px; font-size: 7px; min-width: 44px; min-height: 40px; }
   .back-btn { font-size: 8px; padding: 7px 10px; }
+  .settings-btn { font-size: 9px; padding: 8px 18px; }
 }
 
 /* Small Devices (phones, 375px to 480px) */
@@ -1043,7 +1077,7 @@ header {
   .next-btn { padding: 13px 28px; font-size: 11px; }
   header { padding: 8px 12px; }
   .stat { font-size: 8px; }
-  .menu-controls { max-width: 100%; }
+  .settings-content { max-width: 100%; }
 }
 
 /* Medium Devices (tablets, 481px to 768px) */
@@ -1105,8 +1139,8 @@ header {
   .stat { font-size: 7px; }
   .icon-btn { width: 36px; height: 36px; font-size: 12px; }
   .credits { display: none; }
-  .menu-controls { margin-top: 12px; gap: 8px; padding: 10px; }
-  .menu-controls-row { gap: 8px; }
+  .settings-content { margin-top: 12px; gap: 10px; padding: 10px; }
+  .settings-row { gap: 8px; }
 }
 
 /* Extra tall screens (min-height: 900px) */
@@ -1131,6 +1165,8 @@ header {
   .sound-toggle-btn { min-height: 48px; }
   .theme-btn { min-height: 48px; }
   .back-btn { min-height: 48px; }
+  .settings-btn { min-height: 48px; }
+  .reset-btn { min-height: 48px; }
 
   .option-btn:hover {
     background: rgba(10, 0, 20, 0.8);
