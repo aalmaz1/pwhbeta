@@ -157,18 +157,22 @@
   // ==================== THEME MODULE ====================
   const ThemeManager = {
     currentTheme: 'cyberpunk',
+    themes: ['cyberpunk', 'midnight', 'matrix', 'paper', '3310', 'sunset', 'mono'],
 
     init() {
       const savedTheme = localStorage.getItem('pixelWordHunter_theme');
       if (savedTheme) {
-        this.currentTheme = savedTheme;
+        const normalizedTheme = savedTheme === 'gameboy' ? '3310' : savedTheme;
+        if (this.themes.includes(normalizedTheme)) {
+          this.currentTheme = normalizedTheme;
+        }
       }
       this.applyTheme(this.currentTheme);
       console.log('[Theme] Initialized:', this.currentTheme);
     },
 
     setTheme(theme) {
-      if (theme === this.currentTheme) return;
+      if (!this.themes.includes(theme) || theme === this.currentTheme) return;
       this.currentTheme = theme;
       this.applyTheme(theme);
       localStorage.setItem('pixelWordHunter_theme', theme);
@@ -176,7 +180,9 @@
     },
 
     applyTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
+      if (document.body) {
+        document.body.setAttribute('data-theme', theme);
+      }
       document.querySelectorAll('.theme-btn').forEach(el => {
         el.classList.toggle('active', el.dataset.theme === theme);
       });
