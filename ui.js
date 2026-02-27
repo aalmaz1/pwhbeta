@@ -1,6 +1,7 @@
 export function initUI() {
   return {
     menuScreenElement: document.getElementById('menu-screen'),
+    settingsScreenElement: document.getElementById('settings-screen'),
     categoryScreenElement: document.getElementById('category-screen'),
     gameScreenElement: document.getElementById('game-screen'),
     wordElement: document.getElementById('word'),

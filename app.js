@@ -185,17 +185,13 @@ function updateSoundUI() {
   const isMuted = AudioEngine.isMuted;
   const icon = AudioEngine.getMuteIcon();
 
-  const menuIcon = document.getElementById('menu-sound-icon');
-  const menuLabel = document.getElementById('menu-sound-label');
-  const menuBtn = document.getElementById('menu-sound-btn');
-  if (menuIcon) menuIcon.textContent = icon;
-  if (menuLabel) menuLabel.textContent = isMuted ? 'OFF' : 'ON';
-  if (menuBtn) menuBtn.classList.toggle('muted', isMuted);
-
-  const gameIcon = document.getElementById('game-sound-icon');
-  const gameBtn = document.getElementById('game-sound-btn');
-  if (gameIcon) gameIcon.textContent = icon;
-  if (gameBtn) gameBtn.classList.toggle('muted', isMuted);
+  // Settings screen sound controls
+  const settingsIcon = document.getElementById('settings-sound-icon');
+  const settingsLabel = document.getElementById('settings-sound-label');
+  const settingsBtn = document.getElementById('settings-sound-btn');
+  if (settingsIcon) settingsIcon.textContent = icon;
+  if (settingsLabel) settingsLabel.textContent = isMuted ? 'OFF' : 'ON';
+  if (settingsBtn) settingsBtn.classList.toggle('muted', isMuted);
 }
 
 const state = {
@@ -232,6 +228,14 @@ export async function initApp() {
   document.querySelector('.start-btn').addEventListener('click', showCategories);
 
   window.exitGame = () => toggleScreen('menu');
+  window.showSettings = () => {
+    AudioEngine.playTransitionSound();
+    toggleScreen('settings');
+  };
+  window.goBackFromSettings = () => {
+    AudioEngine.playTransitionSound();
+    toggleScreen('menu');
+  };
   window.goBack = () => {
     AudioEngine.playTransitionSound();
     toggleScreen('menu');
@@ -267,7 +271,7 @@ function showCategories() {
 
 function toggleScreen(screen) {
   // Add exit animation to current visible screen
-  const screens = ['menu', 'category', 'game'];
+  const screens = ['menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = state.ui[`${s}ScreenElement`];
     if (el && !el.classList.contains('hidden') && s !== screen) {
