@@ -157,7 +157,7 @@
   // ==================== THEME MODULE ====================
   const ThemeManager = {
     currentTheme: 'cyberpunk',
-    themes: ['cyberpunk', 'midnight', 'matrix', 'paper', '3310', 'sunset', 'mono'],
+    themes: ['cyberpunk', 'midnight', 'matrix', '3310', 'sunset', 'mono'],
 
     init() {
       const savedTheme = localStorage.getItem('pixelWordHunter_theme');
