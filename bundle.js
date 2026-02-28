@@ -856,6 +856,12 @@
     return { status: '⏰ SLOW', xp: 5 };
   }
 
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function showExplanation(word) {
     const modal = document.getElementById('explanation-modal');
     const list = document.getElementById('explanation-list');
@@ -869,12 +875,12 @@
 
     list.innerHTML =
       '<div style="font-size: 11px; line-height: 1.8;">' +
-      '<p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">' + word.eng + '</p>' +
-      '<p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">' + word.correct + '</p>' +
-      (hasValidExample ? '<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"' + word.exampleEng + '"</p>' : '') +
-      (hasValidRusExample ? '<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">' + word.exampleRus + '</p>' : '') +
+      '<p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">' + escapeHtml(word.eng) + '</p>' +
+      '<p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">' + escapeHtml(word.correct) + '</p>' +
+      (hasValidExample ? '<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"' + escapeHtml(word.exampleEng) + '"</p>' : '') +
+      (hasValidRusExample ? '<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">' + escapeHtml(word.exampleRus) + '</p>' : '') +
       '<p style="color: #ffe600; text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">' +
-      'MASTERY: <span style="color: ' + getMasteryColor(masteryLevel) + '">' + masteryLabel + '</span>' +
+      'MASTERY: <span style="color: ' + getMasteryColor(masteryLevel) + '">' + escapeHtml(masteryLabel) + '</span>' +
       '</p></div>';
 
     const nextBtn = modal.querySelector('.next-btn');
@@ -911,11 +917,11 @@
     list.innerHTML =
       '<div style="font-size: 11px; line-height: 2; text-align: center;">' +
       '<p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 24px; letter-spacing: 3px;">// ROUND COMPLETE //</p>' +
-      '<p style="color: #ffe600; margin-bottom: 20px;">XP: <span style="color: #39ff14;">' + state.xp + '</span></p>' +
+      '<p style="color: #ffe600; margin-bottom: 20px;">XP: <span style="color: #39ff14;">' + escapeHtml(String(state.xp)) + '</span></p>' +
       '<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">' +
-      '<span style="color: #bf5fff;">🟣 ' + mastered + '</span>' +
-      '<span style="color: #ff8800;">🟠 ' + learning + '</span>' +
-      '<span style="color: #ff2d78;">🔴 ' + newWords + '</span>' +
+      '<span style="color: #bf5fff;">🟣 ' + escapeHtml(String(mastered)) + '</span>' +
+      '<span style="color: #ff8800;">🟠 ' + escapeHtml(String(learning)) + '</span>' +
+      '<span style="color: #ff2d78;">🔴 ' + escapeHtml(String(newWords)) + '</span>' +
       '</div>' +
       '<p style="color: #8877aa; font-size: 9px; margin-top: 24px;">Keep practicing to master all words!</p>' +
       '</div>';

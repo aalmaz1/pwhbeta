@@ -45,22 +45,28 @@ function storageRemove(key) {
 export { storageGet, storageSet, storageRemove };
 
 export function saveProgress() {
-  const saveObj = {};
-  getGameData().forEach((w) => {
-    if (w.mastery > 0 || w.lastSeen > 0) {
-      saveObj[w.eng] = {
-        mastery: w.mastery,
-        lastSeen: w.lastSeen,
-        correctCount: w.correctCount || 0,
-        incorrectCount: w.incorrectCount || 0
-      };
-    }
-  });
+  if (!storageAvailable) return;
+  try {
+    const saveObj = {};
+    getGameData().forEach((w) => {
+      if (w.mastery > 0 || w.lastSeen > 0) {
+        saveObj[w.eng] = {
+          mastery: w.mastery,
+          lastSeen: w.lastSeen,
+          correctCount: w.correctCount || 0,
+          incorrectCount: w.incorrectCount || 0
+        };
+      }
+    });
 
-  storageSet(STORAGE_KEY, JSON.stringify(saveObj));
+    storageSet(STORAGE_KEY, JSON.stringify(saveObj));
+  } catch (e) {
+    console.warn('[Storage] Save failed:', e);
+  }
 }
 
 export function loadProgress() {
+  if (!storageAvailable) return {};
   try {
     return JSON.parse(storageGet(STORAGE_KEY)) || {};
   } catch {
@@ -69,6 +75,7 @@ export function loadProgress() {
 }
 
 export function resetProgress() {
+  if (!storageAvailable) return;
   storageRemove(STORAGE_KEY);
   getGameData().forEach((w) => {
     w.mastery = 0;
