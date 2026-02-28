@@ -104,7 +104,6 @@ const AudioEngine = {
 
     const { osc, gain } = this.createOscillator('sine', 400);
     const filter = this.ctx.createBiquadFilter();
-    return { osc, gain };
 
     osc.type = 'sine';
     osc.frequency.setValueAtTime(400, this.ctx.currentTime);
@@ -133,7 +132,6 @@ const AudioEngine = {
         this.ctx.currentTime
       );
     }
-    storageSet('pixelWordHunter_muted', this.isMuted);
     storageSet('pixelWordHunter_muted', this.isMuted);
     return this.isMuted;
   },
