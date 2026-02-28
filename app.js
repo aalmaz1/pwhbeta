@@ -107,9 +107,9 @@ const AudioEngine = {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
+    const filter = this.ctx.createBiquadFilter();
     const { osc, gain } = this.createOscillator('sine', 400);
     osc.connect(filter);
-    const filter = this.ctx.createBiquadFilter();
 
     osc.type = 'sine';
     osc.frequency.setValueAtTime(400, this.ctx.currentTime);
