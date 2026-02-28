@@ -47,7 +47,7 @@ const AudioEngine = {
     }
   },
 
-  createOscillator(type, frequency) {
+  createOscillator(type, frequency) { 
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     osc.type = type;
@@ -55,7 +55,7 @@ const AudioEngine = {
     return { osc, gain };
   }
 
-  playCorrectSound() {
+  playCorrectSound() { 
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
@@ -71,7 +71,7 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.1);
   },
 
-  playWrongSound() {
+  playWrongSound() { 
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
@@ -87,7 +87,7 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.2);
   },
 
-  playTransitionSound() {
+  playTransitionSound() { 
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
@@ -114,7 +114,7 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.15);
   },
 
-  toggleMute() {
+  toggleMute() { 
     this.isMuted = !this.isMuted;
     if (this.masterGain) {
       this.masterGain.gain.setValueAtTime(
@@ -126,7 +126,7 @@ const AudioEngine = {
     return this.isMuted;
   },
 
-  setVolume(value) {
+  setVolume(value) { 
     this.volume = Math.max(0, Math.min(1, value));
     if (this.masterGain && !this.isMuted) {
       this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
@@ -135,7 +135,7 @@ const AudioEngine = {
     return this.volume;
   },
 
-  getMuteIcon() {
+  getMuteIcon() { 
     return this.isMuted ? '🔇' : '🔊';
   }
 };
