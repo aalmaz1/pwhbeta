@@ -244,7 +244,7 @@ export async function initApp() {
     feedbackEl.setAttribute('aria-live', 'polite');
   }
 
-  document.querySelector('.start-btn').addEventListener('click', () => {
+  document.querySelector('.start-btn').addEventListener('click', function() {
     AudioEngine.ensureContext();
     showCategories();
   });
@@ -375,6 +375,7 @@ function loadQuestion() {
   state.ui.optionsElement.appendChild(fragment);
 
   requestAnimationFrame(() => {
+      container.innerHTML = '';
     state.ui.wordElement.textContent = word.eng;
     state.ui.wordElement.classList.remove('typewriter', 'glitch');
     void state.ui.wordElement.offsetWidth;
