@@ -17,8 +17,8 @@ const AudioEngine = {
       this.masterGain.gain.value = this.volume;
       this.masterGain.connect(this.ctx.destination);
 
-      const savedMute = storageGet('pixelWordHunter_muted');
-      const savedVolume = storageGet('pixelWordHunter_volume');
+      const savedMute = storageGet('pixelWordHunter_muted') === 'true';
+      const savedVolume = parseFloat(storageGet('pixelWordHunter_volume'));
 
       if (savedMute !== null) {
         this.isMuted = savedMute === 'true';

@@ -30,9 +30,5 @@ export function renderCategoryButtons(categories, onSelect) {
     container.innerHTML = '';
     container.appendChild(fragment);
   });
-
-  requestAnimationFrame(() => {
-    container.innerHTML = '';
-    container.appendChild(fragment);
   });
 }

@@ -17,7 +17,6 @@ const storageAvailable = isLocalStorageAvailable();
 
 function storageGet(key) {
     if (!storageAvailable) return null;
-  if (!storageAvailable) return null;
   try {
     return localStorage.getItem(key);
   } catch {
@@ -27,7 +26,6 @@ function storageGet(key) {
 
 function storageSet(key, value) {
     if (!storageAvailable) return;
-  if (!storageAvailable) return;
   try {
     localStorage.setItem(key, value);
   } catch (error) {

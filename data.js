@@ -52,22 +52,24 @@ async function fetchWithRetry(url, retries = MAX_FETCH_RETRIES) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       return response;
     } catch (err) {
       if (attempt === retries) {
-        const errorEl = document.getElementById('load-error');
-        if (errorEl) {
-          errorEl.textContent = 'Failed to load data. Please refresh the page.';
-          errorEl.removeAttribute('hidden');
-          errorEl.setAttribute('role', 'alert');
-        }
+        showError('Failed to load data. Please refresh the page.');
         throw err;
       }
       await new Promise(resolve => setTimeout(resolve, FETCH_RETRY_DELAY_MS * attempt));
     }
+  }
+}
+
+function showError(message) {
+  const errorEl = document.getElementById('load-error');
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.removeAttribute('hidden');
+    errorEl.setAttribute('role', 'alert');
   }
 }
 

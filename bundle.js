@@ -97,19 +97,12 @@
       if (!this.ctx || this.isMuted) return;
       this.ensureContext();
 
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+      const { osc, gain } = this.createOscillator('square', 880);
       osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
-
       gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
-
       osc.connect(gain);
       gain.connect(this.masterGain);
-
       osc.start(this.ctx.currentTime);
       osc.stop(this.ctx.currentTime + 0.1);
     },
