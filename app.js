@@ -53,7 +53,7 @@ const AudioEngine = {
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
     return { osc, gain };
-  }
+  },
 
   playCorrectSound() { 
     if (!this.ctx || this.isMuted) return;
