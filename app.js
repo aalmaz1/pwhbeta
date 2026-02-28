@@ -52,7 +52,6 @@ const AudioEngine = {
     const gain = this.ctx.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
-    return { osc, gain };
   }
 
   playCorrectSound() {
@@ -62,7 +61,6 @@ const AudioEngine = {
     const { osc, gain } = this.createOscillator('square', 880);
     osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
     gain.connect(this.masterGain);
-    return { osc, gain };
 
     osc.type = 'square';
     osc.frequency.setValueAtTime(880, this.ctx.currentTime);
@@ -85,7 +83,6 @@ const AudioEngine = {
     const { osc, gain } = this.createOscillator('sawtooth', 300);
     osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
     gain.connect(this.masterGain);
-    return { osc, gain };
 
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(300, this.ctx.currentTime);

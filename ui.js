@@ -30,5 +30,4 @@ export function renderCategoryButtons(categories, onSelect) {
     container.innerHTML = '';
     container.appendChild(fragment);
   });
-  });
 }
