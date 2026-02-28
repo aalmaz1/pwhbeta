@@ -18,7 +18,6 @@ export function renderCategoryButtons(categories, onSelect) {
   const container = document.getElementById('category-list');
   if (!container) return;
 
-  // Use DocumentFragment to batch DOM insertions
   const fragment = document.createDocumentFragment();
 
   categories.forEach((category) => {
@@ -29,7 +28,8 @@ export function renderCategoryButtons(categories, onSelect) {
     fragment.appendChild(btn);
   });
 
-  // Single DOM write operation
-  container.innerHTML = '';
-  container.appendChild(fragment);
+  requestAnimationFrame(() => {
+    container.innerHTML = '';
+    container.appendChild(fragment);
+  });
 }
