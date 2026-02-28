@@ -76,30 +76,6 @@
   );
 }
 
-/* Matrix Theme */
-[data-theme="matrix"] {
-  --bg-deep:       #000800;
-  --bg-mid:        #001100;
-  --neon-pink:     #00ff41;
-  --neon-cyan:     #00ff41;
-  --neon-purple:   #00cc33;
-  --neon-yellow:   #00ff41;
-  --neon-green:    #00ff41;
-  --grid-color:    rgba(0, 255, 65, 0.15);
-  --text-main:     #ccffcc;
-  --text-dim:      #66aa66;
-  --shadow-pink:   0 0 8px #00ff41, 0 0 20px rgba(0,255,65,0.5);
-  --shadow-cyan:   0 0 8px #00ff41, 0 0 20px rgba(0,255,65,0.5);
-  --shadow-purple: 0 0 8px #00cc33, 0 0 20px rgba(0,204,51,0.5);
-  --crt-lines:     repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,255,65,0.05) 2px,
-    rgba(0,255,65,0.05) 4px
-  );
-}
-
 /* 3310 Theme - Nokia LCD */
 [data-theme="3310"] {
   --bg-deep:       #c7cfb9;

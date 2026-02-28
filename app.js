@@ -1,5 +1,5 @@
 import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
-import { saveProgress, loadProgress, resetProgress } from './storage.js';
+import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
 import { initUI, renderCategoryButtons } from './ui.js';
 
 // ==================== AUDIO MODULE ====================
@@ -8,45 +8,45 @@ const AudioEngine = {
   masterGain: null,
   isMuted: false,
   volume: 0.7,
+  initialized: false,
 
-  // Initialize Web Audio API
   init() {
     try {
       this.ctx = new (window.AudioContext || window.webkitAudioContext)();
       this.masterGain = this.ctx.createGain();
       this.masterGain.gain.value = this.volume;
       this.masterGain.connect(this.ctx.destination);
-      
-      // Load saved preferences
-      const savedMute = localStorage.getItem('pixelWordHunter_muted');
-      const savedVolume = localStorage.getItem('pixelWordHunter_volume');
-      
+
+      const savedMute = storageGet('pixelWordHunter_muted');
+      const savedVolume = storageGet('pixelWordHunter_volume');
+
       if (savedMute !== null) {
         this.isMuted = savedMute === 'true';
       }
       if (savedVolume !== null) {
-        this.volume = parseFloat(savedVolume);
+        const parsed = parseFloat(savedVolume);
+        if (Number.isFinite(parsed)) {
+          this.volume = parsed;
+        }
         if (this.masterGain) {
           this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
         }
       }
-      
-      console.log('[Audio] Engine initialized');
+
+      this.initialized = true;
       return true;
-    } catch (e) {
-      console.log('[Audio] Web Audio API not supported');
+    } catch {
       return false;
     }
   },
 
-  // Ensure audio context is running (required after user interaction)
   ensureContext() {
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+    if (!this.ctx) return;
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
     }
   },
 
-  // Create 8-bit style beep sound
   playCorrectSound() {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
@@ -68,7 +68,6 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.1);
   },
 
-  // Create 8-bit style error/boom sound
   playWrongSound() {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
@@ -90,7 +89,6 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.2);
   },
 
-  // Create whoosh/transition sound
   playTransitionSound() {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
@@ -118,7 +116,6 @@ const AudioEngine = {
     osc.stop(this.ctx.currentTime + 0.15);
   },
 
-  // Toggle mute state
   toggleMute() {
     this.isMuted = !this.isMuted;
     if (this.masterGain) {
@@ -127,21 +124,19 @@ const AudioEngine = {
         this.ctx.currentTime
       );
     }
-    localStorage.setItem('pixelWordHunter_muted', this.isMuted);
+    storageSet('pixelWordHunter_muted', this.isMuted);
     return this.isMuted;
   },
 
-  // Set volume (0-1)
   setVolume(value) {
     this.volume = Math.max(0, Math.min(1, value));
     if (this.masterGain && !this.isMuted) {
       this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
     }
-    localStorage.setItem('pixelWordHunter_volume', this.volume);
+    storageSet('pixelWordHunter_volume', this.volume);
     return this.volume;
   },
 
-  // Get current mute icon
   getMuteIcon() {
     return this.isMuted ? '🔇' : '🔊';
   }
@@ -153,7 +148,7 @@ const ThemeManager = {
   themes: ['cyberpunk', 'midnight', 'matrix', '3310', 'sunset', 'mono'],
 
   init() {
-    const savedTheme = localStorage.getItem('pixelWordHunter_theme');
+    const savedTheme = storageGet('pixelWordHunter_theme');
     if (savedTheme) {
       const normalizedTheme = savedTheme === 'gameboy' ? '3310' : savedTheme;
       if (this.themes.includes(normalizedTheme)) {
@@ -161,15 +156,13 @@ const ThemeManager = {
       }
     }
     this.applyTheme(this.currentTheme);
-    console.log('[Theme] Initialized:', this.currentTheme);
   },
 
   setTheme(theme) {
     if (!this.themes.includes(theme) || theme === this.currentTheme) return;
     this.currentTheme = theme;
     this.applyTheme(theme);
-    localStorage.setItem('pixelWordHunter_theme', theme);
-    console.log('[Theme] Changed to:', theme);
+    storageSet('pixelWordHunter_theme', theme);
   },
 
   applyTheme(theme) {
@@ -191,13 +184,18 @@ function updateSoundUI() {
   const isMuted = AudioEngine.isMuted;
   const icon = AudioEngine.getMuteIcon();
 
-  // Settings screen sound controls
   const settingsIcon = document.getElementById('settings-sound-icon');
   const settingsLabel = document.getElementById('settings-sound-label');
   const settingsBtn = document.getElementById('settings-sound-btn');
-  if (settingsIcon) settingsIcon.textContent = icon;
+  if (settingsIcon) {
+    settingsIcon.textContent = icon;
+    settingsIcon.setAttribute('aria-label', isMuted ? 'Sound off' : 'Sound on');
+  }
   if (settingsLabel) settingsLabel.textContent = isMuted ? 'OFF' : 'ON';
-  if (settingsBtn) settingsBtn.classList.toggle('muted', isMuted);
+  if (settingsBtn) {
+    settingsBtn.classList.toggle('muted', isMuted);
+    settingsBtn.setAttribute('aria-pressed', String(isMuted));
+  }
 }
 
 const state = {
@@ -218,7 +216,9 @@ export async function initApp() {
   await loadGameData();
 
   state.ui = initUI();
-  state.xp = parseInt(localStorage.getItem('pixelWordHunter_xp')) || 0;
+
+  const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
+  state.xp = Number.isFinite(savedXp) ? savedXp : 0;
 
   const categories = ['All', ...getCategories()];
   renderCategoryButtons(categories, startGame);
@@ -231,7 +231,15 @@ export async function initApp() {
 
   updateSoundUI();
 
-  document.querySelector('.start-btn').addEventListener('click', showCategories);
+  const feedbackEl = state.ui.feedbackElement;
+  if (feedbackEl) {
+    feedbackEl.setAttribute('aria-live', 'polite');
+  }
+
+  document.querySelector('.start-btn').addEventListener('click', () => {
+    AudioEngine.ensureContext();
+    showCategories();
+  });
 
   window.exitGame = () => toggleScreen('menu');
   window.showSettings = () => {
@@ -253,7 +261,7 @@ export async function initApp() {
   window.resetProgress = () => {
     if (confirm('Reset all progress?')) {
       resetProgress();
-      localStorage.removeItem('pixelWordHunter_xp');
+      storageRemove('pixelWordHunter_xp');
       state.xp = 0;
       location.reload();
     }
@@ -263,11 +271,10 @@ export async function initApp() {
     ThemeManager.setTheme(theme);
   };
   window.toggleMute = () => {
+    AudioEngine.ensureContext();
     AudioEngine.toggleMute();
     updateSoundUI();
   };
-
-  console.log('✅ App initialized with audio, themes, and adaptive learning');
 }
 
 function showCategories() {
@@ -276,7 +283,6 @@ function showCategories() {
 }
 
 function toggleScreen(screen) {
-  // Add exit animation to current visible screen
   const screens = ['menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = state.ui[`${s}ScreenElement`];
@@ -289,7 +295,6 @@ function toggleScreen(screen) {
     }
   });
 
-  // Show new screen with enter animation
   const targetEl = state.ui[`${screen}ScreenElement`];
   if (targetEl) {
     targetEl.classList.remove('hidden');
@@ -302,7 +307,6 @@ function toggleScreen(screen) {
 
 function loadSavedProgress() {
   const savedStats = loadProgress();
-  let restoredCount = 0;
 
   getGameData().forEach((word) => {
     const saved = savedStats[word.eng.trim()];
@@ -311,7 +315,6 @@ function loadSavedProgress() {
       word.lastSeen = saved.lastSeen || 0;
       word.correctCount = saved.correctCount || 0;
       word.incorrectCount = saved.incorrectCount || 0;
-      restoredCount++;
     } else {
       word.mastery = 0;
       word.lastSeen = 0;
@@ -319,13 +322,12 @@ function loadSavedProgress() {
       word.incorrectCount = 0;
     }
   });
-
-  console.log(`♻️ Restored progress for ${restoredCount} words`);
 }
 
 function startGame(category) {
   state.selectedCategory = category;
   state.correctInRow = 0;
+  AudioEngine.ensureContext();
   AudioEngine.playTransitionSound();
   toggleScreen('game');
   document.getElementById('category').textContent = category;
@@ -344,47 +346,75 @@ function loadQuestion() {
   const word = state.currentRound[state.currentQ];
   const options = generateOptionsForWord(word);
 
-  // Batch DOM operations: prepare content first
   const fragment = document.createDocumentFragment();
-  options.forEach((option) => {
+  options.forEach((option, index) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.textContent = option;
+    btn.setAttribute('tabindex', '0');
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('aria-label', `Option ${index + 1}: ${option}`);
     btn.onclick = () => checkAnswer(option, word, btn);
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        checkAnswer(option, word, btn);
+      }
+    });
     fragment.appendChild(btn);
   });
 
-  // Apply all DOM changes in a single batch on the next frame
   requestAnimationFrame(() => {
     state.ui.wordElement.textContent = word.eng;
-    // Add typewriter effect
     state.ui.wordElement.classList.remove('typewriter', 'glitch');
-    void state.ui.wordElement.offsetWidth; // Trigger reflow
+    void state.ui.wordElement.offsetWidth;
     state.ui.wordElement.classList.add('typewriter');
-    
+
     state.ui.optionsElement.innerHTML = '';
     state.ui.optionsElement.appendChild(fragment);
     state.ui.explanationModal?.classList.add('hidden');
     state.wordStartTime = Date.now();
+
+    const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
+    optionButtons.forEach(btn => {
+      btn.addEventListener('keydown', (e) => handleOptionKeyNav(e, optionButtons));
+    });
+
+    const firstOption = optionButtons[0];
+    if (firstOption) firstOption.focus();
   });
 
   state.totalAnswered++;
+}
+
+function handleOptionKeyNav(e, optionButtons) {
+  const current = document.activeElement;
+  const idx = Array.from(optionButtons).indexOf(current);
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    e.preventDefault();
+    const next = optionButtons[(idx + 1) % optionButtons.length];
+    next?.focus();
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const prev = optionButtons[(idx - 1 + optionButtons.length) % optionButtons.length];
+    prev?.focus();
+  }
 }
 
 function checkAnswer(selected, word, btn) {
   const time = (Date.now() - state.wordStartTime) / 1000;
   const isCorrect = selected === word.correct;
 
-  // Cache DOM reads BEFORE any writes to avoid forced reflow
   const buttons = state.ui.optionsElement.querySelectorAll('button');
   const children = Array.from(state.ui.optionsElement.children);
   const xpElement = state.ui.xpElement;
   const feedbackElement = state.ui.feedbackElement;
 
-  // Disable all buttons immediately
-  buttons.forEach((b) => (b.onclick = null));
+  buttons.forEach((b) => {
+    b.onclick = null;
+    b.setAttribute('tabindex', '-1');
+  });
 
-  // Calculate all state changes first
   let status = '';
   let bonus = 0;
   let streak = 0;
@@ -396,23 +426,20 @@ function checkAnswer(selected, word, btn) {
     state.correctInRow++;
     streak = state.correctInRow;
     state.xp += bonus;
-    localStorage.setItem('pixelWordHunter_xp', state.xp);
+    if (!Number.isFinite(state.xp)) state.xp = 0;
+    storageSet('pixelWordHunter_xp', state.xp);
     updateWordProgress(word.eng, true);
-    // Play correct sound
     AudioEngine.playCorrectSound();
   } else {
     state.correctInRow = 0;
     updateWordProgress(word.eng, false);
-    // Play wrong sound
     AudioEngine.playWrongSound();
   }
 
-  // Batch ALL visual updates in a single animation frame
   requestAnimationFrame(() => {
     if (isCorrect) {
       btn.classList.add('correct');
       if (xpElement) xpElement.textContent = state.xp;
-      // Show feedback
       if (feedbackElement) {
         feedbackElement.textContent = status + (streak > 1 ? ` x${streak}` : '');
         feedbackElement.style.color = '#39ff14';
@@ -422,7 +449,6 @@ function checkAnswer(selected, word, btn) {
       btn.classList.add('wrong');
       const correctBtn = children.find((b) => b.textContent === word.correct);
       correctBtn?.classList.add('correct');
-      // Show feedback
       if (feedbackElement) {
         feedbackElement.textContent = 'LEARN!';
         feedbackElement.style.color = '#ff2d78';
@@ -469,7 +495,22 @@ function showExplanation(word) {
       </p>
     </div>
   `;
+
+  const nextBtn = modal.querySelector('.next-btn');
+  if (nextBtn) {
+    nextBtn.classList.remove('hidden');
+    nextBtn.textContent = 'NEXT ▶';
+    nextBtn.onclick = () => {
+      state.currentQ++;
+      loadQuestion();
+    };
+  }
+
   modal.classList.remove('hidden');
+
+  requestAnimationFrame(() => {
+    if (nextBtn) nextBtn.focus();
+  });
 }
 
 function getMasteryColor(level) {
@@ -482,7 +523,6 @@ function showRoundSummary() {
   const list = document.getElementById('explanation-list');
   if (!modal || !list) return;
 
-  const total = state.currentRound.length;
   const mastered = getGameData().filter(w => w.mastery >= 4).length;
   const learning = getGameData().filter(w => w.mastery > 0 && w.mastery < 4).length;
   const newWords = getGameData().filter(w => w.mastery === 0).length;
@@ -504,51 +544,54 @@ function showRoundSummary() {
     </div>
   `;
 
-  // Hide the default next-btn and create custom buttons
   const nextBtn = modal.querySelector('.next-btn');
   if (nextBtn) {
     nextBtn.classList.add('hidden');
   }
 
-  // Remove any existing button container from previous round
   const existingContainer = modal.querySelector('.round-buttons');
   if (existingContainer) {
     existingContainer.remove();
   }
 
-  // Create container for round summary buttons
   const btnContainer = document.createElement('div');
   btnContainer.className = 'round-buttons';
   btnContainer.style.cssText = 'display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;';
 
-  // CONTINUE button - starts new round with same category
   const continueBtn = document.createElement('button');
   continueBtn.className = 'next-btn continue-btn';
   continueBtn.textContent = 'CONTINUE ▶';
+  continueBtn.setAttribute('role', 'button');
+  continueBtn.setAttribute('tabindex', '0');
   continueBtn.onclick = () => {
     modal.classList.add('hidden');
-    nextBtn.classList.remove('hidden');
-    nextBtn.textContent = 'NEXT ▶';
-    nextBtn.onclick = () => {
-      state.currentQ++;
-      loadQuestion();
-    };
+    if (nextBtn) {
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = 'NEXT ▶';
+      nextBtn.onclick = () => {
+        state.currentQ++;
+        loadQuestion();
+      };
+    }
     btnContainer.remove();
     startGame(state.selectedCategory);
   };
 
-  // MENU button - returns to main menu
   const menuBtn = document.createElement('button');
   menuBtn.className = 'next-btn menu-btn';
   menuBtn.textContent = 'MENU ↺';
+  menuBtn.setAttribute('role', 'button');
+  menuBtn.setAttribute('tabindex', '0');
   menuBtn.onclick = () => {
     modal.classList.add('hidden');
-    nextBtn.classList.remove('hidden');
-    nextBtn.textContent = 'NEXT ▶';
-    nextBtn.onclick = () => {
-      state.currentQ++;
-      loadQuestion();
-    };
+    if (nextBtn) {
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = 'NEXT ▶';
+      nextBtn.onclick = () => {
+        state.currentQ++;
+        loadQuestion();
+      };
+    }
     btnContainer.remove();
     toggleScreen('menu');
   };
@@ -558,22 +601,12 @@ function showRoundSummary() {
   modal.appendChild(btnContainer);
 
   modal.classList.remove('hidden');
-}
 
-function showFeedback(message, isCorrect, streak = 0) {
-  const feedback = document.getElementById('feedback');
-  feedback.textContent = message + (streak > 1 ? ` x${streak}` : '');
-  feedback.style.color = isCorrect ? '#39ff14' : '#ff2d78';
-  feedback.style.textShadow = isCorrect
-    ? '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)'
-    : '0 0 10px #ff2d78, 0 0 25px rgba(255,45,120,0.7)';
-  feedback.classList.remove('hidden');
-  setTimeout(() => feedback.classList.add('hidden'), 1500);
+  requestAnimationFrame(() => continueBtn.focus());
 }
 
 function updateMenuStats() {
   const mastered = getGameData().filter((w) => w.mastery >= 4).length;
-  const learning = getGameData().filter((w) => w.mastery > 0 && w.mastery < 4).length;
   if (state.ui.masteredCountElement) {
     state.ui.masteredCountElement.textContent = mastered;
   }

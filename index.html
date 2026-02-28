@@ -95,50 +95,53 @@
   <div class="crt-overlay"></div>
 
   <main role="main">
+  <!-- ── LOAD ERROR ──────────────────────────── -->
+  <div id="load-error" hidden role="alert" style="position:fixed;top:0;left:0;right:0;padding:12px;background:#ff2d78;color:#fff;font-family:monospace;text-align:center;z-index:99999;"></div>
+
   <!-- ── MENU SCREEN ────────────────────────── -->
   <div id="menu-screen" class="game-container">
     <h1 class="game-title">
       PIXEL<br>WORD<br>HUNTER
     </h1>
     <div class="edition-badge">// TOEIC EDITION //</div>
-    <div class="stats-line">
+    <div class="stats-line" aria-live="polite">
       MASTERED&nbsp;<span id="mastered-count">0</span>&nbsp;/&nbsp;<span id="total-count">0</span>
     </div>
-    <p class="blink">▸ PRESS HUNT ◂</p>
-    <button class="start-btn">▶&nbsp;HUNT</button>
+    <p class="blink" aria-hidden="true">▸ PRESS HUNT ◂</p>
+    <button class="start-btn" role="button">▶&nbsp;HUNT</button>
 
-    <button class="settings-btn" onclick="showSettings()">SETTINGS</button>
+    <button class="settings-btn" role="button" onclick="showSettings()">SETTINGS</button>
 
     <div class="credits">© 2026 ALMAZ CORP</div>
   </div>
 
   <!-- ── SETTINGS SCREEN ─────────────────────── -->
-  <div id="settings-screen" class="game-container hidden">
-    <button class="back-btn" onclick="goBackFromSettings()">◀ BACK</button>
+  <div id="settings-screen" class="game-container hidden" role="region" aria-label="Settings">
+    <button class="back-btn" role="button" onclick="goBackFromSettings()">◀ BACK</button>
     <h2 class="screen-title">// SETTINGS //</h2>
     
     <div class="settings-content">
       <!-- Theme selector -->
       <div class="settings-row">
-        <span class="settings-label">THEME</span>
-        <div class="theme-btns">
-          <button class="theme-btn active" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk">
-            <span class="theme-dot cyberpunk"></span>CYB
+        <span class="settings-label" id="theme-label">THEME</span>
+        <div class="theme-btns" role="group" aria-labelledby="theme-label">
+          <button class="theme-btn active" role="button" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk" aria-label="Cyberpunk theme">
+            <span class="theme-dot cyberpunk" aria-hidden="true"></span>CYB
           </button>
-          <button class="theme-btn" data-theme="midnight" onclick="setTheme('midnight')" title="Midnight">
-            <span class="theme-dot midnight"></span>MID
+          <button class="theme-btn" role="button" data-theme="midnight" onclick="setTheme('midnight')" title="Midnight" aria-label="Midnight theme">
+            <span class="theme-dot midnight" aria-hidden="true"></span>MID
           </button>
-          <button class="theme-btn" data-theme="matrix" onclick="setTheme('matrix')" title="Matrix">
-            <span class="theme-dot matrix"></span>MTX
+          <button class="theme-btn" role="button" data-theme="matrix" onclick="setTheme('matrix')" title="Matrix" aria-label="Matrix theme">
+            <span class="theme-dot matrix" aria-hidden="true"></span>MTX
           </button>
-          <button class="theme-btn" data-theme="3310" onclick="setTheme('3310')" title="3310">
-            <span class="theme-dot t3310"></span>3310
+          <button class="theme-btn" role="button" data-theme="3310" onclick="setTheme('3310')" title="3310" aria-label="3310 Nokia theme">
+            <span class="theme-dot t3310" aria-hidden="true"></span>3310
           </button>
-          <button class="theme-btn" data-theme="sunset" onclick="setTheme('sunset')" title="Sunset">
-            <span class="theme-dot sunset"></span>SUN
+          <button class="theme-btn" role="button" data-theme="sunset" onclick="setTheme('sunset')" title="Sunset" aria-label="Sunset theme">
+            <span class="theme-dot sunset" aria-hidden="true"></span>SUN
           </button>
-          <button class="theme-btn" data-theme="mono" onclick="setTheme('mono')" title="Mono">
-            <span class="theme-dot mono"></span>MON
+          <button class="theme-btn" role="button" data-theme="mono" onclick="setTheme('mono')" title="Mono" aria-label="Mono theme">
+            <span class="theme-dot mono" aria-hidden="true"></span>MON
           </button>
         </div>
       </div>
@@ -146,50 +149,50 @@
       <!-- Sound toggle -->
       <div class="settings-row">
         <span class="settings-label">SOUND</span>
-        <button id="settings-sound-btn" class="sound-toggle-btn" onclick="toggleMute()">
-          <span id="settings-sound-icon">🔊</span>
+        <button id="settings-sound-btn" class="sound-toggle-btn" role="button" onclick="toggleMute()" aria-pressed="false">
+          <span id="settings-sound-icon" aria-label="Sound on">🔊</span>
           <span id="settings-sound-label">ON</span>
         </button>
       </div>
       
       <!-- Reset progress -->
       <div class="settings-reset">
-        <button class="reset-btn" onclick="resetProgress()">RESET PROGRESS</button>
+        <button class="reset-btn" role="button" onclick="resetProgress()">RESET PROGRESS</button>
       </div>
     </div>
   </div>
 
   <!-- ── CATEGORY SCREEN ────────────────────── -->
-  <div id="category-screen" class="game-container hidden">
-    <button class="back-btn" onclick="goBack()">◀ BACK</button>
+  <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
+    <button class="back-btn" role="button" onclick="goBack()">◀ BACK</button>
     <h2 class="screen-title">// SELECT CATEGORY //</h2>
-    <div id="category-list" class="category-grid"></div>
+    <div id="category-list" class="category-grid" role="list"></div>
   </div>
 
   <!-- ── GAME SCREEN ────────────────────────── -->
-  <div id="game-screen" class="game-container hidden">
+  <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
     <header>
       <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
       <div class="header-actions">
-        <div class="stat header-xp">XP:&nbsp;<span id="xp">0</span></div>
-        <button class="icon-btn exit-icon-btn" onclick="exitGame()" title="Exit to menu">✕</button>
+        <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
+        <button class="icon-btn exit-icon-btn" role="button" onclick="exitGame()" title="Exit to menu" aria-label="Exit to menu">✕</button>
       </div>
     </header>
 
     <div id="quiz-box">
       <div class="question-card">
-        <h1 id="word"></h1>
+        <h1 id="word" aria-live="polite"></h1>
       </div>
-      <div class="options-grid" id="options"></div>
+      <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
     </div>
 
-    <div id="explanation-modal" class="modal hidden">
+    <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
       <h2 class="modal-title">// WORD REVIEW //</h2>
       <div id="explanation-list"></div>
-      <button class="next-btn" onclick="nextQuestion()">NEXT&nbsp;▶</button>
+      <button class="next-btn" role="button" onclick="nextQuestion()">NEXT&nbsp;▶</button>
     </div>
 
-    <div id="feedback" class="hidden"></div>
+    <div id="feedback" class="hidden" aria-live="polite"></div>
   </div>
   </main>
 </body>

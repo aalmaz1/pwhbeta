@@ -6,54 +6,92 @@
 (function() {
   'use strict';
 
+  // ==================== STORAGE HELPERS ====================
+  function isLocalStorageAvailable() {
+    try {
+      const testKey = '__storage_test__';
+      localStorage.setItem(testKey, '1');
+      localStorage.removeItem(testKey);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  const storageAvailable = isLocalStorageAvailable();
+
+  function storageGet(key) {
+    if (!storageAvailable) return null;
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function storageSet(key, value) {
+    if (!storageAvailable) return;
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      // Quota exceeded or other storage error — silently ignore
+    }
+  }
+
+  function storageRemove(key) {
+    if (!storageAvailable) return;
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // Silently ignore
+    }
+  }
+
   // ==================== AUDIO MODULE ====================
   const AudioEngine = {
     ctx: null,
     masterGain: null,
     isMuted: false,
     volume: 0.7,
-    bgmOscillator: null,
-    bgmGain: null,
-    isPlayingBGM: false,
+    initialized: false,
 
-    // Initialize Web Audio API
     init() {
       try {
         this.ctx = new (window.AudioContext || window.webkitAudioContext)();
         this.masterGain = this.ctx.createGain();
         this.masterGain.gain.value = this.volume;
         this.masterGain.connect(this.ctx.destination);
-        
-        // Load saved preferences
-        const savedMute = localStorage.getItem('pixelWordHunter_muted');
-        const savedVolume = localStorage.getItem('pixelWordHunter_volume');
-        
+
+        const savedMute = storageGet('pixelWordHunter_muted');
+        const savedVolume = storageGet('pixelWordHunter_volume');
+
         if (savedMute !== null) {
           this.isMuted = savedMute === 'true';
         }
         if (savedVolume !== null) {
-          this.volume = parseFloat(savedVolume);
+          const parsed = parseFloat(savedVolume);
+          if (Number.isFinite(parsed)) {
+            this.volume = parsed;
+          }
           if (this.masterGain) {
             this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
           }
         }
-        
-        console.log('[Audio] Engine initialized');
+
+        this.initialized = true;
         return true;
-      } catch (e) {
-        console.log('[Audio] Web Audio API not supported');
+      } catch {
         return false;
       }
     },
 
-    // Ensure audio context is running (required after user interaction)
     ensureContext() {
-      if (this.ctx && this.ctx.state === 'suspended') {
-        this.ctx.resume();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume().catch(() => {});
       }
     },
 
-    // Create 8-bit style beep sound
     playCorrectSound() {
       if (!this.ctx || this.isMuted) return;
       this.ensureContext();
@@ -62,8 +100,8 @@
       const gain = this.ctx.createGain();
 
       osc.type = 'square';
-      osc.frequency.setValueAtTime(880, this.ctx.currentTime); // A5
-      osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05); // A6
+      osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
 
       gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
@@ -75,7 +113,6 @@
       osc.stop(this.ctx.currentTime + 0.1);
     },
 
-    // Create 8-bit style error/boom sound
     playWrongSound() {
       if (!this.ctx || this.isMuted) return;
       this.ensureContext();
@@ -97,7 +134,6 @@
       osc.stop(this.ctx.currentTime + 0.2);
     },
 
-    // Create whoosh/transition sound
     playTransitionSound() {
       if (!this.ctx || this.isMuted) return;
       this.ensureContext();
@@ -125,7 +161,6 @@
       osc.stop(this.ctx.currentTime + 0.15);
     },
 
-    // Toggle mute state
     toggleMute() {
       this.isMuted = !this.isMuted;
       if (this.masterGain) {
@@ -134,21 +169,19 @@
           this.ctx.currentTime
         );
       }
-      localStorage.setItem('pixelWordHunter_muted', this.isMuted);
+      storageSet('pixelWordHunter_muted', this.isMuted);
       return this.isMuted;
     },
 
-    // Set volume (0-1)
     setVolume(value) {
       this.volume = Math.max(0, Math.min(1, value));
       if (this.masterGain && !this.isMuted) {
         this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
       }
-      localStorage.setItem('pixelWordHunter_volume', this.volume);
+      storageSet('pixelWordHunter_volume', this.volume);
       return this.volume;
     },
 
-    // Get current mute state
     getMuteIcon() {
       return this.isMuted ? '🔇' : '🔊';
     }
@@ -160,7 +193,7 @@
     themes: ['cyberpunk', 'midnight', 'matrix', '3310', 'sunset', 'mono'],
 
     init() {
-      const savedTheme = localStorage.getItem('pixelWordHunter_theme');
+      const savedTheme = storageGet('pixelWordHunter_theme');
       if (savedTheme) {
         const normalizedTheme = savedTheme === 'gameboy' ? '3310' : savedTheme;
         if (this.themes.includes(normalizedTheme)) {
@@ -168,15 +201,13 @@
         }
       }
       this.applyTheme(this.currentTheme);
-      console.log('[Theme] Initialized:', this.currentTheme);
     },
 
     setTheme(theme) {
       if (!this.themes.includes(theme) || theme === this.currentTheme) return;
       this.currentTheme = theme;
       this.applyTheme(theme);
-      localStorage.setItem('pixelWordHunter_theme', theme);
-      console.log('[Theme] Changed to:', theme);
+      storageSet('pixelWordHunter_theme', theme);
     },
 
     applyTheme(theme) {
@@ -198,13 +229,18 @@
     const isMuted = AudioEngine.isMuted;
     const icon = AudioEngine.getMuteIcon();
 
-    // Settings screen sound controls
     const settingsIcon = document.getElementById('settings-sound-icon');
     const settingsLabel = document.getElementById('settings-sound-label');
     const settingsBtn = document.getElementById('settings-sound-btn');
-    if (settingsIcon) settingsIcon.textContent = icon;
+    if (settingsIcon) {
+      settingsIcon.textContent = icon;
+      settingsIcon.setAttribute('aria-label', isMuted ? 'Sound off' : 'Sound on');
+    }
     if (settingsLabel) settingsLabel.textContent = isMuted ? 'OFF' : 'ON';
-    if (settingsBtn) settingsBtn.classList.toggle('muted', isMuted);
+    if (settingsBtn) {
+      settingsBtn.classList.toggle('muted', isMuted);
+      settingsBtn.setAttribute('aria-pressed', String(isMuted));
+    }
   }
 
   // ==================== DATA MODULE ====================
@@ -221,13 +257,29 @@
     5: 168 * 60 * 60 * 1000,
   };
 
-  // Check localStorage for cached data first
+  const MAX_FETCH_RETRIES = 3;
+  const FETCH_RETRY_DELAY_MS = 1000;
+
+  async function fetchWithRetry(url, retries) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status + ': ' + response.statusText);
+        }
+        return response;
+      } catch (err) {
+        if (attempt === retries) throw err;
+        await new Promise(resolve => setTimeout(resolve, FETCH_RETRY_DELAY_MS * attempt));
+      }
+    }
+  }
+
   function getCachedData() {
     try {
-      const cached = localStorage.getItem('pixelWordHunter_words_cache');
+      const cached = storageGet('pixelWordHunter_words_cache');
       if (cached) {
         const parsed = JSON.parse(cached);
-        // Add runtime properties
         parsed.forEach(word => {
           word.mastery = 0;
           word.lastSeen = 0;
@@ -236,16 +288,14 @@
         });
         return parsed;
       }
-    } catch (e) {
-      console.log('[Data] No cached data found');
+    } catch {
+      // No usable cached data
     }
     return null;
   }
 
-  // Save to localStorage cache
   function cacheData(data) {
     try {
-      // Don't cache with runtime properties, just original data
       const toCache = data.map(w => ({
         eng: w.eng,
         correct: w.correct,
@@ -253,57 +303,56 @@
         exampleEng: w.exampleEng,
         exampleRus: w.exampleRus
       }));
-      localStorage.setItem('pixelWordHunter_words_cache', JSON.stringify(toCache));
-    } catch (e) {
-      console.log('[Data] Could not cache data');
+      storageSet('pixelWordHunter_words_cache', JSON.stringify(toCache));
+    } catch {
+      // Silently ignore cache write failure
     }
   }
 
   async function loadGameData() {
     if (gameData) return gameData;
-    
-    // If already loading, wait for it
+
     if (dataLoadPromise) return dataLoadPromise;
-    
+
     dataLoadPromise = (async function() {
-      // Try to use cached data first for instant UI
       const cached = getCachedData();
       if (cached) {
-        console.log('[Data] Using cached data for instant load');
         gameData = cached;
-        // Still fetch fresh data in background
         fetchFreshData();
         return gameData;
       }
-      
-      // No cache, must fetch
+
       return fetchFreshData();
     })();
-    
+
     return dataLoadPromise;
   }
 
   async function fetchFreshData() {
     try {
-      const response = await fetch('./words_optimized.json');
+      const response = await fetchWithRetry('./words_optimized.json', MAX_FETCH_RETRIES);
       const freshData = await response.json();
-      
+
       freshData.forEach(word => {
         word.mastery = 0;
         word.lastSeen = 0;
         word.correctCount = 0;
         word.incorrectCount = 0;
       });
-      
+
       gameData = freshData;
       cacheData(freshData);
-      console.log('[Data] Loaded fresh data');
       return gameData;
-    } catch (e) {
-      console.error('[Data] Failed to load fresh data:', e);
-      // If we have cached data, return that
+    } catch (err) {
+      const errorEl = document.getElementById('load-error');
+      if (errorEl) {
+        errorEl.textContent = 'Failed to load word data. Please refresh the page.';
+        errorEl.removeAttribute('hidden');
+        errorEl.setAttribute('role', 'alert');
+      }
       if (gameData) return gameData;
-      throw e;
+      gameData = [];
+      throw err;
     }
   }
 
@@ -323,44 +372,54 @@
     return getGameData().filter(w => w.category === category);
   }
 
-  function getRandomWrongAnswers(correctWord, count = 3) {
+  function getRandomWrongAnswers(correctWord, count) {
+    if (count === undefined) count = 3;
     const allWords = getGameData();
+
+    if (allWords.length <= 1) {
+      return [correctWord.correct];
+    }
+
     const wrongAnswers = allWords
       .filter(w => w.eng !== correctWord.eng)
       .sort(() => Math.random() - 0.5);
-    
+
     const selected = [];
     const correctTranslation = correctWord.correct;
-    
+
     for (const word of wrongAnswers) {
       if (selected.length >= count) break;
       if (word.correct !== correctTranslation && !selected.includes(word.correct)) {
         selected.push(word.correct);
       }
     }
-    
-    while (selected.length < count) {
+
+    const maxIterations = allWords.length * 2;
+    let iterations = 0;
+
+    while (selected.length < count && iterations < maxIterations) {
+      iterations++;
       const randomIdx = Math.floor(Math.random() * allWords.length);
       const randomWord = allWords[randomIdx];
       if (randomWord.correct !== correctTranslation && !selected.includes(randomWord.correct)) {
         selected.push(randomWord.correct);
       }
     }
-    
+
     return selected;
   }
 
   function generateOptionsForWord(word) {
     const wrongAnswers = getRandomWrongAnswers(word, 3);
-    const allOptions = [word.correct, ...wrongAnswers];
+    const allOptions = [word.correct].concat(wrongAnswers);
     return shuffleArray(allOptions);
   }
 
   function shuffleArray(array) {
-    const arr = [...array];
+    const arr = array.slice();
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
     }
     return arr;
   }
@@ -370,12 +429,12 @@
     const lastSeen = word.lastSeen || 0;
     const mastery = word.mastery || 0;
     const timeSinceLastSeen = now - lastSeen;
-    
+
     const interval = INTERVALS[mastery] || INTERVALS[5];
     const isDue = timeSinceLastSeen >= interval;
-    
+
     let priority = 0;
-    
+
     if (mastery === 0) {
       priority = 100;
     } else if (word.incorrectCount > word.correctCount) {
@@ -385,32 +444,33 @@
     } else {
       priority = Math.max(10, 70 - (timeSinceLastSeen / interval) * 60);
     }
-    
+
     return priority;
   }
 
-  function selectWordsForRound(category, roundSize = 10) {
+  function selectWordsForRound(category, roundSize) {
+    if (roundSize === undefined) roundSize = 10;
     const words = getWordsByCategory(category);
     if (!words || words.length === 0) return [];
-    
+
     const wordsWithPriority = words.map(word => ({
       word,
       priority: getWordPriority(word)
     }));
-    
+
     wordsWithPriority.sort((a, b) => b.priority - a.priority);
-    
+
     const selected = [];
     const seen = new Set();
-    
-    for (const { word, priority } of wordsWithPriority) {
+
+    for (const item of wordsWithPriority) {
       if (selected.length >= roundSize) break;
-      if (!seen.has(word.eng)) {
-        seen.add(word.eng);
-        selected.push(word);
+      if (!seen.has(item.word.eng)) {
+        seen.add(item.word.eng);
+        selected.push(item.word);
       }
     }
-    
+
     while (selected.length < roundSize && selected.length < words.length) {
       const remaining = words.filter(w => !seen.has(w.eng));
       if (remaining.length === 0) break;
@@ -418,17 +478,17 @@
       seen.add(randomWord.eng);
       selected.push(randomWord);
     }
-    
+
     return selected;
   }
 
   function updateWordProgress(wordEng, isCorrect) {
     const word = getGameData().find(w => w.eng === wordEng);
     if (!word) return;
-    
+
     const now = Date.now();
     word.lastSeen = now;
-    
+
     if (isCorrect) {
       word.correctCount = (word.correctCount || 0) + 1;
       word.mastery = Math.min(word.mastery + 1, 5);
@@ -463,19 +523,19 @@
       }
     });
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saveObj));
+    storageSet(STORAGE_KEY, JSON.stringify(saveObj));
   }
 
   function loadProgress() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      return JSON.parse(storageGet(STORAGE_KEY)) || {};
     } catch {
       return {};
     }
   }
 
   function resetProgressData() {
-    localStorage.removeItem(STORAGE_KEY);
+    storageRemove(STORAGE_KEY);
     getGameData().forEach((w) => {
       w.mastery = 0;
       w.lastSeen = 0;
@@ -505,18 +565,17 @@
     const container = document.getElementById('category-list');
     if (!container) return;
 
-    // Use DocumentFragment to batch DOM insertions
     const fragment = document.createDocumentFragment();
 
     categories.forEach((category) => {
       const btn = document.createElement('button');
       btn.textContent = category;
       btn.className = 'category-btn';
+      btn.setAttribute('role', 'button');
       btn.onclick = () => onSelect(category);
       fragment.appendChild(btn);
     });
 
-    // Single DOM write operation
     container.innerHTML = '';
     container.appendChild(fragment);
   }
@@ -540,9 +599,11 @@
     await loadGameData();
 
     state.ui = initUI();
-    state.xp = parseInt(localStorage.getItem('pixelWordHunter_xp')) || 0;
 
-    const categories = ['All', ...getCategories()];
+    const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
+    state.xp = Number.isFinite(savedXp) ? savedXp : 0;
+
+    const categories = ['All'].concat(getCategories());
     renderCategoryButtons(categories, startGame);
 
     loadSavedProgress();
@@ -553,7 +614,15 @@
 
     updateSoundUI();
 
-    document.querySelector('.start-btn').addEventListener('click', showCategories);
+    const feedbackEl = state.ui.feedbackElement;
+    if (feedbackEl) {
+      feedbackEl.setAttribute('aria-live', 'polite');
+    }
+
+    document.querySelector('.start-btn').addEventListener('click', function() {
+      AudioEngine.ensureContext();
+      showCategories();
+    });
 
     window.exitGame = () => toggleScreen('menu');
     window.showSettings = () => {
@@ -575,7 +644,7 @@
     window.resetProgress = () => {
       if (confirm('Reset all progress?')) {
         resetProgressData();
-        localStorage.removeItem('pixelWordHunter_xp');
+        storageRemove('pixelWordHunter_xp');
         state.xp = 0;
         location.reload();
       }
@@ -585,11 +654,10 @@
       ThemeManager.setTheme(theme);
     };
     window.toggleMute = () => {
+      AudioEngine.ensureContext();
       AudioEngine.toggleMute();
       updateSoundUI();
     };
-
-    console.log('✅ App initialized with audio, themes, and adaptive learning');
   }
 
   function showCategories() {
@@ -598,10 +666,9 @@
   }
 
   function toggleScreen(screen) {
-    // Add exit animation to current visible screen
     const screens = ['menu', 'settings', 'category', 'game'];
     screens.forEach(s => {
-      const el = state.ui[`${s}ScreenElement`];
+      const el = state.ui[s + 'ScreenElement'];
       if (el && !el.classList.contains('hidden') && s !== screen) {
         el.classList.add('screen-exit');
         setTimeout(() => {
@@ -611,8 +678,7 @@
       }
     });
 
-    // Show new screen with enter animation
-    const targetEl = state.ui[`${screen}ScreenElement`];
+    const targetEl = state.ui[screen + 'ScreenElement'];
     if (targetEl) {
       targetEl.classList.remove('hidden');
       targetEl.classList.add('screen-enter');
@@ -624,7 +690,6 @@
 
   function loadSavedProgress() {
     const savedStats = loadProgress();
-    let restoredCount = 0;
 
     getGameData().forEach((word) => {
       const saved = savedStats[word.eng.trim()];
@@ -633,7 +698,6 @@
         word.lastSeen = saved.lastSeen || 0;
         word.correctCount = saved.correctCount || 0;
         word.incorrectCount = saved.incorrectCount || 0;
-        restoredCount++;
       } else {
         word.mastery = 0;
         word.lastSeen = 0;
@@ -641,13 +705,12 @@
         word.incorrectCount = 0;
       }
     });
-
-    console.log(`♻️ Restored progress for ${restoredCount} words`);
   }
 
   function startGame(category) {
     state.selectedCategory = category;
     state.correctInRow = 0;
+    AudioEngine.ensureContext();
     AudioEngine.playTransitionSound();
     toggleScreen('game');
     document.getElementById('category').textContent = category;
@@ -666,47 +729,75 @@
     const word = state.currentRound[state.currentQ];
     const options = generateOptionsForWord(word);
 
-    // Batch DOM operations: prepare content first
     const fragment = document.createDocumentFragment();
-    options.forEach((option) => {
+    options.forEach((option, index) => {
       const btn = document.createElement('button');
       btn.className = 'option-btn';
       btn.textContent = option;
+      btn.setAttribute('tabindex', '0');
+      btn.setAttribute('role', 'button');
+      btn.setAttribute('aria-label', 'Option ' + (index + 1) + ': ' + option);
       btn.onclick = () => checkAnswer(option, word, btn);
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          checkAnswer(option, word, btn);
+        }
+      });
       fragment.appendChild(btn);
     });
 
-    // Apply all DOM changes in a single batch on the next frame
     requestAnimationFrame(() => {
       state.ui.wordElement.textContent = word.eng;
-      // Add typewriter effect class
       state.ui.wordElement.classList.remove('typewriter', 'glitch');
-      void state.ui.wordElement.offsetWidth; // Trigger reflow
+      void state.ui.wordElement.offsetWidth;
       state.ui.wordElement.classList.add('typewriter');
-      
+
       state.ui.optionsElement.innerHTML = '';
       state.ui.optionsElement.appendChild(fragment);
-      state.ui.explanationModal?.classList.add('hidden');
+      state.ui.explanationModal && state.ui.explanationModal.classList.add('hidden');
       state.wordStartTime = Date.now();
+
+      const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
+      optionButtons.forEach(btn => {
+        btn.addEventListener('keydown', (e) => handleOptionKeyNav(e, optionButtons));
+      });
+
+      const firstOption = optionButtons[0];
+      if (firstOption) firstOption.focus();
     });
 
     state.totalAnswered++;
+  }
+
+  function handleOptionKeyNav(e, optionButtons) {
+    const current = document.activeElement;
+    const idx = Array.from(optionButtons).indexOf(current);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      const next = optionButtons[(idx + 1) % optionButtons.length];
+      if (next) next.focus();
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prev = optionButtons[(idx - 1 + optionButtons.length) % optionButtons.length];
+      if (prev) prev.focus();
+    }
   }
 
   function checkAnswer(selected, word, btn) {
     const time = (Date.now() - state.wordStartTime) / 1000;
     const isCorrect = selected === word.correct;
 
-    // Cache DOM reads BEFORE any writes to avoid forced reflow
     const buttons = state.ui.optionsElement.querySelectorAll('button');
     const children = Array.from(state.ui.optionsElement.children);
     const xpElement = state.ui.xpElement;
     const feedbackElement = state.ui.feedbackElement;
 
-    // Disable all buttons immediately
-    buttons.forEach((b) => (b.onclick = null));
+    buttons.forEach((b) => {
+      b.onclick = null;
+      b.setAttribute('tabindex', '-1');
+    });
 
-    // Calculate all state changes first
     let status = '';
     let bonus = 0;
     let streak = 0;
@@ -718,33 +809,29 @@
       state.correctInRow++;
       streak = state.correctInRow;
       state.xp += bonus;
-      localStorage.setItem('pixelWordHunter_xp', state.xp);
+      if (!Number.isFinite(state.xp)) state.xp = 0;
+      storageSet('pixelWordHunter_xp', state.xp);
       updateWordProgress(word.eng, true);
-      // Play correct sound
       AudioEngine.playCorrectSound();
     } else {
       state.correctInRow = 0;
       updateWordProgress(word.eng, false);
-      // Play wrong sound
       AudioEngine.playWrongSound();
     }
 
-    // Batch ALL visual updates in a single animation frame
     requestAnimationFrame(() => {
       if (isCorrect) {
         btn.classList.add('correct');
         if (xpElement) xpElement.textContent = state.xp;
-        // Show feedback
         if (feedbackElement) {
-          feedbackElement.textContent = status + (streak > 1 ? ` x${streak}` : '');
+          feedbackElement.textContent = status + (streak > 1 ? ' x' + streak : '');
           feedbackElement.style.color = '#39ff14';
           feedbackElement.style.textShadow = '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)';
         }
       } else {
         btn.classList.add('wrong');
         const correctBtn = children.find((b) => b.textContent === word.correct);
-        correctBtn?.classList.add('correct');
-        // Show feedback
+        if (correctBtn) correctBtn.classList.add('correct');
         if (feedbackElement) {
           feedbackElement.textContent = 'LEARN!';
           feedbackElement.style.color = '#ff2d78';
@@ -780,18 +867,31 @@
     const hasValidExample = word.exampleEng && !word.exampleEng.startsWith('Example with');
     const hasValidRusExample = word.exampleRus && !word.exampleRus.startsWith('Пример с');
 
-    list.innerHTML = `
-      <div style="font-size: 11px; line-height: 1.8;">
-        <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">${word.eng}</p>
-        <p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">${word.correct}</p>
-        ${hasValidExample ? `<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"${word.exampleEng}"</p>` : ''}
-        ${hasValidRusExample ? `<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">${word.exampleRus}</p>` : ''}
-        <p style="color: #ffe600; text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">
-          MASTERY: <span style="color: ${getMasteryColor(masteryLevel)}">${masteryLabel}</span>
-        </p>
-      </div>
-    `;
+    list.innerHTML =
+      '<div style="font-size: 11px; line-height: 1.8;">' +
+      '<p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 12px; letter-spacing: 2px;">' + word.eng + '</p>' +
+      '<p style="color: #39ff14; text-shadow: 0 0 8px #39ff14; margin-bottom: 14px;">' + word.correct + '</p>' +
+      (hasValidExample ? '<p style="color: #bf5fff; font-style: italic; margin-bottom: 8px;">"' + word.exampleEng + '"</p>' : '') +
+      (hasValidRusExample ? '<p style="color: #8877aa; font-style: italic; margin-bottom: 12px;">' + word.exampleRus + '</p>' : '') +
+      '<p style="color: #ffe600; text-align: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">' +
+      'MASTERY: <span style="color: ' + getMasteryColor(masteryLevel) + '">' + masteryLabel + '</span>' +
+      '</p></div>';
+
+    const nextBtn = modal.querySelector('.next-btn');
+    if (nextBtn) {
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = 'NEXT ▶';
+      nextBtn.onclick = () => {
+        state.currentQ++;
+        loadQuestion();
+      };
+    }
+
     modal.classList.remove('hidden');
+
+    requestAnimationFrame(() => {
+      if (nextBtn) nextBtn.focus();
+    });
   }
 
   function getMasteryColor(level) {
@@ -804,27 +904,21 @@
     const list = document.getElementById('explanation-list');
     if (!modal || !list) return;
 
-    const total = state.currentRound.length;
     const mastered = getGameData().filter(w => w.mastery >= 4).length;
     const learning = getGameData().filter(w => w.mastery > 0 && w.mastery < 4).length;
     const newWords = getGameData().filter(w => w.mastery === 0).length;
 
-    list.innerHTML = `
-      <div style="font-size: 11px; line-height: 2; text-align: center;">
-        <p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 24px; letter-spacing: 3px;">
-          // ROUND COMPLETE //
-        </p>
-        <p style="color: #ffe600; margin-bottom: 20px;">XP: <span style="color: #39ff14;">${state.xp}</span></p>
-        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-          <span style="color: #bf5fff;">🟣 ${mastered}</span>
-          <span style="color: #ff8800;">🟠 ${learning}</span>
-          <span style="color: #ff2d78;">🔴 ${newWords}</span>
-        </div>
-        <p style="color: #8877aa; font-size: 9px; margin-top: 24px;">
-          Keep practicing to master all words!
-        </p>
-      </div>
-    `;
+    list.innerHTML =
+      '<div style="font-size: 11px; line-height: 2; text-align: center;">' +
+      '<p style="color: #00f5ff; text-shadow: 0 0 8px #00f5ff; margin-bottom: 24px; letter-spacing: 3px;">// ROUND COMPLETE //</p>' +
+      '<p style="color: #ffe600; margin-bottom: 20px;">XP: <span style="color: #39ff14;">' + state.xp + '</span></p>' +
+      '<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">' +
+      '<span style="color: #bf5fff;">🟣 ' + mastered + '</span>' +
+      '<span style="color: #ff8800;">🟠 ' + learning + '</span>' +
+      '<span style="color: #ff2d78;">🔴 ' + newWords + '</span>' +
+      '</div>' +
+      '<p style="color: #8877aa; font-size: 9px; margin-top: 24px;">Keep practicing to master all words!</p>' +
+      '</div>';
 
     const nextBtn = modal.querySelector('.next-btn');
     if (nextBtn) {
@@ -843,14 +937,18 @@
     const continueBtn = document.createElement('button');
     continueBtn.className = 'next-btn continue-btn';
     continueBtn.textContent = 'CONTINUE ▶';
+    continueBtn.setAttribute('role', 'button');
+    continueBtn.setAttribute('tabindex', '0');
     continueBtn.onclick = () => {
       modal.classList.add('hidden');
-      nextBtn.classList.remove('hidden');
-      nextBtn.textContent = 'NEXT ▶';
-      nextBtn.onclick = () => {
-        state.currentQ++;
-        loadQuestion();
-      };
+      if (nextBtn) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = 'NEXT ▶';
+        nextBtn.onclick = () => {
+          state.currentQ++;
+          loadQuestion();
+        };
+      }
       btnContainer.remove();
       startGame(state.selectedCategory);
     };
@@ -858,14 +956,18 @@
     const menuBtn = document.createElement('button');
     menuBtn.className = 'next-btn menu-btn';
     menuBtn.textContent = 'MENU ↺';
+    menuBtn.setAttribute('role', 'button');
+    menuBtn.setAttribute('tabindex', '0');
     menuBtn.onclick = () => {
       modal.classList.add('hidden');
-      nextBtn.classList.remove('hidden');
-      nextBtn.textContent = 'NEXT ▶';
-      nextBtn.onclick = () => {
-        state.currentQ++;
-        loadQuestion();
-      };
+      if (nextBtn) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = 'NEXT ▶';
+        nextBtn.onclick = () => {
+          state.currentQ++;
+          loadQuestion();
+        };
+      }
       btnContainer.remove();
       toggleScreen('menu');
     };
@@ -875,22 +977,12 @@
     modal.appendChild(btnContainer);
 
     modal.classList.remove('hidden');
-  }
 
-  function showFeedback(message, isCorrect, streak = 0) {
-    const feedback = document.getElementById('feedback');
-    feedback.textContent = message + (streak > 1 ? ` x${streak}` : '');
-    feedback.style.color = isCorrect ? '#39ff14' : '#ff2d78';
-    feedback.style.textShadow = isCorrect
-      ? '0 0 10px #39ff14, 0 0 25px rgba(57,255,20,0.7)'
-      : '0 0 10px #ff2d78, 0 0 25px rgba(255,45,120,0.7)';
-    feedback.classList.remove('hidden');
-    setTimeout(() => feedback.classList.add('hidden'), 1500);
+    requestAnimationFrame(() => continueBtn.focus());
   }
 
   function updateMenuStats() {
     const mastered = getGameData().filter((w) => w.mastery >= 4).length;
-    const learning = getGameData().filter((w) => w.mastery > 0 && w.mastery < 4).length;
     if (state.ui.masteredCountElement) {
       state.ui.masteredCountElement.textContent = mastered;
     }
@@ -899,22 +991,13 @@
     }
   }
 
-  // Export init function for external use
   window.initApp = initApp;
-  
-  // Auto-initialize immediately since bundle.js is deferred (DOM is ready)
+
   initApp();
-  
-  // Register service worker after page load (non-blocking)
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('./sw.js')
-        .then(function(registration) {
-          console.log('[SW] Registered:', registration.scope);
-        })
-        .catch(function(error) {
-          console.log('[SW] Registration failed:', error);
-        });
+      navigator.serviceWorker.register('./sw.js').catch(function() {});
     });
   }
 })();
