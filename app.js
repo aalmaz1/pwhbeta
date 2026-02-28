@@ -48,9 +48,11 @@ const AudioEngine = {
   },
 
   createOscillator(type, frequency) {
-    return { osc, gain };
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
+    return { osc, gain };
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
   }
@@ -146,7 +148,6 @@ const AudioEngine = {
       this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
     }
     storageSet('pixelWordHunter_volume', this.volume);
-    return this.volume;
     return this.volume;
   },
 
