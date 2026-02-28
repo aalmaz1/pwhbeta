@@ -72,11 +72,12 @@ async function fetchWithRetry(url, retries = MAX_FETCH_RETRIES) {
 }
 
 async function fetchFreshData() {
-  const response = await fetchWithRetry('./words_optimized.json', MAX_FETCH_RETRIES);
-  if (!response.ok) {
-    throw new Error('Failed to fetch fresh data');
-  }
-  const freshData = await response.json();
+  try {
+    const response = await fetchWithRetry('./words_optimized.json', MAX_FETCH_RETRIES);
+    if (!response.ok) {
+      throw new Error('Failed to fetch fresh data');
+    }
+    const freshData = await response.json();
 
     freshData.forEach(word => {
       word.mastery = 0;

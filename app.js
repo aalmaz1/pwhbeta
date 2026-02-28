@@ -60,6 +60,7 @@ const AudioEngine = {
     this.ensureContext();
 
     const { osc, gain } = this.createOscillator('square', 880);
+    return { osc, gain };
     osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
 
     osc.type = 'square';
@@ -81,6 +82,7 @@ const AudioEngine = {
     this.ensureContext();
 
     const { osc, gain } = this.createOscillator('sawtooth', 300);
+    return { osc, gain };
     osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
 
     osc.type = 'sawtooth';
@@ -101,9 +103,9 @@ const AudioEngine = {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
+    const { osc, gain } = this.createOscillator('sine', 400);
     const filter = this.ctx.createBiquadFilter();
+    return { osc, gain };
 
     osc.type = 'sine';
     osc.frequency.setValueAtTime(400, this.ctx.currentTime);
