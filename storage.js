@@ -28,8 +28,8 @@ function storageSet(key, value) {
   if (!storageAvailable) return;
   try {
     localStorage.setItem(key, value);
-  } catch {
-    // Quota exceeded or other storage error — silently ignore
+  } catch (error) {
+    console.error('Error setting item in localStorage:', error);
   }
 }
 

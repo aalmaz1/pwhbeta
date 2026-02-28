@@ -24,7 +24,8 @@
     if (!storageAvailable) return null;
     try {
       return localStorage.getItem(key);
-    } catch {
+    } catch (error) {
+      console.error('Error getting item from localStorage:', error);
       return null;
     }
   }

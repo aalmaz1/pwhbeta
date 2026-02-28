@@ -363,6 +363,8 @@ function loadQuestion() {
     });
     fragment.appendChild(btn);
   });
+  state.ui.optionsElement.innerHTML = '';
+  state.ui.optionsElement.appendChild(fragment);
 
   requestAnimationFrame(() => {
     state.ui.wordElement.textContent = word.eng;
