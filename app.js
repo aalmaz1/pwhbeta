@@ -53,8 +53,6 @@ const AudioEngine = {
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
     return { osc, gain };
-    osc.type = type;
-    osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
   }
 
   playCorrectSound() {
@@ -66,15 +64,8 @@ const AudioEngine = {
     osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
     gain.connect(this.masterGain);
 
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(880, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
-
     gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
-
-    osc.connect(gain);
-    gain.connect(this.masterGain);
 
     osc.start(this.ctx.currentTime);
     osc.stop(this.ctx.currentTime + 0.1);
@@ -89,15 +80,8 @@ const AudioEngine = {
     osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
     gain.connect(this.masterGain);
 
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(300, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
-
     gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
-
-    osc.connect(gain);
-    gain.connect(this.masterGain);
 
     osc.start(this.ctx.currentTime);
     osc.stop(this.ctx.currentTime + 0.2);
@@ -361,6 +345,7 @@ function loadQuestion() {
   const options = generateOptionsForWord(word);
 
   const fragment = document.createDocumentFragment();
+  const container = state.ui.wordElement; // Define the container variable
   options.forEach((option, index) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
