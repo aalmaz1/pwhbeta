@@ -1,5 +1,6 @@
 let gameData = null;
 let categoriesCache = null;
+let dataLoadPromise = null;
 
 const INTERVALS = {
   0: 0,
@@ -12,6 +13,40 @@ const INTERVALS = {
 
 const MAX_FETCH_RETRIES = 3;
 const FETCH_RETRY_DELAY_MS = 1000;
+
+function getCachedData() {
+  try {
+    const cached = localStorage.getItem('pixelWordHunter_words_cache');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      parsed.forEach(word => {
+        word.mastery = 0;
+        word.lastSeen = 0;
+        word.correctCount = 0;
+        word.incorrectCount = 0;
+      });
+      return parsed;
+    }
+  } catch {
+    // No usable cached data
+  }
+  return null;
+}
+
+function cacheData(data) {
+  try {
+    const toCache = data.map(w => ({
+      eng: w.eng,
+      correct: w.correct,
+      category: w.category,
+      exampleEng: w.exampleEng,
+      exampleRus: w.exampleRus
+    }));
+    localStorage.setItem('pixelWordHunter_words_cache', JSON.stringify(toCache));
+  } catch {
+    // Silently ignore cache write failure
+  }
+}
 
 async function fetchWithRetry(url, retries = MAX_FETCH_RETRIES) {
   for (let attempt = 1; attempt <= retries; attempt++) {
@@ -28,19 +63,21 @@ async function fetchWithRetry(url, retries = MAX_FETCH_RETRIES) {
   }
 }
 
-export async function loadGameData() {
-  if (gameData) return gameData;
-
+async function fetchFreshData() {
   try {
     const response = await fetchWithRetry('./words_optimized.json');
-    gameData = await response.json();
+    const freshData = await response.json();
 
-    gameData.forEach(word => {
+    freshData.forEach(word => {
       word.mastery = 0;
       word.lastSeen = 0;
       word.correctCount = 0;
       word.incorrectCount = 0;
     });
+
+    gameData = freshData;
+    cacheData(freshData);
+    return gameData;
   } catch (err) {
     const errorEl = document.getElementById('load-error');
     if (errorEl) {
@@ -48,11 +85,27 @@ export async function loadGameData() {
       errorEl.removeAttribute('hidden');
       errorEl.setAttribute('role', 'alert');
     }
+    if (gameData) return gameData;
     gameData = [];
     throw err;
   }
+}
 
-  return gameData;
+export async function loadGameData() {
+  if (gameData) return gameData;
+  if (dataLoadPromise) return dataLoadPromise;
+
+  dataLoadPromise = (async () => {
+    const cached = getCachedData();
+    if (cached) {
+      gameData = cached;
+      fetchFreshData();
+      return gameData;
+    }
+    return fetchFreshData();
+  })();
+
+  return dataLoadPromise;
 }
 
 export function getGameData() {

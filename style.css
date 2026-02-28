@@ -148,6 +148,63 @@
   padding: 0;
 }
 
+/* ─── ACCESSIBILITY ───────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--neon-cyan);
+  color: var(--bg-deep);
+  padding: 8px 16px;
+  font-size: 10px;
+  z-index: 10000;
+  transition: top 0.2s;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible for keyboard navigation */
+.option-btn:focus-visible,
+.category-btn:focus-visible,
+.start-btn:focus-visible,
+.next-btn:focus-visible,
+.theme-btn:focus-visible,
+.sound-toggle-btn:focus-visible,
+.back-btn:focus-visible,
+.icon-btn:focus-visible,
+.reset-btn:focus-visible,
+.settings-btn:focus-visible {
+  outline: 3px solid var(--neon-green);
+  outline-offset: 2px;
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ─── BROWSER COMPATIBILITY ─────────────────────────────────────── */
 :root {
   /* Firefox scrollbar */

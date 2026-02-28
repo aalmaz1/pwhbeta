@@ -260,21 +260,6 @@
   const MAX_FETCH_RETRIES = 3;
   const FETCH_RETRY_DELAY_MS = 1000;
 
-  async function fetchWithRetry(url, retries) {
-    for (let attempt = 1; attempt <= retries; attempt++) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('HTTP ' + response.status + ': ' + response.statusText);
-        }
-        return response;
-      } catch (err) {
-        if (attempt === retries) throw err;
-        await new Promise(resolve => setTimeout(resolve, FETCH_RETRY_DELAY_MS * attempt));
-      }
-    }
-  }
-
   function getCachedData() {
     try {
       const cached = storageGet('pixelWordHunter_words_cache');
@@ -309,23 +294,19 @@
     }
   }
 
-  async function loadGameData() {
-    if (gameData) return gameData;
-
-    if (dataLoadPromise) return dataLoadPromise;
-
-    dataLoadPromise = (async function() {
-      const cached = getCachedData();
-      if (cached) {
-        gameData = cached;
-        fetchFreshData();
-        return gameData;
+  async function fetchWithRetry(url, retries) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status + ': ' + response.statusText);
+        }
+        return response;
+      } catch (err) {
+        if (attempt === retries) throw err;
+        await new Promise(resolve => setTimeout(resolve, FETCH_RETRY_DELAY_MS * attempt));
       }
-
-      return fetchFreshData();
-    })();
-
-    return dataLoadPromise;
+    }
   }
 
   async function fetchFreshData() {
@@ -354,6 +335,23 @@
       gameData = [];
       throw err;
     }
+  }
+
+  async function loadGameData() {
+    if (gameData) return gameData;
+    if (dataLoadPromise) return dataLoadPromise;
+
+    dataLoadPromise = (async function() {
+      const cached = getCachedData();
+      if (cached) {
+        gameData = cached;
+        fetchFreshData();
+        return gameData;
+      }
+      return fetchFreshData();
+    })();
+
+    return dataLoadPromise;
   }
 
   function getGameData() {
@@ -579,6 +577,8 @@
     container.innerHTML = '';
     container.appendChild(fragment);
   }
+
+  // Removed unused showFeedback function
 
   // ==================== APP MODULE ====================
   const state = {
@@ -925,8 +925,13 @@
       nextBtn.classList.add('hidden');
     }
 
+    // Clean up existing container and its event listeners
     const existingContainer = modal.querySelector('.round-buttons');
     if (existingContainer) {
+      const buttons = existingContainer.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true));
+      });
       existingContainer.remove();
     }
 
@@ -939,38 +944,40 @@
     continueBtn.textContent = 'CONTINUE ▶';
     continueBtn.setAttribute('role', 'button');
     continueBtn.setAttribute('tabindex', '0');
-    continueBtn.onclick = () => {
-      modal.classList.add('hidden');
-      if (nextBtn) {
-        nextBtn.classList.remove('hidden');
-        nextBtn.textContent = 'NEXT ▶';
-        nextBtn.onclick = () => {
-          state.currentQ++;
-          loadQuestion();
-        };
-      }
-      btnContainer.remove();
-      startGame(state.selectedCategory);
-    };
 
     const menuBtn = document.createElement('button');
     menuBtn.className = 'next-btn menu-btn';
     menuBtn.textContent = 'MENU ↺';
     menuBtn.setAttribute('role', 'button');
     menuBtn.setAttribute('tabindex', '0');
-    menuBtn.onclick = () => {
+
+    // Use addEventListener instead of onclick for proper cleanup
+    function handleContinue() {
       modal.classList.add('hidden');
       if (nextBtn) {
         nextBtn.classList.remove('hidden');
         nextBtn.textContent = 'NEXT ▶';
-        nextBtn.onclick = () => {
-          state.currentQ++;
-          loadQuestion();
-        };
       }
+      continueBtn.removeEventListener('click', handleContinue);
+      menuBtn.removeEventListener('click', handleMenu);
+      btnContainer.remove();
+      startGame(state.selectedCategory);
+    }
+
+    function handleMenu() {
+      modal.classList.add('hidden');
+      if (nextBtn) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = 'NEXT ▶';
+      }
+      continueBtn.removeEventListener('click', handleContinue);
+      menuBtn.removeEventListener('click', handleMenu);
       btnContainer.remove();
       toggleScreen('menu');
-    };
+    }
+
+    continueBtn.addEventListener('click', handleContinue);
+    menuBtn.addEventListener('click', handleMenu);
 
     btnContainer.appendChild(continueBtn);
     btnContainer.appendChild(menuBtn);
