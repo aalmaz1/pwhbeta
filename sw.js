@@ -1,12 +1,12 @@
-const CACHE_VERSION = 'v7';
+const CACHE_VERSION = 'v10';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Assets with version query params for cache busting
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './style.css?v=7',
-  './bundle.js?v=7',
+  './style.css?v=10',
+  './bundle.js?v=10',
   './app.js',
   './data.js',
   './ui.js',
@@ -20,9 +20,9 @@ const ASSETS_TO_CACHE = [
 // Static assets that never change (cache-first forever)
 const STATIC_ASSETS = [
   './style.css',
-  './style.css?v=7',
+  './style.css?v=10',
   './bundle.js',
-  './bundle.js?v=7',
+  './bundle.js?v=10',
   './manifest.json',
   './assets/favicon.ico',
   './assets/logo.png'
