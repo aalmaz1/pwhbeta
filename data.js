@@ -57,7 +57,15 @@ async function fetchWithRetry(url, retries = MAX_FETCH_RETRIES) {
       }
       return response;
     } catch (err) {
-      if (attempt === retries) throw err;
+      if (attempt === retries) {
+        const errorEl = document.getElementById('load-error');
+        if (errorEl) {
+          errorEl.textContent = 'Failed to load data. Please refresh the page.';
+          errorEl.removeAttribute('hidden');
+          errorEl.setAttribute('role', 'alert');
+        }
+        throw err;
+      }
       await new Promise(resolve => setTimeout(resolve, FETCH_RETRY_DELAY_MS * attempt));
     }
   }

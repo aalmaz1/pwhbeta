@@ -19,13 +19,16 @@ export function renderCategoryButtons(categories, onSelect) {
   if (!container) return;
 
   const fragment = document.createDocumentFragment();
-
   categories.forEach((category) => {
     const btn = document.createElement('button');
     btn.textContent = category;
     btn.className = 'category-btn';
     btn.onclick = () => onSelect(category);
     fragment.appendChild(btn);
+  });
+  requestAnimationFrame(() => {
+    container.innerHTML = '';
+    container.appendChild(fragment);
   });
 
   requestAnimationFrame(() => {

@@ -47,12 +47,20 @@ const AudioEngine = {
     }
   },
 
+  createOscillator(type, frequency) {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
+    return { osc, gain };
+  }
+
   playCorrectSound() {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
+    const { osc, gain } = this.createOscillator('square', 880);
+    osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
 
     osc.type = 'square';
     osc.frequency.setValueAtTime(880, this.ctx.currentTime);
@@ -72,8 +80,8 @@ const AudioEngine = {
     if (!this.ctx || this.isMuted) return;
     this.ensureContext();
 
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
+    const { osc, gain } = this.createOscillator('sawtooth', 300);
+    osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
 
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(300, this.ctx.currentTime);
