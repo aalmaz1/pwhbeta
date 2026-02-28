@@ -48,6 +48,7 @@ const AudioEngine = {
   },
 
   createOscillator(type, frequency) {
+    return { osc, gain };
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     osc.type = type;
@@ -59,6 +60,7 @@ const AudioEngine = {
     this.ensureContext();
 
     const { osc, gain } = this.createOscillator('square', 880);
+    osc.connect(gain);
     osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
     gain.connect(this.masterGain);
 
@@ -81,6 +83,7 @@ const AudioEngine = {
     this.ensureContext();
 
     const { osc, gain } = this.createOscillator('sawtooth', 300);
+    osc.connect(gain);
     osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
     gain.connect(this.masterGain);
 
@@ -103,6 +106,7 @@ const AudioEngine = {
     this.ensureContext();
 
     const { osc, gain } = this.createOscillator('sine', 400);
+    osc.connect(filter);
     const filter = this.ctx.createBiquadFilter();
 
     osc.type = 'sine';
@@ -142,6 +146,7 @@ const AudioEngine = {
       this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
     }
     storageSet('pixelWordHunter_volume', this.volume);
+    return this.volume;
     return this.volume;
   },
 
