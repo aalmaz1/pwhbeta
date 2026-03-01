@@ -99,8 +99,24 @@
   <!-- ── LOAD ERROR ──────────────────────────── -->
   <div id="load-error" hidden role="alert" style="position:fixed;top:0;left:0;right:0;padding:12px;background:#ff2d78;color:#fff;font-family:monospace;text-align:center;z-index:99999;"></div>
 
+
+  <!-- ── ONBOARDING SCREEN ─────────────────────── -->
+  <section id="onboarding-screen" class="game-container hidden" role="dialog" aria-modal="true" aria-label="Welcome onboarding">
+    <h2 class="screen-title">// WELCOME HUNTER //</h2>
+    <div class="onboarding-card">
+      <p class="onboarding-lead">Master TOEIC vocabulary with adaptive spaced repetition.</p>
+      <ul class="onboarding-list">
+        <li>🎯 600 TOEIC-focused words by business category</li>
+        <li>🧠 Smart repetition based on your mastery</li>
+        <li>⚡ Fast rounds with instant feedback and XP</li>
+      </ul>
+      <p class="onboarding-note">Tip: start with <strong>All</strong> or pick one business topic.</p>
+      <button class="start-btn onboarding-btn" role="button" onclick="completeOnboarding()">START TRAINING ▶</button>
+    </div>
+  </section>
+
   <!-- ── MENU SCREEN ────────────────────────── -->
-  <div id="menu-screen" class="game-container">
+  <div id="menu-screen" class="game-container hidden">
     <h1 class="game-title">
       PIXEL<br>WORD<br>HUNTER
     </h1>

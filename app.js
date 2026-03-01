@@ -165,7 +165,11 @@ const ThemeManager = {
 
   applyTheme(theme) {
     if (document.body) {
-      document.body.setAttribute('data-theme', theme);
+      if (theme === 'cyberpunk') {
+        document.body.removeAttribute('data-theme');
+      } else {
+        document.body.setAttribute('data-theme', theme);
+      }
     }
     document.querySelectorAll('.theme-btn').forEach(el => {
       el.classList.toggle('active', el.dataset.theme === theme);
@@ -216,6 +220,8 @@ export async function initApp() {
 
   state.ui = initUI();
 
+  const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
+
   const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
   state.xp = Number.isFinite(savedXp) ? savedXp : 0;
 
@@ -228,6 +234,8 @@ export async function initApp() {
     state.ui.xpElement.textContent = state.xp;
   }
 
+  toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
+
   updateSoundUI();
 
   const feedbackEl = state.ui.feedbackElement;
@@ -239,6 +247,12 @@ export async function initApp() {
     AudioEngine.ensureContext();
     showCategories();
   });
+
+  window.completeOnboarding = () => {
+    storageSet('pixelWordHunter_onboarding_seen', 'true');
+    AudioEngine.playTransitionSound();
+    toggleScreen('menu');
+  };
 
   window.exitGame = () => toggleScreen('menu');
   window.showSettings = () => {
@@ -284,7 +298,7 @@ function showCategories() {
 }
 
 function toggleScreen(screen) {
-  const screens = ['menu', 'settings', 'category', 'game'];
+  const screens = ['onboarding', 'menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = state.ui[`${s}ScreenElement`];
     if (el && !el.classList.contains('hidden') && s !== screen) {

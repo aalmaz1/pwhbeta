@@ -14,18 +14,54 @@ const INTERVALS = {
 const MAX_FETCH_RETRIES = 3;
 const FETCH_RETRY_DELAY_MS = 1000;
 
+const TOEIC_CATEGORIES = new Set([
+  'Accounting', 'Banking', 'Business Planning', 'Computers', 'Conferences', 'Contracts',
+  'Electronics', 'Events & Entertainment', 'Financial Statements', 'Hiring', 'Hotels',
+  'Insurance', 'Inventory', 'Investments', 'Invoices', 'Legal', 'Marketing',
+  'Office Procedures', 'Office Technology', 'Ordering Supplies', 'Promotions',
+  'Property & Real Estate', 'Restaurants', 'Salaries', 'Shipping', 'Shopping', 'Taxes',
+  'Transportation', 'Travel', 'Warranties'
+]);
+
+function sanitizeToeicWord(rawWord) {
+  if (!rawWord || typeof rawWord !== 'object') return null;
+
+  const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
+  const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : '';
+  const translation = typeof rawWord.rus === 'string' && rawWord.rus.trim()
+    ? rawWord.rus.trim()
+    : (typeof rawWord.correct === 'string' ? rawWord.correct.trim() : '');
+
+  if (!eng || !translation || !TOEIC_CATEGORIES.has(category)) {
+    return null;
+  }
+
+  return {
+    ...rawWord,
+    eng,
+    category,
+    rus: translation,
+    correct: translation,
+    mastery: 0,
+    lastSeen: 0,
+    correctCount: 0,
+    incorrectCount: 0
+  };
+}
+
+function sanitizeToeicData(words) {
+  if (!Array.isArray(words)) return [];
+  return words
+    .map(sanitizeToeicWord)
+    .filter(Boolean);
+}
+
 function getCachedData() {
   try {
     const cached = localStorage.getItem('pixelWordHunter_words_cache');
     if (cached) {
       const parsed = JSON.parse(cached);
-      parsed.forEach(word => {
-        word.mastery = 0;
-        word.lastSeen = 0;
-        word.correctCount = 0;
-        word.incorrectCount = 0;
-      });
-      return parsed;
+      return sanitizeToeicData(parsed);
     }
   } catch {
     // No usable cached data
@@ -80,16 +116,10 @@ async function fetchFreshData() {
       throw new Error('Failed to fetch fresh data');
     }
     const freshData = await response.json();
+    const sanitizedData = sanitizeToeicData(freshData);
 
-    freshData.forEach(word => {
-      word.mastery = 0;
-      word.lastSeen = 0;
-      word.correctCount = 0;
-      word.incorrectCount = 0;
-    });
-
-    gameData = freshData;
-    cacheData(freshData);
+    gameData = sanitizedData;
+    cacheData(sanitizedData);
     return gameData;
   } catch (err) {
     const errorEl = document.getElementById('load-error');
