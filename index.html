@@ -99,8 +99,24 @@
   <!-- ── LOAD ERROR ──────────────────────────── -->
   <div id="load-error" hidden role="alert" style="position:fixed;top:0;left:0;right:0;padding:12px;background:#ff2d78;color:#fff;font-family:monospace;text-align:center;z-index:99999;"></div>
 
+
+  <!-- ── ONBOARDING SCREEN ─────────────────────── -->
+  <section id="onboarding-screen" class="game-container hidden" role="dialog" aria-modal="true" aria-label="Welcome onboarding">
+    <h2 class="screen-title">// WELCOME HUNTER //</h2>
+    <div class="onboarding-card">
+      <p class="onboarding-lead">Master TOEIC vocabulary with adaptive spaced repetition.</p>
+      <ul class="onboarding-list">
+        <li>🎯 600 TOEIC-focused words by business category</li>
+        <li>🧠 Smart repetition based on your mastery</li>
+        <li>⚡ Fast rounds with instant feedback and XP</li>
+      </ul>
+      <p class="onboarding-note">Tip: start with <strong>All</strong> or pick one business topic.</p>
+      <button id="onboarding-start-btn" class="start-btn onboarding-btn" role="button">START TRAINING ▶</button>
+    </div>
+  </section>
+
   <!-- ── MENU SCREEN ────────────────────────── -->
-  <div id="menu-screen" class="game-container">
+  <div id="menu-screen" class="game-container hidden">
     <h1 class="game-title">
       PIXEL<br>WORD<br>HUNTER
     </h1>
@@ -111,14 +127,14 @@
     <p class="blink" aria-hidden="true">▸ PRESS HUNT ◂</p>
     <button class="start-btn" role="button">▶&nbsp;HUNT</button>
 
-    <button class="settings-btn" role="button" onclick="showSettings()">SETTINGS</button>
+    <button id="settings-open-btn" class="settings-btn" role="button">SETTINGS</button>
 
     <div class="credits">© 2026 ALMAZ CORP</div>
   </div>
 
   <!-- ── SETTINGS SCREEN ─────────────────────── -->
   <div id="settings-screen" class="game-container hidden" role="region" aria-label="Settings">
-    <button class="back-btn" role="button" onclick="goBackFromSettings()">◀ BACK</button>
+    <button id="settings-back-btn" class="back-btn" role="button">◀ BACK</button>
     <h2 class="screen-title">// SETTINGS //</h2>
     
     <div class="settings-content">
@@ -126,22 +142,22 @@
       <div class="settings-row">
         <span class="settings-label" id="theme-label">THEME</span>
         <div class="theme-btns" role="group" aria-labelledby="theme-label">
-          <button class="theme-btn active" role="button" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk" aria-label="Cyberpunk theme">
+          <button class="theme-btn active" role="button" data-theme="cyberpunk" title="Cyberpunk" aria-label="Cyberpunk theme">
             <span class="theme-dot cyberpunk" aria-hidden="true"></span>CYB
           </button>
-          <button class="theme-btn" role="button" data-theme="midnight" onclick="setTheme('midnight')" title="Midnight" aria-label="Midnight theme">
+          <button class="theme-btn" role="button" data-theme="midnight" title="Midnight" aria-label="Midnight theme">
             <span class="theme-dot midnight" aria-hidden="true"></span>MID
           </button>
-          <button class="theme-btn" role="button" data-theme="matrix" onclick="setTheme('matrix')" title="Matrix" aria-label="Matrix theme">
+          <button class="theme-btn" role="button" data-theme="matrix" title="Matrix" aria-label="Matrix theme">
             <span class="theme-dot matrix" aria-hidden="true"></span>MTX
           </button>
-          <button class="theme-btn" role="button" data-theme="3310" onclick="setTheme('3310')" title="3310" aria-label="3310 Nokia theme">
+          <button class="theme-btn" role="button" data-theme="3310" title="3310" aria-label="3310 Nokia theme">
             <span class="theme-dot t3310" aria-hidden="true"></span>3310
           </button>
-          <button class="theme-btn" role="button" data-theme="sunset" onclick="setTheme('sunset')" title="Sunset" aria-label="Sunset theme">
+          <button class="theme-btn" role="button" data-theme="sunset" title="Sunset" aria-label="Sunset theme">
             <span class="theme-dot sunset" aria-hidden="true"></span>SUN
           </button>
-          <button class="theme-btn" role="button" data-theme="mono" onclick="setTheme('mono')" title="Mono" aria-label="Mono theme">
+          <button class="theme-btn" role="button" data-theme="mono" title="Mono" aria-label="Mono theme">
             <span class="theme-dot mono" aria-hidden="true"></span>MON
           </button>
         </div>
@@ -150,7 +166,7 @@
       <!-- Sound toggle -->
       <div class="settings-row">
         <span class="settings-label">SOUND</span>
-        <button id="settings-sound-btn" class="sound-toggle-btn" role="button" onclick="toggleMute()" aria-pressed="false">
+        <button id="settings-sound-btn" class="sound-toggle-btn" role="button" aria-pressed="false">
           <span id="settings-sound-icon" aria-label="Sound on">🔊</span>
           <span id="settings-sound-label">ON</span>
         </button>
@@ -158,14 +174,14 @@
       
       <!-- Reset progress -->
       <div class="settings-reset">
-        <button class="reset-btn" role="button" onclick="resetProgress()">RESET PROGRESS</button>
+        <button id="reset-progress-btn" class="reset-btn" role="button">RESET PROGRESS</button>
       </div>
     </div>
   </div>
 
   <!-- ── CATEGORY SCREEN ────────────────────── -->
   <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
-    <button class="back-btn" role="button" onclick="goBack()">◀ BACK</button>
+    <button id="category-back-btn" class="back-btn" role="button">◀ BACK</button>
     <h2 class="screen-title">// SELECT CATEGORY //</h2>
     <div id="category-list" class="category-grid" role="list"></div>
   </div>
@@ -176,7 +192,7 @@
       <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
       <div class="header-actions">
         <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
-        <button class="icon-btn exit-icon-btn" role="button" onclick="exitGame()" title="Exit to menu" aria-label="Exit to menu">✕</button>
+        <button id="exit-game-btn" class="icon-btn exit-icon-btn" role="button" title="Exit to menu" aria-label="Exit to menu">✕</button>
       </div>
     </header>
 
@@ -190,7 +206,7 @@
     <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
       <h2 class="modal-title">// WORD REVIEW //</h2>
       <div id="explanation-list"></div>
-      <button class="next-btn" role="button" onclick="nextQuestion()">NEXT&nbsp;▶</button>
+      <button id="next-question-btn" class="next-btn" role="button">NEXT&nbsp;▶</button>
     </div>
 
     <div id="feedback" class="hidden" aria-live="polite"></div>
