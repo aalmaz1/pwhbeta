@@ -71,6 +71,25 @@ const AudioEngine = {
       osc.type = step.type || 'square';
       osc.frequency.setValueAtTime(step.freq, start);
 
+      if (Number.isFinite(step.slideTo)) {
+        osc.frequency.exponentialRampToValueAtTime(
+          Math.max(1, step.slideTo),
+          end
+        );
+      }
+
+      if (Number.isFinite(step.vibratoHz) && Number.isFinite(step.vibratoDepth) && step.vibratoDepth > 0) {
+        const lfo = this.ctx.createOscillator();
+        const lfoGain = this.ctx.createGain();
+        lfo.type = 'square';
+        lfo.frequency.setValueAtTime(step.vibratoHz, start);
+        lfoGain.gain.setValueAtTime(step.vibratoDepth, start);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+        lfo.start(start);
+        lfo.stop(end);
+      }
+
       if (Array.isArray(step.arp) && step.arp.length > 0) {
         const slice = Math.max(0.01, duration / step.arp.length);
         step.arp.forEach((freq, idx) => {
@@ -94,27 +113,31 @@ const AudioEngine = {
     });
   },
 
-  playCorrectSound() { 
+  playCorrectSound() {
     this.playToneSequence([
-      { time: 0, freq: 784, duration: 0.06, volume: 0.24, type: 'square' },
-      { time: 0.05, freq: 1046.5, duration: 0.07, volume: 0.26, type: 'square' },
-      { time: 0.11, freq: 1318.5, duration: 0.1, volume: 0.2, type: 'square', arp: [1318.5, 1568, 1760] }
+      { time: 0, freq: 659.25, duration: 0.045, volume: 0.2, type: 'square' },
+      { time: 0.04, freq: 783.99, duration: 0.05, volume: 0.22, type: 'square' },
+      { time: 0.08, freq: 987.77, duration: 0.055, volume: 0.24, type: 'square' },
+      { time: 0.13, freq: 1318.5, duration: 0.12, volume: 0.2, type: 'square', arp: [1318.5, 1568, 1760, 1975.53], vibratoHz: 14, vibratoDepth: 6 },
+      { time: 0.13, freq: 329.63, duration: 0.11, volume: 0.09, type: 'triangle' }
     ]);
   },
 
-  playWrongSound() { 
+  playWrongSound() {
     this.playToneSequence([
-      { time: 0, freq: 220, duration: 0.08, volume: 0.25, type: 'square' },
-      { time: 0.06, freq: 196, duration: 0.08, volume: 0.24, type: 'square' },
-      { time: 0.12, freq: 164.8, duration: 0.1, volume: 0.2, type: 'square' }
+      { time: 0, freq: 246.94, duration: 0.08, volume: 0.22, type: 'square', slideTo: 220 },
+      { time: 0.055, freq: 196, duration: 0.09, volume: 0.2, type: 'square', slideTo: 174.61 },
+      { time: 0.12, freq: 155.56, duration: 0.12, volume: 0.19, type: 'square', slideTo: 110, vibratoHz: 8, vibratoDepth: 3 },
+      { time: 0.12, freq: 82.41, duration: 0.11, volume: 0.1, type: 'triangle' }
     ]);
   },
 
-  playTransitionSound() { 
+  playTransitionSound() {
     this.playToneSequence([
-      { time: 0, freq: 523.25, duration: 0.05, volume: 0.18, type: 'square' },
-      { time: 0.04, freq: 659.25, duration: 0.05, volume: 0.16, type: 'square' },
-      { time: 0.08, freq: 783.99, duration: 0.06, volume: 0.14, type: 'square' }
+      { time: 0, freq: 392, duration: 0.03, volume: 0.16, type: 'square' },
+      { time: 0.026, freq: 523.25, duration: 0.035, volume: 0.15, type: 'square' },
+      { time: 0.054, freq: 659.25, duration: 0.04, volume: 0.14, type: 'square' },
+      { time: 0.08, freq: 523.25, duration: 0.03, volume: 0.08, type: 'triangle' }
     ]);
   },
 
