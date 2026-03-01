@@ -14,18 +14,83 @@ const INTERVALS = {
 const MAX_FETCH_RETRIES = 3;
 const FETCH_RETRY_DELAY_MS = 1000;
 
+const TOEIC_CATEGORIES = new Set([
+  'Accounting', 'Banking', 'Business Planning', 'Computers', 'Conferences', 'Contracts',
+  'Electronics', 'Events & Entertainment', 'Financial Statements', 'Hiring', 'Hotels',
+  'Insurance', 'Inventory', 'Investments', 'Invoices', 'Legal', 'Marketing',
+  'Office Procedures', 'Office Technology', 'Ordering Supplies', 'Promotions',
+  'Property & Real Estate', 'Restaurants', 'Salaries', 'Shipping', 'Shopping', 'Taxes',
+  'Transportation', 'Travel', 'Warranties'
+]);
+
+function sanitizeToeicWord(rawWord) {
+  if (!rawWord || typeof rawWord !== 'object') return null;
+
+  const eng = typeof rawWord.eng === 'string' ? rawWord.eng.trim() : '';
+  const category = typeof rawWord.category === 'string' ? rawWord.category.trim() : '';
+  const translation = typeof rawWord.rus === 'string' && rawWord.rus.trim()
+    ? rawWord.rus.trim()
+    : (typeof rawWord.correct === 'string' ? rawWord.correct.trim() : '');
+
+  if (!eng || !translation || !TOEIC_CATEGORIES.has(category)) {
+    return null;
+  }
+
+  return {
+    ...rawWord,
+    eng,
+    category,
+    rus: translation,
+    correct: translation,
+    mastery: 0,
+    lastSeen: 0,
+    correctCount: 0,
+    incorrectCount: 0
+  };
+}
+
+function sanitizeToeicData(words) {
+  if (!Array.isArray(words)) return [];
+  return words
+    .map(sanitizeToeicWord)
+    .filter(Boolean);
+}
+
+
+function mergeProgressIntoFreshData(freshWords, currentWords) {
+  if (!Array.isArray(currentWords) || currentWords.length === 0) {
+    return freshWords;
+  }
+
+  const progressByEng = new Map(
+    currentWords.map(word => [word.eng, {
+      mastery: word.mastery || 0,
+      lastSeen: word.lastSeen || 0,
+      correctCount: word.correctCount || 0,
+      incorrectCount: word.incorrectCount || 0
+    }])
+  );
+
+  return freshWords.map(word => {
+    const progress = progressByEng.get(word.eng);
+    if (!progress) return word;
+    return {
+      ...word,
+      mastery: progress.mastery,
+      lastSeen: progress.lastSeen,
+      correctCount: progress.correctCount,
+      incorrectCount: progress.incorrectCount
+    };
+  });
+}
+
 function getCachedData() {
   try {
     const cached = localStorage.getItem('pixelWordHunter_words_cache');
-    if (cached) {
+    if (cached && cached.length > 0) {
       const parsed = JSON.parse(cached);
-      parsed.forEach(word => {
-        word.mastery = 0;
-        word.lastSeen = 0;
-        word.correctCount = 0;
-        word.incorrectCount = 0;
-      });
-      return parsed;
+      const sanitized = sanitizeToeicData(parsed);
+      return sanitized.length > 0 ? sanitized : null;
     }
   } catch {
     // No usable cached data
@@ -80,16 +145,11 @@ async function fetchFreshData() {
       throw new Error('Failed to fetch fresh data');
     }
     const freshData = await response.json();
+    const sanitizedData = sanitizeToeicData(freshData);
 
-    freshData.forEach(word => {
-      word.mastery = 0;
-      word.lastSeen = 0;
-      word.correctCount = 0;
-      word.incorrectCount = 0;
-    });
-
-    gameData = freshData;
-    cacheData(freshData);
+    const mergedData = mergeProgressIntoFreshData(sanitizedData, gameData);
+    gameData = mergedData;
+    cacheData(sanitizedData);
     return gameData;
   } catch (err) {
     const errorEl = document.getElementById('load-error');
@@ -110,7 +170,7 @@ export async function loadGameData() {
 
   dataLoadPromise = (async () => {
     const cached = getCachedData();
-    if (cached) {
+    if (cached && cached.length > 0) {
       gameData = cached;
       fetchFreshData();
       return gameData;
@@ -144,33 +204,23 @@ export function getRandomWrongAnswers(correctWord, count = 3) {
     return [correctWord.correct];
   }
 
-  const wrongAnswers = allWords
-    .filter(w => w.eng !== correctWord.eng)
-    .sort(() => Math.random() - 0.5);
+  const uniqueWrong = [];
+  const seenTranslations = new Set();
 
-  const selected = [];
-  const correctTranslation = correctWord.correct;
-
-  for (const word of wrongAnswers) {
-    if (selected.length >= count) break;
-    if (word.correct !== correctTranslation && !selected.includes(word.correct)) {
-      selected.push(word.correct);
+  for (const word of allWords) {
+    if (word.eng === correctWord.eng || word.correct === correctWord.correct) continue;
+    if (!seenTranslations.has(word.correct)) {
+      seenTranslations.add(word.correct);
+      uniqueWrong.push(word.correct);
     }
   }
 
-  const maxIterations = allWords.length * 2;
-  let iterations = 0;
-
-  while (selected.length < count && iterations < maxIterations) {
-    iterations++;
-    const randomIdx = Math.floor(Math.random() * allWords.length);
-    const randomWord = allWords[randomIdx];
-    if (randomWord.correct !== correctTranslation && !selected.includes(randomWord.correct)) {
-      selected.push(randomWord.correct);
-    }
+  for (let i = uniqueWrong.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [uniqueWrong[i], uniqueWrong[j]] = [uniqueWrong[j], uniqueWrong[i]];
   }
 
-  return selected;
+  return uniqueWrong.slice(0, count);
 }
 
 export function generateOptionsForWord(word) {
@@ -233,10 +283,15 @@ export function selectWordsForRound(category, roundSize = 10) {
     }
   }
 
-  while (selected.length < roundSize && selected.length < words.length) {
-    const remaining = words.filter(w => !seen.has(w.eng));
-    if (remaining.length === 0) break;
-    const randomWord = remaining[Math.floor(Math.random() * remaining.length)];
+  const remaining = words.filter(w => !seen.has(w.eng));
+  for (let i = remaining.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+  }
+
+  for (const randomWord of remaining) {
+    if (selected.length >= roundSize) break;
+    if (seen.has(randomWord.eng)) continue;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
