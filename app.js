@@ -17,8 +17,8 @@ const AudioEngine = {
       this.masterGain.gain.value = this.volume;
       this.masterGain.connect(this.ctx.destination);
 
-      const savedMute = storageGet('pixelWordHunter_muted') === 'true';
-      const savedVolume = parseFloat(storageGet('pixelWordHunter_volume'));
+      const savedMute = storageGet('pixelWordHunter_muted');
+      const savedVolume = storageGet('pixelWordHunter_volume');
 
       if (savedMute !== null) {
         this.isMuted = savedMute === 'true';
@@ -28,9 +28,9 @@ const AudioEngine = {
         if (Number.isFinite(parsed)) {
           this.volume = parsed;
         }
-        if (this.masterGain) {
-          this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
-        }
+      }
+      if (this.masterGain) {
+        this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
       }
 
       this.initialized = true;
@@ -165,7 +165,11 @@ const ThemeManager = {
 
   applyTheme(theme) {
     if (document.body) {
-      document.body.setAttribute('data-theme', theme);
+      if (theme === 'cyberpunk') {
+        document.body.removeAttribute('data-theme');
+      } else {
+        document.body.setAttribute('data-theme', theme);
+      }
     }
     document.querySelectorAll('.theme-btn').forEach(el => {
       el.classList.toggle('active', el.dataset.theme === theme);
@@ -205,6 +209,7 @@ const state = {
   wordStartTime: 0,
   totalAnswered: 0,
   correctInRow: 0,
+  isAnswerLocked: false,
 };
 
 export async function initApp() {
@@ -214,6 +219,8 @@ export async function initApp() {
   await loadGameData();
 
   state.ui = initUI();
+
+  const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
 
   const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
   state.xp = Number.isFinite(savedXp) ? savedXp : 0;
@@ -227,6 +234,8 @@ export async function initApp() {
     state.ui.xpElement.textContent = state.xp;
   }
 
+  toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
+
   updateSoundUI();
 
   const feedbackEl = state.ui.feedbackElement;
@@ -239,6 +248,12 @@ export async function initApp() {
     showCategories();
   });
 
+  window.completeOnboarding = () => {
+    storageSet('pixelWordHunter_onboarding_seen', 'true');
+    AudioEngine.playTransitionSound();
+    toggleScreen('menu');
+  };
+
   window.exitGame = () => toggleScreen('menu');
   window.showSettings = () => {
     AudioEngine.playTransitionSound();
@@ -246,10 +261,12 @@ export async function initApp() {
   };
   window.goBackFromSettings = () => {
     AudioEngine.playTransitionSound();
+    state.isAnswerLocked = false;
     toggleScreen('menu');
   };
   window.goBack = () => {
     AudioEngine.playTransitionSound();
+    state.isAnswerLocked = false;
     toggleScreen('menu');
   };
   window.nextQuestion = () => {
@@ -281,7 +298,7 @@ function showCategories() {
 }
 
 function toggleScreen(screen) {
-  const screens = ['menu', 'settings', 'category', 'game'];
+  const screens = ['onboarding', 'menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = state.ui[`${s}ScreenElement`];
     if (el && !el.classList.contains('hidden') && s !== screen) {
@@ -345,7 +362,6 @@ function loadQuestion() {
   const options = generateOptionsForWord(word);
 
   const fragment = document.createDocumentFragment();
-  const container = state.ui.wordElement; // Define the container variable
   options.forEach((option, index) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
@@ -362,11 +378,9 @@ function loadQuestion() {
     });
     fragment.appendChild(btn);
   });
-  state.ui.optionsElement.innerHTML = '';
-  state.ui.optionsElement.appendChild(fragment);
 
   requestAnimationFrame(() => {
-      container.innerHTML = '';
+    state.ui.wordElement.innerHTML = '';
     state.ui.wordElement.textContent = word.eng;
     state.ui.wordElement.classList.remove('typewriter', 'glitch');
     void state.ui.wordElement.offsetWidth;
@@ -376,6 +390,7 @@ function loadQuestion() {
     state.ui.optionsElement.appendChild(fragment);
     state.ui.explanationModal?.classList.add('hidden');
     state.wordStartTime = Date.now();
+    state.isAnswerLocked = false;
 
     const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
     optionButtons.forEach(btn => {
@@ -404,6 +419,9 @@ function handleOptionKeyNav(e, optionButtons) {
 }
 
 function checkAnswer(selected, word, btn) {
+  if (state.isAnswerLocked) return;
+  state.isAnswerLocked = true;
+
   const time = (Date.now() - state.wordStartTime) / 1000;
   const isCorrect = selected === word.correct;
 
@@ -510,6 +528,7 @@ function showExplanation(word) {
     nextBtn.textContent = 'NEXT ▶';
     nextBtn.onclick = () => {
       state.currentQ++;
+      state.isAnswerLocked = false;
       loadQuestion();
     };
   }
@@ -593,6 +612,7 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
+    state.isAnswerLocked = false;
     startGame(state.selectedCategory);
   }
 
@@ -605,6 +625,7 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
+    state.isAnswerLocked = false;
     toggleScreen('menu');
   }
 

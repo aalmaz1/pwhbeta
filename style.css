@@ -28,6 +28,23 @@
   );
 }
 
+
+[data-theme="cyberpunk"] {
+  --bg-deep:       #0a0010;
+  --bg-mid:        #100020;
+  --neon-pink:     #ff2d78;
+  --neon-cyan:     #00f5ff;
+  --neon-purple:   #bf5fff;
+  --neon-yellow:   #ffe600;
+  --neon-green:    #39ff14;
+  --grid-color:    rgba(191, 95, 255, 0.15);
+  --text-main:     #f0e6ff;
+  --text-dim:      #8877aa;
+  --shadow-pink:   0 0 8px #ff2d78, 0 0 20px rgba(255,45,120,0.5);
+  --shadow-cyan:   0 0 8px #00f5ff, 0 0 20px rgba(0,245,255,0.5);
+  --shadow-purple: 0 0 8px #bf5fff, 0 0 20px rgba(191,95,255,0.5);
+}
+
 /* Matrix Theme */
 [data-theme="matrix"] {
   --bg-deep:       #000800;
@@ -269,6 +286,44 @@ body[data-theme="3310"] .game-container {
   box-shadow: inset 0 0 0 2px #2b2b2b, inset 0 0 12px rgba(33,33,33,0.2), 0 12px 24px rgba(0,0,0,0.35);
   filter: blur(0.2px);
 }
+
+/* ─── ONBOARDING ───────────────────────────────────────────── */
+.onboarding-card {
+  width: min(680px, 92%);
+  padding: 22px 20px;
+  border: 2px solid var(--neon-purple);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(16,0,32,0.9), rgba(10,0,16,0.92));
+  box-shadow: 0 0 20px rgba(191,95,255,0.28);
+}
+
+.onboarding-lead {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--neon-cyan);
+  margin-bottom: 16px;
+}
+
+.onboarding-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.onboarding-note {
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+}
+
+.onboarding-btn {
+  width: 100%;
+}
+
 
 /* ─── SYNTHWAVE GRID BACKGROUND ─────────────────────────────── */
 .game-container {
