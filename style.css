@@ -1243,6 +1243,7 @@ header {
 /* Cyberpunk correct/wrong */
 .option-btn.correct {
   background: rgba(57, 255, 20, 0.18);
+  pointer-events: none;
   border-color: var(--neon-green);
   color: var(--neon-green);
   text-shadow: 0 0 8px var(--neon-green);
@@ -1254,6 +1255,7 @@ header {
 
 .option-btn.wrong {
   background: rgba(255, 45, 120, 0.18);
+  pointer-events: none;
   border-color: var(--neon-pink);
   color: var(--neon-pink);
   text-shadow: var(--shadow-pink);
@@ -1358,121 +1360,6 @@ header {
   text-shadow: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
   animation: wrongShake 0.5s ease;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   CORRECT/WRONG STATES - ENHANCED WITH !IMPORTANT
-   These styles ensure buttons highlight properly on answer selection
-   ═══════════════════════════════════════════════════════════════ */
-
-/* Base correct/wrong styles with high specificity */
-.option-btn.correct,
-.options-grid .option-btn.correct {
-  background: rgba(57, 255, 20, 0.3) !important;
-  border-color: #39ff14 !important;
-  color: #39ff14 !important;
-  box-shadow: 0 0 15px rgba(57, 255, 20, 0.5), inset 0 0 10px rgba(57, 255, 20, 0.2) !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-}
-
-.option-btn.wrong,
-.options-grid .option-btn.wrong {
-  background: rgba(255, 45, 120, 0.3) !important;
-  border-color: #ff2d78 !important;
-  color: #ff2d78 !important;
-  box-shadow: 0 0 15px rgba(255, 45, 120, 0.5), inset 0 0 10px rgba(255, 45, 120, 0.2) !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-}
-
-/* Midnight theme enhanced */
-[data-theme="midnight"] .option-btn.correct,
-[data-theme="midnight"] .options-grid .option-btn.correct {
-  background: rgba(100, 255, 218, 0.3) !important;
-  border-color: #64ffda !important;
-  color: #64ffda !important;
-  box-shadow: 0 0 15px rgba(100, 255, 218, 0.5), inset 0 0 10px rgba(100, 255, 218, 0.2) !important;
-}
-
-[data-theme="midnight"] .option-btn.wrong,
-[data-theme="midnight"] .options-grid .option-btn.wrong {
-  background: rgba(79, 195, 247, 0.3) !important;
-  border-color: #4fc3f7 !important;
-  color: #4fc3f7 !important;
-  box-shadow: 0 0 15px rgba(79, 195, 247, 0.5), inset 0 0 10px rgba(79, 195, 247, 0.2) !important;
-}
-
-/* Matrix theme enhanced */
-[data-theme="matrix"] .option-btn.correct,
-[data-theme="matrix"] .options-grid .option-btn.correct {
-  background: rgba(0, 255, 65, 0.3) !important;
-  border-color: #00ff41 !important;
-  color: #00ff41 !important;
-  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5), inset 0 0 10px rgba(0, 255, 65, 0.2) !important;
-}
-
-[data-theme="matrix"] .option-btn.wrong,
-[data-theme="matrix"] .options-grid .option-btn.wrong {
-  background: rgba(200, 50, 50, 0.3) !important;
-  border-color: #c83232 !important;
-  color: #c83232 !important;
-  box-shadow: 0 0 15px rgba(200, 50, 50, 0.5), inset 0 0 10px rgba(200, 50, 50, 0.2) !important;
-}
-
-/* 3310 theme - LCD style with proper contrast */
-[data-theme="3310"] .option-btn.correct,
-[data-theme="3310"] .options-grid .option-btn.correct {
-  background: #2b5e2b !important;
-  border-color: #212121 !important;
-  color: #c7cfb9 !important;
-  box-shadow: 3px 3px 0 #212121 !important;
-  text-shadow: none !important;
-}
-
-[data-theme="3310"] .option-btn.wrong,
-[data-theme="3310"] .options-grid .option-btn.wrong {
-  background: #5e2b2b !important;
-  border-color: #212121 !important;
-  color: #c7cfb9 !important;
-  box-shadow: 3px 3px 0 #212121 !important;
-  text-shadow: none !important;
-}
-
-/* Sunset theme enhanced */
-[data-theme="sunset"] .option-btn.correct,
-[data-theme="sunset"] .options-grid .option-btn.correct {
-  background: rgba(255, 217, 61, 0.3) !important;
-  border-color: #ffd93d !important;
-  color: #ffd93d !important;
-  box-shadow: 0 0 15px rgba(255, 217, 61, 0.5), inset 0 0 10px rgba(255, 217, 61, 0.2) !important;
-}
-
-[data-theme="sunset"] .option-btn.wrong,
-[data-theme="sunset"] .options-grid .option-btn.wrong {
-  background: rgba(255, 107, 157, 0.3) !important;
-  border-color: #ff6b9d !important;
-  color: #ff6b9d !important;
-  box-shadow: 0 0 15px rgba(255, 107, 157, 0.5), inset 0 0 10px rgba(255, 107, 157, 0.2) !important;
-}
-
-/* Mono theme enhanced */
-[data-theme="mono"] .option-btn.correct,
-[data-theme="mono"] .options-grid .option-btn.correct {
-  background: #ffffff !important;
-  border-color: #ffffff !important;
-  color: #000000 !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important;
-  text-shadow: none !important;
-}
-
-[data-theme="mono"] .option-btn.wrong,
-[data-theme="mono"] .options-grid .option-btn.wrong {
-  background: #888888 !important;
-  border-color: #ffffff !important;
-  color: #000000 !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important;
-  text-shadow: none !important;
 }
 
 /* Disabled state - keep buttons visible */

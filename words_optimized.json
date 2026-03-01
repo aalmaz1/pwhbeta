@@ -557,17 +557,17 @@
   {
     "category": "Marketing",
     "eng": "solicitation",
-    "rus": "привлечение клиентов",
+    "rus": "обращение",
     "question": "solicitation",
     "optionsList": [
       "чип",
-      "привлечение клиентов",
+      "обращение",
       "посадочный талон"
     ],
-    "correct": "привлечение клиентов",
+    "correct": "обращение",
     "mastery": 0,
     "exampleEng": "Email solicitation increased lead generation.",
-    "exampleRus": "Рассылка по электронной почте увеличила привлечение клиентов."
+    "exampleRus": "Рассылка по электронной почте увеличила обращение."
   },
   {
     "category": "Marketing",
@@ -957,7 +957,7 @@
     "correct": "информировать",
     "mastery": 0,
     "exampleEng": "The director briefed the board on strategy.",
-    "exampleRus": "Директор проинформировал совет о стратегии."
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Business Planning",
@@ -2157,7 +2157,7 @@
     "correct": "информировать",
     "mastery": 0,
     "exampleEng": "The manager briefed the team on the project.",
-    "exampleRus": "Менеджер проинформировал команду о проекте."
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Office Procedures",
@@ -7422,7 +7422,7 @@
     "correct": "информировать",
     "mastery": 0,
     "exampleEng": "Legal counsel briefed the management team.",
-    "exampleRus": "Юрисконсульт проинструктировал руководство."
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Legal",
