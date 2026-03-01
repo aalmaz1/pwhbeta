@@ -567,7 +567,7 @@
     "correct": "обращение",
     "mastery": 0,
     "exampleEng": "Email solicitation increased lead generation.",
-    "exampleRus": "Рассылка по электронной почте увеличила количество обращений."
+    "exampleRus": "Рассылка по электронной почте увеличила обращение."
   },
   {
     "category": "Marketing",
@@ -947,17 +947,17 @@
   {
     "category": "Business Planning",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
-    "exampleEng": "The director submitted a brief to the board on strategy.",
-    "exampleRus": "Директор представил совету письменное заключение по стратегии."
+    "exampleEng": "The director briefed the board on strategy.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Business Planning",
@@ -2147,17 +2147,17 @@
   {
     "category": "Office Procedures",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
-    "exampleEng": "Please file the brief with the project documents.",
-    "exampleRus": "Пожалуйста, подшейте письменное заключение к документам проекта."
+    "exampleEng": "The manager briefed the team on the project.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Office Procedures",
@@ -7412,17 +7412,17 @@
   {
     "category": "Legal",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
-    "exampleEng": "Legal counsel submitted a brief to the management team.",
-    "exampleRus": "Юрисконсульт представил письменное заключение руководству."
+    "exampleEng": "Legal counsel briefed the management team.",
+    "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
   },
   {
     "category": "Legal",

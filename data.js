@@ -56,41 +56,12 @@ function sanitizeToeicData(words) {
     .filter(Boolean);
 }
 
-
-function mergeProgressIntoFreshData(freshWords, currentWords) {
-  if (!Array.isArray(currentWords) || currentWords.length === 0) {
-    return freshWords;
-  }
-
-  const progressByEng = new Map(
-    currentWords.map(word => [word.eng, {
-      mastery: word.mastery || 0,
-      lastSeen: word.lastSeen || 0,
-      correctCount: word.correctCount || 0,
-      incorrectCount: word.incorrectCount || 0
-    }])
-  );
-
-  return freshWords.map(word => {
-    const progress = progressByEng.get(word.eng);
-    if (!progress) return word;
-    return {
-      ...word,
-      mastery: progress.mastery,
-      lastSeen: progress.lastSeen,
-      correctCount: progress.correctCount,
-      incorrectCount: progress.incorrectCount
-    };
-  });
-}
-
 function getCachedData() {
   try {
     const cached = localStorage.getItem('pixelWordHunter_words_cache');
     if (cached && cached.length > 0) {
       const parsed = JSON.parse(cached);
-      const sanitized = sanitizeToeicData(parsed);
-      return sanitized.length > 0 ? sanitized : null;
+      return sanitizeToeicData(parsed);
     }
   } catch {
     // No usable cached data
@@ -147,8 +118,7 @@ async function fetchFreshData() {
     const freshData = await response.json();
     const sanitizedData = sanitizeToeicData(freshData);
 
-    const mergedData = mergeProgressIntoFreshData(sanitizedData, gameData);
-    gameData = mergedData;
+    gameData = sanitizedData;
     cacheData(sanitizedData);
     return gameData;
   } catch (err) {
@@ -291,7 +261,6 @@ export function selectWordsForRound(category, roundSize = 10) {
 
   for (const randomWord of remaining) {
     if (selected.length >= roundSize) break;
-    if (seen.has(randomWord.eng)) continue;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
