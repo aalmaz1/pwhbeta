@@ -321,7 +321,6 @@ export async function initApp() {
   document.getElementById('settings-back-btn')?.addEventListener('click', goBackFromSettings);
   document.getElementById('category-back-btn')?.addEventListener('click', goBackFromCategory);
   document.getElementById('exit-game-btn')?.addEventListener('click', exitGame);
-  document.getElementById('next-question-btn')?.addEventListener('click', nextQuestion);
   document.getElementById('reset-progress-btn')?.addEventListener('click', handleResetProgress);
   document.getElementById('settings-sound-btn')?.addEventListener('click', handleToggleMute);
 

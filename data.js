@@ -59,9 +59,10 @@ function sanitizeToeicData(words) {
 function getCachedData() {
   try {
     const cached = localStorage.getItem('pixelWordHunter_words_cache');
-    if (cached) {
+    if (cached && cached.length > 0) {
       const parsed = JSON.parse(cached);
-      return sanitizeToeicData(parsed);
+      const sanitized = sanitizeToeicData(parsed);
+      return sanitized.length > 0 ? sanitized : null;
     }
   } catch {
     // No usable cached data
@@ -140,7 +141,7 @@ export async function loadGameData() {
 
   dataLoadPromise = (async () => {
     const cached = getCachedData();
-    if (cached) {
+    if (cached && cached.length > 0) {
       gameData = cached;
       fetchFreshData();
       return gameData;
@@ -261,6 +262,7 @@ export function selectWordsForRound(category, roundSize = 10) {
 
   for (const randomWord of remaining) {
     if (selected.length >= roundSize) break;
+    if (seen.has(randomWord.eng)) continue;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
