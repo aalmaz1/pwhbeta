@@ -316,48 +316,20 @@ export async function initApp() {
     showCategories();
   });
 
-  window.completeOnboarding = () => {
-    storageSet('pixelWordHunter_onboarding_seen', 'true');
-    AudioEngine.playTransitionSound();
-    toggleScreen('menu');
-  };
+  document.getElementById('onboarding-start-btn')?.addEventListener('click', completeOnboarding);
+  document.getElementById('settings-open-btn')?.addEventListener('click', showSettings);
+  document.getElementById('settings-back-btn')?.addEventListener('click', goBackFromSettings);
+  document.getElementById('category-back-btn')?.addEventListener('click', goBackFromCategory);
+  document.getElementById('exit-game-btn')?.addEventListener('click', exitGame);
+  document.getElementById('reset-progress-btn')?.addEventListener('click', handleResetProgress);
+  document.getElementById('settings-sound-btn')?.addEventListener('click', handleToggleMute);
 
-  window.exitGame = () => toggleScreen('menu');
-  window.showSettings = () => {
-    AudioEngine.playTransitionSound();
-    toggleScreen('settings');
-  };
-  window.goBackFromSettings = () => {
-    AudioEngine.playTransitionSound();
-    state.isAnswerLocked = false;
-    toggleScreen('menu');
-  };
-  window.goBack = () => {
-    AudioEngine.playTransitionSound();
-    state.isAnswerLocked = false;
-    toggleScreen('menu');
-  };
-  window.nextQuestion = () => {
-    state.currentQ++;
-    loadQuestion();
-  };
-  window.resetProgress = () => {
-    if (confirm('Reset all progress?')) {
-      resetProgress();
-      storageRemove('pixelWordHunter_xp');
-      state.xp = 0;
-      location.reload();
-    }
-  };
-
-  window.setTheme = (theme) => {
-    ThemeManager.setTheme(theme);
-  };
-  window.toggleMute = () => {
-    AudioEngine.ensureContext();
-    AudioEngine.toggleMute();
-    updateSoundUI();
-  };
+  document.querySelector('.theme-btns')?.addEventListener('click', (event) => {
+    const target = event.target.closest('.theme-btn');
+    if (!target) return;
+    const { theme } = target.dataset;
+    if (theme) ThemeManager.setTheme(theme);
+  });
 }
 
 function showCategories() {
@@ -458,7 +430,7 @@ function loadQuestion() {
     state.ui.optionsElement.appendChild(fragment);
     state.ui.explanationModal?.classList.add('hidden');
     state.wordStartTime = Date.now();
-    state.isAnswerLocked = false;
+    unlockAnswerFlow();
 
     const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
     optionButtons.forEach(btn => {
@@ -677,6 +649,7 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
+    unlockAnswerFlow();
     state.isAnswerLocked = false;
     startGame(state.selectedCategory);
   }
