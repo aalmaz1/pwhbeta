@@ -55,63 +55,90 @@ const AudioEngine = {
     return { osc, gain };
   },
 
-  playCorrectSound() { 
-    if (!this.ctx || this.isMuted) return;
+  playToneSequence(steps = []) {
+    if (!this.ctx || this.isMuted || !this.masterGain || steps.length === 0) return;
     this.ensureContext();
 
-    const { osc, gain } = this.createOscillator('square', 880);
-    osc.connect(gain);
-    osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
-    gain.connect(this.masterGain);
+    const startAt = this.ctx.currentTime;
 
-    gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+    steps.forEach((step) => {
+      const start = startAt + step.time;
+      const duration = step.duration;
+      const end = start + duration;
 
-    osc.start(this.ctx.currentTime);
-    osc.stop(this.ctx.currentTime + 0.1);
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = step.type || 'square';
+      osc.frequency.setValueAtTime(step.freq, start);
+
+      if (Number.isFinite(step.slideTo)) {
+        osc.frequency.exponentialRampToValueAtTime(
+          Math.max(1, step.slideTo),
+          end
+        );
+      }
+
+      if (Number.isFinite(step.vibratoHz) && Number.isFinite(step.vibratoDepth) && step.vibratoDepth > 0) {
+        const lfo = this.ctx.createOscillator();
+        const lfoGain = this.ctx.createGain();
+        lfo.type = 'square';
+        lfo.frequency.setValueAtTime(step.vibratoHz, start);
+        lfoGain.gain.setValueAtTime(step.vibratoDepth, start);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+        lfo.start(start);
+        lfo.stop(end);
+      }
+
+      if (Array.isArray(step.arp) && step.arp.length > 0) {
+        const slice = Math.max(0.01, duration / step.arp.length);
+        step.arp.forEach((freq, idx) => {
+          osc.frequency.setValueAtTime(freq, start + idx * slice);
+        });
+      }
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      const attack = Math.max(0.001, Math.min(step.attack ?? 0.003, duration * 0.4));
+      const release = Math.max(0.002, Math.min(step.release ?? 0.02, duration * 0.8));
+      const peak = Math.max(0.01, Math.min(step.volume ?? 0.22, 0.4));
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.linearRampToValueAtTime(peak, start + attack);
+      gain.gain.exponentialRampToValueAtTime(0.0001, Math.max(start + attack + 0.001, end - release));
+
+      osc.start(start);
+      osc.stop(end);
+    });
   },
 
-  playWrongSound() { 
-    if (!this.ctx || this.isMuted) return;
-    this.ensureContext();
-
-    const { osc, gain } = this.createOscillator('sawtooth', 300);
-    osc.connect(gain);
-    osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.2);
-    gain.connect(this.masterGain);
-
-    gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
-
-    osc.start(this.ctx.currentTime);
-    osc.stop(this.ctx.currentTime + 0.2);
+  playCorrectSound() {
+    this.playToneSequence([
+      { time: 0, freq: 659.25, duration: 0.045, volume: 0.2, type: 'square' },
+      { time: 0.04, freq: 783.99, duration: 0.05, volume: 0.22, type: 'square' },
+      { time: 0.08, freq: 987.77, duration: 0.055, volume: 0.24, type: 'square' },
+      { time: 0.13, freq: 1318.5, duration: 0.12, volume: 0.2, type: 'square', arp: [1318.5, 1568, 1760, 1975.53], vibratoHz: 14, vibratoDepth: 6 },
+      { time: 0.13, freq: 329.63, duration: 0.11, volume: 0.09, type: 'triangle' }
+    ]);
   },
 
-  playTransitionSound() { 
-    if (!this.ctx || this.isMuted) return;
-    this.ensureContext();
+  playWrongSound() {
+    this.playToneSequence([
+      { time: 0, freq: 246.94, duration: 0.08, volume: 0.22, type: 'square', slideTo: 220 },
+      { time: 0.055, freq: 196, duration: 0.09, volume: 0.2, type: 'square', slideTo: 174.61 },
+      { time: 0.12, freq: 155.56, duration: 0.12, volume: 0.19, type: 'square', slideTo: 110, vibratoHz: 8, vibratoDepth: 3 },
+      { time: 0.12, freq: 82.41, duration: 0.11, volume: 0.1, type: 'triangle' }
+    ]);
+  },
 
-    const filter = this.ctx.createBiquadFilter();
-    const { osc, gain } = this.createOscillator('sine', 400);
-    osc.connect(filter);
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(400, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.15);
-
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(400, this.ctx.currentTime);
-    filter.frequency.linearRampToValueAtTime(3000, this.ctx.currentTime + 0.15);
-
-    gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(this.masterGain);
-
-    osc.start(this.ctx.currentTime);
-    osc.stop(this.ctx.currentTime + 0.15);
+  playTransitionSound() {
+    this.playToneSequence([
+      { time: 0, freq: 392, duration: 0.03, volume: 0.16, type: 'square' },
+      { time: 0.026, freq: 523.25, duration: 0.035, volume: 0.15, type: 'square' },
+      { time: 0.054, freq: 659.25, duration: 0.04, volume: 0.14, type: 'square' },
+      { time: 0.08, freq: 523.25, duration: 0.03, volume: 0.08, type: 'triangle' }
+    ]);
   },
 
   toggleMute() { 
