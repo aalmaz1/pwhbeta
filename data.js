@@ -144,33 +144,23 @@ export function getRandomWrongAnswers(correctWord, count = 3) {
     return [correctWord.correct];
   }
 
-  const wrongAnswers = allWords
-    .filter(w => w.eng !== correctWord.eng)
-    .sort(() => Math.random() - 0.5);
+  const uniqueWrong = [];
+  const seenTranslations = new Set();
 
-  const selected = [];
-  const correctTranslation = correctWord.correct;
-
-  for (const word of wrongAnswers) {
-    if (selected.length >= count) break;
-    if (word.correct !== correctTranslation && !selected.includes(word.correct)) {
-      selected.push(word.correct);
+  for (const word of allWords) {
+    if (word.eng === correctWord.eng || word.correct === correctWord.correct) continue;
+    if (!seenTranslations.has(word.correct)) {
+      seenTranslations.add(word.correct);
+      uniqueWrong.push(word.correct);
     }
   }
 
-  const maxIterations = allWords.length * 2;
-  let iterations = 0;
-
-  while (selected.length < count && iterations < maxIterations) {
-    iterations++;
-    const randomIdx = Math.floor(Math.random() * allWords.length);
-    const randomWord = allWords[randomIdx];
-    if (randomWord.correct !== correctTranslation && !selected.includes(randomWord.correct)) {
-      selected.push(randomWord.correct);
-    }
+  for (let i = uniqueWrong.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [uniqueWrong[i], uniqueWrong[j]] = [uniqueWrong[j], uniqueWrong[i]];
   }
 
-  return selected;
+  return uniqueWrong.slice(0, count);
 }
 
 export function generateOptionsForWord(word) {
@@ -233,10 +223,14 @@ export function selectWordsForRound(category, roundSize = 10) {
     }
   }
 
-  while (selected.length < roundSize && selected.length < words.length) {
-    const remaining = words.filter(w => !seen.has(w.eng));
-    if (remaining.length === 0) break;
-    const randomWord = remaining[Math.floor(Math.random() * remaining.length)];
+  const remaining = words.filter(w => !seen.has(w.eng));
+  for (let i = remaining.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+  }
+
+  for (const randomWord of remaining) {
+    if (selected.length >= roundSize) break;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
