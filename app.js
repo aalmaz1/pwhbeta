@@ -207,10 +207,77 @@ const state = {
   xp: 0,
   selectedCategory: 'All',
   wordStartTime: 0,
-  totalAnswered: 0,
   correctInRow: 0,
   isAnswerLocked: false,
 };
+
+function unlockAnswerFlow() {
+  state.isAnswerLocked = false;
+}
+
+function goToMenu({ withSound = true } = {}) {
+  if (withSound) {
+    AudioEngine.playTransitionSound();
+  }
+  unlockAnswerFlow();
+  toggleScreen('menu');
+}
+
+function completeOnboarding() {
+  storageSet('pixelWordHunter_onboarding_seen', 'true');
+  AudioEngine.playTransitionSound();
+  toggleScreen('menu');
+}
+
+function goBackFromSettings() {
+  goToMenu();
+}
+
+function goBackFromCategory() {
+  goToMenu();
+}
+
+function showSettings() {
+  AudioEngine.playTransitionSound();
+  toggleScreen('settings');
+}
+
+function exitGame() {
+  goToMenu({ withSound: false });
+}
+
+function nextQuestion() {
+  state.currentQ++;
+  loadQuestion();
+}
+
+function handleResetProgress() {
+  if (confirm('Reset all progress?')) {
+    resetProgress();
+    storageRemove('pixelWordHunter_xp');
+    storageRemove('pixelWordHunter_onboarding_seen');
+    state.xp = 0;
+    location.reload();
+  }
+}
+
+function handleToggleMute() {
+  AudioEngine.ensureContext();
+  AudioEngine.toggleMute();
+  updateSoundUI();
+}
+
+function getProgressStats() {
+  const words = getGameData();
+  const total = words.length;
+  let mastered = 0;
+  let learning = 0;
+  for (const word of words) {
+    if (word.mastery >= 4) mastered++;
+    else if (word.mastery > 0) learning++;
+  }
+  return { mastered, learning, newWords: total - mastered - learning, total };
+}
 
 export async function initApp() {
   AudioEngine.init();
@@ -243,7 +310,8 @@ export async function initApp() {
     feedbackEl.setAttribute('aria-live', 'polite');
   }
 
-  document.querySelector('.start-btn').addEventListener('click', function() {
+  const menuStartButton = document.querySelector('#menu-screen .start-btn');
+  menuStartButton?.addEventListener('click', () => {
     AudioEngine.ensureContext();
     showCategories();
   });
@@ -401,7 +469,6 @@ function loadQuestion() {
     if (firstOption) firstOption.focus();
   });
 
-  state.totalAnswered++;
 }
 
 function handleOptionKeyNav(e, optionButtons) {
@@ -550,9 +617,7 @@ function showRoundSummary() {
   const list = document.getElementById('explanation-list');
   if (!modal || !list) return;
 
-  const mastered = getGameData().filter(w => w.mastery >= 4).length;
-  const learning = getGameData().filter(w => w.mastery > 0 && w.mastery < 4).length;
-  const newWords = getGameData().filter(w => w.mastery === 0).length;
+  const { mastered, learning, newWords } = getProgressStats();
 
   list.innerHTML = `
     <div style="font-size: 11px; line-height: 2; text-align: center;">
@@ -642,11 +707,11 @@ function showRoundSummary() {
 }
 
 function updateMenuStats() {
-  const mastered = getGameData().filter((w) => w.mastery >= 4).length;
+  const { mastered, total } = getProgressStats();
   if (state.ui.masteredCountElement) {
     state.ui.masteredCountElement.textContent = mastered;
   }
   if (state.ui.totalCountElement) {
-    state.ui.totalCountElement.textContent = getGameData().length;
+    state.ui.totalCountElement.textContent = total;
   }
 }
