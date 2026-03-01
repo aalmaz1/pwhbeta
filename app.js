@@ -331,6 +331,48 @@ export async function initApp() {
     const { theme } = target.dataset;
     if (theme) ThemeManager.setTheme(theme);
   });
+  window.completeOnboarding = () => {
+    storageSet('pixelWordHunter_onboarding_seen', 'true');
+    AudioEngine.playTransitionSound();
+    toggleScreen('menu');
+  };
+
+  window.exitGame = () => toggleScreen('menu');
+  window.showSettings = () => {
+    AudioEngine.playTransitionSound();
+    toggleScreen('settings');
+  };
+  window.goBackFromSettings = () => {
+    AudioEngine.playTransitionSound();
+    state.isAnswerLocked = false;
+    toggleScreen('menu');
+  };
+  window.goBack = () => {
+    AudioEngine.playTransitionSound();
+    state.isAnswerLocked = false;
+    toggleScreen('menu');
+  };
+  window.nextQuestion = () => {
+    state.currentQ++;
+    loadQuestion();
+  };
+  window.resetProgress = () => {
+    if (confirm('Reset all progress?')) {
+      resetProgress();
+      storageRemove('pixelWordHunter_xp');
+      state.xp = 0;
+      location.reload();
+    }
+  };
+
+  window.setTheme = (theme) => {
+    ThemeManager.setTheme(theme);
+  };
+  window.toggleMute = () => {
+    AudioEngine.ensureContext();
+    AudioEngine.toggleMute();
+    updateSoundUI();
+  };
 }
 
 function showCategories() {
@@ -432,6 +474,7 @@ function loadQuestion() {
     state.ui.explanationModal?.classList.add('hidden');
     state.wordStartTime = Date.now();
     unlockAnswerFlow();
+    state.isAnswerLocked = false;
 
     const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
     optionButtons.forEach(btn => {
@@ -569,6 +612,7 @@ function showExplanation(word) {
     nextBtn.onclick = () => {
       state.currentQ++;
       unlockAnswerFlow();
+      state.isAnswerLocked = false;
       loadQuestion();
     };
   }
@@ -651,6 +695,7 @@ function showRoundSummary() {
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
     unlockAnswerFlow();
+    state.isAnswerLocked = false;
     startGame(state.selectedCategory);
   }
 
@@ -664,6 +709,8 @@ function showRoundSummary() {
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
     goToMenu({ withSound: false });
+    state.isAnswerLocked = false;
+    toggleScreen('menu');
   }
 
   continueBtn.addEventListener('click', handleContinue);
