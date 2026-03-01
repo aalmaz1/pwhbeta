@@ -557,17 +557,17 @@
   {
     "category": "Marketing",
     "eng": "solicitation",
-    "rus": "прощение",
+    "rus": "обращение",
     "question": "solicitation",
     "optionsList": [
       "чип",
-      "прощение",
+      "обращение",
       "посадочный талон"
     ],
-    "correct": "прощение",
+    "correct": "обращение",
     "mastery": 0,
     "exampleEng": "Email solicitation increased lead generation.",
-    "exampleRus": "Рассылка по электронной почте увеличила привлечение клиентов."
+    "exampleRus": "Рассылка по электронной почте увеличила количество обращений."
   },
   {
     "category": "Marketing",
@@ -947,17 +947,17 @@
   {
     "category": "Business Planning",
     "eng": "brief",
-    "rus": "инструктировать",
+    "rus": "письменное заключение",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "инструктировать",
+      "письменное заключение",
       "каталог"
     ],
-    "correct": "инструктировать",
+    "correct": "письменное заключение",
     "mastery": 0,
-    "exampleEng": "The director briefed the board on strategy.",
-    "exampleRus": "Директор проинформировал совет о стратегии."
+    "exampleEng": "The director submitted a brief to the board on strategy.",
+    "exampleRus": "Директор представил совету письменное заключение по стратегии."
   },
   {
     "category": "Business Planning",
@@ -2147,17 +2147,17 @@
   {
     "category": "Office Procedures",
     "eng": "brief",
-    "rus": "инструктировать",
+    "rus": "письменное заключение",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "инструктировать",
+      "письменное заключение",
       "каталог"
     ],
-    "correct": "инструктировать",
+    "correct": "письменное заключение",
     "mastery": 0,
-    "exampleEng": "The manager briefed the team on the project.",
-    "exampleRus": "Менеджер проинформировал команду о проекте."
+    "exampleEng": "Please file the brief with the project documents.",
+    "exampleRus": "Пожалуйста, подшейте письменное заключение к документам проекта."
   },
   {
     "category": "Office Procedures",
@@ -3992,17 +3992,17 @@
   {
     "category": "Ordering Supplies",
     "eng": "check",
-    "rus": "проверять",
+    "rus": "чек",
     "question": "check",
     "optionsList": [
-      "проверять",
+      "чек",
       "браузер",
       "прибыльный"
     ],
-    "correct": "проверять",
+    "correct": "чек",
     "mastery": 0,
-    "exampleEng": "Check each item carefully.",
-    "exampleRus": "Внимательно проверяйте каждый элемент."
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
   },
   {
     "category": "Ordering Supplies",
@@ -4607,17 +4607,17 @@
   {
     "category": "Invoices",
     "eng": "check",
-    "rus": "проверять",
+    "rus": "чек",
     "question": "check",
     "optionsList": [
-      "проверять",
+      "чек",
       "браузер",
       "прибыльный"
     ],
-    "correct": "проверять",
+    "correct": "чек",
     "mastery": 0,
-    "exampleEng": "Check each item carefully.",
-    "exampleRus": "Внимательно проверяйте каждый элемент."
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
   },
   {
     "category": "Invoices",
@@ -5267,17 +5267,17 @@
   {
     "category": "Banking",
     "eng": "check",
-    "rus": "проверять",
+    "rus": "чек",
     "question": "check",
     "optionsList": [
-      "проверять",
+      "чек",
       "браузер",
       "прибыльный"
     ],
-    "correct": "проверять",
+    "correct": "чек",
     "mastery": 0,
-    "exampleEng": "Check each item carefully.",
-    "exampleRus": "Внимательно проверяйте каждый элемент."
+    "exampleEng": "Please pay by check.",
+    "exampleRus": "Пожалуйста, оплатите чеком."
   },
   {
     "category": "Banking",
@@ -7412,17 +7412,17 @@
   {
     "category": "Legal",
     "eng": "brief",
-    "rus": "инструктировать",
+    "rus": "письменное заключение",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "инструктировать",
+      "письменное заключение",
       "каталог"
     ],
-    "correct": "инструктировать",
+    "correct": "письменное заключение",
     "mastery": 0,
-    "exampleEng": "Legal counsel briefed the management team.",
-    "exampleRus": "Юрисконсульт проинструктировал руководство."
+    "exampleEng": "Legal counsel submitted a brief to the management team.",
+    "exampleRus": "Юрисконсульт представил письменное заключение руководству."
   },
   {
     "category": "Legal",

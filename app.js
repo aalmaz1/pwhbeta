@@ -17,8 +17,8 @@ const AudioEngine = {
       this.masterGain.gain.value = this.volume;
       this.masterGain.connect(this.ctx.destination);
 
-      const savedMute = storageGet('pixelWordHunter_muted') === 'true';
-      const savedVolume = parseFloat(storageGet('pixelWordHunter_volume'));
+      const savedMute = storageGet('pixelWordHunter_muted');
+      const savedVolume = storageGet('pixelWordHunter_volume');
 
       if (savedMute !== null) {
         this.isMuted = savedMute === 'true';
@@ -28,9 +28,9 @@ const AudioEngine = {
         if (Number.isFinite(parsed)) {
           this.volume = parsed;
         }
-        if (this.masterGain) {
-          this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
-        }
+      }
+      if (this.masterGain) {
+        this.masterGain.gain.value = this.isMuted ? 0 : this.volume;
       }
 
       this.initialized = true;
@@ -165,7 +165,11 @@ const ThemeManager = {
 
   applyTheme(theme) {
     if (document.body) {
-      document.body.setAttribute('data-theme', theme);
+      if (theme === 'cyberpunk') {
+        document.body.removeAttribute('data-theme');
+      } else {
+        document.body.setAttribute('data-theme', theme);
+      }
     }
     document.querySelectorAll('.theme-btn').forEach(el => {
       el.classList.toggle('active', el.dataset.theme === theme);
@@ -203,9 +207,77 @@ const state = {
   xp: 0,
   selectedCategory: 'All',
   wordStartTime: 0,
-  totalAnswered: 0,
   correctInRow: 0,
+  isAnswerLocked: false,
 };
+
+function unlockAnswerFlow() {
+  state.isAnswerLocked = false;
+}
+
+function goToMenu({ withSound = true } = {}) {
+  if (withSound) {
+    AudioEngine.playTransitionSound();
+  }
+  unlockAnswerFlow();
+  toggleScreen('menu');
+}
+
+function completeOnboarding() {
+  storageSet('pixelWordHunter_onboarding_seen', 'true');
+  AudioEngine.playTransitionSound();
+  toggleScreen('menu');
+}
+
+function goBackFromSettings() {
+  goToMenu();
+}
+
+function goBackFromCategory() {
+  goToMenu();
+}
+
+function showSettings() {
+  AudioEngine.playTransitionSound();
+  toggleScreen('settings');
+}
+
+function exitGame() {
+  goToMenu({ withSound: false });
+}
+
+function nextQuestion() {
+  state.currentQ++;
+  loadQuestion();
+}
+
+function handleResetProgress() {
+  if (confirm('Reset all progress?')) {
+    resetProgress();
+    storageRemove('pixelWordHunter_xp');
+    storageRemove('pixelWordHunter_onboarding_seen');
+    state.xp = 0;
+    location.reload();
+  }
+}
+
+function handleToggleMute() {
+  AudioEngine.ensureContext();
+  AudioEngine.toggleMute();
+  updateSoundUI();
+}
+
+function getProgressStats() {
+  const words = getGameData();
+  const total = words.length;
+  let mastered = 0;
+  let learning = 0;
+  for (const word of words) {
+    if (word.mastery >= 4) mastered++;
+    else if (word.mastery > 0) learning++;
+  }
+  return { mastered, learning, newWords: total - mastered - learning, total };
+}
 
 export async function initApp() {
   AudioEngine.init();
@@ -214,6 +286,8 @@ export async function initApp() {
   await loadGameData();
 
   state.ui = initUI();
+
+  const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
 
   const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
   state.xp = Number.isFinite(savedXp) ? savedXp : 0;
@@ -227,6 +301,8 @@ export async function initApp() {
     state.ui.xpElement.textContent = state.xp;
   }
 
+  toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
+
   updateSoundUI();
 
   const feedbackEl = state.ui.feedbackElement;
@@ -234,45 +310,26 @@ export async function initApp() {
     feedbackEl.setAttribute('aria-live', 'polite');
   }
 
-  document.querySelector('.start-btn').addEventListener('click', function() {
+  const menuStartButton = document.querySelector('#menu-screen .start-btn');
+  menuStartButton?.addEventListener('click', () => {
     AudioEngine.ensureContext();
     showCategories();
   });
 
-  window.exitGame = () => toggleScreen('menu');
-  window.showSettings = () => {
-    AudioEngine.playTransitionSound();
-    toggleScreen('settings');
-  };
-  window.goBackFromSettings = () => {
-    AudioEngine.playTransitionSound();
-    toggleScreen('menu');
-  };
-  window.goBack = () => {
-    AudioEngine.playTransitionSound();
-    toggleScreen('menu');
-  };
-  window.nextQuestion = () => {
-    state.currentQ++;
-    loadQuestion();
-  };
-  window.resetProgress = () => {
-    if (confirm('Reset all progress?')) {
-      resetProgress();
-      storageRemove('pixelWordHunter_xp');
-      state.xp = 0;
-      location.reload();
-    }
-  };
+  document.getElementById('onboarding-start-btn')?.addEventListener('click', completeOnboarding);
+  document.getElementById('settings-open-btn')?.addEventListener('click', showSettings);
+  document.getElementById('settings-back-btn')?.addEventListener('click', goBackFromSettings);
+  document.getElementById('category-back-btn')?.addEventListener('click', goBackFromCategory);
+  document.getElementById('exit-game-btn')?.addEventListener('click', exitGame);
+  document.getElementById('reset-progress-btn')?.addEventListener('click', handleResetProgress);
+  document.getElementById('settings-sound-btn')?.addEventListener('click', handleToggleMute);
 
-  window.setTheme = (theme) => {
-    ThemeManager.setTheme(theme);
-  };
-  window.toggleMute = () => {
-    AudioEngine.ensureContext();
-    AudioEngine.toggleMute();
-    updateSoundUI();
-  };
+  document.querySelector('.theme-btns')?.addEventListener('click', (event) => {
+    const target = event.target.closest('.theme-btn');
+    if (!target) return;
+    const { theme } = target.dataset;
+    if (theme) ThemeManager.setTheme(theme);
+  });
 }
 
 function showCategories() {
@@ -281,7 +338,7 @@ function showCategories() {
 }
 
 function toggleScreen(screen) {
-  const screens = ['menu', 'settings', 'category', 'game'];
+  const screens = ['onboarding', 'menu', 'settings', 'category', 'game'];
   screens.forEach(s => {
     const el = state.ui[`${s}ScreenElement`];
     if (el && !el.classList.contains('hidden') && s !== screen) {
@@ -345,7 +402,6 @@ function loadQuestion() {
   const options = generateOptionsForWord(word);
 
   const fragment = document.createDocumentFragment();
-  const container = state.ui.wordElement; // Define the container variable
   options.forEach((option, index) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
@@ -362,11 +418,9 @@ function loadQuestion() {
     });
     fragment.appendChild(btn);
   });
-  state.ui.optionsElement.innerHTML = '';
-  state.ui.optionsElement.appendChild(fragment);
 
   requestAnimationFrame(() => {
-      container.innerHTML = '';
+    state.ui.wordElement.innerHTML = '';
     state.ui.wordElement.textContent = word.eng;
     state.ui.wordElement.classList.remove('typewriter', 'glitch');
     void state.ui.wordElement.offsetWidth;
@@ -376,6 +430,7 @@ function loadQuestion() {
     state.ui.optionsElement.appendChild(fragment);
     state.ui.explanationModal?.classList.add('hidden');
     state.wordStartTime = Date.now();
+    unlockAnswerFlow();
 
     const optionButtons = state.ui.optionsElement.querySelectorAll('.option-btn');
     optionButtons.forEach(btn => {
@@ -386,7 +441,6 @@ function loadQuestion() {
     if (firstOption) firstOption.focus();
   });
 
-  state.totalAnswered++;
 }
 
 function handleOptionKeyNav(e, optionButtons) {
@@ -404,6 +458,9 @@ function handleOptionKeyNav(e, optionButtons) {
 }
 
 function checkAnswer(selected, word, btn) {
+  if (state.isAnswerLocked) return;
+  state.isAnswerLocked = true;
+
   const time = (Date.now() - state.wordStartTime) / 1000;
   const isCorrect = selected === word.correct;
 
@@ -510,6 +567,7 @@ function showExplanation(word) {
     nextBtn.textContent = 'NEXT ▶';
     nextBtn.onclick = () => {
       state.currentQ++;
+      unlockAnswerFlow();
       loadQuestion();
     };
   }
@@ -531,9 +589,7 @@ function showRoundSummary() {
   const list = document.getElementById('explanation-list');
   if (!modal || !list) return;
 
-  const mastered = getGameData().filter(w => w.mastery >= 4).length;
-  const learning = getGameData().filter(w => w.mastery > 0 && w.mastery < 4).length;
-  const newWords = getGameData().filter(w => w.mastery === 0).length;
+  const { mastered, learning, newWords } = getProgressStats();
 
   list.innerHTML = `
     <div style="font-size: 11px; line-height: 2; text-align: center;">
@@ -593,6 +649,7 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
+    unlockAnswerFlow();
     startGame(state.selectedCategory);
   }
 
@@ -605,7 +662,7 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
-    toggleScreen('menu');
+    goToMenu({ withSound: false });
   }
 
   continueBtn.addEventListener('click', handleContinue);
@@ -621,11 +678,11 @@ function showRoundSummary() {
 }
 
 function updateMenuStats() {
-  const mastered = getGameData().filter((w) => w.mastery >= 4).length;
+  const { mastered, total } = getProgressStats();
   if (state.ui.masteredCountElement) {
     state.ui.masteredCountElement.textContent = mastered;
   }
   if (state.ui.totalCountElement) {
-    state.ui.totalCountElement.textContent = getGameData().length;
+    state.ui.totalCountElement.textContent = total;
   }
 }
