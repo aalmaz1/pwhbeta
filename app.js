@@ -567,7 +567,7 @@ function showExplanation(word) {
     nextBtn.textContent = 'NEXT ▶';
     nextBtn.onclick = () => {
       state.currentQ++;
-      unlockAnswerFlow();
+      state.isAnswerLocked = false;
       loadQuestion();
     };
   }
@@ -650,6 +650,7 @@ function showRoundSummary() {
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
     unlockAnswerFlow();
+    state.isAnswerLocked = false;
     startGame(state.selectedCategory);
   }
 
@@ -662,7 +663,8 @@ function showRoundSummary() {
     continueBtn.removeEventListener('click', handleContinue);
     menuBtn.removeEventListener('click', handleMenu);
     btnContainer.remove();
-    goToMenu({ withSound: false });
+    state.isAnswerLocked = false;
+    toggleScreen('menu');
   }
 
   continueBtn.addEventListener('click', handleContinue);
