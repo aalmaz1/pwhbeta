@@ -947,14 +947,14 @@
   {
     "category": "Business Planning",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
     "exampleEng": "The director briefed the board on strategy.",
     "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
@@ -2147,14 +2147,14 @@
   {
     "category": "Office Procedures",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
     "exampleEng": "The manager briefed the team on the project.",
     "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
@@ -7412,14 +7412,14 @@
   {
     "category": "Legal",
     "eng": "brief",
-    "rus": "письменное заключение",
+    "rus": "информировать",
     "question": "brief",
     "optionsList": [
       "продлевать",
-      "письменное заключение",
+      "информировать",
       "каталог"
     ],
-    "correct": "письменное заключение",
+    "correct": "информировать",
     "mastery": 0,
     "exampleEng": "Legal counsel briefed the management team.",
     "exampleRus": "Юрисконсульт подготовил письменное заключение для руководства."
