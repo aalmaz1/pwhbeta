@@ -61,8 +61,7 @@ function getCachedData() {
     const cached = localStorage.getItem('pixelWordHunter_words_cache');
     if (cached && cached.length > 0) {
       const parsed = JSON.parse(cached);
-      const sanitized = sanitizeToeicData(parsed);
-      return sanitized.length > 0 ? sanitized : null;
+      return sanitizeToeicData(parsed);
     }
   } catch {
     // No usable cached data
@@ -262,7 +261,6 @@ export function selectWordsForRound(category, roundSize = 10) {
 
   for (const randomWord of remaining) {
     if (selected.length >= roundSize) break;
-    if (seen.has(randomWord.eng)) continue;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
