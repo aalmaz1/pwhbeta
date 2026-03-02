@@ -44,50 +44,67 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
 
-  // Google Fonts — cache-first
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
-    event.respondWith(
-      caches.match(event.request).then(resp => resp || fetch(event.request).then(r => {
-        if (r.ok) caches.open(CACHE_NAME).then(c => c.put(event.request, r.clone()));
-        return r;
-      }))
-    );
-    return;
-  }
-
-  // JSON — stale-while-revalidate
-  if (url.pathname.endsWith('words_optimized.json')) {
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        const fetchPromise = fetch(event.request).then(r => {
-          if (r.ok) caches.open(CACHE_NAME).then(c => c.put(event.request, r.clone()));
-          return r;
-        });
-        return cached || fetchPromise;
-      })
-    );
-    return;
-  }
-
-  // HTML — network-first
-  if (url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname === '' ) {
-    event.respondWith(
-      fetch(event.request).then(r => {
-        if (r.ok) caches.open(CACHE_NAME).then(c => c.put(event.request, r.clone()));
-        return r;
-      }).catch(() => caches.match('./index.html'))
-    );
-    return;
-  }
-
-  // Остальное — cache-first
+// Google Fonts — cache-first
+if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
   event.respondWith(
-    caches.match(event.request).then(resp => resp || fetch(event.request).then(r => {
-      if (r.ok) caches.open(CACHE_NAME).then(c => c.put(event.request, r.clone()));
-      return r;
-    }))
+    caches.match(event.request).then(resp => {
+      if (resp) return resp;
+      return fetch(event.request).then(r => {
+        if (r.ok) {
+          const clone = r.clone();
+          caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+        }
+        return r;
+      });
+    })
   );
-});
+  return;
+}
+
+// JSON — stale-while-revalidate
+if (url.pathname.endsWith('words_optimized.json')) {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      const fetchPromise = fetch(event.request).then(r => {
+        if (r.ok) {
+          const clone = r.clone();
+          caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+        }
+        return r;
+      });
+      return cached || fetchPromise;
+    })
+  );
+  return;
+}
+
+// HTML — network-first
+if (url.pathname.endsWith('.html') ⠞⠵⠺⠟⠟⠞⠞⠵⠟⠵⠟⠵⠞⠞⠟⠺⠺⠟⠺⠟⠞⠞ url.pathname === '') {
+  event.respondWith(
+    fetch(event.request).then(r => {
+      if (r.ok) {
+        const clone = r.clone();
+        caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+      }
+      return r;
+    }).catch(() => caches.match('./index.html'))
+  );
+  return;
+}
+
+// Остальное — cache-first
+event.respondWith(
+  caches.match(event.request).then(resp => {
+    if (resp) return resp;
+    return fetch(event.request).then(r => {
+      if (r.ok) {
+        const clone = r.clone();
+        caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+      }
+      return r;
+    });
+  })
+);
 
 // Сообщения от клиента
 self.addEventListener('message', event => {
