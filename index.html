@@ -1,43 +1,55 @@
-<!-- ── GAME SCREEN ────────────────────────── -->
-  <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
-    <header>
-      <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
-      <div class="header-actions">
-        <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
-        <button id="exit-game-btn" class="icon-btn exit-icon-btn" role="button" title="Exit to menu" aria-label="Exit to menu">✕</button>
-      </div>
-    </header>
-
-    <div id="quiz-box">
-      <div class="question-card">
-        <h1 id="word" aria-live="polite"></h1>
-      </div>
-      <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
-    </div>
-
-    <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
-      <h2 class="modal-title">// WORD REVIEW //</h2>
-      <div id="explanation-list"></div>
-      <button id="next-question-btn" class="next-btn" role="button">NEXT&nbsp;▶</button>
-    </div>
-
-    <div id="feedback" class="hidden" aria-live="polite"></div>
-  </div>
-  </main>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Word Hunter</title>
 
+  <!-- Стили -->
   <link rel="stylesheet" href="./style.css">
+
+  <!-- Манифест -->
+  <link rel="manifest" href="./manifest.json">
+
+  <!-- Иконка -->
+  <link rel="icon" href="./assets/favicon.ico">
+
+  <!-- PWA мета -->
+  <meta name="mobile-web-app-capable" content="yes">
 </head>
 <body>
-  <div id="app"></div>
+  <a href="#options" class="skip-link">Skip to options</a>
+  <div class="crt-overlay"></div>
+
+  <main role="main">
+    <!-- ── GAME SCREEN ────────────────────────── -->
+    <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
+      <header>
+        <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
+        <div class="header-actions">
+          <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
+          <button id="exit-game-btn" class="icon-btn exit-icon-btn" role="button" title="Exit to menu" aria-label="Exit to menu">✕</button>
+        </div>
+      </header>
+
+      <div id="quiz-box">
+        <div class="question-card">
+          <h1 id="word" aria-live="polite"></h1>
+        </div>
+        <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
+      </div>
+
+      <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
+        <h2 class="modal-title">// WORD REVIEW //</h2>
+        <div id="explanation-list"></div>
+        <button id="next-question-btn" class="next-btn" role="button">NEXT&nbsp;▶</button>
+      </div>
+
+      <div id="feedback" class="hidden" aria-live="polite"></div>
+    </div>
+  </main>
 
   <!-- Подключаем игру -->
-  <script src="./bundle.js"></script>
+  <script src="./bundle.js?v=10" defer></script>
 </body>
 </html>
