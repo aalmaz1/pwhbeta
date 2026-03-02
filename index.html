@@ -1,55 +1,200 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Pixel Word Hunter - TOEIC Edition: Learn 600 business English words with adaptive spaced repetition. Master TOEIC vocabulary through a retro pixel-art quiz game.">
   <title>Pixel Word Hunter</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="assets/favicon.ico">
+  
+  <!-- iOS PWA Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Word Hunter">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0010">
+  
+  <!-- Preconnect to critical origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
-  <!-- Стили -->
-  <link rel="stylesheet" href="./style.css">
+  <!-- Preload critical JS bundle -->
+  <link rel="preload" href="bundle.js?v=10" as="script" fetchpriority="high">
 
-  <!-- Манифест -->
-  <link rel="manifest" href="./manifest.json">
+  <!-- Preload font file for instant text rendering -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf" as="font" type="font/ttf" crossorigin fetchpriority="high">
+  
+  <!-- Preload JSON data -->
+  <link rel="preload" href="words_optimized.json" as="fetch" crossorigin>
+  
+  <!-- Critical CSS - Inlined for fast first paint -->
+  <style>
+    @font-face {
+      font-family: 'Press Start 2P';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url('https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf') format('truetype');
+    }
+    :root {
+      --bg-deep:       #0a0010;
+      --bg-mid:        #100020;
+      --neon-pink:     #ff2d78;
+      --neon-cyan:     #00f5ff;
+      --neon-purple:   #bf5fff;
+      --neon-yellow:   #ffe600;
+      --neon-green:    #39ff14;
+      --grid-color:    rgba(191, 95, 255, 0.15);
+      --text-main:     #f0e6ff;
+      --text-dim:      #8877aa;
+      --shadow-pink:   0 0 8px #ff2d78, 0 0 20px rgba(255,45,120,0.5);
+      --shadow-cyan:   0 0 8px #00f5ff, 0 0 20px rgba(0,245,255,0.5);
+      --shadow-purple: 0 0 8px #bf5fff, 0 0 20px rgba(191,95,255,0.5);
+      --crt-lines:     repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; width: 100%; overflow: hidden; overscroll-behavior: none; user-select: none; -webkit-user-select: none; font-family: 'Press Start 2P', monospace; background: var(--bg-deep); color: var(--text-main); }
+    .game-container { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; contain: layout style; }
+    .game-container::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(191,95,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(191,95,255,0.07) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(400px) rotateX(45deg) scaleX(1.5); transform-origin: bottom center; z-index: -1; contain: strict; }
+    .game-container::after { content: ''; position: absolute; bottom: 0; left: -20%; right: -20%; height: 50%; background: linear-gradient(to top, rgba(255,45,120,0.08) 0%, transparent 100%); z-index: -1; contain: strict; }
+    .hidden { display: none !important; }
+    .game-title { font-size: clamp(18px, 5vw, 36px); line-height: 1.5; text-align: center; margin-bottom: 18px; letter-spacing: 4px; color: var(--neon-cyan); text-shadow: var(--shadow-cyan); }
+    .edition-badge { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); letter-spacing: 6px; margin-bottom: 28px; }
+    .stats-line { font-size: 9px; color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green); margin-bottom: 30px; letter-spacing: 2px; }
+    .blink { font-size: 10px; color: var(--neon-pink); text-shadow: var(--shadow-pink); margin-bottom: 28px; }
+    .start-btn { padding: 16px 36px; font-family: inherit; font-size: 14px; background: transparent; color: var(--neon-pink); border: 2px solid var(--neon-pink); border-radius: 0; cursor: pointer; text-shadow: var(--shadow-pink); box-shadow: 0 0 12px rgba(255,45,120,0.5), inset 0 0 12px rgba(255,45,120,0.08); letter-spacing: 3px; transition: all 0.2s; -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); position: relative; overflow: hidden; contain: layout style paint; will-change: transform; }
+    .reset-button { margin-top: 32px; font-size: 7px; color: var(--text-dim); cursor: pointer; letter-spacing: 2px; transition: color 0.2s; }
+    .credits { position: absolute; bottom: 18px; font-size: 7px; color: var(--text-dim); letter-spacing: 2px; }
+    body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.6s infinite; contain: strict; will-change: opacity; }
+    body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%); pointer-events: none; z-index: 9001; contain: strict; }
+    @keyframes crtFlicker { 0%, 96% { opacity: 1; } 97% { opacity: 0.98; } 98% { opacity: 1; } 99% { opacity: 0.96; } 100% { opacity: 1; } }
+    @keyframes titlePulse { 0%, 100% { text-shadow: var(--shadow-cyan); color: var(--neon-cyan); } 50% { text-shadow: 0 0 16px #00f5ff, 0 0 40px rgba(0,245,255,0.9), 0 0 60px rgba(0,245,255,0.4); color: #aaffff; } }
+    @keyframes blink { 50% { opacity: 0; } }
+    .game-title { animation: titlePulse 3s ease-in-out infinite; contain: layout style paint; will-change: text-shadow, color; }
+    .edition-badge, .blink { animation: blink 2.5s step-end infinite; contain: layout style paint; will-change: opacity; }
+    .blink { animation: blink 1s step-end infinite; }
+  </style>
+  
+  <!-- Non-critical CSS loaded asynchronously -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
+  <link rel="stylesheet" href="style.css?v=10" media="print" onload="this.media='all'" fetchpriority="high">
+  <noscript><link rel="stylesheet" href="style.css?v=10"></noscript>
 
-  <!-- Иконка -->
-  <link rel="icon" href="./assets/favicon.ico">
-
-  <!-- PWA мета -->
-  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Deferred JS bundle - auto-initializes when loaded -->
+  <script src="bundle.js?v=10" defer fetchpriority="high"></script>
 </head>
 <body>
   <a href="#options" class="skip-link">Skip to options</a>
   <div class="crt-overlay"></div>
 
   <main role="main">
-    <!-- ── GAME SCREEN ────────────────────────── -->
-    <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
-      <header>
-        <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
-        <div class="header-actions">
-          <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
-          <button id="exit-game-btn" class="icon-btn exit-icon-btn" role="button" title="Exit to menu" aria-label="Exit to menu">✕</button>
-        </div>
-      </header>
+  <!-- ── LOAD ERROR ──────────────────────────── -->
+  <div id="load-error" hidden role="alert" style="position:fixed;top:0;left:0;right:0;padding:12px;background:#ff2d78;color:#fff;font-family:monospace;text-align:center;z-index:99999;"></div>
 
-      <div id="quiz-box">
-        <div class="question-card">
-          <h1 id="word" aria-live="polite"></h1>
-        </div>
-        <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
-      </div>
-
-      <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
-        <h2 class="modal-title">// WORD REVIEW //</h2>
-        <div id="explanation-list"></div>
-        <button id="next-question-btn" class="next-btn" role="button">NEXT&nbsp;▶</button>
-      </div>
-
-      <div id="feedback" class="hidden" aria-live="polite"></div>
+  <!-- ── MENU SCREEN ────────────────────────── -->
+  <div id="menu-screen" class="game-container">
+    <h1 class="game-title">
+      PIXEL<br>WORD<br>HUNTER
+    </h1>
+    <div class="edition-badge">// TOEIC EDITION //</div>
+    <div class="stats-line" aria-live="polite">
+      MASTERED&nbsp;<span id="mastered-count">0</span>&nbsp;/&nbsp;<span id="total-count">0</span>
     </div>
-  </main>
+    <p class="blink" aria-hidden="true">▸ PRESS HUNT ◂</p>
+    <button class="start-btn" role="button">▶&nbsp;HUNT</button>
 
-  <!-- Подключаем игру -->
-  <script src="./bundle.js?v=10" defer></script>
+    <button class="settings-btn" role="button" onclick="showSettings()">SETTINGS</button>
+
+    <div class="credits">© 2026 ALMAZ CORP</div>
+  </div>
+
+  <!-- ── SETTINGS SCREEN ─────────────────────── -->
+  <div id="settings-screen" class="game-container hidden" role="region" aria-label="Settings">
+    <button class="back-btn" role="button" onclick="goBackFromSettings()">◀ BACK</button>
+    <h2 class="screen-title">// SETTINGS //</h2>
+    
+    <div class="settings-content">
+      <!-- Theme selector -->
+      <div class="settings-row">
+        <span class="settings-label" id="theme-label">THEME</span>
+        <div class="theme-btns" role="group" aria-labelledby="theme-label">
+          <button class="theme-btn active" role="button" data-theme="cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk" aria-label="Cyberpunk theme">
+            <span class="theme-dot cyberpunk" aria-hidden="true"></span>CYB
+          </button>
+          <button class="theme-btn" role="button" data-theme="midnight" onclick="setTheme('midnight')" title="Midnight" aria-label="Midnight theme">
+            <span class="theme-dot midnight" aria-hidden="true"></span>MID
+          </button>
+          <button class="theme-btn" role="button" data-theme="matrix" onclick="setTheme('matrix')" title="Matrix" aria-label="Matrix theme">
+            <span class="theme-dot matrix" aria-hidden="true"></span>MTX
+          </button>
+          <button class="theme-btn" role="button" data-theme="3310" onclick="setTheme('3310')" title="3310" aria-label="3310 Nokia theme">
+            <span class="theme-dot t3310" aria-hidden="true"></span>3310
+          </button>
+          <button class="theme-btn" role="button" data-theme="sunset" onclick="setTheme('sunset')" title="Sunset" aria-label="Sunset theme">
+            <span class="theme-dot sunset" aria-hidden="true"></span>SUN
+          </button>
+          <button class="theme-btn" role="button" data-theme="mono" onclick="setTheme('mono')" title="Mono" aria-label="Mono theme">
+            <span class="theme-dot mono" aria-hidden="true"></span>MON
+          </button>
+        </div>
+      </div>
+      
+      <!-- Sound toggle -->
+      <div class="settings-row">
+        <span class="settings-label">SOUND</span>
+        <button id="settings-sound-btn" class="sound-toggle-btn" role="button" onclick="toggleMute()" aria-pressed="false">
+          <span id="settings-sound-icon" aria-label="Sound on">🔊</span>
+          <span id="settings-sound-label">ON</span>
+        </button>
+      </div>
+      
+      <!-- Reset progress -->
+      <div class="settings-reset">
+        <button class="reset-btn" role="button" onclick="resetProgress()">RESET PROGRESS</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CATEGORY SCREEN ────────────────────── -->
+  <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
+    <button class="back-btn" role="button" onclick="goBack()">◀ BACK</button>
+    <h2 class="screen-title">// SELECT CATEGORY //</h2>
+    <div id="category-list" class="category-grid" role="list"></div>
+  </div>
+
+  <!-- ── GAME SCREEN ────────────────────────── -->
+  <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
+    <header>
+      <div class="stat">CAT:&nbsp;<span id="category">ALL</span></div>
+      <div class="header-actions">
+        <div class="stat header-xp">XP:&nbsp;<span id="xp" aria-live="polite">0</span></div>
+        <button class="icon-btn exit-icon-btn" role="button" onclick="exitGame()" title="Exit to menu" aria-label="Exit to menu">✕</button>
+      </div>
+    </header>
+
+    <div id="quiz-box">
+      <div class="question-card">
+        <h1 id="word" aria-live="polite"></h1>
+      </div>
+      <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
+    </div>
+
+    <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
+      <h2 class="modal-title">// WORD REVIEW //</h2>
+      <div id="explanation-list"></div>
+      <button class="next-btn" role="button" onclick="nextQuestion()">NEXT&nbsp;▶</button>
+    </div>
+
+    <div id="feedback" class="hidden" aria-live="polite"></div>
+  </div>
+  </main>
 </body>
 </html>
