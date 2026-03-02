@@ -1,18 +1,18 @@
 // ==================== SERVICE WORKER ====================
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').then(reg => {
-    console.log('[App] Service Worker зарегистрирован:', reg);
+// if ('serviceWorker' in navigator) {
+  //navigator.serviceWorker.register('./sw.js').then(reg => {
+    //console.log('[App] Service Worker зарегистрирован:', reg);
 
     // Слушаем сообщения от SW
-    navigator.serviceWorker.addEventListener('message', event => {
-      if (event.data && event.data.type === 'NEW_VERSION_AVAILABLE') {
-        showUpdateBanner();
-      }
-    });
-  }).catch(err => {
-    console.error('[App] Ошибка регистрации SW:', err);
-  });
-}
+    //navigator.serviceWorker.addEventListener('message', event => {
+      //if (event.data && event.data.type === 'NEW_VERSION_AVAILABLE') {
+        //showUpdateBanner();
+      //}
+    //});
+  //}).catch(err => {
+    //console.error('[App] Ошибка регистрации SW:', err);
+  //});
+//} //
 
 // Функция для показа баннера обновления
 function showUpdateBanner() {
