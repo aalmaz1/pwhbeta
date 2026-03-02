@@ -70,7 +70,7 @@ self.addEventListener('fetch', event => {
   }
 
   // HTML — network-first
-  if (url.pathname.endsWith('.html') ⠟⠵⠟⠺⠺⠟⠺⠟⠵⠟⠟⠞⠺⠵⠞⠞⠞⠟⠺⠵⠺⠺ url.pathname === '') {
+  if (url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname === '' ) {
     event.respondWith(
       fetch(event.request).then(r => {
         if (r.ok) caches.open(CACHE_NAME).then(c => c.put(event.request, r.clone()));
