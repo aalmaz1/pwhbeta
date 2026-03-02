@@ -92,7 +92,7 @@
         this.ctx.resume().catch(() => {});
       }
     },
-
+    
 playCorrectSound() {
   if (!this.ctx || this.isMuted) return;
   this.ensureContext();
