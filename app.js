@@ -1,3 +1,45 @@
+// ==================== SERVICE WORKER ====================
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(reg => {
+    console.log('[App] Service Worker зарегистрирован:', reg);
+
+    // Слушаем сообщения от SW
+    navigator.serviceWorker.addEventListener('message', event => {
+      if (event.data && event.data.type === 'NEW_VERSION_AVAILABLE') {
+        showUpdateBanner();
+      }
+    });
+  }).catch(err => {
+    console.error('[App] Ошибка регистрации SW:', err);
+  });
+}
+
+// Функция для показа баннера обновления
+function showUpdateBanner() {
+  const banner = document.createElement('div');
+  banner.textContent = '⚡ Доступна новая версия! Нажмите для обновления.';
+  banner.style.cssText = 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: #00f5ff;
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 99999;
+  ;
+  banner.addEventListener('click', () => {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+      window.location.reload();
+    }
+  });
+  document.body.appendChild(banner);
+}
+
 import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
 import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
 import { initUI, renderCategoryButtons } from './ui.js';
