@@ -894,6 +894,8 @@ header {
   background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
   border-bottom: 1px solid rgba(191,95,255,0.3);
   gap: 8px;
+  flex-wrap: wrap;
+   min-height:44px;
 }
 
 .stat {
@@ -1556,9 +1558,11 @@ header {
   .modal-title { font-size: 10px; margin-bottom: 18px; }
   #explanation-list { max-height: 45vh; padding: 16px; }
   .next-btn { padding: 12px 24px; font-size: 10px; }
-  header { padding: 8px 10px; }
-  .stat { font-size: 7px; }
-  .icon-btn { width: 36px; height: 36px; font-size: 13px; }
+  header { padding: 6px 10px; gap:4px; }
+  .stat:first-child { width:100%; max-width:100%; font-size: 7px; order: -1; text-align: left;}
+   .header-actions { width: 100%; justify-content: space-between; margin-top: 2px; gap:8px; }
+   .header-xp{ font-size:7px; }
+  .icon-btn { width: 36px; height: 36px; font-size: 12px; min-width:44px; min-height:44px; }
   .category-grid { max-height: 50vh; gap: 8px; padding: 12px; }
   .settings-content { max-width: 100%; padding: 12px; gap: 12px; }
   .theme-btn { padding: 6px 7px; font-size: 7px; min-width: 44px; min-height: 40px; }
@@ -1581,8 +1585,11 @@ header {
   .modal-title { font-size: 11px; margin-bottom: 20px; }
   #explanation-list { max-height: 46vh; padding: 18px; }
   .next-btn { padding: 13px 28px; font-size: 11px; }
-  header { padding: 8px 12px; }
-  .stat { font-size: 8px; }
+  header { padding: 8px 12px; gap:6px;}
+  .stat:first-child { width:100%; max-width:100% font-size: 8px; order: -1; text-align: left;}
+   .header-actions { width:100%; justify-content: space-between; margin-top:4px; gap:10px; }
+   .header-xp { font-size:8px; }
+   .icon-btn { min-width:44px; min-height:44px;}
   .settings-content { max-width: 100%; }
 }
 
@@ -1641,7 +1648,9 @@ header {
   .modal-title { font-size: 10px; margin-bottom: 14px; }
   #explanation-list { max-height: 35vh; padding: 12px; }
   .next-btn { padding: 10px 24px; font-size: 10px; }
-  header { padding: 6px 10px; }
+  header { flex-wrap: nowrap; padding: 6px 10px; }
+   .stat:first-child { width: auto; order:0; }
+   .header-actions { width:auto; margin-top:0; }
   .stat { font-size: 7px; }
   .icon-btn { width: 36px; height: 36px; font-size: 12px; }
   .credits { display: none; }
