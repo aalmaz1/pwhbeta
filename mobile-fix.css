@@ -1,91 +1,52 @@
+/* ===== CRITICAL: Override header position for mobile ===== */
+#game-screen header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 50px !important;
+  min-height: 50px !important;
+  z-index: 9999 !important;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent) !important;
+}
+#game-screen {
+  padding-top: 55px !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
 /* ===== MOBILE HEADER FIX ===== */
 @media (max-width: 480px) {
-  /* Header - фиксируем вверху */
   #game-screen header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: 50px !important;
-    min-height: 50px !important;
-    z-index: 1000 !important;
-    padding: 6px 10px !important;
+    flex-wrap: nowrap !important;
+    padding: 6px 8px !important;
+    gap: 4px !important;
+  }
+  
+  #game-screen header .stat:first-child {
+    font-size: 7px !important;
+    white-space: nowrap !important;
+  }
+  
+  #game-screen .header-actions {
+    display: flex !important;
+    align-items: center !important;
     gap: 6px !important;
   }
   
-  /* CAT - категория */
-  #game-screen header .stat:first-child {
-    width: auto !important;
-    font-size: 8px !important;
-    order: -1 !important;
-    text-align: left !important;
-    white-space: nowrap !important;
-    overflow: visible !important;
-  }
-  
-  /* XP и кнопки */
-  #game-screen .header-actions {
-    display: flex !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    gap: 8px !important;
-    margin-left: auto !important;
-  }
-  
-  #game-screen .header-xp {
-    font-size: 8px !important;
-    order: 1 !important;
-  }
-  
-  /* Кнопка выхода (крестик) */
-  #game-screen .icon-btn {
-    order: 2 !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 14px !important;
-    padding: 0 !important;
-  }
-  
-  /* Game screen - отступ от фиксированного header */
-  #game-screen {
-    padding-top: 56px !important;
-    min-height: 100vh !important;
-    overflow-y: auto !important;
-    box-sizing: border-box !important;
-  }
-}
-/* Маленькие экраны (< 380px) */
-@media (max-width: 380px) {
-  #game-screen header {
-    padding: 4px 8px !important;
-  }
-  #game-screen header .stat:first-child {
-    font-size: 7px !important;
-  }
   #game-screen .header-xp {
     font-size: 7px !important;
   }
+  
   #game-screen .icon-btn {
     min-width: 32px !important;
     min-height: 32px !important;
     width: 32px !important;
     height: 32px !important;
     font-size: 12px !important;
-  }
-  #game-screen {
-    padding-top: 50px !important;
-  }
-}
-/* Galaxy S23 Ultra / узкие экраны */
-@media (max-width: 412px) {
-  #game-screen header .stat:first-child {
-    font-size: 7px !important;
-  }
-  #game-screen .header-xp {
-    font-size: 7px !important;
+    padding: 0 !important;
   }
 }
 /* ===== FIX: Settings screen Back button ===== */
@@ -102,19 +63,10 @@
     position: fixed !important;
     top: 10px !important;
     left: 10px !important;
-    z-index: 1001 !important;
-    min-width: 44px !important;
-    min-height: 44px !important;
-    font-size: 9px !important;
-    padding: 6px 10px !important;
-  }
-}
-/* iOS Safe Area */
-@supports (padding-top: env(safe-area-inset-top)) {
-  #game-screen header {
-    padding-top: calc(6px + env(safe-area-inset-top)) !important;
-  }
-  #game-screen {
-    padding-top: calc(56px + env(safe-area-inset-top)) !important;
+    z-index: 10000 !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    font-size: 8px !important;
+    padding: 4px 8px !important;
   }
 }
