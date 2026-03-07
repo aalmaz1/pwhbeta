@@ -1251,6 +1251,8 @@ header {
   text-shadow: 0 0 8px var(--neon-green);
   box-shadow: 0 0 16px rgba(57,255,20,0.5), inset 0 0 10px rgba(57,255,20,0.1);
   animation: smoothZoomIn 0.4s ease-out;
+  transform-origin: center center !important;
+  transform: translateZ(0) !important; 
   contain: layout style paint;
   will-change: box-shadow, transform;
 }
@@ -1263,6 +1265,8 @@ header {
   text-shadow: var(--shadow-pink);
   box-shadow: 0 0 16px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
   animation: smoothZoomWrong 0.4s ease-out;
+  transform-origin: center center !important;  
+  transform: translateZ(0) !important;        
   contain: layout style paint;
   will-change: transform;
 }
@@ -1275,6 +1279,8 @@ header {
   text-shadow: 0 0 8px #64ffda;
   box-shadow: 0 0 16px rgba(100,255,218,0.5), inset 0 0 10px rgba(100,255,218,0.1);
   animation: smoothZoomIn 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 [data-theme="midnight"] .option-btn.wrong {
@@ -1284,6 +1290,8 @@ header {
   text-shadow: 0 0 8px #4fc3f7;
   box-shadow: 0 0 16px rgba(79,195,247,0.5), inset 0 0 10px rgba(79,195,247,0.1);
   animation: smoothZoomWrong 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 /* Matrix correct/wrong */
@@ -1294,6 +1302,8 @@ header {
   text-shadow: 0 0 8px #00ff41;
   box-shadow: 0 0 16px rgba(0,255,65,0.5), inset 0 0 10px rgba(0,255,65,0.1);
   animation: smoothZoomIn 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 [data-theme="matrix"] .option-btn.wrong {
@@ -1303,6 +1313,8 @@ header {
   text-shadow: 0 0 8px #c83232;
   box-shadow: 0 0 16px rgba(200,50,50,0.5), inset 0 0 10px rgba(200,50,50,0.1);
   animation: smoothZoomWrong 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 /* 3310 correct/wrong (no glow) */
@@ -1313,6 +1325,8 @@ header {
   text-shadow: none;
   box-shadow: 3px 3px 0 #212121;
   animation: smoothZoomIn 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 [data-theme="3310"] .option-btn.wrong {
@@ -1322,6 +1336,8 @@ header {
   text-shadow: none;
   box-shadow: 3px 3px 0 #4a4a4a;
   animation: smoothZoomWrong 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 /* Sunset correct/wrong */
@@ -1332,6 +1348,8 @@ header {
   text-shadow: 0 0 8px #ffd93d;
   box-shadow: 0 0 16px rgba(255,217,61,0.5), inset 0 0 10px rgba(255,217,61,0.1);
   animation: smoothZoomIn 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 [data-theme="sunset"] .option-btn.wrong {
@@ -1341,6 +1359,8 @@ header {
   text-shadow: 0 0 8px #ff6b9d;
   box-shadow: 0 0 16px rgba(255,107,157,0.5), inset 0 0 10px rgba(255,107,157,0.1);
   animation: smoothZoomWrong 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 /* Mono correct/wrong (maximum contrast, no glow) */
@@ -1352,6 +1372,8 @@ header {
   text-shadow: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
   animation: smoothZoomIn 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 [data-theme="mono"] .option-btn.wrong {
@@ -1362,6 +1384,8 @@ header {
   text-shadow: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
   animation: smoothZoomWrong 0.4s ease-out;
+   transform-origin: center center !important;  /* ДОБАВЬ */
+  transform: translateZ(0) !important;        /* ДОБАВЬ */
 }
 
 /* Disabled state - keep buttons visible */
