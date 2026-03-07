@@ -96,16 +96,19 @@
 playCorrectSound() {
   if (!this.ctx || this.isMuted) return;
   this.ensureContext();
-  const osc = this.ctx.createOscillator();
-  const gain = this.ctx.createGain();
-  osc.type = 'square';
-  osc.frequency.setValueAtTime(880, this.ctx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.05);
-  gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
-  gain.connect(this.masterGain);
-  osc.start(this.ctx.currentTime);
-  osc.stop(this.ctx.currentTime + 0.1);
+  const now = this.ctx.currentTime;
+  [523, 659, 784, 1047].forEach((freq, i) => {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, now + i * 0.08);
+    gain.gain.setValueAtTime(0.2, now + i * 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.07);
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+    osc.start(now + i * 0.08);
+    osc.stop(now + i * 0.08 + 0.07);
+  });
 },
 
     playWrongSound() {
