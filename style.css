@@ -1748,3 +1748,10 @@ header {
   50% { transform: scale(1.03); }
   100% { transform: scale(1.01); }
 }
+
+/* Fix for scale movement - prevents shifting */
+.option-btn.correct,
+.option-btn.wrong {
+  transform-origin: center center !important;
+  transform: translateZ(0) !important;
+}
