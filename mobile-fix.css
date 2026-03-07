@@ -1,45 +1,85 @@
 /* ===== MOBILE HEADER FIX ===== */
 @media (max-width: 480px) {
+  /* Header - фиксируем вверху */
   #game-screen header {
-    flex-wrap: wrap !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    z-index: 1000 !important;
     padding: 6px 10px !important;
-    gap: 4px !important;
-    min-height: auto !important;
+    gap: 6px !important;
   }
   
+  /* CAT - категория */
   #game-screen header .stat:first-child {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: auto !important;
     font-size: 8px !important;
     order: -1 !important;
     text-align: left !important;
     white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    overflow: visible !important;
   }
   
+  /* XP и кнопки */
   #game-screen .header-actions {
-    width: 100% !important;
-    justify-content: space-between !important;
-    margin-top: 4px !important;
-    gap: 10px !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-left: auto !important;
   }
   
   #game-screen .header-xp {
     font-size: 8px !important;
-    max-width: none !important;
-    overflow: visible !important;
+    order: 1 !important;
   }
   
+  /* Кнопка выхода (крестик) */
   #game-screen .icon-btn {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    width: 44px !important;
-    height: 44px !important;
+    order: 2 !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    width: 36px !important;
+    height: 36px !important;
     font-size: 14px !important;
+    padding: 0 !important;
+  }
+  
+  /* Game screen - отступ от фиксированного header */
+  #game-screen {
+    padding-top: 56px !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
   }
 }
-/* Galaxy S23 Ultra specific */
+/* Маленькие экраны (< 380px) */
+@media (max-width: 380px) {
+  #game-screen header {
+    padding: 4px 8px !important;
+  }
+  #game-screen header .stat:first-child {
+    font-size: 7px !important;
+  }
+  #game-screen .header-xp {
+    font-size: 7px !important;
+  }
+  #game-screen .icon-btn {
+    min-width: 32px !important;
+    min-height: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 12px !important;
+  }
+  #game-screen {
+    padding-top: 50px !important;
+  }
+}
+/* Galaxy S23 Ultra / узкие экраны */
 @media (max-width: 412px) {
   #game-screen header .stat:first-child {
     font-size: 7px !important;
@@ -48,30 +88,33 @@
     font-size: 7px !important;
   }
 }
-/* ===== FIX: Header stays visible on Brave Mobile ===== */
-#game-screen header {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  z-index: 1000 !important;
+/* ===== FIX: Settings screen Back button ===== */
+@media (max-width: 480px) {
+  #settings-screen {
+    overflow: auto !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    padding-top: 50px !important;
+    box-sizing: border-box !important;
+  }
+  
+  #settings-screen .back-btn {
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    z-index: 1001 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    font-size: 9px !important;
+    padding: 6px 10px !important;
+  }
 }
-#game-screen {
-  padding-top: 50px !important;
-}
-/* ===== FIX: Settings screen Back button visibility ===== */
-#settings-screen {
-  overflow: auto !important;
-  height: 100vh !important;
-}
-#settings-screen .back-btn {
-  position: fixed !important;
-  top: 10px !important;
-  left: 10px !important;
-  z-index: 1001 !important;
-  min-width: 50px !important;
-  min-height: 50px !important;
-  font-size: 10px !important;
-  padding: 8px 12px !important;
+/* iOS Safe Area */
+@supports (padding-top: env(safe-area-inset-top)) {
+  #game-screen header {
+    padding-top: calc(6px + env(safe-area-inset-top)) !important;
+  }
+  #game-screen {
+    padding-top: calc(56px + env(safe-area-inset-top)) !important;
+  }
 }
