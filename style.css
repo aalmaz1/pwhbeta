@@ -1331,7 +1331,7 @@ header {
   color: #ffd93d;
   text-shadow: 0 0 8px #ffd93d;
   box-shadow: 0 0 16px rgba(255,217,61,0.5), inset 0 0 10px rgba(255,217,61,0.1);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
 }
 
 [data-theme="sunset"] .option-btn.wrong {
@@ -1340,7 +1340,7 @@ header {
   color: #ff6b9d;
   text-shadow: 0 0 8px #ff6b9d;
   box-shadow: 0 0 16px rgba(255,107,157,0.5), inset 0 0 10px rgba(255,107,157,0.1);
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
 }
 
 /* Mono correct/wrong (maximum contrast, no glow) */
@@ -1351,7 +1351,7 @@ header {
   font-weight: bold;
   text-shadow: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
 }
 
 [data-theme="mono"] .option-btn.wrong {
@@ -1361,7 +1361,7 @@ header {
   font-weight: bold;
   text-shadow: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
 }
 
 /* Disabled state - keep buttons visible */
