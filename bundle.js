@@ -790,6 +790,7 @@ playCorrectSound() {
 
     buttons.forEach((b) => {
       b.onclick = null;
+      b.disabled = true;
       b.setAttribute('tabindex', '-1');
     });
 
