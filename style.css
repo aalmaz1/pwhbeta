@@ -1250,7 +1250,7 @@ header {
   color: var(--neon-green);
   text-shadow: 0 0 8px var(--neon-green);
   box-shadow: 0 0 16px rgba(57,255,20,0.5), inset 0 0 10px rgba(57,255,20,0.1);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
   contain: layout style paint;
   will-change: box-shadow, transform;
 }
@@ -1262,7 +1262,7 @@ header {
   color: var(--neon-pink);
   text-shadow: var(--shadow-pink);
   box-shadow: 0 0 16px rgba(255,45,120,0.5), inset 0 0 10px rgba(255,45,120,0.1);
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
   contain: layout style paint;
   will-change: transform;
 }
@@ -1274,7 +1274,7 @@ header {
   color: #64ffda;
   text-shadow: 0 0 8px #64ffda;
   box-shadow: 0 0 16px rgba(100,255,218,0.5), inset 0 0 10px rgba(100,255,218,0.1);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
 }
 
 [data-theme="midnight"] .option-btn.wrong {
@@ -1283,7 +1283,7 @@ header {
   color: #4fc3f7;
   text-shadow: 0 0 8px #4fc3f7;
   box-shadow: 0 0 16px rgba(79,195,247,0.5), inset 0 0 10px rgba(79,195,247,0.1);
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
 }
 
 /* Matrix correct/wrong */
@@ -1293,7 +1293,7 @@ header {
   color: #00ff41;
   text-shadow: 0 0 8px #00ff41;
   box-shadow: 0 0 16px rgba(0,255,65,0.5), inset 0 0 10px rgba(0,255,65,0.1);
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
 }
 
 [data-theme="matrix"] .option-btn.wrong {
@@ -1302,7 +1302,7 @@ header {
   color: #c83232;
   text-shadow: 0 0 8px #c83232;
   box-shadow: 0 0 16px rgba(200,50,50,0.5), inset 0 0 10px rgba(200,50,50,0.1);
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
 }
 
 /* 3310 correct/wrong (no glow) */
@@ -1312,7 +1312,7 @@ header {
   color: #c7cfb9;
   text-shadow: none;
   box-shadow: 3px 3px 0 #212121;
-  animation: correctFlash 0.4s ease, correctBounce 0.5s ease;
+  animation: smoothZoomIn 0.4s ease-out;
 }
 
 [data-theme="3310"] .option-btn.wrong {
@@ -1321,7 +1321,7 @@ header {
   color: #c7cfb9;
   text-shadow: none;
   box-shadow: 3px 3px 0 #4a4a4a;
-  animation: wrongShake 0.5s ease;
+  animation: smoothZoomWrong 0.4s ease-out;
 }
 
 /* Sunset correct/wrong */
