@@ -60,3 +60,18 @@
 #game-screen {
   padding-top: 50px !important;
 }
+/* ===== FIX: Settings screen Back button visibility ===== */
+#settings-screen {
+  overflow: auto !important;
+  height: 100vh !important;
+}
+#settings-screen .back-btn {
+  position: fixed !important;
+  top: 10px !important;
+  left: 10px !important;
+  z-index: 1001 !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  font-size: 10px !important;
+  padding: 8px 12px !important;
+}
