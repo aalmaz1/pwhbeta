@@ -79,7 +79,7 @@ if (url.pathname.endsWith('words_optimized.json')) {
 }
 
 // HTML — network-first
-if (url.pathname.endsWith('.html') ⠞⠵⠺⠟⠟⠞⠞⠵⠟⠵⠟⠵⠞⠞⠟⠺⠺⠟⠺⠟⠞⠞ url.pathname === '') {
+if (url.pathname.endsWith('.html') || url.pathname === '') {
   event.respondWith(
     fetch(event.request).then(r => {
       if (r.ok) {
