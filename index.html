@@ -232,5 +232,110 @@
     </div>
   </div>
   </main>
+  <!-- Firebase SDK (добавь свой config) -->
+<script type="module">
+  // ТВОЙ Firebase config из консоли (Project Settings → Web app)
+  const firebaseConfig = {
+    apiKey: "AIza...", // ← ЗАМЕНИ НА СВОИ КЛЮЧИ!
+    authDomain: "...",
+    projectId: "...",
+    // ... остальные ключи
+  };
+
+  // Импорт Firebase
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+  import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  let isRegisterMode = false;
+
+  // ФУНКЦИИ КОТОРЫЕ БЫЛИ СЛОМАНЫ
+  window.showAuthModal = (mode) => {
+    isRegisterMode = mode === 'register';
+    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+    document.getElementById('auth-modal').classList.remove('hidden');
+  };
+
+  window.toggleAuthMode = () => {
+    isRegisterMode = !isRegisterMode;
+    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+    document.getElementById('auth-toggle-text').textContent = isRegisterMode ? 'Have account?' : 'Need an account?';
+    document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
+  };
+
+  window.closeAuthModal = () => {
+    document.getElementById('auth-modal').classList.add('hidden');
+    document.getElementById('auth-error').textContent = '';
+  };
+
+  window.handleAuthSubmit = async () => {
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const username = document.getElementById('auth-username').value;
+    const errorEl = document.getElementById('auth-error');
+    
+    errorEl.textContent = '';
+
+    try {
+      let userCredential;
+      
+      if (isRegisterMode) {
+        // РЕГИСТРАЦИЯ
+        if (!username) throw new Error('Enter username');
+        userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        
+        // Сохраняем профиль в Firestore
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          username,
+          email,
+          xp: 0,
+          level: 1,
+          category: "Beginner",
+          mastered: 0,
+          total: 600,
+          createdAt: new Date()
+        });
+      } else {
+        // ВХОД
+        userCredential = await signInWithEmailAndPassword(auth, email, password);
+      }
+
+      // Успех! Закрываем модалку
+      closeAuthModal();
+      
+      // iOS УВЕДОМЛЕНИЕ
+      showWelcomeNotification(userCredential.user);
+      
+      // Показываем Hunt кнопку
+      document.getElementById('hunt-btn').classList.remove('hidden');
+      document.getElementById('auth-buttons').classList.add('hidden');
+      
+      // Загружаем прогресс
+      loadUserProgress(userCredential.user);
+      
+    } catch (error) {
+      errorEl.textContent = error.message;
+    }
+  };
+
+  // Загрузка прогресса пользователя
+  async function loadUserProgress(user) {
+    try {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        document.getElementById('xp').textContent = data.xp || 0;
+        document.getElementById('mastered-count').textContent = data.mastered || 0;
+        document.getElementById('total-count').textContent = data.total || 600;
+      }
+    } catch (e) {
+      console.error('Load progress error:', e);
+    }
+  }
 </body>
 </html>
