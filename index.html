@@ -23,32 +23,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
-
   <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-  
-  // ⚠️ ЗАМЕНИТЬ НА СВОЙ КОНФИГ из Firebase Console!
-  const firebaseConfig = {
-    apiKey: "ВАШ_API_KEY",
-    authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
-    projectId: "ВАШ_ПРОЕКТ",
-    storageBucket: "ВАШ_ПРОЕКТ.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "ВАШ_APP_ID"
-  };
-  
-  window.firebaseApp = initializeApp(firebaseConfig);
-  window.firebaseAuth = getAuth(window.firebaseApp);
-  window.firebaseDb = getFirestore(window.firebaseApp);
-</script>
-
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+    
+    // ⚠️ ЗАМЕНИТЬ НА СВОЙ КОНФИГ из Firebase Console!
+    const firebaseConfig = {
+      apiKey: "ВАШ_API_KEY",
+      authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
+      projectId: "ВАШ_ПРОЕКТ",
+      storageBucket: "ВАШ_ПРОЕКТ.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "ВАШ_APP_ID"
+    };
+    
+    window.firebaseApp = initializeApp(firebaseConfig);
+    window.firebaseAuth = getAuth(window.firebaseApp);
+    window.firebaseDb = getFirestore(window.firebaseApp);
+  </script>
   <!-- Preload critical JS bundle -->
-  <link rel="preload" href="bundle.js?v=12" as="script" fetchpriority="high">
-
+  <link rel="preload" href="bundle.js?v=13" as="script" fetchpriority="high">
   <!-- Preload font file for instant text rendering -->
   <link rel="preload" href="https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf" as="font" type="font/ttf" crossorigin fetchpriority="high">
   
@@ -101,28 +97,62 @@
     .game-title { animation: titlePulse 3s ease-in-out infinite; contain: layout style paint; will-change: text-shadow, color; }
     .edition-badge, .blink { animation: blink 2.5s step-end infinite; contain: layout style paint; will-change: opacity; }
     .blink { animation: blink 1s step-end infinite; }
+    
+    /* ===== AUTH SYSTEM (Critical CSS) ===== */
+    .auth-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .auth-btn { padding: 16px 36px; font-family: inherit; font-size: 14px; background: transparent; color: var(--neon-cyan); border: 2px solid var(--neon-cyan); border-radius: 0; cursor: pointer; text-shadow: var(--shadow-cyan); box-shadow: 0 0 12px rgba(0,245,255,0.5), inset 0 0 12px rgba(0,245,255,0.08); letter-spacing: 3px; transition: all 0.2s; -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); min-height: 44px; min-width: 140px; }
+    .auth-btn:hover { background: rgba(0,245,255,0.15); box-shadow: 0 0 24px rgba(0,245,255,0.8), inset 0 0 20px rgba(0,245,255,0.2); color: #fff; }
+    .register-btn { color: var(--neon-purple); border-color: var(--neon-purple); text-shadow: var(--shadow-purple); box-shadow: 0 0 12px rgba(191,95,255,0.5), inset 0 0 12px rgba(191,95,255,0.08); }
+    .register-btn:hover { background: rgba(191,95,255,0.15); box-shadow: 0 0 24px rgba(191,95,255,0.8), inset 0 0 20px rgba(191,95,255,0.2); }
+    .hunt-btn.hidden, .auth-buttons.hidden { display: none !important; }
+    .auth-modal { z-index: 200; }
+    .auth-container { position: relative; width: min(380px, 90%); padding: 32px 24px; background: rgba(10, 0, 20, 0.95); border: 2px solid var(--neon-purple); box-shadow: 0 0 30px rgba(191,95,255,0.4); }
+    .auth-form { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+    .auth-field { display: flex; flex-direction: column; gap: 6px; }
+    .auth-field label { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); letter-spacing: 2px; }
+    .auth-field input { padding: 12px 14px; font-family: inherit; font-size: 16px; background: rgba(0,0,0,0.6); border: 1px solid var(--text-dim); color: var(--text-main); outline: none; transition: all 0.2s; min-height: 44px; }
+    .auth-field input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0,245,255,0.3); color: var(--neon-cyan); }
+    .auth-error { font-size: 9px; color: var(--neon-pink); text-shadow: var(--shadow-pink); min-height: 18px; text-align: center; }
+    .auth-submit { margin-top: 8px; padding: 14px 32px; font-family: inherit; font-size: 12px; background: transparent; color: var(--neon-green); border: 2px solid var(--neon-green); cursor: pointer; letter-spacing: 3px; text-shadow: 0 0 8px var(--neon-green); box-shadow: 0 0 12px rgba(57,255,20,0.4); transition: all 0.2s; min-height: 44px; }
+    .auth-submit:hover { background: rgba(57,255,20,0.15); box-shadow: 0 0 24px rgba(57,255,20,0.7); }
+    .auth-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .auth-toggle { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 9px; color: var(--text-dim); }
+    .auth-toggle-btn { background: transparent; border: none; color: var(--neon-cyan); font-family: inherit; font-size: 9px; cursor: pointer; text-decoration: underline; padding: 4px; min-height: 44px; }
+    .auth-toggle-btn:hover { color: var(--neon-yellow); text-shadow: 0 0 8px var(--neon-yellow); }
+    .auth-close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; background: transparent; border: 1px solid var(--text-dim); color: var(--text-dim); font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+    .auth-close:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+    .ios-notification { position: fixed; top: 0; left: 50%; transform: translateX(-50%) translateY(-100%); background: rgba(30, 30, 30, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 14px 24px; border-radius: 0 0 20px 20px; display: flex; align-items: center; gap: 12px; z-index: 10000; box-shadow: 0 4px 24px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-top: none; min-width: 280px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .ios-notification.show { transform: translateX(-50%) translateY(0); }
+    .notification-icon { font-size: 20px; }
+    .notification-text { font-size: 12px; color: #fff; letter-spacing: 1px; }
+    .user-info { position: absolute; top: 14px; right: 14px; display: flex; align-items: center; gap: 10px; font-size: 9px; color: var(--neon-cyan); }
+    .user-info button { background: transparent; border: 1px solid var(--neon-pink); color: var(--neon-pink); font-family: inherit; font-size: 8px; padding: 6px 12px; cursor: pointer; min-height: 32px; }
+    .user-info button:hover { background: rgba(255,45,120,0.15); box-shadow: 0 0 12px rgba(255,45,120,0.5); }
+    @media (max-width: 480px) { .auth-container { padding: 24px 16px; } .auth-btn { padding: 14px 28px; font-size: 12px; } }
   </style>
   
   <!-- Non-critical CSS loaded asynchronously -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
-  <link rel="stylesheet" href="style.css?v=12">
-  <noscript><link rel="stylesheet" href="style.css?v=12"></noscript>
-  <link rel="stylesheet" href="mobile-fix.css?v=4">
-<noscript><link rel="stylesheet" href="mobile-fix.css?v=1"></noscript>
-
+  <link rel="stylesheet" href="style.css?v=13">
+  <noscript><link rel="stylesheet" href="style.css?v=13"></noscript>
+  <link rel="stylesheet" href="mobile-fix.css?v=5">
+  <noscript><link rel="stylesheet" href="mobile-fix.css?v=5"></noscript>
   <!-- Deferred JS bundle - auto-initializes when loaded -->
-  <script src="bundle.js?v=12" defer fetchpriority="high"></script>
+  <script src="bundle.js?v=13" defer fetchpriority="high"></script>
 </head>
 <body>
   <a href="#options" class="skip-link">Skip to options</a>
   <div class="crt-overlay"></div>
-
+  <!-- iOS Notification -->
+  <div id="ios-notification" class="ios-notification hidden">
+    <span class="notification-icon">👤</span>
+    <span class="notification-text" id="notification-text"></span>
+  </div>
   <main role="main">
   <!-- ── LOAD ERROR ──────────────────────────── -->
   <div id="load-error" hidden role="alert" style="position:fixed;top:0;left:0;right:0;padding:12px;background:#ff2d78;color:#fff;font-family:monospace;text-align:center;z-index:99999;"></div>
-
   <!-- ── MENU SCREEN ────────────────────────── -->
   <div id="menu-screen" class="game-container">
     <h1 class="game-title">
@@ -133,13 +163,17 @@
       MASTERED&nbsp;<span id="mastered-count">0</span>&nbsp;/&nbsp;<span id="total-count">0</span>
     </div>
     <p class="blink" aria-hidden="true">▸ PRESS HUNT ◂</p>
-    <button class="start-btn" role="button">▶&nbsp;HUNT</button>
-
+    
+    <!-- Auth Buttons (до логина) -->
+    <div class="auth-buttons" id="auth-buttons">
+      <button class="auth-btn" onclick="showAuthModal('login')">▶ LOGIN</button>
+      <button class="auth-btn register-btn" onclick="showAuthModal('register')">▶ REGISTER</button>
+    </div>
+    <!-- Hunt Button (после логина) -->
+    <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button">▶&nbsp;HUNT</button>
     <button class="settings-btn" role="button" onclick="showSettings()">SETTINGS</button>
-
     <div class="credits">© 2026 ALMAZ CORP</div>
   </div>
-
   <!-- ── SETTINGS SCREEN ─────────────────────── -->
   <div id="settings-screen" class="game-container hidden" role="region" aria-label="Settings">
     <button class="back-btn" role="button" onclick="goBackFromSettings()">◀ BACK</button>
@@ -186,14 +220,12 @@
       </div>
     </div>
   </div>
-
   <!-- ── CATEGORY SCREEN ────────────────────── -->
   <div id="category-screen" class="game-container hidden" role="region" aria-label="Category selection">
     <button class="back-btn" role="button" onclick="goBack()">◀ BACK</button>
     <h2 class="screen-title">// SELECT CATEGORY //</h2>
     <div id="category-list" class="category-grid" role="list"></div>
   </div>
-
   <!-- ── GAME SCREEN ────────────────────────── -->
   <div id="game-screen" class="game-container hidden" role="region" aria-label="Game">
     <header>
@@ -203,22 +235,207 @@
         <button class="icon-btn exit-icon-btn" role="button" onclick="exitGame()" title="Exit to menu" aria-label="Exit to menu">✕</button>
       </div>
     </header>
-
     <div id="quiz-box">
       <div class="question-card">
         <h1 id="word" aria-live="polite"></h1>
       </div>
       <div class="options-grid" id="options" role="group" aria-label="Answer options"></div>
     </div>
-
     <div id="explanation-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Word review">
       <h2 class="modal-title">// WORD REVIEW //</h2>
       <div id="explanation-list"></div>
       <button class="next-btn" role="button" onclick="nextQuestion()">NEXT&nbsp;▶</button>
     </div>
-
     <div id="feedback" class="hidden" aria-live="polite"></div>
   </div>
+  <!-- ── AUTH MODAL ─────────────────────────── -->
+  <div id="auth-modal" class="modal auth-modal hidden" role="dialog" aria-modal="true" aria-label="Authentication">
+    <div class="auth-container">
+      <h2 class="modal-title" id="auth-title">// LOGIN //</h2>
+      
+      <form id="auth-form" class="auth-form" onsubmit="return false;">
+        <div class="auth-field" id="username-field" style="display:none;">
+          <label>USERNAME</label>
+          <input type="text" id="auth-username" placeholder="Enter username" autocomplete="username">
+        </div>
+        
+        <div class="auth-field">
+          <label>EMAIL</label>
+          <input type="email" id="auth-email" placeholder="Enter email" autocomplete="email" required>
+        </div>
+        
+        <div class="auth-field">
+          <label>PASSWORD</label>
+          <input type="password" id="auth-password" placeholder="Enter password" autocomplete="current-password" required>
+        </div>
+        
+        <div id="auth-error" class="auth-error"></div>
+        
+        <button type="button" class="auth-submit" id="auth-submit" onclick="handleAuthSubmit()">ENTER</button>
+      </form>
+      
+      <div class="auth-toggle">
+        <span id="auth-toggle-text">Need an account?</span>
+        <button type="button" class="auth-toggle-btn" onclick="toggleAuthMode()">REGISTER</button>
+      </div>
+      
+      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+    </div>
+  </div>
   </main>
+  <!-- Auth Logic -->
+  <script type="module">
+    import { 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      updateProfile,
+      onAuthStateChanged,
+      signOut 
+    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { 
+      doc, 
+      setDoc, 
+      getDoc 
+    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+    const authState = {
+      currentUser: null,
+      isAuthenticated: false,
+      mode: 'login'
+    };
+    window.showAuthModal = function(mode = 'login') {
+      authState.mode = mode;
+      document.getElementById('auth-title').textContent = mode === 'login' ? '// LOGIN //' : '// REGISTER //';
+      document.getElementById('username-field').style.display = mode === 'register' ? 'flex' : 'none';
+      document.getElementById('auth-toggle-text').textContent = mode === 'login' ? 'Need an account?' : 'Have an account?';
+      document.querySelector('.auth-toggle-btn').textContent = mode === 'login' ? 'REGISTER' : 'LOGIN';
+      document.getElementById('auth-error').textContent = '';
+      document.getElementById('auth-form').reset();
+      document.getElementById('auth-modal').classList.remove('hidden');
+    };
+    window.closeAuthModal = function() {
+      document.getElementById('auth-modal').classList.add('hidden');
+    };
+    window.toggleAuthMode = function() {
+      window.showAuthModal(authState.mode === 'login' ? 'register' : 'login');
+    };
+    window.showIOSNotification = function(message, duration = 3000) {
+      const el = document.getElementById('ios-notification');
+      document.getElementById('notification-text').textContent = message;
+      el.classList.remove('hidden');
+      requestAnimationFrame(() => el.classList.add('show'));
+      setTimeout(() => {
+        el.classList.remove('show');
+        setTimeout(() => el.classList.add('hidden'), 400);
+      }, duration);
+    };
+    function updateAuthUI() {
+      const authButtons = document.getElementById('auth-buttons');
+      const huntBtn = document.getElementById('hunt-btn');
+      const menuScreen = document.getElementById('menu-screen');
+      
+      const oldInfo = menuScreen.querySelector('.user-info');
+      if (oldInfo) oldInfo.remove();
+      
+      if (authState.isAuthenticated && authState.currentUser) {
+        authButtons?.classList.add('hidden');
+        huntBtn?.classList.remove('hidden');
+        
+        const info = document.createElement('div');
+        info.className = 'user-info';
+        info.innerHTML = `
+          <span>${authState.currentUser.displayName || authState.currentUser.email.split('@')[0]}</span>
+          <button onclick="handleLogout()">LOGOUT</button>
+        `;
+        menuScreen.insertBefore(info, menuScreen.querySelector('.credits'));
+      } else {
+        authButtons?.classList.remove('hidden');
+        huntBtn?.classList.add('hidden');
+      }
+    }
+    window.handleLogout = async function() {
+      try {
+        await signOut(window.firebaseAuth);
+        authState.currentUser = null;
+        authState.isAuthenticated = false;
+        updateAuthUI();
+        window.showIOSNotification('Logged out successfully');
+      } catch (e) {
+        console.error('Logout error:', e);
+      }
+    };
+    window.handleAuthSubmit = async function() {
+      const btn = document.getElementById('auth-submit');
+      const errorEl = document.getElementById('auth-error');
+      
+      btn.disabled = true;
+      errorEl.textContent = '';
+      
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      
+      try {
+        if (authState.mode === 'register') {
+          const username = document.getElementById('auth-username').value;
+          if (!username) {
+            errorEl.textContent = 'Username required';
+            btn.disabled = false;
+            return;
+          }
+          
+          const { user } = await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+          await updateProfile(user, { displayName: username });
+          
+          await setDoc(doc(window.firebaseDb, 'users', user.uid), {
+            username,
+            email,
+            xp: 0,
+            level: 1,
+            category: 'Novice',
+            createdAt: new Date(),
+            stats: { wordsFound: 0, gamesPlayed: 0 }
+          });
+        } else {
+          await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+        }
+        
+        window.closeAuthModal();
+      } catch (error) {
+        const errors = {
+          'auth/email-already-in-use': 'Email already registered',
+          'auth/invalid-email': 'Invalid email',
+          'auth/weak-password': 'Password min 6 chars',
+          'auth/user-not-found': 'User not found',
+          'auth/wrong-password': 'Wrong password',
+          'auth/invalid-credential': 'Invalid email or password'
+        };
+        errorEl.textContent = errors[error.code] || 'Auth failed';
+      }
+      
+      btn.disabled = false;
+    };
+    // Auth State Listener
+    onAuthStateChanged(window.firebaseAuth, async (user) => {
+      if (user) {
+        authState.currentUser = user;
+        authState.isAuthenticated = true;
+        
+        // Load progress from Firestore
+        try {
+          const docSnap = await getDoc(doc(window.firebaseDb, 'users', user.uid));
+          if (docSnap.exists() && window.state) {
+            const data = docSnap.data();
+            if (data.xp) window.state.xp = data.xp;
+          }
+        } catch (e) { console.error('Load error:', e); }
+        
+        const name = user.displayName || user.email.split('@')[0];
+        window.showIOSNotification(`Welcome, ${name}!`);
+      } else {
+        authState.currentUser = null;
+        authState.isAuthenticated = false;
+      }
+      updateAuthUI();
+    });
+  </script>
 </body>
 </html>
