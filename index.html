@@ -24,6 +24,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
+
+  <!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+  import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+  
+  // ⚠️ ЗАМЕНИТЬ НА СВОЙ КОНФИГ из Firebase Console!
+  const firebaseConfig = {
+    apiKey: "ВАШ_API_KEY",
+    authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
+    projectId: "ВАШ_ПРОЕКТ",
+    storageBucket: "ВАШ_ПРОЕКТ.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "ВАШ_APP_ID"
+  };
+  
+  window.firebaseApp = initializeApp(firebaseConfig);
+  window.firebaseAuth = getAuth(window.firebaseApp);
+  window.firebaseDb = getFirestore(window.firebaseApp);
+</script>
+
   <!-- Preload critical JS bundle -->
   <link rel="preload" href="bundle.js?v=12" as="script" fetchpriority="high">
 
