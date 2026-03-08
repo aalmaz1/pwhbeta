@@ -23,26 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-    
-   const firebaseConfig = {
-  apiKey: "AIzaSyCgKKrHIaDNzjUIaK2Z-Usf587px-lPMSY",
-  authDomain: "pixelwordhunter.firebaseapp.com",
-  projectId: "pixelwordhunter",
-  storageBucket: "pixelwordhunter.firebasestorage.app",
-  messagingSenderId: "1094897769595",
-  appId: "1:1094897769595:web:392a30ef42f3b558b896de",
-  measurementId: "G-X90YSQL16F"
-};
-    
-    window.firebaseApp = initializeApp(firebaseConfig);
-    window.firebaseAuth = getAuth(window.firebaseApp);
-    window.firebaseDb = getFirestore(window.firebaseApp);
-  </script>
+ 
   <!-- Preload critical JS bundle -->
   <link rel="preload" href="bundle.js?v=13" as="script" fetchpriority="high">
   <!-- Preload font file for instant text rendering -->
