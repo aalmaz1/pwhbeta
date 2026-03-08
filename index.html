@@ -69,8 +69,6 @@
     .edition-badge { font-size: 9px; color: var(--neon-purple); text-shadow: var(--shadow-purple); letter-spacing: 6px; margin-bottom: 28px; }
     .stats-line { font-size: 9px; color: var(--neon-green); text-shadow: 0 0 6px var(--neon-green); margin-bottom: 30px; letter-spacing: 2px; }
     .blink { font-size: 10px; color: var(--neon-pink); text-shadow: var(--shadow-pink); margin-bottom: 28px; }
-    body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.6s infinite; contain: strict; will-change: opacity; }
-    body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%); pointer-events: none; z-index: 9001; contain: strict; }
     
     /* ===== AUTH SYSTEM (Critical CSS) ===== */
     .auth-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
