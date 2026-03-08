@@ -1610,7 +1610,7 @@ header {
   #explanation-list { max-height: 46vh; padding: 18px; }
   .next-btn { padding: 13px 28px; font-size: 11px; }
   header { padding: 8px 12px; gap:6px;}
-  .stat:first-child { width:100%; max-width:100% font-size: 8px; order: -1; text-align: left;}
+  .stat:first-child { width:100%; max-width:100%; font-size: 8px; order: -1; text-align: left;}
    .header-actions { width:100%; justify-content: space-between; margin-top:4px; gap:10px; }
    .header-xp { font-size:8px; }
    .icon-btn { min-width:44px; min-height:44px;}
