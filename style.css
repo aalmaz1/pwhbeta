@@ -1583,7 +1583,7 @@ header {
   #explanation-list { max-height: 45vh; padding: 16px; }
   .next-btn { padding: 12px 24px; font-size: 10px; }
   header { padding: 6px 10px; gap:4px; }
-  .stat:first-child { width:100%; max-width:100%; font-size: 7px; order: -1; text-align: left;}
+  .stat:first-child { width:100%; max-width:100%; font-size: 7px; order: -1; text-align: left; }
    .header-actions { width: 100%; justify-content: space-between; margin-top: 2px; gap:8px; }
    .header-xp{ font-size:7px; }
   .icon-btn { width: 36px; height: 36px; font-size: 12px; min-width:44px; min-height:44px; }
