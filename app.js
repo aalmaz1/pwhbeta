@@ -13,6 +13,185 @@
     //console.error('[App] Ошибка регистрации SW:', err);
   //});
 //} //
+// ===== FIREBASE AUTH SYSTEM =====
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  updateProfile,
+  onAuthStateChanged,
+  signOut 
+} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+import { 
+  doc, 
+  setDoc, 
+  getDoc 
+} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+const authState = {
+  currentUser: null,
+  isAuthenticated: false,
+  mode: 'login'
+};
+// Auth Manager
+const AuthManager = {
+  async register(username, email, password) {
+    try {
+      const { user } = await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+      await updateProfile(user, { displayName: username });
+      
+      // Create user doc in Firestore
+      await setDoc(doc(window.firebaseDb, 'users', user.uid), {
+        username,
+        email,
+        xp: state.xp || 0,
+        level: Math.floor((state.xp || 0) / 100) + 1,
+        category: 'Novice',
+        createdAt: new Date(),
+        stats: { wordsFound: 0, gamesPlayed: 0 }
+      });
+      
+      return { success: true, user };
+    } catch (error) {
+      return { success: false, error: this.getErrorMessage(error.code) };
+    }
+  },
+  async login(email, password) {
+    try {
+      const { user } = await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+      return { success: true, user };
+    } catch (error) {
+      return { success: false, error: this.getErrorMessage(error.code) };
+    }
+  },
+  async logout() {
+    try {
+      await signOut(window.firebaseAuth);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  },
+  getErrorMessage(code) {
+    const errors = {
+      'auth/email-already-in-use': 'Email already registered',
+      'auth/invalid-email': 'Invalid email address',
+      'auth/weak-password': 'Password should be at least 6 characters',
+      'auth/user-not-found': 'User not found',
+      'auth/wrong-password': 'Incorrect password',
+      'auth/invalid-credential': 'Invalid email or password'
+    };
+    return errors[code] || 'Authentication failed';
+  }
+};
+// Firestore Sync
+const FirestoreSync = {
+  async loadProgress(uid) {
+    try {
+      const docSnap = await getDoc(doc(window.firebaseDb, 'users', uid));
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.xp) state.xp = data.xp;
+        // Load word progress
+        if (data.wordProgress) {
+          const words = getGameData();
+          Object.entries(data.wordProgress).forEach(([eng, progress]) => {
+            const word = words.find(w => w.eng === eng);
+            if (word) Object.assign(word, progress);
+          });
+        }
+        return data;
+      }
+    } catch (e) { console.error('[Firestore] Load failed:', e); }
+    return null;
+  },
+  async saveProgress(uid) {
+    try {
+      const words = getGameData();
+      const wordProgress = {};
+      words.forEach(w => {
+        if (w.mastery > 0) {
+          wordProgress[w.eng] = {
+            mastery: w.mastery,
+            lastSeen: w.lastSeen,
+            correctCount: w.correctCount || 0,
+            incorrectCount: w.incorrectCount || 0
+          };
+        }
+      });
+      
+      await setDoc(doc(window.firebaseDb, 'users', uid), {
+        xp: state.xp,
+        level: Math.floor(state.xp / 100) + 1,
+        wordProgress,
+        lastSync: new Date(),
+        stats: { wordsFound: words.filter(w => w.mastery >= 4).length }
+      }, { merge: true });
+    } catch (e) { console.error('[Firestore] Save failed:', e); }
+  }
+};
+// UI Functions
+window.showAuthModal = function(mode = 'login') {
+  authState.mode = mode;
+  document.getElementById('auth-title').textContent = mode === 'login' ? '// LOGIN //' : '// REGISTER //';
+  document.getElementById('username-field').style.display = mode === 'register' ? 'flex' : 'none';
+  document.getElementById('auth-toggle-text').textContent = mode === 'login' ? 'Need an account?' : 'Have an account?';
+  document.querySelector('.auth-toggle-btn').textContent = mode === 'login' ? 'REGISTER' : 'LOGIN';
+  document.getElementById('auth-error').textContent = '';
+  document.getElementById('auth-form').reset();
+  document.getElementById('auth-modal').classList.remove('hidden');
+};
+window.closeAuthModal = function() {
+  document.getElementById('auth-modal').classList.add('hidden');
+};
+window.toggleAuthMode = function() {
+  window.showAuthModal(authState.mode === 'login' ? 'register' : 'login');
+};
+window.handleLogout = async function() {
+  const result = await AuthManager.logout();
+  if (result.success) {
+    authState.currentUser = null;
+    authState.isAuthenticated = false;
+    updateAuthUI();
+    showIOSNotification('Logged out successfully');
+  }
+};
+function showIOSNotification(message, duration = 3000) {
+  const el = document.getElementById('ios-notification');
+  document.getElementById('notification-text').textContent = message;
+  el.classList.remove('hidden');
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.classList.add('hidden'), 400);
+  }, duration);
+}
+function updateAuthUI() {
+  const authButtons = document.getElementById('auth-buttons');
+  const huntBtn = document.getElementById('hunt-btn');
+  const menuScreen = document.getElementById('menu-screen');
+  
+  // Remove old user info
+  const oldInfo = menuScreen.querySelector('.user-info');
+  if (oldInfo) oldInfo.remove();
+  
+  if (authState.isAuthenticated) {
+    authButtons?.classList.add('hidden');
+    huntBtn?.classList.remove('hidden');
+    
+    // Add user info with logout
+    const info = document.createElement('div');
+    info.className = 'user-info';
+    info.innerHTML = `
+      <span>${authState.currentUser.displayName || authState.currentUser.email.split('@')[0]}</span>
+      <button onclick="handleLogout()">LOGOUT</button>
+    `;
+    menuScreen.insertBefore(info, menuScreen.querySelector('.credits'));
+  } else {
+    authButtons?.classList.remove('hidden');
+    huntBtn?.classList.add('hidden');
+  }
+}
+// Expose showIOSNotification globally
+window.showIOSNotification = showIOSNotification;
 
 // Функция для показа баннера обновления
 function showUpdateBanner() {
