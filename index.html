@@ -75,12 +75,6 @@
     .credits { position: absolute; bottom: 18px; font-size: 7px; color: var(--text-dim); letter-spacing: 2px; }
     body::before { content: ''; position: fixed; inset: 0; background: var(--crt-lines); pointer-events: none; z-index: 9000; animation: crtFlicker 0.6s infinite; contain: strict; will-change: opacity; }
     body::after { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%); pointer-events: none; z-index: 9001; contain: strict; }
-    @keyframes crtFlicker { 0%, 96% { opacity: 1; } 97% { opacity: 0.98; } 98% { opacity: 1; } 99% { opacity: 0.96; } 100% { opacity: 1; } }
-    @keyframes titlePulse { 0%, 100% { text-shadow: var(--shadow-cyan); color: var(--neon-cyan); } 50% { text-shadow: 0 0 16px #00f5ff, 0 0 40px rgba(0,245,255,0.9), 0 0 60px rgba(0,245,255,0.4); color: #aaffff; } }
-    @keyframes blink { 50% { opacity: 0; } }
-    .game-title { animation: titlePulse 3s ease-in-out infinite; contain: layout style paint; will-change: text-shadow, color; }
-    .edition-badge, .blink { animation: blink 2.5s step-end infinite; contain: layout style paint; will-change: opacity; }
-    .blink { animation: blink 1s step-end infinite; }
     
     /* ===== AUTH SYSTEM (Critical CSS) ===== */
     .auth-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
