@@ -115,8 +115,16 @@
     
     <!-- Auth Buttons (до логина) -->
     <div class="auth-buttons" id="auth-buttons">
-      <button class="auth-btn" onclick="showAuthModal('login')">▶ LOGIN</button>
-      <button class="auth-btn register-btn" onclick="showAuthModal('register')">▶ REGISTER</button>
+
+
+<button class="auth-btn" onclick="document.getElementById('auth-modal').classList.remove('hidden'); 
+  document.getElementById('auth-title').textContent='// LOGIN //'; 
+  document.getElementById('username-field').style.display='none';">▶ LOGIN</button>
+<button class="auth-btn register-btn" onclick="document.getElementById('auth-modal').classList.remove('hidden'); 
+  document.getElementById('auth-title').textContent='// REGISTER //'; 
+  document.getElementById('username-field').style.display='flex';">▶ REGISTER</button>
+
+      
     </div>
     <!-- Hunt Button (после логина) -->
     <button class="start-btn hunt-btn hidden" id="hunt-btn" role="button">▶&nbsp;HUNT</button>
@@ -220,15 +228,23 @@
         
         <div id="auth-error" class="auth-error"></div>
         
-        <button type="button" class="auth-submit" id="auth-submit" onclick="handleAuthSubmit()">ENTER</button>
+        <button type="button" class="auth-submit" onclick="localStorage.setItem('user','test');
+          document.getElementById('auth-modal').classList.add('hidden'); 
+          document.getElementById('hunt-btn').classList.remove('hidden'); 
+          document.getElementById('auth-buttons').classList.add('hidden'); 
+          document.getElementById('notification-text').textContent='Welcome!'; 
+          document.getElementById('ios-notification').classList.remove('hidden');
+          document.getElementById('ios-notification').classList.add('show'); 
+          setTimeout(()=>{document.getElementById('ios-notification').classList.remove('show')},3000);">ENTER</button>
       </form>
       
       <div class="auth-toggle">
         <span id="auth-toggle-text">Need an account?</span>
-        <button type="button" class="auth-toggle-btn" onclick="toggleAuthMode()">REGISTER</button>
+        <button type="button" class="auth-toggle-btn" onclick="document.getElementById('username-field').style.display=document.getElementById('username-field').style.display==='flex'?'none':'flex'; 
+          document.getElementById('auth-title').textContent=document.getElementById('auth-title').textContent==='// REGISTER //'?'// LOGIN //':'// REGISTER //';">REGISTER</button>
       </div>
       
-      <button class="auth-close" onclick="closeAuthModal()">✕</button>
+     <button class="auth-close" onclick="document.getElementById('auth-modal').classList.add('hidden');">✕</button>
     </div>
   </div>
   </main>
