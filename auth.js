@@ -1,10 +1,12 @@
 // auth.js — Firebase + Регистрация для Pixel Word Hunter
 const firebaseConfig = {
-  // ТВОИ КЛЮЧИ ИЗ FIREBASE СЮДА!
-  apiKey: "AIzaSy...",
-  authDomain: "...",
-  projectId: "...",
-  // ... остальные
+  apiKey: "AIzaSyCgKKrHIaDNzjUIaK2Z-Usf587px-lPMSY",
+  authDomain: "pixelwordhunter.firebaseapp.com",
+  projectId: "pixelwordhunter",
+  storageBucket: "pixelwordhunter.firebasestorage.app",
+  messagingSenderId: "1094897769595",
+  appId: "1:1094897769595:web:392a30ef42f3b558b896de",
+  measurementId: "G-X90YSQL16F"
 };
 
 // Инициализация Firebase
