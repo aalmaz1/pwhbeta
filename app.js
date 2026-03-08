@@ -178,32 +178,6 @@ function updateAuthUI() {
 // Expose showIOSNotification globally
 window.showIOSNotification = showIOSNotification;
 
-// Функция для показа баннера обновления
-function showUpdateBanner() {
-  const banner = document.createElement('div');
-  banner.textContent = '⚡ Доступна новая версия! Нажмите для обновления.';
-  banner.style.cssText = 
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px;
-    background: #00f5ff;
-    color: #000;
-    text-align: center;
-    font-size: 14px;
-    cursor: pointer;
-    z-index: 99999;
-  ;
-  banner.addEventListener('click', () => {
-    if (navigator.serviceWorker.controller) {
-      navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
-      window.location.reload();
-    }
-  });
-  document.body.appendChild(banner);
-}
-
 import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
 import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
 import { initUI, renderCategoryButtons } from './ui.js';
