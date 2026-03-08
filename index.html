@@ -345,95 +345,80 @@
  
 
 
-  <script type="module">
-  // ТВОЙ firebaseConfig ← ВСТАВЬ СЮДА!
-   const firebaseConfig = {
-    apiKey: "AIzaSyCgKKrHIaDNzjUIaK2Z-Usf587px-lPMSY",
-    authDomain: "pixelwordhunter.firebaseapp.com",
-    projectId: "pixelwordhunter",
-    storageBucket: "pixelwordhunter.firebasestorage.app",
-    messagingSenderId: "1094897769595",
-    appId: "1:1094897769595:web:9654af1d215a0086b896de",
-    measurementId: "G-PFSSVH6RT2"
-  };
+<script>
+// 🔥 ВРЕМЕННО БЕЗ FIREBASE — БЫСТРО ПОЧИНИМ КНОПКИ!
+let isRegisterMode = false;
 
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-  import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+window.showAuthModal = (mode) => {
+  isRegisterMode = mode === 'register';
+  document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+  document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+  document.getElementById('auth-modal').classList.remove('hidden');
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  let isRegisterMode = false;
+window.toggleAuthMode = () => {
+  isRegisterMode = !isRegisterMode;
+  document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+  document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+  document.getElementById('auth-toggle-text').textContent = isRegisterMode ? 'Have account?' : 'Need an account?';
+  document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
+};
 
-  window.showAuthModal = (mode) => {
-    isRegisterMode = mode === 'register';
-    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
-    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
-    document.getElementById('auth-modal').classList.remove('hidden');
-  };
+window.closeAuthModal = () => {
+  document.getElementById('auth-modal').classList.add('hidden');
+  document.getElementById('auth-error').textContent = '';
+};
 
-  window.toggleAuthMode = () => {
-    isRegisterMode = !isRegisterMode;
-    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
-    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
-    document.getElementById('auth-toggle-text').textContent = isRegisterMode ? 'Have account?' : 'Need an account?';
-    document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
-  };
-
-  window.closeAuthModal = () => {
-    document.getElementById('auth-modal').classList.add('hidden');
-    document.getElementById('auth-error').textContent = '';
-  };
-
-  window.handleAuthSubmit = async () => {
-    const email = document.getElementById('auth-email').value;
-    const password = document.getElementById('auth-password').value;
-    const username = document.getElementById('auth-username').value;
-    const errorEl = document.getElementById('auth-error');
-    
-    errorEl.textContent = 'Loading...';
-
-    try {
-      let userCredential;
-      
-      if (isRegisterMode) {
-        if (!username) throw new Error('Enter username');
-        userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await setDoc(doc(db, "users", userCredential.user.uid), {
-          username, email, xp: 0, level: 1, category: "Beginner", mastered: 0, total: 600
-        });
-      } else {
-        userCredential = await signInWithEmailAndPassword(auth, email, password);
-      }
-
-      closeAuthModal();
-      showWelcomeNotification(userCredential.user);
-      document.getElementById('hunt-btn').classList.remove('hidden');
-      document.getElementById('auth-buttons').classList.add('hidden');
-      
-    } catch (error) {
-      errorEl.textContent = error.message;
-    }
-  };
-
-  function showWelcomeNotification(user) {
-    const notif = document.getElementById('ios-notification');
-    document.getElementById('notification-text').textContent = Welcome, ${user.email.split('@')[0]}!;
-    notif.classList.remove('hidden');
-    notif.classList.add('show');
-    setTimeout(() => {
-      notif.classList.remove('show');
-      setTimeout(() => notif.classList.add('hidden'), 400);
-    }, 3000);
+window.handleAuthSubmit = () => {
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+  const username = document.getElementById('auth-username').value;
+  
+  if (!email || !password) {
+    document.getElementById('auth-error').textContent = 'Заполни все поля!';
+    return;
   }
+  
+  // СОХРАНЕНИЕ ПРОГРЕССА
+  const userData = {
+    username: username || email.split('@')[0],
+    email, 
+    xp: 100, 
+    mastered: 15,
+    total: 600,
+    level: 1
+  };
+  localStorage.setItem('pixelUser', JSON.stringify(userData));
+  
+  closeAuthModal();
+  
+  // iOS УВЕДОМЛЕНИЕ
+  const notif = document.getElementById('ios-notification');
+  document.getElementById('notification-text').textContent = Welcome, ${userData.username}!;
+  notif.classList.remove('hidden');
+  notif.classList.add('show');
+  setTimeout(() => {
+    notif.classList.remove('show');
+    setTimeout(() => notif.classList.add('hidden'), 400);
+  }, 3000);
+  
+  // ПОКАЗЫВАЕМ HUNT + СТАТИСТИКУ
+  document.getElementById('hunt-btn').classList.remove('hidden');
+  document.getElementById('auth-buttons').classList.add('hidden');
+  document.getElementById('mastered-count').textContent = '15';
+  document.getElementById('total-count').textContent = '600';
+  document.getElementById('xp').textContent = '100';
+};
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.getElementById('hunt-btn').classList.remove('hidden');
-      document.getElementById('auth-buttons').classList.add('hidden');
-    }
-  });
+// АВТОЛОГИН при перезагрузке
+if (localStorage.getItem('pixelUser')) {
+  const user = JSON.parse(localStorage.getItem('pixelUser'));
+  document.getElementById('hunt-btn').classList.remove('hidden');
+  document.getElementById('auth-buttons').classList.add('hidden');
+  document.getElementById('mastered-count').textContent = user.mastered || '15';
+  document.getElementById('total-count').textContent = user.total || '600';
+  document.getElementById('xp').textContent = user.xp || '100';
+}
 </script>
 </body>
 </html>
