@@ -655,6 +655,61 @@ function loadSavedProgress() {
   });
 }
 
+// Auth State Listener
+onAuthStateChanged(window.firebaseAuth, async (user) => {
+  if (user) {
+    authState.currentUser = user;
+    authState.isAuthenticated = true;
+    
+    // Load cloud progress
+    await FirestoreSync.loadProgress(user.uid);
+    
+    // Show welcome notification
+    const name = user.displayName || user.email.split('@')[0];
+    showIOSNotification(`Welcome, ${name}!`);
+    
+    // Update XP display
+    if (state.ui?.xpElement) state.ui.xpElement.textContent = state.xp;
+    updateMenuStats();
+  } else {
+    authState.currentUser = null;
+    authState.isAuthenticated = false;
+  }
+  updateAuthUI();
+});
+// Auth Form Handler
+document.getElementById('auth-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('auth-submit');
+  const errorEl = document.getElementById('auth-error');
+  
+  btn.disabled = true;
+  errorEl.textContent = '';
+  
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+  
+  let result;
+  if (authState.mode === 'register') {
+    const username = document.getElementById('auth-username').value;
+    if (!username) {
+      errorEl.textContent = 'Username required';
+      btn.disabled = false;
+      return;
+    }
+    result = await AuthManager.register(username, email, password);
+  } else {
+    result = await AuthManager.login(email, password);
+  }
+  
+  if (result.success) {
+    closeAuthModal();
+  } else {
+    errorEl.textContent = result.error;
+  }
+  btn.disabled = false;
+});
+
 function startGame(category) {
   state.selectedCategory = category;
   state.correctInRow = 0;
