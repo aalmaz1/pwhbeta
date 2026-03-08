@@ -346,79 +346,85 @@
 
 
 <script>
-// 🔥 ВРЕМЕННО БЕЗ FIREBASE — БЫСТРО ПОЧИНИМ КНОПКИ!
-let isRegisterMode = false;
+// === PIXEL WORD HUNTER AUTH SYSTEM ===
+window.addEventListener('DOMContentLoaded', function() {
+  let isRegisterMode = false;
 
-window.showAuthModal = (mode) => {
-  isRegisterMode = mode === 'register';
-  document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
-  document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
-  document.getElementById('auth-modal').classList.remove('hidden');
-};
-
-window.toggleAuthMode = () => {
-  isRegisterMode = !isRegisterMode;
-  document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
-  document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
-  document.getElementById('auth-toggle-text').textContent = isRegisterMode ? 'Have account?' : 'Need an account?';
-  document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
-};
-
-window.closeAuthModal = () => {
-  document.getElementById('auth-modal').classList.add('hidden');
-  document.getElementById('auth-error').textContent = '';
-};
-
-window.handleAuthSubmit = () => {
-  const email = document.getElementById('auth-email').value;
-  const password = document.getElementById('auth-password').value;
-  const username = document.getElementById('auth-username').value;
-  
-  if (!email || !password) {
-    document.getElementById('auth-error').textContent = 'Заполни все поля!';
-    return;
-  }
-  
-  // СОХРАНЕНИЕ ПРОГРЕССА
-  const userData = {
-    username: username || email.split('@')[0],
-    email, 
-    xp: 100, 
-    mastered: 15,
-    total: 600,
-    level: 1
+  // 🔧 ФУНКЦИЯ 1: Открыть модалку
+  window.showAuthModal = function(mode) {
+    isRegisterMode = mode === 'register';
+    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+    document.getElementById('auth-modal').classList.remove('hidden');
   };
-  localStorage.setItem('pixelUser', JSON.stringify(userData));
-  
-  closeAuthModal();
-  
-  // iOS УВЕДОМЛЕНИЕ
-  const notif = document.getElementById('ios-notification');
-  document.getElementById('notification-text').textContent = Welcome, ${userData.username}!;
-  notif.classList.remove('hidden');
-  notif.classList.add('show');
-  setTimeout(() => {
-    notif.classList.remove('show');
-    setTimeout(() => notif.classList.add('hidden'), 400);
-  }, 3000);
-  
-  // ПОКАЗЫВАЕМ HUNT + СТАТИСТИКУ
-  document.getElementById('hunt-btn').classList.remove('hidden');
-  document.getElementById('auth-buttons').classList.add('hidden');
-  document.getElementById('mastered-count').textContent = '15';
-  document.getElementById('total-count').textContent = '600';
-  document.getElementById('xp').textContent = '100';
-};
 
-// АВТОЛОГИН при перезагрузке
-if (localStorage.getItem('pixelUser')) {
-  const user = JSON.parse(localStorage.getItem('pixelUser'));
-  document.getElementById('hunt-btn').classList.remove('hidden');
-  document.getElementById('auth-buttons').classList.add('hidden');
-  document.getElementById('mastered-count').textContent = user.mastered || '15';
-  document.getElementById('total-count').textContent = user.total || '600';
-  document.getElementById('xp').textContent = user.xp || '100';
-}
+  // 🔧 ФУНКЦИЯ 2: Переключить Login/Register
+  window.toggleAuthMode = function() {
+    isRegisterMode = !isRegisterMode;
+    document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
+    document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
+    document.getElementById('auth-toggle-text').textContent = isRegisterMode ? 'Have account?' : 'Need an account?';
+    document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
+  };
+
+  // 🔧 ФУНКЦИЯ 3: Закрыть модалку
+  window.closeAuthModal = function() {
+    document.getElementById('auth-modal').classList.add('hidden');
+    document.getElementById('auth-error').textContent = '';
+  };
+
+  // 🔧 ФУНКЦИЯ 4: Регистрация/Логин
+  window.handleAuthSubmit = function() {
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const username = document.getElementById('auth-username').value;
+    const errorEl = document.getElementById('auth-error');
+    
+    if (!email || !password) {
+      errorEl.textContent = 'Заполни все поля!';
+      return;
+    }
+    
+    // СОХРАНЕНИЕ
+    const userData = {
+      username: username || email.split('@')[0],
+      email, password, // ⚠️ В реальной игре пароль НЕ храни!
+      xp: 150, mastered: 25, total: 600, level: 3
+    };
+    localStorage.setItem('pixelHunterUser', JSON.stringify(userData));
+    
+    // ЗАКРЫВАЕМ МОДАЛКУ
+    closeAuthModal();
+    
+    // iOS УВЕДОМЛЕНИЕ
+    const notif = document.getElementById('ios-notification');
+    document.getElementById('notification-text').textContent = Welcome, ${userData.username}!;
+    notif.classList.remove('hidden');
+    notif.classList.add('show');
+    setTimeout(() => {
+      notif.classList.remove('show');
+      setTimeout(() => notif.classList.add('hidden'), 400);
+    }, 3500);
+    
+    // ПОКАЗЫВАЕМ HUNT
+    document.getElementById('hunt-btn').classList.remove('hidden');
+    document.getElementById('auth-buttons').classList.add('hidden');
+    
+    // ОБНОВЛЯЕМ СТАТИСТИКУ
+    document.getElementById('mastered-count').textContent = '25';
+    document.getElementById('total-count').textContent = '600';
+  };
+
+  // 🔧 АВТОЛОГИН
+  const savedUser = localStorage.getItem('pixelHunterUser');
+  if (savedUser) {
+    const user = JSON.parse(savedUser);
+    document.getElementById('hunt-btn').classList.remove('hidden');
+    document.getElementById('auth-buttons').classList.add('hidden');
+    document.getElementById('mastered-count').textContent = user.mastered || '25';
+    document.getElementById('total-count').textContent = user.total || '600';
+  }
+});
 </script>
 </body>
 </html>
