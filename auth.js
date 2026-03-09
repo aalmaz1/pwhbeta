@@ -72,7 +72,7 @@ window.handleAuthSubmit = async () => {
 // Остальные функции...
 function showWelcomeNotification(user) {
   const notif = document.getElementById('ios-notification');
-  document.getElementById('notification-text').textContent = Welcome, ${user.email.split('@')[0]}!;
+  document.getElementById('notification-text').textContent = `Welcome, ${user.email.split('@')[0]}!`;
   notif.classList.remove('hidden');
   notif.classList.add('show');
   setTimeout(() => {
