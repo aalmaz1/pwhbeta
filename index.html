@@ -230,7 +230,7 @@
         
         <div id="auth-error" class="auth-error"></div>
         
-        <button type="button" class="auth-submit" onclick="handleAuthSubmit()">ENTER</button>
+        <button type="button" class="auth-submit" id="auth-submit-btn">ENTER</button>
       </form>
       
       <div class="auth-toggle">
@@ -330,7 +330,7 @@ window.handleAuthSubmit = async () => {
 // ✅ ФУНКЦИЯ 5: iOS уведомление (ОТСУТСТВОВАЛА!)
 function showWelcomeNotification(user) {
   const notif = document.getElementById('ios-notification');
-  document.getElementById('notification-text').textContent = Welcome, ${user.email.split('@')[0]}!;
+  document.getElementById('notification-text').textContent = `Welcome, ${user.email.split('@')[0]}!`;
   notif.classList.remove('hidden');
   notif.classList.add('show');
   setTimeout(() => {
@@ -366,6 +366,19 @@ onAuthStateChanged(auth, async (user) => {
     await loadUserProgress(user);
   }
 });
+  // Добавляем обработчик события для кнопки ENTER
+document.getElementById('auth-submit-btn').addEventListener('click', handleAuthSubmit);
+
+// Добавляем обработчики для кнопок LOGIN/REGISTER на главном экране
+document.querySelector('.auth-buttons button:first-child').addEventListener('click', () => showAuthModal('login'));
+document.querySelector('.auth-buttons button:last-child').addEventListener('click', () => showAuthModal('register'));
+
+// Добавляем обработчик для кнопки LOGIN/REGISTER внутри модалки
+document.querySelector('.auth-toggle-btn').addEventListener('click', toggleAuthMode);
+
+// Добавляем обработчик для кнопки закрытия модалки
+document.querySelector('.auth-close').addEventListener('click', closeAuthModal);
+
 </script>
 
   
