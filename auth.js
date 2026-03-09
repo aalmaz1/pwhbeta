@@ -86,4 +86,19 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById('hunt-btn').classList.remove('hidden');
     document.getElementById('auth-buttons').classList.add('hidden');
   }
+  // Добавляем обработчик события для кнопки ENTER
+document.getElementById('auth-submit-btn').addEventListener('click', window.handleAuthSubmit);
+
+// Добавляем обработчики для кнопок LOGIN/REGISTER на главном экране
+// Предполагая, что они все еще имеют исходные onclick, но теперь вы вызываете showAuthModal/toggleAuthMode
+document.querySelector('#auth-buttons button:nth-child(1)').addEventListener('click', () => window.showAuthModal('login'));
+document.querySelector('#auth-buttons button:nth-child(2)').addEventListener('click', () => window.showAuthModal('register'));
+
+// Добавляем обработчик для кнопки LOGIN/REGISTER внутри модалки
+document.querySelector('.auth-toggle-btn').addEventListener('click', window.toggleAuthMode);
+
+// Добавляем обработчик для кнопки закрытия модалки
+document.querySelector('.auth-close').addEventListener('click', window.closeAuthModal);
+```
+
 });
