@@ -155,4 +155,37 @@ window.confirmDeleteAccount = async () => {
     console.error('Delete account error:', error);
     errorEl.textContent = error.message.includes('wrong-password') ? 'Wrong password' : error.message;
   }
+  window.showDeleteAccountModal = () => {
+  document.getElementById('delete-modal').classList.remove('hidden');
+  document.getElementById('delete-password').value = '';
+  document.getElementById('delete-error').textContent = '';
+};
+window.closeDeleteModal = () => {
+  document.getElementById('delete-modal').classList.add('hidden');
+};
+document.getElementById('delete-confirm-btn')?.addEventListener('click', async () => {
+  const password = document.getElementById('delete-password').value;
+  const errorEl = document.getElementById('delete-error');
+  const user = auth.currentUser;
+  
+  if (!user) { errorEl.textContent = 'Not logged in'; return; }
+  if (!password) { errorEl.textContent = 'Enter password'; return; }
+  
+  try {
+    // Re-authenticate
+    await signInWithEmailAndPassword(auth, user.email, password);
+    
+    // Delete Firestore data
+    await deleteDoc(doc(db, "users", user.uid));
+    
+    // Delete Auth account
+    await user.delete();
+    
+    alert('Account deleted!');
+    window.location.reload();
+  } catch (error) {
+    console.error('Delete error:', error);
+    errorEl.textContent = error.message.includes('wrong-password') ? 'Wrong password' : error.message;
+  }
+});
 };
