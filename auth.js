@@ -99,6 +99,60 @@ document.querySelector('.auth-toggle-btn').addEventListener('click', window.togg
 
 // Добавляем обработчик для кнопки закрытия модалки
 document.querySelector('.auth-close').addEventListener('click', window.closeAuthModal);
-```
 
-});
+// Показать модалку удаления
+window.showDeleteAccountModal = () => {
+  document.getElementById('delete-modal').classList.remove('hidden');
+  document.getElementById('delete-password').value = '';
+  document.getElementById('delete-error').textContent = '';
+};
+// Закрыть модалку
+window.closeDeleteModal = () => {
+  document.getElementById('delete-modal').classList.add('hidden');
+};
+// Удалить аккаунт
+window.confirmDeleteAccount = async () => {
+  const password = document.getElementById('delete-password').value;
+  const errorEl = document.getElementById('delete-error');
+  const user = auth.currentUser;
+  
+  if (!user) {
+    errorEl.textContent = 'No user logged in';
+    return;
+  }
+  
+  if (!password) {
+    errorEl.textContent = 'Enter password to confirm';
+    return;
+  }
+  
+  try {
+    // 1. Re-authenticate user
+    const credential = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js').then(m => 
+      m.reauthenticateWithCredential(user, new m.EmailAuthProvider.credential(user.email, password))
+    ).catch(() => null);
+    
+    if (!credential) {
+      // Попробуем через signIn
+      await signInWithEmailAndPassword(auth, user.email, password);
+    }
+    
+    // 2. Удалить данные пользователя из Firestore
+    await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js').then(async (m) => {
+      const userDocRef = m.doc(db, "users", user.uid);
+      await m.deleteDoc(userDocRef);
+    });
+    
+    // 3. Удалить пользователя из Auth
+    await user.delete();
+    
+    // 4. Logout и уведомление
+    closeDeleteModal();
+    alert('Account deleted successfully. Goodbye!');
+    window.logout();
+    
+  } catch (error) {
+    console.error('Delete account error:', error);
+    errorEl.textContent = error.message.includes('wrong-password') ? 'Wrong password' : error.message;
+  }
+};
