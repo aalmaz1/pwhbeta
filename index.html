@@ -468,7 +468,7 @@ try {
     alert('Account deleted!');
     window.location.reload();
   } catch (error) {
-    console.error('Delete error:', error);
+    // console.error('Delete error:', error);
     errorEl.textContent = error.message.includes('wrong-password') ? 'Wrong password' : error.message;
     deleteBtn.disabled = false;
     deleteBtn.textContent = 'DELETE';
@@ -498,7 +498,7 @@ async function loadUserProgress(user) {
       if (xpEl) xpEl.textContent = data.xp || 0;
     }
   } catch (e) {
-    console.error('Load progress error:', e);
+    //console.error('Load progress error:', e);
   }
 }
 
