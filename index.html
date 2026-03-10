@@ -349,7 +349,7 @@ const firebaseConfig = {
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { getFirestore, doc, setDoc, getDoc, updateDoc ,deleteDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { getFirestore, doc, setDoc, getDoc, updateDoc ,deleteDoc,writeBatch} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -444,20 +444,34 @@ window.closeDeleteModal = () => {
 document.getElementById('delete-confirm-btn')?.addEventListener('click', async () => {
   const password = document.getElementById('delete-password').value;
   const errorEl = document.getElementById('delete-error');
+  const deleteBtn = document.getElementById('delete-confirm-btn');
   const user = auth.currentUser;
   
   if (!user) { errorEl.textContent = 'Not logged in'; return; }
   if (!password) { errorEl.textContent = 'Enter password'; return; }
+  // Loading state
+  deleteBtn.disabled = true;
+  deleteBtn.textContent = 'DELETING...';
   
-  try {
+try {
+    // Re-authenticate
     await signInWithEmailAndPassword(auth, user.email, password);
-    await deleteDoc(doc(db, "users", user.uid));
+    
+    // Batch delete - атомарная операция
+    const batch = writeBatch(db);
+    batch.delete(doc(db, "users", user.uid));
+    await batch.commit();
+    
+    // Delete Auth account
     await user.delete();
+    
     alert('Account deleted!');
     window.location.reload();
   } catch (error) {
     console.error('Delete error:', error);
     errorEl.textContent = error.message.includes('wrong-password') ? 'Wrong password' : error.message;
+    deleteBtn.disabled = false;
+    deleteBtn.textContent = 'DELETE';
   }
 });
   
