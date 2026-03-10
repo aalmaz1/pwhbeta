@@ -336,7 +336,7 @@ window.logout = async () => {
 function showWelcomeNotification(user) {
   const notif = document.getElementById('ios-notification');
 const displayName = user.displayName || user.email.split('@')[0];
-  document.getElementById('notification-text').textContent = Welcome, ${displayName}!;
+  document.getElementById('notification-text').textContent = `Welcome, ${displayName}!`;
   notif.classList.remove('hidden');
   notif.classList.add('show');
   setTimeout(() => {
@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInfo.className = 'user-info';
         document.querySelector('.game-title').parentNode.appendChild(userInfo);
       }
-      userInfo.innerHTML = 👤 ${user.email.split('@')[0]} <button onclick="logout()">LOGOUT</button>;
+      userInfo.innerHTML = `👤 ${user.email.split('@')[0]} <button onclick="logout()">LOGOUT</button>`;
     } else {
       document.getElementById('hunt-btn').classList.add('hidden');
       document.getElementById('auth-buttons').classList.remove('hidden');
