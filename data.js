@@ -162,6 +162,11 @@ export function getCategories() {
   return categoriesCache;
 }
 
+export function getWordsByCategory(category) {
+  if (category === 'All') return getGameData();
+  return getGameData().filter(w => w.category === category);
+}
+
 export function getRandomWrongAnswers(correctWord, count = 3) {
   const allWords = getGameData();
 
