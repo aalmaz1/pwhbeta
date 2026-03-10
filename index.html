@@ -368,7 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('hunt-btn').classList.remove('hidden');
       document.getElementById('auth-buttons').classList.add('hidden');
       await loadUserProgress(user);
-      
       // Добавляем кнопку logout в user-info
       let userInfo = document.querySelector('.user-info');
       if (!userInfo) {
@@ -384,15 +383,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (userInfo) userInfo.remove();
     }
   });
-
   // Обработчики событий
   document.getElementById('auth-submit-btn')?.addEventListener('click', handleAuthSubmit);
   document.querySelector('.auth-toggle-btn')?.addEventListener('click', toggleAuthMode);
   document.querySelector('.auth-close')?.addEventListener('click', closeAuthModal);
 });
 </script>
-
-
-  
 </body>
 </html>
