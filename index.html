@@ -314,17 +314,19 @@
      <button class="auth-close" onclick="document.getElementById('auth-modal').classList.add('hidden');">✕</button>
     </div>
   </div>
-    <!-- Delete Account Modal -->
-<div id="delete-modal" class="modal delete-modal hidden" role="dialog" aria-modal="true" aria-label="Delete Account">
+
+
+
+    <div id="delete-modal" class="modal delete-modal hidden" role="dialog" aria-modal="true" aria-label="Delete Account">
   <div class="modal-container">
     <h2 class="modal-title">// DELETE ACCOUNT //</h2>
-    <p class="delete-warning">⚠️ This action is irreversible! All your data will be permanently deleted.</p>
-    <p style="font-size: 9px; color: var(--text-dim); margin-bottom: 15px;">Enter your password to confirm:</p>
-    <input type="password" id="delete-password" class="delete-input" placeholder="Enter password">
+    <p class="delete-warning">⚠️ This action is irreversible!</p>
+    <p style="font-size:9px;color:var(--text-dim);margin-bottom:15px;">Enter password:</p>
+    <input type="password" id="delete-password" class="delete-input" placeholder="Password">
     <div id="delete-error" class="auth-error"></div>
     <div class="delete-actions">
       <button class="delete-cancel" onclick="closeDeleteModal()">CANCEL</button>
-      <button class="delete-confirm" onclick="confirmDeleteAccount()">DELETE</button>
+      <button class="delete-confirm" id="delete-confirm-btn">DELETE</button>
     </div>
   </div>
 </div>
