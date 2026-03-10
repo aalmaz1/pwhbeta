@@ -85,19 +85,26 @@
   background: transparent;
   color: var(--neon-pink);
   border: 2px solid var(--neon-pink);
-  padding: 12px 24px;
+  padding: 16px 36px;
   font-family: inherit;
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
   text-shadow: 0 0 8px var(--neon-pink);
   box-shadow: 0 0 12px rgba(255,45,120,0.4);
   transition: all 0.2s;
+  letter-spacing: 2px;
+  min-height: 52px;
+  display: block;
+  width: 100%;
   margin-top: 10px;
+  -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 .delete-account-btn:hover {
   background: rgba(255,45,120,0.15);
   box-shadow: 0 0 24px rgba(255,45,120,0.7);
 }
+
 /* Delete Modal */
 .delete-modal {
   z-index: 300;
