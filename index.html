@@ -114,18 +114,11 @@
     <p class="blink" aria-hidden="true">▸ PRESS HUNT ◂</p>
     
     <!-- Auth Buttons (до логина) -->
-    <div class="auth-buttons" id="auth-buttons">
+<div class="auth-buttons" id="auth-buttons">
+  <button class="auth-btn" onclick="showAuthModal('login')">▶ LOGIN</button>
+  <button class="auth-btn register-btn" onclick="showAuthModal('register')">▶ REGISTER</button>
+</div>
 
-
-<button class="auth-btn" onclick="document.getElementById('auth-modal').classList.remove('hidden'); 
-  document.getElementById('auth-title').textContent='// LOGIN //'; 
-  document.getElementById('username-field').style.display='none';">▶ LOGIN</button>
-<button class="auth-btn register-btn" onclick="document.getElementById('auth-modal').classList.remove('hidden'); 
-  document.getElementById('auth-title').textContent='// REGISTER //'; 
-  document.getElementById('username-field').style.display='flex';">▶ REGISTER</button>
-
-      
-    </div>
     <!-- Hunt Button (после логина) -->
     <button class="start-btn hunt-btn hidden" id="hunt-btn" onclick="alert('Hunt работает!');
       document.getElementById('menu-screen').classList.add('hidden'); 
