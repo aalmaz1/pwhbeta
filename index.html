@@ -80,6 +80,77 @@
     .user-info button { background: transparent; border: 1px solid var(--neon-pink); color: var(--neon-pink); font-family: inherit; font-size: 8px; padding: 6px 12px; cursor: pointer; min-height: 32px; }
     .user-info button:hover { background: rgba(255,45,120,0.15); box-shadow: 0 0 12px rgba(255,45,120,0.5); }
     @media (max-width: 480px) { .auth-container { padding: 24px 16px; } .auth-btn { padding: 14px 28px; font-size: 12px; } }
+    /* Delete Account Button */
+.delete-account-btn {
+  background: transparent;
+  color: var(--neon-pink);
+  border: 2px solid var(--neon-pink);
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+  text-shadow: 0 0 8px var(--neon-pink);
+  box-shadow: 0 0 12px rgba(255,45,120,0.4);
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+.delete-account-btn:hover {
+  background: rgba(255,45,120,0.15);
+  box-shadow: 0 0 24px rgba(255,45,120,0.7);
+}
+/* Delete Modal */
+.delete-modal {
+  z-index: 300;
+}
+.delete-modal .modal-container {
+  background: rgba(10, 0, 20, 0.95);
+  border: 2px solid var(--neon-pink);
+  box-shadow: 0 0 30px rgba(255,45,120,0.4);
+  padding: 32px;
+  max-width: 380px;
+  margin: auto;
+}
+.delete-warning {
+  color: var(--neon-pink);
+  font-size: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.delete-input {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--text-dim);
+  color: var(--text-main);
+  font-family: inherit;
+  margin-bottom: 15px;
+}
+.delete-input:focus {
+  border-color: var(--neon-pink);
+  outline: none;
+}
+.delete-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.delete-cancel {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--text-dim);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.delete-confirm {
+  background: transparent;
+  color: var(--neon-pink);
+  border: 1px solid var(--neon-pink);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.delete-confirm:hover {
+  background: rgba(255,45,120,0.2);
+}
   </style>
   
   <!-- Non-critical CSS loaded asynchronously -->
@@ -170,6 +241,10 @@
       <div class="settings-reset">
         <button class="reset-btn" role="button" onclick="resetProgress()">RESET PROGRESS</button>
       </div>
+      <!-- Delete Account -->
+<div class="settings-delete">
+  <button class="delete-account-btn" role="button" onclick="showDeleteAccountModal()">DELETE ACCOUNT</button>
+</div>
     </div>
   </div>
   <!-- ── CATEGORY SCREEN ────────────────────── -->
@@ -235,6 +310,20 @@
      <button class="auth-close" onclick="document.getElementById('auth-modal').classList.add('hidden');">✕</button>
     </div>
   </div>
+    <!-- Delete Account Modal -->
+<div id="delete-modal" class="modal delete-modal hidden" role="dialog" aria-modal="true" aria-label="Delete Account">
+  <div class="modal-container">
+    <h2 class="modal-title">// DELETE ACCOUNT //</h2>
+    <p class="delete-warning">⚠️ This action is irreversible! All your data will be permanently deleted.</p>
+    <p style="font-size: 9px; color: var(--text-dim); margin-bottom: 15px;">Enter your password to confirm:</p>
+    <input type="password" id="delete-password" class="delete-input" placeholder="Enter password">
+    <div id="delete-error" class="auth-error"></div>
+    <div class="delete-actions">
+      <button class="delete-cancel" onclick="closeDeleteModal()">CANCEL</button>
+      <button class="delete-confirm" onclick="confirmDeleteAccount()">DELETE</button>
+    </div>
+  </div>
+</div>
   </main>
 
   <!-- Game Bundle -->
