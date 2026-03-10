@@ -244,6 +244,7 @@
   </div>
   </main>
   <!-- Firebase SDK (добавь свой config) -->
+
 <script type="module">
 const firebaseConfig = {
   apiKey: "AIzaSyCgKKrHIaDNzjUIaK2Z-Usf587px-lPMSY",
@@ -256,23 +257,23 @@ const firebaseConfig = {
 };
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 let isRegisterMode = false;
 
-// ✅ ФУНКЦИЯ 1: Модалка
+// 🔥 ВСЕ ФУНКЦИИ FIREBASE
 window.showAuthModal = (mode) => {
   isRegisterMode = mode === 'register';
   document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
   document.getElementById('username-field').style.display = isRegisterMode ? 'flex' : 'none';
   document.getElementById('auth-modal').classList.remove('hidden');
+  document.getElementById('auth-error').textContent = '';
 };
 
-// ✅ ФУНКЦИЯ 2: Toggle Login/Register
 window.toggleAuthMode = () => {
   isRegisterMode = !isRegisterMode;
   document.getElementById('auth-title').textContent = isRegisterMode ? '// REGISTER //' : '// LOGIN //';
@@ -281,56 +282,68 @@ window.toggleAuthMode = () => {
   document.querySelector('.auth-toggle-btn').textContent = isRegisterMode ? 'LOGIN' : 'REGISTER';
 };
 
-// ✅ ФУНКЦИЯ 3: Закрыть модалку
 window.closeAuthModal = () => {
   document.getElementById('auth-modal').classList.add('hidden');
   document.getElementById('auth-error').textContent = '';
 };
 
-// ✅ ФУНКЦИЯ 4: Регистрация/Вход (ИСПРАВЛЕНО!)
 window.handleAuthSubmit = async () => {
-  const email = document.getElementById('auth-email').value;
+  const email = document.getElementById('auth-email').value.trim();
   const password = document.getElementById('auth-password').value;
-  const username = document.getElementById('auth-username').value;
+  const username = document.getElementById('auth-username').value.trim();
   const errorEl = document.getElementById('auth-error');
   
+  if (!email || !password) {
+    errorEl.textContent = 'Email and password required';
+    return;
+  }
+
   errorEl.textContent = 'Loading...';
 
   try {
     let userCredential;
     
     if (isRegisterMode) {
-      if (!username.trim()) throw new Error('Enter username');
+      if (!username) throw new Error('Enter username');
       userCredential = await createUserWithEmailAndPassword(auth, email, password);
       
       await setDoc(doc(db, "users", userCredential.user.uid), {
-        username: username.trim(),
+        username,
         email,
         xp: 0,
         level: 1,
         category: "Beginner",
         mastered: 0,
         total: 600,
-        createdAt: new Date()
+        createdAt: new Date().toISOString()
       });
     } else {
       userCredential = await signInWithEmailAndPassword(auth, email, password);
     }
     
     closeAuthModal();
-    showWelcomeNotification(userCredential.user);  // ✅ Теперь существует
-    document.getElementById('hunt-btn').classList.remove('hidden');
-    document.getElementById('auth-buttons').classList.add('hidden');
+    showWelcomeNotification(userCredential.user);
     
   } catch (error) {
-    errorEl.textContent = error.message;
+    errorEl.textContent = error.message.includes('auth/user-not-found') ? 'User not found' : 
+                         error.message.includes('auth/wrong-password') ? 'Wrong password' :
+                         error.message.includes('auth/email-already') ? 'Email already exists' :
+                         error.message;
   }
 };
 
-// ✅ ФУНКЦИЯ 5: iOS уведомление (ОТСУТСТВОВАЛА!)
+window.logout = async () => {
+  await signOut(auth);
+  document.getElementById('hunt-btn').classList.add('hidden');
+  document.getElementById('auth-buttons').classList.remove('hidden');
+  document.getElementById('mastered-count').textContent = '0';
+  document.getElementById('total-count').textContent = '600';
+};
+
 function showWelcomeNotification(user) {
   const notif = document.getElementById('ios-notification');
-  document.getElementById('notification-text').textContent = `Welcome, ${user.email.split('@')[0]}!`;
+const displayName = user.displayName || user.email.split('@')[0];
+  document.getElementById('notification-text').textContent = Welcome, ${displayName}!;
   notif.classList.remove('hidden');
   notif.classList.add('show');
   setTimeout(() => {
@@ -339,47 +352,53 @@ function showWelcomeNotification(user) {
   }, 3000);
 }
 
-// ✅ ФУНКЦИЯ 6: Загрузка прогресса (ОТСУТСТВОВАЛА!)
 async function loadUserProgress(user) {
   try {
     const userDoc = await getDoc(doc(db, "users", user.uid));
     if (userDoc.exists()) {
       const data = userDoc.data();
+      document.getElementById('mastered-count').textContent = data.mastered || 0;
+      document.getElementById('total-count').textContent = data.total || 600;
       const xpEl = document.getElementById('xp');
-      const masteredEl = document.getElementById('mastered-count');
-      const totalEl = document.getElementById('total-count');
-      
       if (xpEl) xpEl.textContent = data.xp || 0;
-      if (masteredEl) masteredEl.textContent = data.mastered || 0;
-      if (totalEl) totalEl.textContent = data.total || 600;
     }
   } catch (e) {
     console.error('Load progress error:', e);
   }
 }
 
-// ✅ Автологин
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    document.getElementById('hunt-btn').classList.remove('hidden');
-    document.getElementById('auth-buttons').classList.add('hidden');
-    await loadUserProgress(user);
-  }
+// ✅ КРИТИЧЕСКИ ВАЖНО: ВСЁ в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Firebase автологин
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      document.getElementById('hunt-btn').classList.remove('hidden');
+      document.getElementById('auth-buttons').classList.add('hidden');
+      await loadUserProgress(user);
+      
+      // Добавляем кнопку logout в user-info
+      let userInfo = document.querySelector('.user-info');
+      if (!userInfo) {
+        userInfo = document.createElement('div');
+        userInfo.className = 'user-info';
+        document.querySelector('.game-title').parentNode.appendChild(userInfo);
+      }
+      userInfo.innerHTML = 👤 ${user.email.split('@')[0]} <button onclick="logout()">LOGOUT</button>;
+    } else {
+      document.getElementById('hunt-btn').classList.add('hidden');
+      document.getElementById('auth-buttons').classList.remove('hidden');
+      const userInfo = document.querySelector('.user-info');
+      if (userInfo) userInfo.remove();
+    }
+  });
+
+  // Обработчики событий
+  document.getElementById('auth-submit-btn')?.addEventListener('click', handleAuthSubmit);
+  document.querySelector('.auth-toggle-btn')?.addEventListener('click', toggleAuthMode);
+  document.querySelector('.auth-close')?.addEventListener('click', closeAuthModal);
 });
-  // Добавляем обработчик события для кнопки ENTER
-document.getElementById('auth-submit-btn').addEventListener('click', handleAuthSubmit);
-
-// Добавляем обработчики для кнопок LOGIN/REGISTER на главном экране
-document.querySelector('.auth-buttons button:first-child').addEventListener('click', () => showAuthModal('login'));
-document.querySelector('.auth-buttons button:last-child').addEventListener('click', () => showAuthModal('register'));
-
-// Добавляем обработчик для кнопки LOGIN/REGISTER внутри модалки
-document.querySelector('.auth-toggle-btn').addEventListener('click', toggleAuthMode);
-
-// Добавляем обработчик для кнопки закрытия модалки
-document.querySelector('.auth-close').addEventListener('click', closeAuthModal);
-
 </script>
+
 
   
 </body>
