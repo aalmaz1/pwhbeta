@@ -196,7 +196,7 @@ self.addEventListener('message', event => {
     // event.source may be undefined in some contexts; guard it
     try {
       event.source && event.source.postMessage({ type: 'CACHEVERSION', version: CACHE_VERSION });
-    } catch (e) { / ignore / }
+    } catch (e) { /* ignore */ }
   }
 });
 
