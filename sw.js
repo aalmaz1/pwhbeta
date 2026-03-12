@@ -1,7 +1,7 @@
 // sw.js — final robust service worker for pixel-word
 // Bump CACHE_VERSION on deploy to force clients to update
 const CACHE_VERSION = 'v13';
-const CACHENAME = pixel-word-${CACHE_VERSION};
+const CACHENAME = `pixel-word-${CACHE_VERSION}`;
 
 // Core assets to precache. Remove manifest if you don't host it at root.
 const ASSETS_TO_CACHE = [
@@ -25,7 +25,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
       try {
-        await cache.addAll(ASSETSTOCACHE);
+        await cache.addAll(ASSETS_TO_CACHE);
       } catch (err) {
         // don't block install on partial failures
         console.warn('Precache failed (some assets may be missing):', err);
@@ -133,8 +133,9 @@ async function networkFirstWithPreload(event) {
   const request = event.request;
   try {
     // use navigation preload if available (faster)
-    const preloadResp = await event.preloadResponse;
-    if (preloadResp) {
+    if (self.registration && self.registration.navigationPreload && event.preloadResponse)
+    {
+      const preloadResp = await event.preloadResponse;
       safeCachePut(request, preloadResp);
       return preloadResp;
     }
@@ -143,7 +144,7 @@ async function networkFirstWithPreload(event) {
     safeCachePut(request, networkResp);
     return networkResp;
   } catch (err) {
-    const cache = await caches.open(CACHE_NAME);
+    const cache = await caches.open(CACHENAME);
     const cached = (await cache.match(request)) ||
                    (await cache.match('./index.html')) ||
                    (await cache.match('./offline.html'));
@@ -153,7 +154,7 @@ async function networkFirstWithPreload(event) {
 
 // Strategy: stale-while-revalidate (single network fetch, background update)
 async function staleWhileRevalidate(request) {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(CACHENAME);
   const cached = await cache.match(request);
 
   const networkPromise = fetch(request)
