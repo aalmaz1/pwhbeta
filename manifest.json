@@ -12,13 +12,13 @@
   "categories": ["education", "games"],
   "icons": [
     {
-      "src": "/pwhbeta/assets/logo-192.png",
+      "src": "/pwhbeta/assets/favicon.ico",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/pwhbeta/assets/logo-512.png",
+      "src": "/pwhbeta/assets/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
