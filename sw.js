@@ -1,7 +1,7 @@
 // sw.js — final robust service worker for pixel-word
 // Bump CACHE_VERSION on deploy to force clients to update
 const CACHE_VERSION = 'v13';
-const CACHENAME = `pixel-word-${CACHE_VERSION}`;
+const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Core assets to precache. Remove manifest if you don't host it at root.
 const ASSETS_TO_CACHE = [
@@ -144,7 +144,7 @@ async function networkFirstWithPreload(event) {
     safeCachePut(request, networkResp);
     return networkResp;
   } catch (err) {
-    const cache = await caches.open(CACHENAME);
+    const cache = await caches.open(CACHE_NAME);
     const cached = (await cache.match(request)) ||
                    (await cache.match('./index.html')) ||
                    (await cache.match('./offline.html'));
@@ -154,7 +154,7 @@ async function networkFirstWithPreload(event) {
 
 // Strategy: stale-while-revalidate (single network fetch, background update)
 async function staleWhileRevalidate(request) {
-  const cache = await caches.open(CACHENAME);
+  const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
 
   const networkPromise = fetch(request)
@@ -195,7 +195,7 @@ self.addEventListener('message', event => {
   if (event.data.type === 'GETCACHEVERSION') {
     // event.source may be undefined in some contexts; guard it
     try {
-      event.source && event.source.postMessage({ type: 'CACHEVERSION', version: CACHEVERSION });
+      event.source && event.source.postMessage({ type: 'CACHEVERSION', version: CACHE_VERSION });
     } catch (e) { / ignore / }
   }
 });
