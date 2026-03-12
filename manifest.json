@@ -1,8 +1,10 @@
 {
+  "id": "/pwhbeta/index.html",
   "short_name": "WordHunter",
   "name": "Pixel Word Hunter",
   "description": "TOEIC vocabulary learning game",
-  "start_url": "./index.html",
+  "start_url": "/pwhbeta/index.html",
+  "scope": "/pwhbeta/",
   "display": "standalone",
   "orientation": "any",
   "theme_color": "#0a0010",
@@ -10,13 +12,13 @@
   "categories": ["education", "games"],
   "icons": [
     {
-      "src": "assets/logo.png",
+      "src": "/pwhbeta/assets/logo-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/logo.png",
+      "src": "/pwhbeta/assets/logo-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
