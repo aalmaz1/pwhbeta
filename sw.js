@@ -1,6 +1,6 @@
 // sw.js — final robust service worker for pixel-word
 // Bump CACHE_VERSION on deploy to force clients to update
-const CACHE_VERSION = 'v14';
+const CACHE_VERSION = 'v15';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Core assets to precache. Remove manifest if you don't host it at root.
@@ -138,10 +138,11 @@ async function networkFirstWithPreload(event) {
   const request = event.request;
   try {
     // use navigation preload if available (faster)
-    if (self.registration && self.registration.navigationPreload && event.preloadResponse)
+    if (self.registration?.navigationPreload && event.preloadResponse)
     {
       const preloadResp = await event.preloadResponse;
-      safeCachePut(request, preloadResp);
+      if (preloadResp) { const cloneForCache = preloadResp.clone();
+      safeCachePut(request, cloneForCache);
       return preloadResp;
     }
 
