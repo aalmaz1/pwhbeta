@@ -155,26 +155,16 @@ async function networkFirstWithPreload(event) {
 // Strategy: stale-while-revalidate (single network fetch, background update)
 async function staleWhileRevalidate(request) {
   const cache = await caches.open(CACHE_NAME);
-  const cached = await cache.match(request);
+  let cached = await cache.match(request);
 
-  const networkPromise = fetch(request)
-    .then(resp => {
-      if (resp && (resp.ok || resp.type === 'opaque')) {
-        safeCachePut(request, resp);
-      }
-      return resp;
-    })
-    .catch(() => null);
+  const networkPromise = fetch(request).then(async (resp) => {
+    if (resp && (resp.ok || resp.type === 'opaque')) { const cloneForCache = resp.clone();
+    await safeCachePut(request,cloneForCache);                                                  
+    }
+    return resp;
+  }).catch(() => null);
 
-  if (cached) {
-    // return cached immediately, update in background
-    networkPromise.catch(()=>{/* ignore */});
-    return cached;
-  }
-
-  const netResp = await networkPromise;
-  if (netResp) return netResp;
-  return (await caches.match('./offline.html')) || new Response('', { status: 504, statusText: 'Offline' });
+  return await networkPromise || caches.match('./offline.html');
 }
 
 // Strategy: network-only with offline fallback
