@@ -62,6 +62,10 @@ async function safeCachePut(request, response) {
     if (!request || !response) return;
     if (request.method !== 'GET') return;
     if (!(response.ok || response.type === 'opaque')) return;
+    if (response.bodyUsed) {
+      console.warn('Response body already used,skipping cache');
+      return;
+    }
     const cache = await caches.open(CACHE_NAME);
     await cache.put(request, response.clone());
   } catch (err) {
