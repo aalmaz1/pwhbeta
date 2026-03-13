@@ -1,6 +1,6 @@
 // sw.js — final robust service worker for pixel-word
 // Bump CACHE_VERSION on deploy to force clients to update
-const CACHE_VERSION = 'v13';
+const CACHE_VERSION = 'v14';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 // Core assets to precache. Remove manifest if you don't host it at root.
