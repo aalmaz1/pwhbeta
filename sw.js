@@ -77,6 +77,11 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(req.url);
 
+  if (url.hostname.includes('firestore.googleapis.com')) {
+    event.respondWith(fetch(req));
+    return;
+  }
+
   // Bypass SW for sensitive API/admin endpoints (network-only)
   if (url.pathname.startsWith('/api/') || url.pathname.includes('/admin')) {
     event.respondWith(networkOnly(req));
