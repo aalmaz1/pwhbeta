@@ -167,9 +167,9 @@ async function staleWhileRevalidate(request) {
   const cache = await caches.open(CACHE_NAME);
   let cached = await cache.match(request);
 
-  const networkPromise = fetch(request).then(async (resp) => {
+  const networkPromise = fetch(request).then(async resp => {
     if (resp && (resp.ok || resp.type === 'opaque')) { const cloneForCache = resp.clone();
-    await safeCachePut(request,cloneForCache);                                                  
+    await cahes.open(CACHE_NAME).put(request,cloneForCache);                                                  
     }
     return resp;
   }).catch(() => null);
@@ -203,3 +203,23 @@ self.addEventListener('message', event => {
 // Optional placeholders for push/sync if you add those features later
 // self.addEventListener('push', event => { / handle push / });
 // self.addEventListener('sync', event => { / handle background sync / });
+
+async function safeCachePut(request,response) {
+    try{
+      const url = new URL(request.url);
+      if
+        (url.hostname.includes('googleapis.com')||url.hostname.includes('gstatic.com')){
+          return;
+        }
+
+      if(!request || !response) return;
+      if(request.method ! == 'GET') return;
+      if(!(response.ok || response.type === 'opaque')) return;
+
+      const cache = await caches.open(CACHES_NAME);
+      await
+      cache.put(request,response.clone());      
+    } catch(err){
+    
+    }
+}
