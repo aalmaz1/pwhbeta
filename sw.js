@@ -174,7 +174,7 @@ async function staleWhileRevalidate(request) {
     return resp;
   }).catch(() => null);
 
-  return await networkPromise || caches.match('./offline.html');
+  return (await networkPromise) || (await caches.match('./offline.html'));
 }
 
 // Strategy: network-only with offline fallback
