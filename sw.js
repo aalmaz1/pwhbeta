@@ -149,7 +149,7 @@ async function networkFirstWithPreload(event) {
       safeCachePut(request, cloneForCache);
       return preloadResp;
     }
-
+  }
     const networkResp = await fetch(request);
     safeCachePut(request, networkResp);
     return networkResp;
