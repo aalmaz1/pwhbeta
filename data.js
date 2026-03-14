@@ -292,3 +292,30 @@ export function getMasteryLabel(mastery) {
   const labels = ['NEW', 'LEARNING', 'FAMILIAR', 'GOOD', 'STRONG', 'MASTER'];
   return labels[mastery] || labels[0];
 }
+
+// В data.js добавить модифицированный SM-2
+function calculateNextInterval(word, quality) {
+  // quality: 0-5 (0-2 = неправильно, 3-5 = правильно)
+  const easeFactor = word.easeFactor || 2.5;
+  const interval = word.interval || 1;
+  
+  let newEaseFactor = easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  newEaseFactor = Math.max(1.3, newEaseFactor);
+  
+  let newInterval;
+  if (quality < 3) {
+    newInterval = 1; // сброс при неправильном ответе
+  } else if (interval === 1) {
+    newInterval = 1; // 1 день
+  } else if (interval === 6) {
+    newInterval = 24; // 1 день → 6 дней
+  } else {
+    newInterval = Math.round(interval * newEaseFactor); // экспоненциальный рост
+  }
+  
+  return {
+    interval: newInterval,
+    easeFactor: newEaseFactor,
+    nextReview: Date.now() + newInterval * 24 * 60 * 60 * 1000
+  };
+}
