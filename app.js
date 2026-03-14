@@ -741,6 +741,20 @@ function startGame(category) {
   loadQuestion();
 }
 
+const TTSEngine = {
+  synth:window.speechSynthesis,speak(text) {
+    this.synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.8;
+
+    const voices = this.synth.getVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (englishVoice) utterance.voice = englishVoice;
+
+    this.synth.speak(utterance);
+  }
+};
+
 function loadQuestion() {
   if (state.currentQ >= state.currentRound.length) {
     showRoundSummary();
