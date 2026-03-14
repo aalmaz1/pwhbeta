@@ -2,14 +2,18 @@ let gameData = null;
 let categoriesCache = null;
 let dataLoadPromise = null;
 
-const INTERVALS = {
+// Адаптивные интервалы на основе SM-2 (начнём с базовых значений, далее будут корректироваться)
+const BASE_INTERVALS = {
   0: 0,
-  1: 60 * 60 * 1000,
-  2: 6 * 60 * 60 * 1000,
-  3: 24 * 60 * 60 * 1000,
-  4: 72 * 60 * 60 * 1000,
-  5: 168 * 60 * 60 * 1000,
+  1: 60 * 60 * 1000,      // 1 час
+  2: 6 * 60 * 60 * 1000,   // 6 часов
+  3: 24 * 60 * 60 * 1000,  // 1 день
+  4: 72 * 60 * 60 * 1000,  // 3 дня
+  5: 168 * 60 * 60 * 1000, // 1 неделя
 };
+
+// Для мастерских слов - долгосрочное обслуживание (каждые 2 недели)
+const MAINTENANCE_INTERVAL = 14 * 24 * 60 * 60 * 1000;
 
 const MAX_FETCH_RETRIES = 3;
 const FETCH_RETRY_DELAY_MS = 1000;
@@ -22,6 +26,11 @@ const TOEIC_CATEGORIES = new Set([
   'Property & Real Estate', 'Restaurants', 'Salaries', 'Shipping', 'Shopping', 'Taxes',
   'Transportation', 'Travel', 'Warranties'
 ]);
+
+// Кеш для анализа слабых слов (обновляется лениво)
+let weaknessesCache = null;
+let weaknessesCacheTime = 0;
+const WEAKNESS_CACHE_TTL = 60000; // 1 минута
 
 function sanitizeToeicWord(rawWord) {
   if (!rawWord || typeof rawWord !== 'object') return null;
@@ -42,10 +51,15 @@ function sanitizeToeicWord(rawWord) {
     category,
     rus: translation,
     correct: translation,
+    // Прогресс обучения
     mastery: 0,
     lastSeen: 0,
     correctCount: 0,
-    incorrectCount: 0
+    incorrectCount: 0,
+    // SM-2 параметры
+    easeFactor: 2.5,
+    interval: 1, // в днях
+    nextReview: 0,
   };
 }
 
@@ -167,6 +181,7 @@ export function getWordsByCategory(category) {
   return getGameData().filter(w => w.category === category);
 }
 
+// Улучшенная функция: дистракторы из той же или смежной категории
 export function getRandomWrongAnswers(correctWord, count = 3) {
   const allWords = getGameData();
 
@@ -174,23 +189,48 @@ export function getRandomWrongAnswers(correctWord, count = 3) {
     return [correctWord.correct];
   }
 
-  const uniqueWrong = [];
-  const seenTranslations = new Set();
+  // Находим слова из той же категории
+  const sameCategoryWords = allWords.filter(w => 
+    w.category === correctWord.category && w.eng !== correctWord.eng
+  );
 
-  for (const word of allWords) {
-    if (word.eng === correctWord.eng || word.correct === correctWord.correct) continue;
-    if (!seenTranslations.has(word.correct)) {
-      seenTranslations.add(word.correct);
-      uniqueWrong.push(word.correct);
-    }
+  // Находим слова из смежных категорий (по алфавиту рядом)
+  const allCategories = getCategories();
+  const categoryIndex = allCategories.indexOf(correctWord.category);
+  const adjacentCategories = allCategories.filter((cat, idx) => 
+    cat !== correctWord.category && Math.abs(idx - categoryIndex) <= 2
+  );
+  
+  const adjacentWords = allWords.filter(w => 
+    adjacentCategories.includes(w.category) && w.eng !== correctWord.eng
+  );
+
+  // Формируем пул: 60% из той же категории, 40% из других
+  const poolSize = count * 3;
+  const fromSameCount = Math.ceil(poolSize * 0.6);
+  
+  let pool = [];
+  
+  // Добавляем слова из той же категории
+  const shuffledSame = shuffleArray([...sameCategoryWords]);
+  pool.push(...shuffledSame.slice(0, fromSameCount));
+  
+  // Добавляем слова из смежных/других категорий
+  const shuffledAdjacent = shuffleArray([...adjacentWords]);
+  const remaining = poolSize - pool.length;
+  pool.push(...shuffledAdjacent.slice(0, remaining));
+
+  // Если мало слов - добираем из любых других
+  if (pool.length < poolSize) {
+    const otherWords = allWords.filter(w => 
+      w.eng !== correctWord.eng && !pool.includes(w)
+    );
+    pool.push(...shuffleArray(otherWords).slice(0, poolSize - pool.length));
   }
 
-  for (let i = uniqueWrong.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [uniqueWrong[i], uniqueWrong[j]] = [uniqueWrong[j], uniqueWrong[i]];
-  }
-
-  return uniqueWrong.slice(0, count);
+  pool = shuffleArray(pool).slice(0, count);
+  
+  return pool.map(w => w.correct);
 }
 
 export function generateOptionsForWord(word) {
@@ -208,43 +248,141 @@ function shuffleArray(array) {
   return arr;
 }
 
+// Получить список слабых слов пользователя
+export function getUserWeaknesses() {
+  const now = Date.now();
+  
+  // Используем кеш
+  if (weaknessesCache && (now - weaknessesCacheTime) < WEAKNESS_CACHE_TTL) {
+    return weaknessesCache;
+  }
+  
+  const words = getGameData();
+  const weaknesses = [];
+  
+  for (const word of words) {
+    const total = (word.correctCount || 0) + (word.incorrectCount || 0);
+    if (total < 2) continue; // нужно минимум 2 попытки
+    
+    const accuracy = word.correctCount / total;
+    if (word.incorrectCount >= 1 && accuracy < 0.7) {
+      weaknesses.push({ 
+        word, 
+        accuracy, 
+        errors: word.incorrectCount,
+        total
+      });
+    }
+  }
+  
+  // Сортируем по точности (самые слабые first)
+  weaknesses.sort((a, b) => a.accuracy - b.accuracy);
+  
+  weaknessesCache = weaknesses.slice(0, 10);
+  weaknessesCacheTime = now;
+  
+  return weaknessesCache;
+}
+
+// Очистка кеша слабых слов при обновлении прогресса
+function invalidateWeaknessCache() {
+  weaknessesCache = null;
+  weaknessesCacheTime = 0;
+}
+
 export function getWordPriority(word) {
   const now = Date.now();
   const lastSeen = word.lastSeen || 0;
   const mastery = word.mastery || 0;
   const timeSinceLastSeen = now - lastSeen;
 
-  const interval = INTERVALS[mastery] || INTERVALS[5];
-  const isDue = timeSinceLastSeen >= interval;
-
-  let priority = 0;
-
-  if (mastery === 0) {
-    priority = 100;
-  } else if (word.incorrectCount > word.correctCount) {
-    priority = 90;
-  } else if (isDue) {
-    priority = 80;
-  } else {
-    priority = Math.max(10, 70 - (timeSinceLastSeen / interval) * 60);
+  // Проверяем, является ли слово "слабым"
+  const weaknesses = getUserWeaknesses();
+  const isWeakWord = weaknesses.some(w => w.word.eng === word.eng);
+  
+  // 1. Слабые слова - highest priority
+  if (isWeakWord) {
+    return 100;
   }
-
-  return priority;
+  
+  // 2. Новые слова (ещё не изучались)
+  if (mastery === 0 || word.correctCount === 0) {
+    return 90;
+  }
+  
+  // 3. Мастерские слова (mastery >= 4) - долгосрочное обслуживание
+  if (mastery >= 4) {
+    const timeSinceReview = now - (word.nextReview || lastSeen);
+    if (timeSinceReview >= MAINTENANCE_INTERVAL) {
+      return 70; // пора повторить
+    }
+    return 10; // недавно повторяли
+  }
+  
+  // 4. Слова с ошибками - высокий приоритет
+  if ((word.incorrectCount || 0) > (word.correctCount || 0)) {
+    return 85;
+  }
+  
+  // 5. Обычные слова - проверяем интервал
+  const baseInterval = BASE_INTERVALS[mastery] || BASE_INTERVALS[5];
+  const isDue = timeSinceLastSeen >= baseInterval;
+  
+  if (isDue) {
+    return 80;
+  }
+  
+  // 6. Слова, которые ещё не пора повторять
+  // Чем больше времени прошло от последнего показанного - тем выше приоритет
+  const urgency = (timeSinceLastSeen / baseInterval) * 70;
+  return Math.max(10, Math.min(70, urgency));
 }
 
+// Интерливинг: выбираем слова из разных категорий
 export function selectWordsForRound(category, roundSize = 10) {
-  const words = getWordsByCategory(category);
+  let sourceWords;
+  
+  if (category === 'All') {
+    sourceWords = getGameData();
+  } else {
+    // Интерливинг: 70% из целевой категории, 30% из смежных
+    const allCategories = getCategories();
+    const categoryIndex = allCategories.indexOf(category);
+    const adjacentCategories = allCategories
+      .filter((cat, idx) => Math.abs(idx - categoryIndex) <= 2);
+    
+    const targetWords = getWordsByCategory(category);
+    const adjacentWords = getGameData()
+      .filter(w => adjacentCategories.includes(w.category) && w.category !== category);
+    
+    const targetCount = Math.floor(roundSize * 0.7);
+    const adjacentCount = roundSize - targetCount;
+    
+    sourceWords = [
+      ...targetWords.slice(0, targetCount),
+      ...shuffleArray(adjacentWords).slice(0, adjacentCount)
+    ];
+    
+    // Если мало слов - добираем
+    if (sourceWords.length < roundSize) {
+      const otherWords = getGameData()
+        .filter(w => !sourceWords.includes(w) && w.category !== category);
+      sourceWords.push(...shuffleArray(otherWords).slice(0, roundSize - sourceWords.length));
+    }
+  }
 
-  const wordsWithPriority = words.map(word => ({
+  const wordsWithPriority = sourceWords.map(word => ({
     word,
     priority: getWordPriority(word)
   }));
 
+  // Сортируем по приоритету
   wordsWithPriority.sort((a, b) => b.priority - a.priority);
 
   const selected = [];
   const seen = new Set();
 
+  // Выбираем высокоприоритетные слова
   for (const { word } of wordsWithPriority) {
     if (selected.length >= roundSize) break;
     if (!seen.has(word.eng)) {
@@ -253,19 +391,60 @@ export function selectWordsForRound(category, roundSize = 10) {
     }
   }
 
-  const remaining = words.filter(w => !seen.has(w.eng));
-  for (let i = remaining.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
-  }
-
-  for (const randomWord of remaining) {
+  // Дополняем случайными словами если нужно
+  const remaining = sourceWords.filter(w => !seen.has(w.eng));
+  const shuffledRemaining = shuffleArray(remaining);
+  
+  for (const randomWord of shuffledRemaining) {
     if (selected.length >= roundSize) break;
     seen.add(randomWord.eng);
     selected.push(randomWord);
   }
 
   return selected;
+}
+
+// SM-2 адаптивный алгоритм интервалов
+function calculateSM2Interval(word, quality) {
+  // quality: 0-5 (0-2 = неправильно, 3-5 = правильно)
+  // 0-1 = полная забывчивость
+  // 2 = неточный ответ
+  // 3 = правильный с трудом
+  // 4 = правильный легко
+  // 5 = идеальный ответ
+  
+  let easeFactor = word.easeFactor || 2.5;
+  let interval = word.interval || 1;
+  
+  // Обновляем ease factor по формуле SM-2
+  const newEaseFactor = easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  easeFactor = Math.max(1.3, newEaseFactor); // минимум 1.3
+  
+  if (quality < 3) {
+    // Неправильный ответ - сбрасываем интервал
+    interval = 1;
+  } else {
+    // Правильный ответ - увеличиваем интервал
+    if (interval === 1) {
+      interval = 1;
+    } else if (interval === 6) {
+      interval = 24;
+    } else {
+      interval = Math.round(interval * easeFactor);
+    }
+  }
+  
+  // Ограничиваем максимальный интервал (30 дней)
+  interval = Math.min(interval, 30);
+  
+  // Рассчитываем следующую дату повторения
+  const nextReview = Date.now() + interval * 24 * 60 * 60 * 1000;
+  
+  return {
+    interval,
+    easeFactor,
+    nextReview
+  };
 }
 
 export function updateWordProgress(wordEng, isCorrect) {
@@ -275,13 +454,27 @@ export function updateWordProgress(wordEng, isCorrect) {
   const now = Date.now();
   word.lastSeen = now;
 
+  // Определяем quality для SM-2
+  // Для упрощения: неправильный = 1, правильный = 4
+  const quality = isCorrect ? 4 : 1;
+  
+  // Рассчитываем новый интервал
+  const sm2Result = calculateSM2Interval(word, quality);
+  word.interval = sm2Result.interval;
+  word.easeFactor = sm2Result.easeFactor;
+  word.nextReview = sm2Result.nextReview;
+
   if (isCorrect) {
     word.correctCount = (word.correctCount || 0) + 1;
     word.mastery = Math.min(word.mastery + 1, 5);
   } else {
     word.incorrectCount = (word.incorrectCount || 0) + 1;
+    // При ошибке уменьшаем mastery более агрессивно
     word.mastery = Math.max(word.mastery - 1, 0);
   }
+  
+  // Инвалидируем кеш слабых слов
+  invalidateWeaknessCache();
 }
 
 export function getMasteryLevel(word) {
@@ -293,50 +486,16 @@ export function getMasteryLabel(mastery) {
   return labels[mastery] || labels[0];
 }
 
-// В data.js добавить модифицированный SM-2
-function calculateNextInterval(word, quality) {
-  // quality: 0-5 (0-2 = неправильно, 3-5 = правильно)
-  const easeFactor = word.easeFactor || 2.5;
-  const interval = word.interval || 1;
-  
-  let newEaseFactor = easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
-  newEaseFactor = Math.max(1.3, newEaseFactor);
-  
-  let newInterval;
-  if (quality < 3) {
-    newInterval = 1; // сброс при неправильном ответе
-  } else if (interval === 1) {
-    newInterval = 1; // 1 день
-  } else if (interval === 6) {
-    newInterval = 24; // 1 день → 6 дней
-  } else {
-    newInterval = Math.round(interval * newEaseFactor); // экспоненциальный рост
-  }
-  
-  return {
-    interval: newInterval,
-    easeFactor: newEaseFactor,
-    nextReview: Date.now() + newInterval * 24 * 60 * 60 * 1000
-  };
-}
-
-export function getUserWeaknesses() {
-  const words = getGameData();
-  const weaknesses = [];
+// Получить статистику по категории
+export function getCategoryStats(category) {
+  const words = getWordsByCategory(category);
+  let mastered = 0, learning = 0, newWords = 0;
   
   for (const word of words) {
-    const accuracy = word.correctCount / (word.correctCount + word.incorrectCount);
-    if (word.incorrectCount >= 2 && accuracy < 0.6) {
-      weaknesses.push({ word, accuracy, errors: word.incorrectCount });
-    }
+    if (word.mastery >= 4) mastered++;
+    else if (word.mastery > 0) learning++;
+    else newWords++;
   }
   
-  return weaknesses.sort((a, b) => a.accuracy - b.accuracy).slice(0, 5);
-}
-
-// Приоритизировать слабые слова
-export function getWordPriority(word) {
-  const weakness = getUserWeaknesses().find(w => w.word.eng === word.eng);
-  if (weakness) return 95; // высокий приоритет для слабых
-  // ...
+  return { total: words.length, mastered, learning, newWords };
 }
