@@ -383,26 +383,14 @@ const AudioEngine = {
 };
 
 const TTSEngine = {
-  currentUtterance: null,
-  
-  speak(word) {
-    // Остановить предыдущую озвучку
-    if (speechSynthesis.speaking) speechSynthesis.cancel();
-    
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.8; // медленно для запоминания
-    utterance.pitch = 1;
-    
-    // Выбрать лучший английский голос
-    const voices = speechSynthesis.getVoices();
-    const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('English')) 
-                 || voices.find(v => v.lang.startsWith('en-US')) 
-                 || voices.find(v => v.lang.startsWith('en'));
-    if (enVoice) utterance.voice = enVoice;
-    
-    this.currentUtterance = utterance;
-    speechSynthesis.speak(utterance);
+ speak(text) {
+   const synth = windows.speechSynthesis;
+   if (!synth) return;
+   synth.cancel();
+   const utterance = new SpeechSynthesisUtterance(text);
+   utterance.lang = 'en-US';
+   utterance.rate = 0.8;
+   synth.speak(utterance);
   }
 };
 
@@ -776,6 +764,9 @@ function loadQuestion() {
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
+        TTSEngine.speak(word.eng);
+        wordSpan.classList.add('speaking');
+        setTimeout(() => wordSpan.classList.remove('speaking'),1500);
         checkAnswer(option, word, btn);
       }
     });
@@ -789,9 +780,9 @@ function loadQuestion() {
     wordSpan.textContent = word.eng;
     wordSpan.setAttribute('role','button');
     wordSpan.setAttribute('tabindex','0');
-    wordSpan.setAttribute('aria-label',`Listen to ${word.eng}`');
+    wordSpan.setAttribute('aria-label',`Listen to ${word.eng}`);
 
-    wordSpan.addEventListener('click',(e) => {e.stopPropagation();
+    wordSpan.addEventListener('click',(e) => {e.stopPropagation();  TTSEngine.speak(word.eng);
     wordSpan.classList.add('speaking');
         setTimeout(() => wordSpan.classList.remove('speaking'),1500);
                                              });
@@ -801,7 +792,8 @@ function loadQuestion() {
 
         TTSEngine.speak(word.eng);
 
-    wordSpan.classList.add('speaking'),1500);
+    wordSpan.classList.add('speaking');
+        setTimeout(() => wordSpan.classList.remove('speaking'),1500);
       }
     });
 
