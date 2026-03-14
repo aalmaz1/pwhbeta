@@ -1987,11 +1987,11 @@ header {
   }
 }
 .target-word{
-   cursor:pointer;
+   cursor:pointer !important;
    user-select:none;
    padding:4px 8px;
    border-radius:6px;
-   transition:all 0.2s ease;
+   transition:all 0.2s;
    display:inline-block;
    min-height:1.2em;
 }
