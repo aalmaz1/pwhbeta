@@ -319,3 +319,24 @@ function calculateNextInterval(word, quality) {
     nextReview: Date.now() + newInterval * 24 * 60 * 60 * 1000
   };
 }
+
+export function getUserWeaknesses() {
+  const words = getGameData();
+  const weaknesses = [];
+  
+  for (const word of words) {
+    const accuracy = word.correctCount / (word.correctCount + word.incorrectCount);
+    if (word.incorrectCount >= 2 && accuracy < 0.6) {
+      weaknesses.push({ word, accuracy, errors: word.incorrectCount });
+    }
+  }
+  
+  return weaknesses.sort((a, b) => a.accuracy - b.accuracy).slice(0, 5);
+}
+
+// Приоритизировать слабые слова
+export function getWordPriority(word) {
+  const weakness = getUserWeaknesses().find(w => w.word.eng === word.eng);
+  if (weakness) return 95; // высокий приоритет для слабых
+  // ...
+}
