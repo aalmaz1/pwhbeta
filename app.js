@@ -382,6 +382,30 @@ const AudioEngine = {
   }
 };
 
+const TTSEngine = {
+  currentUtterance: null,
+  
+  speak(word) {
+    // Остановить предыдущую озвучку
+    if (speechSynthesis.speaking) speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.8; // медленно для запоминания
+    utterance.pitch = 1;
+    
+    // Выбрать лучший английский голос
+    const voices = speechSynthesis.getVoices();
+    const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('English')) 
+                 || voices.find(v => v.lang.startsWith('en-US')) 
+                 || voices.find(v => v.lang.startsWith('en'));
+    if (enVoice) utterance.voice = enVoice;
+    
+    this.currentUtterance = utterance;
+    speechSynthesis.speak(utterance);
+  }
+};
+
 // ==================== THEME MODULE ====================
 const ThemeManager = {
   currentTheme: 'cyberpunk',
