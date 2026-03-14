@@ -770,7 +770,29 @@ function loadQuestion() {
 
   requestAnimationFrame(() => {
     state.ui.wordElement.innerHTML = '';
-    state.ui.wordElement.textContent = word.eng;
+    const wordSpan = document.createElement('span');
+    wordSpan.className = 'target-word';
+    wordSpan.textContent = word.eng;
+    wordSpan.setAttribute('role','button');
+    wordSpan.setAttribute('tabindex','0');
+    wordSpan.setAttribute('aria-label',`Listen to ${word.eng}`');
+
+    wordSpan.addEventListener('click',(e) => {e.stopPropagation();
+    wordSpan.classList.add('speaking');
+        setTimeout(() => wordSpan.classList.remove('speaking'),1500);
+                                             });
+    wordSpan.addEventListener('keydown',(e) => {
+      if (e.key === 'Enter' || e.key === ''){
+        e.preventDefault();
+
+        TTSEngine.speak(word.eng);
+
+    wordSpan.classList.add('speaking'),1500);
+      }
+    });
+
+    state.ui.wordElement.appendChild(wordSpan);
+    
     state.ui.wordElement.classList.remove('typewriter', 'glitch');
     void state.ui.wordElement.offsetWidth;
     state.ui.wordElement.classList.add('typewriter');
