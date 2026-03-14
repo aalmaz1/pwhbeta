@@ -213,7 +213,7 @@ function renderCategoryButtons(categories, onSelect) {
   });
 }
 
-import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
+import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories, getUserWeaknesses, getCategoryStats } from './data.js';
 import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
 
 
