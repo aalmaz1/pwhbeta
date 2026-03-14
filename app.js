@@ -729,8 +729,6 @@ function startGame(category) {
   loadQuestion();
 }
 
-};
-
 function loadQuestion() {
   if (state.currentQ >= state.currentRound.length) {
     showRoundSummary();
