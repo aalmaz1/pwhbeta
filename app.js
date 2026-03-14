@@ -747,11 +747,12 @@ function loadQuestion() {
     btn.setAttribute('role', 'button');
     btn.setAttribute('aria-label', `Option ${index + 1}: ${option}`);
     btn.onclick = () => checkAnswer(option, word, btn);
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+
+    btn.addEventListener("keydown",(e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        TTSEngine.speak(word.eng);
-        wordSpan.classList.add('speaking');
+        checkAnswer(option,word,btn);
+      }
         setTimeout(() => wordSpan.classList.remove('speaking'),1500);
         checkAnswer(option, word, btn);
       }
