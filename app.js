@@ -481,6 +481,24 @@ function renderCategoryButtons(categories, onSelect) {
 import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories, getUserWeaknesses, getCategoryStats } from './data.js';
 import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
 
+// ========== SERVICE WORKER COMMUNICATION ==========
+function sendToSW(message) {
+  if (navigator.serviceWorker?.controller) {
+    navigator.serviceWorker.controller.postMessage(message);
+    console.log('📬 Отправлено в SW:', message);
+  }
+}
+
+function resetCacheForNewUser() {
+  console.log('💥 Отправляем команду RESET_CACHE в SW');
+  sendToSW('RESET_CACHE');
+}
+
+function setUserUidInSW(uid) {
+  console.log('👤 Отправляем UID в SW:', uid);
+  sendToSW({ type: 'SET_USER_UID', uid: uid });
+}
+
 
 // ==================== AUDIO MODULE ====================
 const AudioEngine = {
