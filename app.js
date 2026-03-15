@@ -1,65 +1,64 @@
 // ===== FIREBASE AUTH SYSTEM =====
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  updateProfile,
-  onAuthStateChanged,
-  signOut 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-import { 
-  doc, 
-  setDoc, 
-  getDoc 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+// ВАЖНО: используем db из index.html через window.firebaseDb
 
 const authState = {
   currentUser: null,
   isAuthenticated: false,
-  mode: 'login',
-  currentUid: null  // ДОБАВЛЕНО - трек UID
+  currentUid: null
 };
 
 let unsubscribeAuth = null;
 
-// ========== СБРОС STATE ПРИ СМЕНЕ ПОЛЬЗОВАТЕЛЯ ==========
-function resetStateForNewUser() {
-  console.log('🔄 Сброс state для нового пользователя...');
-  state.xp = 0;
-  state.correctInRow = 0;
-  state.currentQ = 0;
-  state.currentRound = [];
+// ========== ЭКСТРЕННЫЙ СБРОС ==========
+function EMERGENCY_RESET() {
+  console.log('🆘 EMERGENCY_RESET: НАЧАЛО');
   
-  // Сброс прогресса слов в памяти
+  // 1. Сброс XP
+  state.xp = 0;
+  console.log('✅ state.xp = 0');
+  
+  // 2. Очистка localStorage
+  try {
+    localStorage.removeItem('pixelWordHunter_xp');
+    localStorage.removeItem('pixelWordHunter_save');
+  } catch(e) {}
+  console.log('✅ localStorage очищен');
+  
+  // 3. Сброс слов
   const words = getGameData();
   words.forEach(w => {
     w.mastery = 0;
     w.lastSeen = 0;
     w.correctCount = 0;
     w.incorrectCount = 0;
-    w.easeFactor = 2.5;
-    w.interval = 1;
-    w.nextReview = 0;
   });
+  console.log('✅ words reset');
   
-  // Обновить UI
+  // 4. UI update
   if (state.ui?.xpElement) state.ui.xpElement.textContent = '0';
   updateMenuStats();
   
-  console.log('✅ State сброшен: xp=0');
+  console.log('🆘 EMERGENCY_RESET: КОНЕЦ');
 }
 
+// ========== Auth Listener ==========
 function initAuthListener() {
+  console.log('📡 Подключаем onAuthStateChanged...');
+  
   unsubscribeAuth = onAuthStateChanged(window.firebaseAuth, async (user) => {
+    console.log('🔔 onAuthStateChanged:', user ? user.uid : 'нет юзера');
+    
     if (user && user.uid) {
-      // ПРОВЕРКА: новый пользователь или смена аккаунта?
+      // Проверка: новый юзер?
       const isNewUser = authState.currentUid !== user.uid;
       
       if (isNewUser) {
-        console.log('👤 Смена пользователя:', authState.currentUid, '→', user.uid);
+        console.log('👤 СМЕНА ПОЛЬЗОВАТЕЛЯ:', authState.currentUid, '→', user.uid);
         
-        // Если был другой пользователь - сбрасываем state
+        // Если был другой юзер - полный сброс
         if (authState.currentUid !== null) {
-          resetStateForNewUser();
+          console.log('🔄 Сброс для нового юзера...');
+          EMERGENCY_RESET();
         }
         
         authState.currentUid = user.uid;
@@ -68,24 +67,156 @@ function initAuthListener() {
       authState.currentUser = user;
       authState.isAuthenticated = true;
       
-      // Загружаем прогресс конкретного пользователя
+      // Загружаем прогресс
+      console.log('📖 loadProgress для UID:', user.uid);
       const progress = await FirestoreSync.loadProgress(user.uid);
-      console.log('📥 Загружен прогресс юзера', user.uid.substring(0, 8), ':', progress?.xp || 0, 'XP');
+      console.log('💾 Данные загружены:', progress?.xp ?? 0, 'XP');
       
       if (typeof updateUI === 'function') updateUI();
       
     } else {
-      // Выход из аккаунта
-      console.log('👋 Пользователь вышел');
+      console.log('👋 Выход из аккаунта');
       authState.currentUser = null;
       authState.isAuthenticated = false;
       authState.currentUid = null;
-      // НЕ сбрасываем state при logout - оставляем локально
     }
   });
 }
 
 initAuthListener();
+
+// ========== Firestore Sync ==========
+const FirestoreSync = {
+  async loadProgress(uid) {
+    if (!uid) return null;
+    
+    console.log('🔍 loadProgress: запрашиваю документ users/', uid);
+    
+    try {
+      const docRef = doc(window.firebaseDb, 'users', uid);
+      console.log('🔍 Документ:', docRef.path);
+      
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log('📦 Данные из Firestore:', JSON.stringify(data));
+        
+        // ВАЖНО: используем ТОЛЬКО данные из Firestore
+        const loadedXp = data.xp || 0;
+        state.xp = loadedXp;
+        
+        console.log('✅ Записано в state.xp:', state.xp);
+        
+        // Загрузить прогресс слов
+        if (data.wordProgress) {
+          const words = getGameData();
+          Object.entries(data.wordProgress).forEach(([eng, progress]) => {
+            const word = words.find(w => w.eng === eng);
+            if (word) {
+              word.mastery = progress.mastery || 0;
+              word.lastSeen = progress.lastSeen || 0;
+              word.correctCount = progress.correctCount || 0;
+              word.incorrectCount = progress.incorrectCount || 0;
+            }
+          });
+        }
+        
+        // UI
+        if (state.ui?.xpElement) state.ui.xpElement.textContent = state.xp;
+        updateMenuStats();
+        
+        return data;
+      } else {
+        console.log('📭 Документ НЕ существует - новый юзер');
+        return null;
+      }
+    } catch (e) {
+      console.error('❌ Ошибка loadProgress:', e);
+      return null;
+    }
+  },
+  
+  async saveProgress(uid) {
+    if (!uid) return;
+    
+    try {
+      const words = getGameData();
+      const wordProgress = {};
+      
+      words.forEach(w => {
+        if (w.mastery > 0 || w.correctCount > 0 || w.incorrectCount > 0) {
+          wordProgress[w.eng] = {
+            mastery: w.mastery || 0,
+            lastSeen: w.lastSeen || 0,
+            correctCount: w.correctCount || 0,
+            incorrectCount: w.incorrectCount || 0
+          };
+        }
+      });
+      
+      await setDoc(doc(window.firebaseDb, 'users', uid), {
+        xp: state.xp || 0,
+        level: Math.floor((state.xp || 0) / 100) + 1,
+        wordProgress,
+        lastSync: new Date()
+      }, { merge: true });
+      
+      console.log('💾 Сохранено:', state.xp, 'XP');
+    } catch (e) {
+      console.error('❌ saveProgress error:', e);
+    }
+  }
+};
+
+// ========== Auth Manager ==========
+const AuthManager = {
+  async register(username, email, password) {
+    console.log('📝 Регистрация:', email);
+    
+    try {
+      const { user } = await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+      console.log('✅ Юзер создан:', user.uid);
+      
+      // ВАЖНО: xp: 0 ЯВНО!
+      await setDoc(doc(window.firebaseDb, 'users', user.uid), {
+        username,
+        email,
+        xp: 0,  // ВСЕГДА 0!
+        level: 1,
+        category: 'Novice',
+        createdAt: new Date(),
+        wordProgress: {}
+      });
+      
+      console.log('✅ Документ создан с xp: 0');
+      
+      return { success: true, user };
+    } catch (error) {
+      console.error('❌ Register error:', error);
+      return { success: false, error: error.message };
+    }
+  },
+  
+  async login(email, password) {
+    console.log('🔐 Логин:', email);
+    try {
+      await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+      return { success: true };
+    } catch (error) {
+      console.error('❌ Login error:', error);
+      return { success: false, error: error.message };
+    }
+  },
+  
+  async logout() {
+    await signOut(window.firebaseAuth);
+    return { success: true };
+  }
+};
+
+
+
 
 // ========== Auth Manager ==========
 const AuthManager = {
