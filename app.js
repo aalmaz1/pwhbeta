@@ -16,6 +16,31 @@ const authState = {
   isAuthenticated: false,
   mode: 'login'
 };
+
+let unsubscribeAuth = null;
+
+function initAuthListener() {
+  unsubscribeAuth = onAuthStateChanged(window.firebaseAuth,async (user) => 
+    {
+      if (user && user.uid) 
+      { authState.currentUser = user;
+                            authState.isAuthenticated = true;
+                            const progress = await FirestoneSync.loadProgress(user.uid);
+                            console.log('Прогресс загружен:',progress);
+                            
+                            if (typeof updateUI === 'function')
+                              updateUI();
+                           } else {
+                 authState.currentUser = null;
+                 authState.isAuthenticated = false;
+      console.log('Пользователь вышел');
+    }
+      
+                           });
+}
+
+initAuthListener();
+
 // Auth Manager
 const AuthManager = {
   async register(username, email, password) {
@@ -41,8 +66,8 @@ const AuthManager = {
   },
   async login(email, password) {
     try {
-      const { user } = await signInWithEmailAndPassword(window.firebaseAuth, email, password);
-      return { success: true, user };
+      await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+      return { success: true, message:'Вход выполнен,загрузка...' };
     } catch (error) {
       return { success: false, error: this.getErrorMessage(error.code) };
     }
@@ -50,6 +75,9 @@ const AuthManager = {
   async logout() {
     try {
       await signOut(window.firebaseAuth);
+      if (unsubsribeAuth){
+        unsubscribeAuth = null;
+      }
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
@@ -70,6 +98,9 @@ const AuthManager = {
 // Firestore Sync
 const FirestoreSync = {
   async loadProgress(uid) {
+    if(!uid) {console.warn('X нет UID для загрузки прогресса');
+             return null;
+             }
     try {
       const docSnap = await getDoc(doc(window.firebaseDb, 'users', uid));
       if (docSnap.exists()) {
@@ -88,7 +119,11 @@ const FirestoreSync = {
     } catch (e) { console.error('[Firestore] Load failed:', e); }
     return null;
   },
-  async saveProgress(uid) {
+  async saveProgress(uid){
+    if (!uid){
+      console.warn('X Нет UID для сохранения прогресса');
+      return;
+    }
     try {
       const words = getGameData();
       const wordProgress = {};
