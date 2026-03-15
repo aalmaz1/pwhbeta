@@ -11,143 +11,242 @@ import {
   setDoc, 
   getDoc 
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
 const authState = {
   currentUser: null,
   isAuthenticated: false,
-  mode: 'login'
+  mode: 'login',
+  currentUid: null  // ДОБАВЛЕНО - трек UID
 };
 
 let unsubscribeAuth = null;
 
+// ========== СБРОС STATE ПРИ СМЕНЕ ПОЛЬЗОВАТЕЛЯ ==========
+function resetStateForNewUser() {
+  console.log('🔄 Сброс state для нового пользователя...');
+  state.xp = 0;
+  state.correctInRow = 0;
+  state.currentQ = 0;
+  state.currentRound = [];
+  
+  // Сброс прогресса слов в памяти
+  const words = getGameData();
+  words.forEach(w => {
+    w.mastery = 0;
+    w.lastSeen = 0;
+    w.correctCount = 0;
+    w.incorrectCount = 0;
+    w.easeFactor = 2.5;
+    w.interval = 1;
+    w.nextReview = 0;
+  });
+  
+  // Обновить UI
+  if (state.ui?.xpElement) state.ui.xpElement.textContent = '0';
+  updateMenuStats();
+  
+  console.log('✅ State сброшен: xp=0');
+}
+
 function initAuthListener() {
-  unsubscribeAuth = onAuthStateChanged(window.firebaseAuth,async (user) => 
-    {
-      if (user && user.uid) 
-      { authState.currentUser = user;
-                            authState.isAuthenticated = true;
-                            const progress = await FirestoneSync.loadProgress(user.uid);
-                            console.log('Прогресс загружен:',progress);
-                            
-                            if (typeof updateUI === 'function')
-                              updateUI();
-                           } else {
-                 authState.currentUser = null;
-                 authState.isAuthenticated = false;
-      console.log('Пользователь вышел');
-    }
+  unsubscribeAuth = onAuthStateChanged(window.firebaseAuth, async (user) => {
+    if (user && user.uid) {
+      // ПРОВЕРКА: новый пользователь или смена аккаунта?
+      const isNewUser = authState.currentUid !== user.uid;
       
-                           });
+      if (isNewUser) {
+        console.log('👤 Смена пользователя:', authState.currentUid, '→', user.uid);
+        
+        // Если был другой пользователь - сбрасываем state
+        if (authState.currentUid !== null) {
+          resetStateForNewUser();
+        }
+        
+        authState.currentUid = user.uid;
+      }
+      
+      authState.currentUser = user;
+      authState.isAuthenticated = true;
+      
+      // Загружаем прогресс конкретного пользователя
+      const progress = await FirestoreSync.loadProgress(user.uid);
+      console.log('📥 Загружен прогресс юзера', user.uid.substring(0, 8), ':', progress?.xp || 0, 'XP');
+      
+      if (typeof updateUI === 'function') updateUI();
+      
+    } else {
+      // Выход из аккаунта
+      console.log('👋 Пользователь вышел');
+      authState.currentUser = null;
+      authState.isAuthenticated = false;
+      authState.currentUid = null;
+      // НЕ сбрасываем state при logout - оставляем локально
+    }
+  });
 }
 
 initAuthListener();
 
-// Auth Manager
+// ========== Auth Manager ==========
 const AuthManager = {
   async register(username, email, password) {
     try {
       const { user } = await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
       await updateProfile(user, { displayName: username });
       
-      // Create user doc in Firestore
+      // ✅ ИСПРАВЛЕНО:xp: 0 ЯВНО для нового аккаунта!
       await setDoc(doc(window.firebaseDb, 'users', user.uid), {
         username,
         email,
-        xp: state.xp || 0,
-        level: Math.floor((state.xp || 0) / 100) + 1,
+        xp: 0,  // ВСЕГДА 0 для нового!
+        level: 1,
         category: 'Novice',
         createdAt: new Date(),
-        stats: { wordsFound: 0, gamesPlayed: 0 }
+        stats: { wordsFound: 0, gamesPlayed: 0 },
+        wordProgress: {}  // Пустой прогресс слов
       });
+      
+      console.log('✅ Новый аккаунт создан: xp=0, uid=', user.uid.substring(0, 8));
       
       return { success: true, user };
     } catch (error) {
+      console.error('❌ Register error:', error);
       return { success: false, error: this.getErrorMessage(error.code) };
     }
   },
+  
   async login(email, password) {
     try {
       await signInWithEmailAndPassword(window.firebaseAuth, email, password);
-      return { success: true, message:'Вход выполнен,загрузка...' };
+      console.log('✅ Вход выполнен');
+      return { success: true, message: 'Вход выполнен, загрузка...' };
     } catch (error) {
+      console.error('❌ Login error:', error);
       return { success: false, error: this.getErrorMessage(error.code) };
     }
   },
+  
   async logout() {
     try {
       await signOut(window.firebaseAuth);
-      if (unsubsribeAuth){
-        unsubscribeAuth = null;
-      }
+      console.log('👋 Logout выполнен');
       return { success: true };
     } catch (error) {
+      console.error('❌ Logout error:', error);
       return { success: false, error: error.message };
     }
   },
+  
   getErrorMessage(code) {
     const errors = {
-      'auth/email-already-in-use': 'Email already registered',
-      'auth/invalid-email': 'Invalid email address',
-      'auth/weak-password': 'Password should be at least 6 characters',
-      'auth/user-not-found': 'User not found',
-      'auth/wrong-password': 'Incorrect password',
-      'auth/invalid-credential': 'Invalid email or password'
+      'auth/email-already-in-use': 'Email уже зарегистрирован',
+      'auth/invalid-email': 'Неверный email',
+      'auth/weak-password': 'Пароль минимум 6 символов',
+      'auth/user-not-found': 'Пользователь не найден',
+      'auth/wrong-password': 'Неверный пароль',
+      'auth/invalid-credential': 'Неверный email или пароль'
     };
-    return errors[code] || 'Authentication failed';
+    return errors[code] || 'Ошибка авторизации';
   }
 };
-// Firestore Sync
+
+// ========== Firestore Sync ==========
 const FirestoreSync = {
   async loadProgress(uid) {
-    if(!uid) {console.warn('X нет UID для загрузки прогресса');
-             return null;
-             }
+    if (!uid) { 
+      console.warn('⚠️ Нет UID для загрузки');
+      return null; 
+    }
+    
     try {
       const docSnap = await getDoc(doc(window.firebaseDb, 'users', uid));
+      
       if (docSnap.exists()) {
         const data = docSnap.data();
-        if (data.xp) state.xp = data.xp;
-        // Load word progress
+        
+        // ✅ ИСПРАВЛЕНО: использовать ТОЛЬКО данные из Firestore
+        const loadedXp = data.xp || 0;
+        state.xp = loadedXp;
+        
+        console.log('📥 Загружено из Firestore:', loadedXp, 'XP');
+        
+        // Загрузить прогресс слов
         if (data.wordProgress) {
           const words = getGameData();
           Object.entries(data.wordProgress).forEach(([eng, progress]) => {
             const word = words.find(w => w.eng === eng);
-            if (word) Object.assign(word, progress);
+            if (word) {
+              word.mastery = progress.mastery || 0;
+              word.lastSeen = progress.lastSeen || 0;
+              word.correctCount = progress.correctCount || 0;
+              word.incorrectCount = progress.incorrectCount || 0;
+              // SM-2 данные
+              word.easeFactor = progress.easeFactor || 2.5;
+              word.interval = progress.interval || 1;
+              word.nextReview = progress.nextReview || 0;
+            }
           });
         }
+        
+        // Обновить UI
+        if (state.ui?.xpElement) {
+          state.ui.xpElement.textContent = state.xp;
+        }
+        updateMenuStats();
+        
         return data;
+      } else {
+        console.log('📭 Нет данных в Firestore для uid:', uid.substring(0, 8));
+        return null;
       }
-    } catch (e) { console.error('[Firestore] Load failed:', e); }
-    return null;
+    } catch (e) { 
+      console.error('❌ [Firestore] Load failed:', e); 
+      return null;
+    }
   },
-  async saveProgress(uid){
-    if (!uid){
-      console.warn('X Нет UID для сохранения прогресса');
+  
+  async saveProgress(uid) {
+    if (!uid) {
+      console.warn('⚠️ Нет UID для сохранения');
       return;
     }
+    
     try {
       const words = getGameData();
       const wordProgress = {};
+      
       words.forEach(w => {
-        if (w.mastery > 0) {
+        if (w.mastery > 0 || w.correctCount > 0 || w.incorrectCount > 0) {
           wordProgress[w.eng] = {
-            mastery: w.mastery,
-            lastSeen: w.lastSeen,
+            mastery: w.mastery || 0,
+            lastSeen: w.lastSeen || 0,
             correctCount: w.correctCount || 0,
-            incorrectCount: w.incorrectCount || 0
+            incorrectCount: w.incorrectCount || 0,
+            easeFactor: w.easeFactor || 2.5,
+            interval: w.interval || 1,
+            nextReview: w.nextReview || 0
           };
         }
       });
       
       await setDoc(doc(window.firebaseDb, 'users', uid), {
-        xp: state.xp,
-        level: Math.floor(state.xp / 100) + 1,
+        xp: state.xp || 0,
+        level: Math.floor((state.xp || 0) / 100) + 1,
         wordProgress,
         lastSync: new Date(),
         stats: { wordsFound: words.filter(w => w.mastery >= 4).length }
       }, { merge: true });
-    } catch (e) { console.error('[Firestore] Save failed:', e); }
+      
+      console.log('💾 Сохранено:', state.xp, 'XP для uid:', uid.substring(0, 8));
+      
+    } catch (e) { 
+      console.error('❌ [Firestore] Save failed:', e); 
+    }
   }
 };
+
+
+
 // UI Functions
 window.showAuthModal = function(mode = 'login') {
   authState.mode = mode;
