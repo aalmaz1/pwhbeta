@@ -1354,3 +1354,5 @@ function updateMenuStats() {
     state.ui.totalCountElement.textContent = total;
   }
 }
+// 🚀 ЗАПУСК ПРИЛОЖЕНИЯ
+initApp();
