@@ -667,6 +667,7 @@ function getProgressStats() {
   return { mastered, learning, newWords: total - mastered - learning, total };
 }
 
+
 export async function initApp() {
   AudioEngine.init();
   ThemeManager.init();
@@ -677,16 +678,32 @@ export async function initApp() {
 
   const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
 
-  const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
-  state.xp = Number.isFinite(savedXp) ? savedXp : 0;
+  // ========== ИСПРАВЛЕНО: Сброс ВСЕГО при старте ==========
+  console.log('🚀 1. СТАРТ: сбрасываем ВСЁ');
+  
+  // ВСЕГДА сбрасываем XP - загрузится из Firestore после авторизации
+  state.xp = 0;
+  
+  // Полный сброс прогресса слов
+  const words = getGameData();
+  words.forEach(w => {
+    w.mastery = 0;
+    w.lastSeen = 0;
+    w.correctCount = 0;
+    w.incorrectCount = 0;
+  });
+  
+  console.log('🚀 2. Сброс: xp=0, words cleared');
 
   const categories = ['All', ...getCategories()];
   renderCategoryButtons(categories, startGame);
 
-  loadSavedProgress();
+  // НЕ вызываем loadSavedProgress() - только Firestore!
+  // loadSavedProgress(); // УДАЛИТЬ!
+  
   updateMenuStats();
   if (state.ui.xpElement) {
-    state.ui.xpElement.textContent = state.xp;
+    state.ui.xpElement.textContent = '0';
   }
 
   toggleScreen(hasSeenOnboarding ? 'menu' : 'onboarding');
@@ -695,7 +712,7 @@ export async function initApp() {
 
   const feedbackEl = state.ui.feedbackElement;
   if (feedbackEl) {
-    feedbackEl.setAttribute('aria-live', 'polite');
+    feedbackElement.setAttribute('aria-live', 'polite');
   }
 
   const menuStartButton = document.querySelector('#menu-screen .start-btn');
@@ -703,6 +720,9 @@ export async function initApp() {
     AudioEngine.ensureContext();
     showCategories();
   });
+
+
+
 
   window.completeOnboarding = () => {
     storageSet('pixelWordHunter_onboarding_seen', 'true');
