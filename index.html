@@ -239,18 +239,16 @@
 
 <!-- Firebase Initialization -->
   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-    
-    const firebaseConfig = {
-      apiKey: "AIzaSy...", // твой ключ
-      authDomain: "pixelwordhunter.firebaseapp.com",
-      projectId: "pixelwordhunter",
-      storageBucket: "pixelwordhunter.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123456789:web:abcdef123456"
-    };
+   const firebaseConfig = {
+  apiKey: "AIzaSyCgKKrHIaDNzjUIaK2Z-Usf587px-lPMSY",
+  authDomain: "pixelwordhunter.firebaseapp.com",
+  databaseURL: "https://pixelwordhunter-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "pixelwordhunter",
+  storageBucket: "pixelwordhunter.firebasestorage.app",
+  messagingSenderId: "1094897769595",
+  appId: "1:1094897769595:web:392a30ef42f3b558b896de",
+  measurementId: "G-X90YSQL16F"
+};
     
     const app = initializeApp(firebaseConfig);
     window.firebaseAuth = getAuth(app);
