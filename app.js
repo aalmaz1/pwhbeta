@@ -205,7 +205,7 @@ function showUpdateBanner() {
 }
 
 import { loadGameData, getGameData, selectWordsForRound, generateOptionsForWord, updateWordProgress, getMasteryLevel, getMasteryLabel, getCategories } from './data.js';
-import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove } from './storage.js';
+import { saveProgress, loadProgress, resetProgress, storageGet, storageSet, storageRemove, setUserXP, getUserXP } from './storage.js';
 import { initUI, renderCategoryButtons } from './ui.js';
 
 // ==================== AUDIO MODULE ====================
@@ -522,8 +522,7 @@ export async function initApp() {
 
   const hasSeenOnboarding = storageGet('pixelWordHunter_onboarding_seen') === 'true';
 
-  const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
-  state.xp = Number.isFinite(savedXp) ? savedXp : 0;
+  state.xp = getUserXP();
 
   const categories = ['All', ...getCategories()];
   renderCategoryButtons(categories, startGame);
@@ -802,7 +801,7 @@ function checkAnswer(selected, word, btn) {
     streak = state.correctInRow;
     state.xp += bonus;
     if (!Number.isFinite(state.xp)) state.xp = 0;
-    storageSet('pixelWordHunter_xp', state.xp);
+    setUserXP(state.xp);
     updateWordProgress(word.eng, true);
     AudioEngine.playCorrectSound();
   } else {
