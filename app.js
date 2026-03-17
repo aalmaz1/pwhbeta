@@ -418,10 +418,6 @@ const state = {
   isAnswerLocked: false,
 };
 
-function unlockAnswerFlow() {
-  state.isAnswerLocked = false;
-}
-
 function goToMenu({ withSound = true } = {}) {
   if (withSound) {
     AudioEngine.playTransitionSound();
@@ -440,10 +436,6 @@ function goBackFromSettings() {
   goToMenu();
 }
 
-function goBackFromCategory() {
-  goToMenu();
-}
-
 function showSettings() {
   AudioEngine.playTransitionSound();
   toggleScreen('settings');
@@ -451,39 +443,6 @@ function showSettings() {
 
 function exitGame() {
   goToMenu({ withSound: false });
-}
-
-function nextQuestion() {
-  state.currentQ++;
-  loadQuestion();
-}
-
-function handleResetProgress() {
-  if (confirm('Reset all progress?')) {
-    resetProgress();
-    storageRemove('pixelWordHunter_xp');
-    storageRemove('pixelWordHunter_onboarding_seen');
-    state.xp = 0;
-    location.reload();
-  }
-}
-
-function handleToggleMute() {
-  AudioEngine.ensureContext();
-  AudioEngine.toggleMute();
-  updateSoundUI();
-}
-
-function getProgressStats() {
-  const words = getGameData();
-  const total = words.length;
-  let mastered = 0;
-  let learning = 0;
-  for (const word of words) {
-    if (word.mastery >= 4) mastered++;
-    else if (word.mastery > 0) learning++;
-  }
-  return { mastered, learning, newWords: total - mastered - learning, total };
 }
 
 export async function initApp() {
