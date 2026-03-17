@@ -292,3 +292,15 @@ export function getMasteryLabel(mastery) {
   const labels = ['NEW', 'LEARNING', 'FAMILIAR', 'GOOD', 'STRONG', 'MASTER'];
   return labels[mastery] || labels[0];
 }
+
+function getProgressStats() {
+  const words = getGameData();
+  const total = words.length;
+  let mastered = 0;
+  let learning = 0;
+  for (const word of words) {
+    if (word.mastery >= 4) mastered++;
+    else if (word.mastery > 0) learning++;
+  }
+  return { mastered, learning, newWords: total - mastered - learning, total };
+}
