@@ -661,38 +661,6 @@ onAuthStateChanged(window.firebaseAuth, async (user) => {
   }
   updateAuthUI();
 });
-// Auth Form Handler
-document.getElementById('auth-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.getElementById('auth-submit');
-  const errorEl = document.getElementById('auth-error');
-  
-  btn.disabled = true;
-  errorEl.textContent = '';
-  
-  const email = document.getElementById('auth-email').value;
-  const password = document.getElementById('auth-password').value;
-  
-  let result;
-  if (authState.mode === 'register') {
-    const username = document.getElementById('auth-username').value;
-    if (!username) {
-      errorEl.textContent = 'Username required';
-      btn.disabled = false;
-      return;
-    }
-    result = await AuthManager.register(username, email, password);
-  } else {
-    result = await AuthManager.login(email, password);
-  }
-  
-  if (result.success) {
-    closeAuthModal();
-  } else {
-    errorEl.textContent = result.error;
-  }
-  btn.disabled = false;
-});
 
 function startGame(category) {
   state.selectedCategory = category;
