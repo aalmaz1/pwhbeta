@@ -87,23 +87,17 @@ export function resetProgress() {
 
 // User-specific XP storage to prevent shared XP bug
 function getCurrentUserId() {
-   return localStorage.getItem('pixelWordHunter_userId') || 
-          (window.firebaseAuth?.currentUser?.uid) || 
-          null;
+   return (window.firebaseAuth?.currentUser?.uid) || null;
  }
  
  export function setUserXP(xp) {
    const userId = getCurrentUserId() || 'guest_' + Date.now();
    storageSet(`xp_${userId}`, xp || 0);
-   // Also store userId for future sessions
-   if (!localStorage.getItem('pixelWordHunter_userId')) {
-     storageSet('pixelWordHunter_userId', userId);
-   }
  }
  
  export function getUserXP() {
    const userId = getCurrentUserId();
-   if (!userId) return 0;
+   if (!userId || userId.startsWith('guest_')) return 0;
    const saved = storageGet(`xp_${userId}`);
    return parseInt(saved, 10) || 0;
  }
