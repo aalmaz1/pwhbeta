@@ -426,12 +426,6 @@ function goToMenu({ withSound = true } = {}) {
   toggleScreen('menu');
 }
 
-function completeOnboarding() {
-  storageSet('pixelWordHunter_onboarding_seen', 'true');
-  AudioEngine.playTransitionSound();
-  toggleScreen('menu');
-}
-
 function goBackFromSettings() {
   goToMenu();
 }
