@@ -236,6 +236,27 @@
     </div>
   </div>
   </main>
+
+<!-- Firebase Initialization -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSy...", // твой ключ
+      authDomain: "pixelwordhunter.firebaseapp.com",
+      projectId: "pixelwordhunter",
+      storageBucket: "pixelwordhunter.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "1:123456789:web:abcdef123456"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    window.firebaseAuth = getAuth(app);
+    window.firebaseDb = getFirestore(app);
+  </script>
+  
   <!-- Auth Logic -->
   <script type="module">
     import { 
