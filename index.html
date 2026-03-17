@@ -374,6 +374,7 @@
         
         window.closeAuthModal();
       } catch (error) {
+        console.error('Firebase Error:', error.code, error.message);
         const errors = {
           'auth/email-already-in-use': 'Email already registered',
           'auth/invalid-email': 'Invalid email',
@@ -382,7 +383,7 @@
           'auth/wrong-password': 'Wrong password',
           'auth/invalid-credential': 'Invalid email or password'
         };
-        errorEl.textContent = errors[error.code] || 'Auth failed';
+        errorEl.textContent = errors[error.code] || 'Auth failed: ' + error.code;
       }
       
       btn.disabled = false;
