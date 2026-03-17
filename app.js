@@ -27,8 +27,8 @@ const AuthManager = {
       await setDoc(doc(window.firebaseDb, 'users', user.uid), {
         username,
         email,
-        xp: state.xp || 0,
-        level: Math.floor((state.xp || 0) / 100) + 1,
+        xp: 0,
+        level: 1,
         category: 'Novice',
         createdAt: new Date(),
         stats: { wordsFound: 0, gamesPlayed: 0 }
@@ -639,60 +639,7 @@ function loadSavedProgress() {
   });
 }
 
-// Auth State Listener
-onAuthStateChanged(window.firebaseAuth, async (user) => {
-  if (user) {
-    authState.currentUser = user;
-    authState.isAuthenticated = true;
-    
-    // Load cloud progress
-    await FirestoreSync.loadProgress(user.uid);
-    
-    // Show welcome notification
-    const name = user.displayName || user.email.split('@')[0];
-    showIOSNotification(`Welcome, ${name}!`);
-    
-    // Update XP display
-    if (state.ui?.xpElement) state.ui.xpElement.textContent = state.xp;
-    updateMenuStats();
-  } else {
-    authState.currentUser = null;
-    authState.isAuthenticated = false;
-  }
-  updateAuthUI();
-});
 
-function startGame(category) {
-  state.selectedCategory = category;
-  state.correctInRow = 0;
-  AudioEngine.ensureContext();
-  AudioEngine.playTransitionSound();
-  toggleScreen('game');
-  document.getElementById('category').textContent = category;
-
-  state.currentRound = selectWordsForRound(category, 10);
-  state.currentQ = 0;
-  loadQuestion();
-}
-
-function loadQuestion() {
-  if (state.currentQ >= state.currentRound.length) {
-    showRoundSummary();
-    return;
-  }
-
-  const word = state.currentRound[state.currentQ];
-  const options = generateOptionsForWord(word);
-
-  const fragment = document.createDocumentFragment();
-  options.forEach((option, index) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = option;
-    btn.setAttribute('tabindex', '0');
-    btn.setAttribute('role', 'button');
-    btn.setAttribute('aria-label', `Option ${index + 1}: ${option}`);
-    btn.onclick = () => checkAnswer(option, word, btn);
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
