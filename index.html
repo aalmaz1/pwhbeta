@@ -399,10 +399,11 @@
         
         // Load progress from Firestore
         try {
+          window.state.xp = 0;
           const docSnap = await getDoc(doc(window.firebaseDb, 'users', user.uid));
           if (docSnap.exists() && window.state) {
             const data = docSnap.data();
-            if (data.xp) window.state.xp = data.xp;
+            if (data.xp !== undefined) window.state.xp = data.xp || 0;
           }
         } catch (e) { console.error('Load error:', e); }
         
