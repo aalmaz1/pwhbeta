@@ -550,7 +550,7 @@ playCorrectSound() {
       wordElement: document.getElementById('word'),
       optionsElement: document.getElementById('options'),
       explanationModal: document.getElementById('explanation-modal'),
-      xpElement: document.getElementById('xp') || document.querySelector('.header-xp #xp'),
+      xpElement: document.getElementById('xp'),
       masteredCountElement: document.getElementById('mastered-count'),
       totalCountElement: document.getElementById('total-count'),
       feedbackElement: document.getElementById('feedback'),
