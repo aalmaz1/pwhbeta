@@ -35,12 +35,12 @@
   <!-- Critical CSS - Inlined for fast first paint -->
   <style>
     @font-face {
-      font-family: 'Press Start 2P';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url('https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf') format('truetype');
-    }
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/press-start-2p.woff2') format('woff2');
+}
     html, body { height: 100%; width: 100%; overflow: hidden; font-family: 'Press Start 2P', monospace; background: #0a0010; color: #f0e6ff; }
     .game-container { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; contain: layout style; }
     .game-container::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(191,95,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(191,95,255,0.07) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(400px) rotateX(45deg) scaleX(1.5); transform-origin: bottom center; z-index: -1; contain: strict; }
