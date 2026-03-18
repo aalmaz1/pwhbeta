@@ -542,7 +542,7 @@ playCorrectSound() {
 
   // ==================== UI MODULE ====================
   function initUI() {
-    return {
+    const els = {
       menuScreenElement: document.getElementById('menu-screen'),
       settingsScreenElement: document.getElementById('settings-screen'),
       categoryScreenElement: document.getElementById('category-screen'),
@@ -550,11 +550,12 @@ playCorrectSound() {
       wordElement: document.getElementById('word'),
       optionsElement: document.getElementById('options'),
       explanationModal: document.getElementById('explanation-modal'),
-      xpElement: document.getElementById('xp'),
+      xpElement: document.getElementById('xp') || null,
       masteredCountElement: document.getElementById('mastered-count'),
       totalCountElement: document.getElementById('total-count'),
       feedbackElement: document.getElementById('feedback'),
     };
+    return els;
   }
 
   function renderCategoryButtons(categories, onSelect) {
