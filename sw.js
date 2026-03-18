@@ -13,7 +13,8 @@ const ASSETS_TO_CACHE = [
   './words_optimized.json',
   './manifest.json',
   './assets/favicon.ico',
-  './assets/logo.png'
+  './assets/logo.png',
+  './assets/press-start-2p.woff2'
 ];
 
 // Установка — кешируем всё сразу
