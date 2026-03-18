@@ -555,6 +555,7 @@ playCorrectSound() {
       totalCountElement: document.getElementById('total-count'),
       feedbackElement: document.getElementById('feedback'),
     };
+    if (!els.xpElement) {console.warn('XP element (#xp) not found - will be lazy-loaded');}
     return els;
   }
 
@@ -790,6 +791,7 @@ playCorrectSound() {
     const buttons = state.ui.optionsElement.querySelectorAll('button');
     const children = Array.from(state.ui.optionsElement.children);
     const xpElement = state.ui.xpElement;
+    if (xpElement) {xpElement.textContent = state.xp;}
     const feedbackElement = state.ui.feedbackElement;
 
     buttons.forEach((b) => {
