@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <link rel="preload" href="assets/press-start-2p.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+  <link rel="preload" href="assets/press-start-2p-v16-latin-regular.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
   <meta name="description" content="Pixel Word Hunter - TOEIC Edition: Learn 600 business English words with adaptive spaced repetition. Master TOEIC vocabulary through a retro pixel-art quiz game.">
   <title>Pixel Word Hunter</title>
   
@@ -26,7 +26,7 @@
   <!-- Preload critical JS bundle -->
   <link rel="preload" href="bundle.js?v=13" as="script" fetchpriority="high">
   <!-- Preload font file for instant text rendering -->
-  <link rel="preload" href="assets/press-start-2p.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+  <link rel="preload" href="assets/press-start-2p-v16-latin-regular.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
   
   <!-- Preload JSON data -->
   <link rel="preload" href="words_optimized.json" as="fetch" crossorigin>
@@ -38,7 +38,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('assets/press-start-2p.woff2') format('woff2');
+  src: url('assets/press-start-2p-v16-latin-regular.woff2') format('woff2');
 }
     html, body { height: 100%; width: 100%; overflow: hidden; font-family: 'Press Start 2P', monospace; background: #0a0010; color: #f0e6ff; }
     .game-container { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; overflow: hidden; contain: layout style; }
@@ -84,8 +84,8 @@
   </style>
   
   <!-- Non-critical CSS loaded asynchronously -->
-  <link rel="preload" as="style" href="assets/press-start-2p.woff2">
-  <link rel="stylesheet" href="assets/press-start-2p.woff2" onload="this.media='all'">
+  <link rel="preload" as="style" href="assets/press-start-2p-v16-latin-regular.woff2">
+  <link rel="stylesheet" href="assets/press-start-2p-v16-latin-regular.woff2" onload="this.media='all'">
   <link rel="stylesheet" href="style.css?v=13">
   <noscript><link rel="stylesheet" href="style.css?v=13"></noscript>
   <link rel="stylesheet" href="mobile-fix.css?v=5">
