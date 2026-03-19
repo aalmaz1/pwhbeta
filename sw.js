@@ -44,6 +44,12 @@ self.addEventListener('fetch', event => {
   
   const url = new URL(event.request.url);
 
+  // Не кэшируй Firebase - всегда свежий ответ
+  if (url.hostname.includes('firebase') || url.hostname.includes('gstatic.com')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   // Google Fonts — cache-first
   if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
     event.respondWith(
