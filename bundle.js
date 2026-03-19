@@ -600,8 +600,9 @@ playCorrectSound() {
 
     state.ui = initUI();
 
-    const savedXp = parseInt(storageGet('pixelWordHunter_xp'), 10);
-    state.xp = Number.isFinite(savedXp) ? savedXp : 0;
+    const uid = window.firebaseAuth?.currentUser?.uid;
+const xpKey = uid ? `pixelWordHunter_xp_${uid}` : 'pixelWordHunter_xp';
+const savedXp = storageGet(xpKey);
 
     const categories = ['All'].concat(getCategories());
     renderCategoryButtons(categories, startGame);
@@ -812,7 +813,9 @@ playCorrectSound() {
       streak = state.correctInRow;
       state.xp += bonus;
       if (!Number.isFinite(state.xp)) state.xp = 0;
-      storageSet('pixelWordHunter_xp', state.xp);
+      const uid = window.firebaseAuth?.currentUser?.uid;
+const xpKey = uid ? `pixelWordHunter_xp_${uid}` : 'pixelWordHunter_xp';
+storageSet(xpKey, state.xp);
       // Save XP to Firestore
 if (window.firebaseDb && window.firebaseAuth?.currentUser) {
   import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js').then(firebase => {
