@@ -30,13 +30,19 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
+    Promise.all([
     caches.keys().then(keys =>
       Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
-  );
+    ),
+    new Promise((resolve) => {
   if ('navigationPreload' in self.registration) {
-    event.waitUntil(self.registration.navigationPreload.enable());
+    self.registration.navigationPreload.enable().then(resolve);
+  } else {
+    resolve();
   }
+    })
+    ])
+  );
   self.clients.claim();
 });
 
@@ -115,4 +121,3 @@ event.respondWith((async() => {
                 }
               }
                       return response;        }) ());
-);
