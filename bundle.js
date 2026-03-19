@@ -813,6 +813,12 @@ playCorrectSound() {
       state.xp += bonus;
       if (!Number.isFinite(state.xp)) state.xp = 0;
       storageSet('pixelWordHunter_xp', state.xp);
+      // Save XP to Firestore
+if (window.firebaseDb && window.firebaseAuth?.currentUser) {
+  import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js').then(firebase => {
+    firebase.updateDoc(firebase.doc(window.firebaseDb, 'users', window.firebaseAuth.currentUser.uid), { xp: state.xp });
+  }).catch(e => console.warn('Firestore save failed:', e));
+}
       updateWordProgress(word.eng, true);
       AudioEngine.playCorrectSound();
     } else {
