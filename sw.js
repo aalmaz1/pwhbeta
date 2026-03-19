@@ -34,6 +34,9 @@ self.addEventListener('activate', event => {
       Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
   );
+  if ('navigationPreload' in self.registration) {
+    event.waitUntil(self.registration.navigationPreload.enable());
+  }
   self.clients.claim();
 });
 
@@ -97,4 +100,19 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('message', event => {
   if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
+event.respondWith((async() => { 
+  let response = await event.preloadResponse;
+                              if (!response){
+                                response = await caches.match(event.request);
+                              }
+              if(!response || response.status === 404){
+                response = await fetch(event.request);
+                if (response.ok){
+                  const clone = response.clone();
+                  caches.open(CACHES_NAME).then(c => c.put(event.request,clone));
+                }
+              }
+                      return response;        }) ());
 });
