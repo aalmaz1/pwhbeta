@@ -389,6 +389,7 @@
       btn.disabled = false;
     };
     // Auth State Listener
+    window.state = window.state || { xp: 0, ... };
     onAuthStateChanged(window.firebaseAuth, async (user) => {
       if (user) {
         authState.currentUser = user;
