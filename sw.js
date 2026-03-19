@@ -104,15 +104,13 @@ self.addEventListener('fetch', event => {
   );
 });
 
-self.addEventListener('message', event => {
-  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
-});
-
 event.respondWith((async() => { 
   let response = await event.preloadResponse;
                               if (!response){
                                 response = await caches.match(event.request);
-              if(!response || response.status === 404){
+                              }
+              if(!response || response.status === 404)
+              {
                 response = await fetch(event.request);
                 if (response.ok){
                   const clone = response.clone();
@@ -122,5 +120,8 @@ event.respondWith((async() => {
               }
                       return response;       
                               }) ());
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+});
 }
 });
