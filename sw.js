@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v15';
+const CACHE_VERSION = 'v16';
 const CACHE_NAME = `pixel-word-${CACHE_VERSION}`;
 
 const ASSETS_TO_CACHE = [
