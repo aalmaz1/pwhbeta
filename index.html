@@ -402,6 +402,8 @@
           if (docSnap.exists() && window.state) {
             const data = docSnap.data();
             if (data.xp !== undefined) window.state.xp = data.xp || 0;
+            document.getElementById("menu-xp").textContent = window.state.xp + " XP";  
+            document.getElementById("game-xp").textContent = window.state.xp;          
           }
         } catch (e) { console.error('Load error:', e); }
         
