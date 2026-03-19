@@ -115,4 +115,4 @@ event.respondWith((async() => {
                 }
               }
                       return response;        }) ());
-});
+);
