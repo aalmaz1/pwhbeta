@@ -550,7 +550,7 @@ playCorrectSound() {
       wordElement: document.getElementById('word'),
       optionsElement: document.getElementById('options'),
       explanationModal: document.getElementById('explanation-modal'),
-      xpElement: document.getElementById('xp'),
+      xpElement: document.getElementById('game-xp'),
       masteredCountElement: document.getElementById('mastered-count'),
       totalCountElement: document.getElementById('total-count'),
       feedbackElement: document.getElementById('feedback'),
