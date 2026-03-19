@@ -112,12 +112,15 @@ event.respondWith((async() => {
   let response = await event.preloadResponse;
                               if (!response){
                                 response = await caches.match(event.request);
-                              }
               if(!response || response.status === 404){
                 response = await fetch(event.request);
                 if (response.ok){
                   const clone = response.clone();
-                  caches.open(CACHES_NAME).then(c => c.put(event.request,clone));
+                  const cache = await caches.open(CACHES_NAME);
+                  await cache.put(event.request,clone);
                 }
               }
-                      return response;        }) ());
+                      return response;       
+                              }) ());
+}
+});
